@@ -12,3 +12,8 @@ D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\bin\Debug\DentalDB.dll
 D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\bin\Debug\DentalDB.pdb
 D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\obj\Debug\DentalDB.dll
 D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\obj\Debug\DentalDB.pdb
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\bin\Debug\DentalDB.dacpac
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\bin\Debug\DentalDB.dll
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\bin\Debug\DentalDB.pdb
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\DentalDB.dll
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\DentalDB.pdb
