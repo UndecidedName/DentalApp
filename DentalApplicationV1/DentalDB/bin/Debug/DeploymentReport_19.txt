@@ -1,0 +1,61 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       [dbo].[DiagnosisType]
+       [dbo].[MouthType]
+       [dbo].[UserType]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[MouthType].[Name] on table [dbo].[MouthType] must be added, but the column has no default value and
+         does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must
+         either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults
+         as a deployment option.
+       The column [dbo].[UserType].[Name] on table [dbo].[UserType] must be added, but the column has no default value and does
+         not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either:
+         add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+
+** User actions
+     Rename
+       [dbo].[DiagnosisType].[Name] (Column)
+     Drop
+       on [dbo].[DiagnosisType].[Status] (Default Constraint)
+       on [dbo].[MouthType].[Status] (Default Constraint)
+       on [dbo].[UserType].[Status] (Default Constraint)
+     Table rebuild
+       [dbo].[DiagnosisType] (Table)
+       [dbo].[MouthType] (Table)
+       [dbo].[UserType] (Table)
+     Create
+       [dbo].[DentalMenu] (Table)
+       [dbo].[ScheduleDetail] (Table)
+       [dbo].[ScheduleMaster] (Table)
+       Default Constraint on [dbo].[DentalMenu].[Status] (Default Constraint)
+       Default Constraint on [dbo].[ScheduleMaster].[Status] (Default Constraint)
+       [dbo].[FK_DentalMenu_UserTypeId] (Foreign Key)
+       [dbo].[FK_ScheduleDetail_ScheduLeMasterId] (Foreign Key)
+       [dbo].[FK_ScheduleMaster_DentistId] (Foreign Key)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId] (Foreign Key)
+       [dbo].[FK_MouthType_ImageUrlId] (Foreign Key)
+       [dbo].[FK_PatientMouth_MouthTypeId] (Foreign Key)
+       [dbo].[FK_Tooth_MouthTypeId] (Foreign Key)
+       [dbo].[FK_User_UserTypeId] (Foreign Key)
+     Create
+       [dbo].[FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId] (Foreign Key)
+       [dbo].[FK_MouthType_ImageUrlId] (Foreign Key)
+       [dbo].[FK_PatientMouth_MouthTypeId] (Foreign Key)
+       [dbo].[FK_Tooth_MouthTypeId] (Foreign Key)
+       [dbo].[FK_User_UserTypeId] (Foreign Key)
+
+The column [dbo].[MouthType].[Name] on table [dbo].[MouthType] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column [dbo].[UserType].[Name] on table [dbo].[UserType] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

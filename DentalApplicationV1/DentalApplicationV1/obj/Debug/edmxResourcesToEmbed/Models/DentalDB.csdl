@@ -636,7 +636,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DentalDBEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DentalDBEntities" annotation:LazyLoadingEnabled="false">
     <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
     <EntitySet Name="Appointments" EntityType="Self.Appointment" />
     <EntitySet Name="CivilStatus" EntityType="Self.CivilStatu" />

@@ -18,6 +18,7 @@ namespace DentalApplicationV1.Models
         public DentalDBEntities()
             : base("name=DentalDBEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

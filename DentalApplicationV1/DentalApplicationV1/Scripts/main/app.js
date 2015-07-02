@@ -1,9 +1,8 @@
 ﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router'])
-.run(function ($rootScope) {
+.run(function ($rootScope, $http) {
     $rootScope.browserWidth = true;
-    //If user is not logged, request to server
     $rootScope.isLogged = false;
-    $rootScope.userType = null;
+    $rootScope.username = null;
     $rootScope.sideBarCompiled = false;
     $rootScope.appName = "Smile Fairies Dental Suites";
 });

@@ -1,0 +1,29 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       [dbo].[ScheduleDetail]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Table rebuild
+       [dbo].[ScheduleDetail] (Table)
+     Alter
+       [dbo].[User] (Table)
+     Create
+       [dbo].[DentalMenu] (Table)
+       Default Constraint on [dbo].[DentalMenu].[Status] (Default Constraint)
+       [dbo].[FK_DentalMenu_UserTypeId] (Foreign Key)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_ScheduleDetail_ScheduLeMasterId] (Foreign Key)
+     Create
+       [dbo].[FK_ScheduleDetail_ScheduLeMasterId] (Foreign Key)

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ImageUrl]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Url] VARCHAR(200) NOT NULL, 
+    [Status] INT NOT NULL DEFAULT 1
+)

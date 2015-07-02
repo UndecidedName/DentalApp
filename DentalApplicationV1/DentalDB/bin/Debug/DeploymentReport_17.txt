@@ -1,0 +1,25 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[PatientDiagnosisHistoryMaster]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       on [dbo].[PatientDiagnosisHistoryMaster].[Status] (Default Constraint)
+     Table rebuild
+       [dbo].[PatientDiagnosisHistoryMaster] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_PatientDiagnosisHistoryDetail_PDHMasterId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryMaster_PatientId] (Foreign Key)
+     Create
+       [dbo].[FK_PatientDiagnosisHistoryDetail_PDHMasterId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryMaster_PatientId] (Foreign Key)

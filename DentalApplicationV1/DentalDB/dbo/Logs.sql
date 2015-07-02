@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Logs]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Description] VARCHAR(500) NOT NULL, 
+    [Date] DATETIME NOT NULL
+)
