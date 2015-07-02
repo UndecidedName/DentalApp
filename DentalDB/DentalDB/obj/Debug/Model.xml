@@ -12,7 +12,7 @@
 		</CustomData>
 		<CustomData Category="Reference" Type="Assembly">
 			<Metadata Name="LogicalName" Value="DentalDB.dll" />
-			<Metadata Name="FileName" Value="D:\CARL\PROJECTS\PERSONAL\DENTALAPPLICATION\DENTALDB\DENTALDB\OBJ\DEBUG\DENTALDB.DLL" />
+			<Metadata Name="FileName" Value="D:\CARL\PROJECTS\PERSONAL\DENTALAPP\DENTALDB\DENTALDB\OBJ\DEBUG\DENTALDB.DLL" />
 			<Metadata Name="AssemblyName" Value="DentalDB" />
 			<Metadata Name="PermissionSet" Value="SAFE" />
 			<Metadata Name="Owner" Value="" />
@@ -20,7 +20,7 @@
 			<Metadata Name="IsVisible" Value="True" />
 			<Metadata Name="IsModelAware" Value="True" />
 			<Metadata Name="SkipCreationIfEmpty" Value="True" />
-			<Metadata Name="AssemblySymbolsName" Value="D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\DentalDB.pdb" />
+			<Metadata Name="AssemblySymbolsName" Value="D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\DentalDB.pdb" />
 		</CustomData>
 		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
 	</Header>

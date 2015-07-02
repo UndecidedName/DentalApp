@@ -17,3 +17,7 @@ D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\bin\Debug\DentalDB.dll
 D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\bin\Debug\DentalDB.pdb
 D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\DentalDB.dll
 D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\DentalDB.pdb
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\Model.xml
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\refactor.xml
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\postdeploy.sql
+D:\Carl\Projects\Personal\DentalApp\DentalDB\DentalDB\obj\Debug\predeploy.sql
