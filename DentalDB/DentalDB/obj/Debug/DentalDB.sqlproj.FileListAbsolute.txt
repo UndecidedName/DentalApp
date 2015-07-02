@@ -1,0 +1,14 @@
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\bin\Debug\DentalDB.dacpac
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\bin\Debug\DentalDB.dll
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\bin\Debug\DentalDB.pdb
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\Model.xml
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\refactor.xml
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\postdeploy.sql
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\predeploy.sql
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\DentalDB.dll
+D:\Carl\Projects\Personal\DentalApplication\DentalDB\DentalDB\obj\Debug\DentalDB.pdb
+D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\bin\Debug\DentalDB.dacpac
+D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\bin\Debug\DentalDB.dll
+D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\bin\Debug\DentalDB.pdb
+D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\obj\Debug\DentalDB.dll
+D:\Carl\Projects\Personal\Dental\DentalDB\DentalDB\obj\Debug\DentalDB.pdb
