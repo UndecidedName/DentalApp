@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html ng-app="DentalApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Dental Web Application</title>
+    <link rel="stylesheet" href="~/libs/lumx/dist/lumx.css" />
+    <link rel="stylesheet" href="~/libs/lumx/dist/roboto.css" />
+</head>
+<body ng-controller="HomeController">
+    <div ng-show="!isLogged" ng-include="'/Home/Templates/Header'"></div>
+    <div ng-show="isLogged" ng-controller="UserController">
+        <div ng-include="'/User/Templates/Header'"></div>
+        <div ng-include="'/User/Templates/Sidebar'"></div>
+    </div>
+    <div ui-view></div>
+</body>
+</html>
+<script src="~/libs/jquery/dist/jquery.js"></script>
+<script src="~/libs/velocity/velocity.js"></script>
+<script src="~/libs/moment/min/moment-with-locales.js"></script>
+<script src="~/libs/angular/angular.js"></script>
+<script src="~/libs/lumx/dist/lumx.js"></script>
+<script src="~/Scripts/extras/angular-ui-router.min.js"></script>
+<script src="~/Scripts/main/app.js"></script>
+<script src="~/Scripts/controllers/dentalController.js"></script>
+<script src="~/Scripts/services/dentalService.js"></script>
+<script src="~/Scripts/directives/dentalDirective.js"></script>

@@ -1,0 +1,1004 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F42E5F4-2FFB-48FF-89BD-37C45058243E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DentalApplicationV1</RootNamespace>
+    <AssemblyName>DentalApplicationV1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="libs\angular-route\angular-route.js" />
+    <Content Include="libs\angular-route\angular-route.min.js" />
+    <Content Include="libs\angular-route\index.js" />
+    <Content Include="libs\angular\angular-csp.css" />
+    <Content Include="libs\angular\angular.js" />
+    <Content Include="libs\angular\angular.min.js" />
+    <Content Include="libs\angular\index.js" />
+    <Content Include="libs\highlightjs\highlight.pack.js" />
+    <Content Include="libs\highlightjs\styles\agate.css" />
+    <Content Include="libs\highlightjs\styles\androidstudio.css" />
+    <Content Include="libs\highlightjs\styles\arta.css" />
+    <Content Include="libs\highlightjs\styles\ascetic.css" />
+    <Content Include="libs\highlightjs\styles\atelier-cave.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-cave.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-dune.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-dune.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-estuary.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-estuary.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-forest.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-forest.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-heath.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-heath.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-lakeside.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-lakeside.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-plateau.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-plateau.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-savanna.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-savanna.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-seaside.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-seaside.light.css" />
+    <Content Include="libs\highlightjs\styles\atelier-sulphurpool.dark.css" />
+    <Content Include="libs\highlightjs\styles\atelier-sulphurpool.light.css" />
+    <Content Include="libs\highlightjs\styles\brown_paper.css" />
+    <Content Include="libs\highlightjs\styles\brown_papersq.png" />
+    <Content Include="libs\highlightjs\styles\codepen-embed.css" />
+    <Content Include="libs\highlightjs\styles\color-brewer.css" />
+    <Content Include="libs\highlightjs\styles\dark.css" />
+    <Content Include="libs\highlightjs\styles\darkula.css" />
+    <Content Include="libs\highlightjs\styles\default.css" />
+    <Content Include="libs\highlightjs\styles\docco.css" />
+    <Content Include="libs\highlightjs\styles\far.css" />
+    <Content Include="libs\highlightjs\styles\foundation.css" />
+    <Content Include="libs\highlightjs\styles\github.css" />
+    <Content Include="libs\highlightjs\styles\googlecode.css" />
+    <Content Include="libs\highlightjs\styles\hybrid.css" />
+    <Content Include="libs\highlightjs\styles\idea.css" />
+    <Content Include="libs\highlightjs\styles\ir_black.css" />
+    <Content Include="libs\highlightjs\styles\kimbie.dark.css" />
+    <Content Include="libs\highlightjs\styles\kimbie.light.css" />
+    <Content Include="libs\highlightjs\styles\magula.css" />
+    <Content Include="libs\highlightjs\styles\mono-blue.css" />
+    <Content Include="libs\highlightjs\styles\monokai.css" />
+    <Content Include="libs\highlightjs\styles\monokai_sublime.css" />
+    <Content Include="libs\highlightjs\styles\obsidian.css" />
+    <Content Include="libs\highlightjs\styles\paraiso.dark.css" />
+    <Content Include="libs\highlightjs\styles\paraiso.light.css" />
+    <Content Include="libs\highlightjs\styles\pojoaque.css" />
+    <Content Include="libs\highlightjs\styles\pojoaque.jpg" />
+    <Content Include="libs\highlightjs\styles\railscasts.css" />
+    <Content Include="libs\highlightjs\styles\rainbow.css" />
+    <Content Include="libs\highlightjs\styles\school_book.css" />
+    <Content Include="libs\highlightjs\styles\school_book.png" />
+    <Content Include="libs\highlightjs\styles\solarized_dark.css" />
+    <Content Include="libs\highlightjs\styles\solarized_light.css" />
+    <Content Include="libs\highlightjs\styles\sunburst.css" />
+    <Content Include="libs\highlightjs\styles\tomorrow-night-blue.css" />
+    <Content Include="libs\highlightjs\styles\tomorrow-night-bright.css" />
+    <Content Include="libs\highlightjs\styles\tomorrow-night-eighties.css" />
+    <Content Include="libs\highlightjs\styles\tomorrow-night.css" />
+    <Content Include="libs\highlightjs\styles\tomorrow.css" />
+    <Content Include="libs\highlightjs\styles\vs.css" />
+    <Content Include="libs\highlightjs\styles\xcode.css" />
+    <Content Include="libs\highlightjs\styles\zenburn.css" />
+    <Content Include="libs\jquery\dist\jquery.js" />
+    <Content Include="libs\jquery\dist\jquery.min.js" />
+    <Content Include="libs\jquery\MIT-LICENSE.txt" />
+    <Content Include="libs\jquery\src\ajax.js" />
+    <Content Include="libs\jquery\src\ajax\jsonp.js" />
+    <Content Include="libs\jquery\src\ajax\load.js" />
+    <Content Include="libs\jquery\src\ajax\parseJSON.js" />
+    <Content Include="libs\jquery\src\ajax\parseXML.js" />
+    <Content Include="libs\jquery\src\ajax\script.js" />
+    <Content Include="libs\jquery\src\ajax\var\nonce.js" />
+    <Content Include="libs\jquery\src\ajax\var\rquery.js" />
+    <Content Include="libs\jquery\src\ajax\xhr.js" />
+    <Content Include="libs\jquery\src\attributes.js" />
+    <Content Include="libs\jquery\src\attributes\attr.js" />
+    <Content Include="libs\jquery\src\attributes\classes.js" />
+    <Content Include="libs\jquery\src\attributes\prop.js" />
+    <Content Include="libs\jquery\src\attributes\support.js" />
+    <Content Include="libs\jquery\src\attributes\val.js" />
+    <Content Include="libs\jquery\src\callbacks.js" />
+    <Content Include="libs\jquery\src\core.js" />
+    <Content Include="libs\jquery\src\core\access.js" />
+    <Content Include="libs\jquery\src\core\init.js" />
+    <Content Include="libs\jquery\src\core\parseHTML.js" />
+    <Content Include="libs\jquery\src\core\ready.js" />
+    <Content Include="libs\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="libs\jquery\src\css.js" />
+    <Content Include="libs\jquery\src\css\addGetHookIf.js" />
+    <Content Include="libs\jquery\src\css\curCSS.js" />
+    <Content Include="libs\jquery\src\css\defaultDisplay.js" />
+    <Content Include="libs\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="libs\jquery\src\css\support.js" />
+    <Content Include="libs\jquery\src\css\swap.js" />
+    <Content Include="libs\jquery\src\css\var\cssExpand.js" />
+    <Content Include="libs\jquery\src\css\var\getStyles.js" />
+    <Content Include="libs\jquery\src\css\var\isHidden.js" />
+    <Content Include="libs\jquery\src\css\var\rmargin.js" />
+    <Content Include="libs\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="libs\jquery\src\data.js" />
+    <Content Include="libs\jquery\src\data\accepts.js" />
+    <Content Include="libs\jquery\src\data\Data.js" />
+    <Content Include="libs\jquery\src\data\var\data_priv.js" />
+    <Content Include="libs\jquery\src\data\var\data_user.js" />
+    <Content Include="libs\jquery\src\deferred.js" />
+    <Content Include="libs\jquery\src\deprecated.js" />
+    <Content Include="libs\jquery\src\dimensions.js" />
+    <Content Include="libs\jquery\src\effects.js" />
+    <Content Include="libs\jquery\src\effects\animatedSelector.js" />
+    <Content Include="libs\jquery\src\effects\Tween.js" />
+    <Content Include="libs\jquery\src\event.js" />
+    <Content Include="libs\jquery\src\event\ajax.js" />
+    <Content Include="libs\jquery\src\event\alias.js" />
+    <Content Include="libs\jquery\src\event\support.js" />
+    <Content Include="libs\jquery\src\exports\amd.js" />
+    <Content Include="libs\jquery\src\exports\global.js" />
+    <Content Include="libs\jquery\src\intro.js" />
+    <Content Include="libs\jquery\src\jquery.js" />
+    <Content Include="libs\jquery\src\manipulation.js" />
+    <Content Include="libs\jquery\src\manipulation\support.js" />
+    <Content Include="libs\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="libs\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="libs\jquery\src\offset.js" />
+    <Content Include="libs\jquery\src\outro.js" />
+    <Content Include="libs\jquery\src\queue.js" />
+    <Content Include="libs\jquery\src\queue\delay.js" />
+    <Content Include="libs\jquery\src\selector-native.js" />
+    <Content Include="libs\jquery\src\selector-sizzle.js" />
+    <Content Include="libs\jquery\src\selector.js" />
+    <Content Include="libs\jquery\src\serialize.js" />
+    <Content Include="libs\jquery\src\sizzle\dist\sizzle.js" />
+    <Content Include="libs\jquery\src\sizzle\dist\sizzle.min.js" />
+    <Content Include="libs\jquery\src\traversing.js" />
+    <Content Include="libs\jquery\src\traversing\findFilter.js" />
+    <Content Include="libs\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="libs\jquery\src\var\arr.js" />
+    <Content Include="libs\jquery\src\var\class2type.js" />
+    <Content Include="libs\jquery\src\var\concat.js" />
+    <Content Include="libs\jquery\src\var\hasOwn.js" />
+    <Content Include="libs\jquery\src\var\indexOf.js" />
+    <Content Include="libs\jquery\src\var\pnum.js" />
+    <Content Include="libs\jquery\src\var\push.js" />
+    <Content Include="libs\jquery\src\var\rnotwhite.js" />
+    <Content Include="libs\jquery\src\var\slice.js" />
+    <Content Include="libs\jquery\src\var\strundefined.js" />
+    <Content Include="libs\jquery\src\var\support.js" />
+    <Content Include="libs\jquery\src\var\toString.js" />
+    <Content Include="libs\jquery\src\wrap.js" />
+    <Content Include="libs\lumx\core\js\lumx.js" />
+    <Content Include="libs\lumx\core\js\utils\transclude-replace_directive.js" />
+    <Content Include="libs\lumx\core\js\utils\transclude_directive.js" />
+    <Content Include="libs\lumx\dist\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="libs\lumx\dist\fonts\roboto.css" />
+    <Content Include="libs\lumx\dist\lumx.css" />
+    <Content Include="libs\lumx\dist\lumx.js" />
+    <Content Include="libs\lumx\dist\lumx.min.js" />
+    <Content Include="libs\lumx\dist\roboto.css" />
+    <Content Include="libs\lumx\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="libs\lumx\modules\date-picker\js\date-picker_directive.js" />
+    <Content Include="libs\lumx\modules\date-picker\views\date-picker.html" />
+    <Content Include="libs\lumx\modules\dialog\js\dialog_directive.js" />
+    <Content Include="libs\lumx\modules\dropdown\js\dropdown_directive.js" />
+    <Content Include="libs\lumx\modules\dropdown\views\dropdown-menu.html" />
+    <Content Include="libs\lumx\modules\dropdown\views\dropdown-toggle.html" />
+    <Content Include="libs\lumx\modules\dropdown\views\dropdown.html" />
+    <Content Include="libs\lumx\modules\file-input\js\file-input_directive.js" />
+    <Content Include="libs\lumx\modules\file-input\views\file-input.html" />
+    <Content Include="libs\lumx\modules\notification\js\notification_service.js" />
+    <Content Include="libs\lumx\modules\progress\js\progress_service.js" />
+    <Content Include="libs\lumx\modules\progress\views\progress.html" />
+    <Content Include="libs\lumx\modules\ripple\js\ripple_directive.js" />
+    <Content Include="libs\lumx\modules\scrollbar\js\scrollbar_directive.js" />
+    <Content Include="libs\lumx\modules\search-filter\js\search-filter_directive.js" />
+    <Content Include="libs\lumx\modules\search-filter\views\search-filter.html" />
+    <Content Include="libs\lumx\modules\select\js\select_directive.js" />
+    <Content Include="libs\lumx\modules\select\views\select-choices.html" />
+    <Content Include="libs\lumx\modules\select\views\select-selected.html" />
+    <Content Include="libs\lumx\modules\select\views\select.html" />
+    <Content Include="libs\lumx\modules\tabs\js\tabs_directive.js" />
+    <Content Include="libs\lumx\modules\tabs\views\tab.html" />
+    <Content Include="libs\lumx\modules\tabs\views\tabs.html" />
+    <Content Include="libs\lumx\modules\text-field\js\text-field_directive.js" />
+    <Content Include="libs\lumx\modules\text-field\views\text-field.html" />
+    <Content Include="libs\lumx\modules\thumbnail\js\thumbnail_directive.js" />
+    <Content Include="libs\lumx\modules\tooltip\js\tooltip_directive.js" />
+    <Content Include="libs\mdi\css\materialdesignicons.css" />
+    <Content Include="libs\mdi\css\materialdesignicons.min.css" />
+    <Content Include="libs\mdi\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="libs\mdi\license.txt" />
+    <Content Include="libs\mdi\preview.html" />
+    <Content Include="libs\moment\locale\af.js" />
+    <Content Include="libs\moment\locale\ar-ma.js" />
+    <Content Include="libs\moment\locale\ar-sa.js" />
+    <Content Include="libs\moment\locale\ar-tn.js" />
+    <Content Include="libs\moment\locale\ar.js" />
+    <Content Include="libs\moment\locale\az.js" />
+    <Content Include="libs\moment\locale\be.js" />
+    <Content Include="libs\moment\locale\bg.js" />
+    <Content Include="libs\moment\locale\bn.js" />
+    <Content Include="libs\moment\locale\bo.js" />
+    <Content Include="libs\moment\locale\br.js" />
+    <Content Include="libs\moment\locale\bs.js" />
+    <Content Include="libs\moment\locale\ca.js" />
+    <Content Include="libs\moment\locale\cs.js" />
+    <Content Include="libs\moment\locale\cv.js" />
+    <Content Include="libs\moment\locale\cy.js" />
+    <Content Include="libs\moment\locale\da.js" />
+    <Content Include="libs\moment\locale\de-at.js" />
+    <Content Include="libs\moment\locale\de.js" />
+    <Content Include="libs\moment\locale\el.js" />
+    <Content Include="libs\moment\locale\en-au.js" />
+    <Content Include="libs\moment\locale\en-ca.js" />
+    <Content Include="libs\moment\locale\en-gb.js" />
+    <Content Include="libs\moment\locale\eo.js" />
+    <Content Include="libs\moment\locale\es.js" />
+    <Content Include="libs\moment\locale\et.js" />
+    <Content Include="libs\moment\locale\eu.js" />
+    <Content Include="libs\moment\locale\fa.js" />
+    <Content Include="libs\moment\locale\fi.js" />
+    <Content Include="libs\moment\locale\fo.js" />
+    <Content Include="libs\moment\locale\fr-ca.js" />
+    <Content Include="libs\moment\locale\fr.js" />
+    <Content Include="libs\moment\locale\fy.js" />
+    <Content Include="libs\moment\locale\gl.js" />
+    <Content Include="libs\moment\locale\he.js" />
+    <Content Include="libs\moment\locale\hi.js" />
+    <Content Include="libs\moment\locale\hr.js" />
+    <Content Include="libs\moment\locale\hu.js" />
+    <Content Include="libs\moment\locale\hy-am.js" />
+    <Content Include="libs\moment\locale\id.js" />
+    <Content Include="libs\moment\locale\is.js" />
+    <Content Include="libs\moment\locale\it.js" />
+    <Content Include="libs\moment\locale\ja.js" />
+    <Content Include="libs\moment\locale\jv.js" />
+    <Content Include="libs\moment\locale\ka.js" />
+    <Content Include="libs\moment\locale\km.js" />
+    <Content Include="libs\moment\locale\ko.js" />
+    <Content Include="libs\moment\locale\lb.js" />
+    <Content Include="libs\moment\locale\lt.js" />
+    <Content Include="libs\moment\locale\lv.js" />
+    <Content Include="libs\moment\locale\me.js" />
+    <Content Include="libs\moment\locale\mk.js" />
+    <Content Include="libs\moment\locale\ml.js" />
+    <Content Include="libs\moment\locale\mr.js" />
+    <Content Include="libs\moment\locale\ms-my.js" />
+    <Content Include="libs\moment\locale\my.js" />
+    <Content Include="libs\moment\locale\nb.js" />
+    <Content Include="libs\moment\locale\ne.js" />
+    <Content Include="libs\moment\locale\nl.js" />
+    <Content Include="libs\moment\locale\nn.js" />
+    <Content Include="libs\moment\locale\pl.js" />
+    <Content Include="libs\moment\locale\pt-br.js" />
+    <Content Include="libs\moment\locale\pt.js" />
+    <Content Include="libs\moment\locale\ro.js" />
+    <Content Include="libs\moment\locale\ru.js" />
+    <Content Include="libs\moment\locale\si.js" />
+    <Content Include="libs\moment\locale\sk.js" />
+    <Content Include="libs\moment\locale\sl.js" />
+    <Content Include="libs\moment\locale\sq.js" />
+    <Content Include="libs\moment\locale\sr-cyrl.js" />
+    <Content Include="libs\moment\locale\sr.js" />
+    <Content Include="libs\moment\locale\sv.js" />
+    <Content Include="libs\moment\locale\ta.js" />
+    <Content Include="libs\moment\locale\th.js" />
+    <Content Include="libs\moment\locale\tl-ph.js" />
+    <Content Include="libs\moment\locale\tr.js" />
+    <Content Include="libs\moment\locale\tzm-latn.js" />
+    <Content Include="libs\moment\locale\tzm.js" />
+    <Content Include="libs\moment\locale\uk.js" />
+    <Content Include="libs\moment\locale\uz.js" />
+    <Content Include="libs\moment\locale\vi.js" />
+    <Content Include="libs\moment\locale\zh-cn.js" />
+    <Content Include="libs\moment\locale\zh-tw.js" />
+    <Content Include="libs\moment\min\locales.js" />
+    <Content Include="libs\moment\min\locales.min.js" />
+    <Content Include="libs\moment\min\moment-with-locales.js" />
+    <Content Include="libs\moment\min\moment-with-locales.min.js" />
+    <Content Include="libs\moment\min\moment.min.js" />
+    <Content Include="libs\moment\min\tests.js" />
+    <Content Include="libs\moment\moment.js" />
+    <Content Include="libs\moment\src\lib\create\check-overflow.js" />
+    <Content Include="libs\moment\src\lib\create\date-from-array.js" />
+    <Content Include="libs\moment\src\lib\create\from-anything.js" />
+    <Content Include="libs\moment\src\lib\create\from-array.js" />
+    <Content Include="libs\moment\src\lib\create\from-object.js" />
+    <Content Include="libs\moment\src\lib\create\from-string-and-array.js" />
+    <Content Include="libs\moment\src\lib\create\from-string-and-format.js" />
+    <Content Include="libs\moment\src\lib\create\from-string.js" />
+    <Content Include="libs\moment\src\lib\create\local.js" />
+    <Content Include="libs\moment\src\lib\create\parsing-flags.js" />
+    <Content Include="libs\moment\src\lib\create\utc.js" />
+    <Content Include="libs\moment\src\lib\create\valid.js" />
+    <Content Include="libs\moment\src\lib\duration\abs.js" />
+    <Content Include="libs\moment\src\lib\duration\add-subtract.js" />
+    <Content Include="libs\moment\src\lib\duration\as.js" />
+    <Content Include="libs\moment\src\lib\duration\bubble.js" />
+    <Content Include="libs\moment\src\lib\duration\constructor.js" />
+    <Content Include="libs\moment\src\lib\duration\create.js" />
+    <Content Include="libs\moment\src\lib\duration\duration.js" />
+    <Content Include="libs\moment\src\lib\duration\get.js" />
+    <Content Include="libs\moment\src\lib\duration\humanize.js" />
+    <Content Include="libs\moment\src\lib\duration\iso-string.js" />
+    <Content Include="libs\moment\src\lib\duration\prototype.js" />
+    <Content Include="libs\moment\src\lib\format\format.js" />
+    <Content Include="libs\moment\src\lib\locale\calendar.js" />
+    <Content Include="libs\moment\src\lib\locale\constructor.js" />
+    <Content Include="libs\moment\src\lib\locale\en.js" />
+    <Content Include="libs\moment\src\lib\locale\formats.js" />
+    <Content Include="libs\moment\src\lib\locale\invalid.js" />
+    <Content Include="libs\moment\src\lib\locale\lists.js" />
+    <Content Include="libs\moment\src\lib\locale\locale.js" />
+    <Content Include="libs\moment\src\lib\locale\locales.js" />
+    <Content Include="libs\moment\src\lib\locale\ordinal.js" />
+    <Content Include="libs\moment\src\lib\locale\pre-post-format.js" />
+    <Content Include="libs\moment\src\lib\locale\prototype.js" />
+    <Content Include="libs\moment\src\lib\locale\relative.js" />
+    <Content Include="libs\moment\src\lib\locale\set.js" />
+    <Content Include="libs\moment\src\lib\moment\add-subtract.js" />
+    <Content Include="libs\moment\src\lib\moment\calendar.js" />
+    <Content Include="libs\moment\src\lib\moment\clone.js" />
+    <Content Include="libs\moment\src\lib\moment\compare.js" />
+    <Content Include="libs\moment\src\lib\moment\constructor.js" />
+    <Content Include="libs\moment\src\lib\moment\diff.js" />
+    <Content Include="libs\moment\src\lib\moment\format.js" />
+    <Content Include="libs\moment\src\lib\moment\from.js" />
+    <Content Include="libs\moment\src\lib\moment\get-set.js" />
+    <Content Include="libs\moment\src\lib\moment\locale.js" />
+    <Content Include="libs\moment\src\lib\moment\min-max.js" />
+    <Content Include="libs\moment\src\lib\moment\moment.js" />
+    <Content Include="libs\moment\src\lib\moment\prototype.js" />
+    <Content Include="libs\moment\src\lib\moment\start-end-of.js" />
+    <Content Include="libs\moment\src\lib\moment\to-type.js" />
+    <Content Include="libs\moment\src\lib\moment\to.js" />
+    <Content Include="libs\moment\src\lib\moment\valid.js" />
+    <Content Include="libs\moment\src\lib\parse\regex.js" />
+    <Content Include="libs\moment\src\lib\parse\token.js" />
+    <Content Include="libs\moment\src\lib\units\aliases.js" />
+    <Content Include="libs\moment\src\lib\units\constants.js" />
+    <Content Include="libs\moment\src\lib\units\day-of-month.js" />
+    <Content Include="libs\moment\src\lib\units\day-of-week.js" />
+    <Content Include="libs\moment\src\lib\units\day-of-year.js" />
+    <Content Include="libs\moment\src\lib\units\hour.js" />
+    <Content Include="libs\moment\src\lib\units\millisecond.js" />
+    <Content Include="libs\moment\src\lib\units\minute.js" />
+    <Content Include="libs\moment\src\lib\units\month.js" />
+    <Content Include="libs\moment\src\lib\units\offset.js" />
+    <Content Include="libs\moment\src\lib\units\quarter.js" />
+    <Content Include="libs\moment\src\lib\units\second.js" />
+    <Content Include="libs\moment\src\lib\units\timestamp.js" />
+    <Content Include="libs\moment\src\lib\units\timezone.js" />
+    <Content Include="libs\moment\src\lib\units\units.js" />
+    <Content Include="libs\moment\src\lib\units\week-year.js" />
+    <Content Include="libs\moment\src\lib\units\week.js" />
+    <Content Include="libs\moment\src\lib\units\year.js" />
+    <Content Include="libs\moment\src\lib\utils\abs-floor.js" />
+    <Content Include="libs\moment\src\lib\utils\compare-arrays.js" />
+    <Content Include="libs\moment\src\lib\utils\defaults.js" />
+    <Content Include="libs\moment\src\lib\utils\deprecate.js" />
+    <Content Include="libs\moment\src\lib\utils\extend.js" />
+    <Content Include="libs\moment\src\lib\utils\has-own-prop.js" />
+    <Content Include="libs\moment\src\lib\utils\hooks.js" />
+    <Content Include="libs\moment\src\lib\utils\is-array.js" />
+    <Content Include="libs\moment\src\lib\utils\is-date.js" />
+    <Content Include="libs\moment\src\lib\utils\map.js" />
+    <Content Include="libs\moment\src\lib\utils\to-int.js" />
+    <Content Include="libs\moment\src\lib\utils\zero-fill.js" />
+    <Content Include="libs\moment\src\locale\af.js" />
+    <Content Include="libs\moment\src\locale\ar-ma.js" />
+    <Content Include="libs\moment\src\locale\ar-sa.js" />
+    <Content Include="libs\moment\src\locale\ar-tn.js" />
+    <Content Include="libs\moment\src\locale\ar.js" />
+    <Content Include="libs\moment\src\locale\az.js" />
+    <Content Include="libs\moment\src\locale\be.js" />
+    <Content Include="libs\moment\src\locale\bg.js" />
+    <Content Include="libs\moment\src\locale\bn.js" />
+    <Content Include="libs\moment\src\locale\bo.js" />
+    <Content Include="libs\moment\src\locale\br.js" />
+    <Content Include="libs\moment\src\locale\bs.js" />
+    <Content Include="libs\moment\src\locale\ca.js" />
+    <Content Include="libs\moment\src\locale\cs.js" />
+    <Content Include="libs\moment\src\locale\cv.js" />
+    <Content Include="libs\moment\src\locale\cy.js" />
+    <Content Include="libs\moment\src\locale\da.js" />
+    <Content Include="libs\moment\src\locale\de-at.js" />
+    <Content Include="libs\moment\src\locale\de.js" />
+    <Content Include="libs\moment\src\locale\el.js" />
+    <Content Include="libs\moment\src\locale\en-au.js" />
+    <Content Include="libs\moment\src\locale\en-ca.js" />
+    <Content Include="libs\moment\src\locale\en-gb.js" />
+    <Content Include="libs\moment\src\locale\eo.js" />
+    <Content Include="libs\moment\src\locale\es.js" />
+    <Content Include="libs\moment\src\locale\et.js" />
+    <Content Include="libs\moment\src\locale\eu.js" />
+    <Content Include="libs\moment\src\locale\fa.js" />
+    <Content Include="libs\moment\src\locale\fi.js" />
+    <Content Include="libs\moment\src\locale\fo.js" />
+    <Content Include="libs\moment\src\locale\fr-ca.js" />
+    <Content Include="libs\moment\src\locale\fr.js" />
+    <Content Include="libs\moment\src\locale\fy.js" />
+    <Content Include="libs\moment\src\locale\gl.js" />
+    <Content Include="libs\moment\src\locale\he.js" />
+    <Content Include="libs\moment\src\locale\hi.js" />
+    <Content Include="libs\moment\src\locale\hr.js" />
+    <Content Include="libs\moment\src\locale\hu.js" />
+    <Content Include="libs\moment\src\locale\hy-am.js" />
+    <Content Include="libs\moment\src\locale\id.js" />
+    <Content Include="libs\moment\src\locale\is.js" />
+    <Content Include="libs\moment\src\locale\it.js" />
+    <Content Include="libs\moment\src\locale\ja.js" />
+    <Content Include="libs\moment\src\locale\jv.js" />
+    <Content Include="libs\moment\src\locale\ka.js" />
+    <Content Include="libs\moment\src\locale\km.js" />
+    <Content Include="libs\moment\src\locale\ko.js" />
+    <Content Include="libs\moment\src\locale\lb.js" />
+    <Content Include="libs\moment\src\locale\lt.js" />
+    <Content Include="libs\moment\src\locale\lv.js" />
+    <Content Include="libs\moment\src\locale\me.js" />
+    <Content Include="libs\moment\src\locale\mk.js" />
+    <Content Include="libs\moment\src\locale\ml.js" />
+    <Content Include="libs\moment\src\locale\mr.js" />
+    <Content Include="libs\moment\src\locale\ms-my.js" />
+    <Content Include="libs\moment\src\locale\my.js" />
+    <Content Include="libs\moment\src\locale\nb.js" />
+    <Content Include="libs\moment\src\locale\ne.js" />
+    <Content Include="libs\moment\src\locale\nl.js" />
+    <Content Include="libs\moment\src\locale\nn.js" />
+    <Content Include="libs\moment\src\locale\pl.js" />
+    <Content Include="libs\moment\src\locale\pt-br.js" />
+    <Content Include="libs\moment\src\locale\pt.js" />
+    <Content Include="libs\moment\src\locale\ro.js" />
+    <Content Include="libs\moment\src\locale\ru.js" />
+    <Content Include="libs\moment\src\locale\si.js" />
+    <Content Include="libs\moment\src\locale\sk.js" />
+    <Content Include="libs\moment\src\locale\sl.js" />
+    <Content Include="libs\moment\src\locale\sq.js" />
+    <Content Include="libs\moment\src\locale\sr-cyrl.js" />
+    <Content Include="libs\moment\src\locale\sr.js" />
+    <Content Include="libs\moment\src\locale\sv.js" />
+    <Content Include="libs\moment\src\locale\ta.js" />
+    <Content Include="libs\moment\src\locale\th.js" />
+    <Content Include="libs\moment\src\locale\tl-ph.js" />
+    <Content Include="libs\moment\src\locale\tr.js" />
+    <Content Include="libs\moment\src\locale\tzm-latn.js" />
+    <Content Include="libs\moment\src\locale\tzm.js" />
+    <Content Include="libs\moment\src\locale\uk.js" />
+    <Content Include="libs\moment\src\locale\uz.js" />
+    <Content Include="libs\moment\src\locale\vi.js" />
+    <Content Include="libs\moment\src\locale\zh-cn.js" />
+    <Content Include="libs\moment\src\locale\zh-tw.js" />
+    <Content Include="libs\moment\src\moment.js" />
+    <Content Include="libs\moment\templates\amd-named.js" />
+    <Content Include="libs\moment\templates\amd.js" />
+    <Content Include="libs\moment\templates\globals.js" />
+    <Content Include="libs\moment\templates\locale-header.js" />
+    <Content Include="libs\moment\templates\test-header.js" />
+    <Content Include="libs\velocity\test\bluebird.js" />
+    <Content Include="libs\velocity\test\index.html" />
+    <Content Include="libs\velocity\test\jquery-1.11.1.js" />
+    <Content Include="libs\velocity\test\jquery-1.4.3.js" />
+    <Content Include="libs\velocity\test\q.js" />
+    <Content Include="libs\velocity\test\qunit-1.14.0.css" />
+    <Content Include="libs\velocity\test\qunit-1.14.0.js" />
+    <Content Include="libs\velocity\test\when.js" />
+    <Content Include="libs\velocity\test\zepto.js" />
+    <Content Include="libs\velocity\velocity.js" />
+    <Content Include="libs\velocity\velocity.min.js" />
+    <Content Include="libs\velocity\velocity.ui.js" />
+    <Content Include="libs\velocity\velocity.ui.min.js" />
+    <Content Include="Scripts\controllers\dentalController.js" />
+    <Content Include="Scripts\directives\dentalDirective.js" />
+    <Content Include="Scripts\extras\angular-ui-router.min.js" />
+    <Content Include="Scripts\extras\bootstrap.min.js" />
+    <Content Include="Scripts\main\app.js" />
+    <Content Include="Scripts\services\dentalService.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIController\UsersController.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DirectiveController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CivilStatu.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__RefactorLog.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DentalDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DentalDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DentalDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DentalDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DentistInformation.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiagnosisType.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GMailer.cs" />
+    <Compile Include="Models\ImageUrl.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MouthType.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyGenerator.cs" />
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientDentalHistory.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientDiagnosisHistoryDetail.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientDiagnosisHistoryMaster.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientInformation.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientMedicalHistory.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientMouth.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientTooth.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\ScheduleDetail.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleMaster.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tooth.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TreatmentType.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserMenu.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserType.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <EntityDeploy Include="Models\DentalDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DentalDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DentalDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+      <LastGenOutput>DentalDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DentalDB.edmx.diagram">
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DentalDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+      <LastGenOutput>DentalDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="libs\angular-route\.bower.json" />
+    <Content Include="libs\angular-route\angular-route.min.js.map" />
+    <Content Include="libs\angular-route\bower.json" />
+    <Content Include="libs\angular-route\package.json" />
+    <Content Include="libs\angular-route\README.md" />
+    <Content Include="libs\angular\.bower.json" />
+    <Content Include="libs\angular\angular.min.js.gzip" />
+    <Content Include="libs\angular\angular.min.js.map" />
+    <Content Include="libs\angular\bower.json" />
+    <Content Include="libs\angular\package.json" />
+    <Content Include="libs\angular\README.md" />
+    <Content Include="libs\bourbon\.bower.json" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_border-color.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_border-radius.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_border-style.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_border-width.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_buttons.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_clearfix.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_ellipsis.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_font-stacks.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_hide-text.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_margin.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_padding.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_position.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_prefixer.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_retina-image.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_size.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_text-inputs.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_timing-functions.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_triangle.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\addons\_word-wrap.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_animation.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_appearance.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_backface-visibility.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_background-image.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_background.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_border-image.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_calc.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_columns.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_filter.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_flex-box.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_font-face.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_font-feature-settings.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_hidpi-media-query.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_hyphens.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_image-rendering.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_keyframes.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_linear-gradient.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_perspective.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_placeholder.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_radial-gradient.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_selection.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_text-decoration.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_transform.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_transition.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\css3\_user-select.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_assign-inputs.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_contains-falsy.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_contains.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_is-length.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_is-light.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_is-number.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_is-size.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_modular-scale.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_px-to-em.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_px-to-rem.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_shade.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_strip-units.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_tint.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_transition-property-name.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\functions\_unpack.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_convert-units.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_directional-values.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_font-source-declaration.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_gradient-positions-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_linear-angle-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_linear-gradient-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_linear-positions-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_linear-side-corner-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_radial-arg-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_radial-gradient-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_radial-positions-parser.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_render-gradients.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_shape-size-stripper.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\helpers\_str-to-num.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\settings\_asset-pipeline.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\settings\_prefixer.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\settings\_px-to-em.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\_bourbon-deprecated-upcoming.scss" />
+    <Content Include="libs\bourbon\app\assets\stylesheets\_bourbon.scss" />
+    <Content Include="libs\bourbon\bower.json" />
+    <Content Include="libs\bourbon\LICENSE.md" />
+    <Content Include="libs\bourbon\README.md" />
+    <Content Include="libs\highlightjs\.bower.json" />
+    <Content Include="libs\highlightjs\bower.json" />
+    <Content Include="libs\highlightjs\component.json" />
+    <Content Include="libs\highlightjs\composer.json" />
+    <Content Include="libs\highlightjs\LICENSE" />
+    <Content Include="libs\highlightjs\Makefile" />
+    <Content Include="libs\highlightjs\README.md" />
+    <Content Include="libs\jquery\.bower.json" />
+    <Content Include="libs\jquery\bower.json" />
+    <Content Include="libs\jquery\dist\jquery.min.map" />
+    <Content Include="libs\jquery\src\sizzle\dist\sizzle.min.map" />
+    <Content Include="libs\lumx\.bower.json" />
+    <Content Include="libs\lumx\bower.json" />
+    <Content Include="libs\lumx\changelog.py" />
+    <Content Include="libs\lumx\core\scss\animations\_jelly.scss" />
+    <Content Include="libs\lumx\core\scss\animations\_ripple.scss" />
+    <Content Include="libs\lumx\core\scss\animations\_spin.scss" />
+    <Content Include="libs\lumx\core\scss\base\_colors.scss" />
+    <Content Include="libs\lumx\core\scss\base\_images.scss" />
+    <Content Include="libs\lumx\core\scss\base\_page.scss" />
+    <Content Include="libs\lumx\core\scss\base\_paragraph.scss" />
+    <Content Include="libs\lumx\core\scss\base\_typography.scss" />
+    <Content Include="libs\lumx\core\scss\generic\_box-sizing.scss" />
+    <Content Include="libs\lumx\core\scss\generic\_normalize.scss" />
+    <Content Include="libs\lumx\core\scss\generic\_reset.scss" />
+    <Content Include="libs\lumx\core\scss\objects\_bare-list.scss" />
+    <Content Include="libs\lumx\core\scss\objects\_divider.scss" />
+    <Content Include="libs\lumx\core\scss\objects\_z-depth.scss" />
+    <Content Include="libs\lumx\core\scss\settings\_colors.scss" />
+    <Content Include="libs\lumx\core\scss\settings\_defaults.scss" />
+    <Content Include="libs\lumx\core\scss\settings\_responsive.scss" />
+    <Content Include="libs\lumx\core\scss\tools\_functions.scss" />
+    <Content Include="libs\lumx\core\scss\tools\_mixins.scss" />
+    <Content Include="libs\lumx\core\scss\tools\_responsive.scss" />
+    <Content Include="libs\lumx\core\scss\trumps\_helpers.scss" />
+    <Content Include="libs\lumx\core\scss\trumps\_spacing.scss" />
+    <Content Include="libs\lumx\core\scss\trumps\_widths.scss" />
+    <Content Include="libs\lumx\core\scss\_lumx.scss" />
+    <Content Include="libs\lumx\dist\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="libs\lumx\dist\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="libs\lumx\dist\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="libs\lumx\dist\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="libs\lumx\dist\scss\animations\_jelly.scss" />
+    <Content Include="libs\lumx\dist\scss\animations\_ripple.scss" />
+    <Content Include="libs\lumx\dist\scss\animations\_spin.scss" />
+    <Content Include="libs\lumx\dist\scss\base\_colors.scss" />
+    <Content Include="libs\lumx\dist\scss\base\_images.scss" />
+    <Content Include="libs\lumx\dist\scss\base\_page.scss" />
+    <Content Include="libs\lumx\dist\scss\base\_paragraph.scss" />
+    <Content Include="libs\lumx\dist\scss\base\_typography.scss" />
+    <Content Include="libs\lumx\dist\scss\generic\_box-sizing.scss" />
+    <Content Include="libs\lumx\dist\scss\generic\_normalize.scss" />
+    <Content Include="libs\lumx\dist\scss\generic\_reset.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_button.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_card.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_checkbox.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_data-table.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_date-picker.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_dialog.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_dropdown.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_fab.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_file-input.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_flexbox.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_icon.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_list.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_notification.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_progress.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_radio-button.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_ripple.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_scrollbar.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_search-filter.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_select.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_switch.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_tabs.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_text-field.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_toolbar.scss" />
+    <Content Include="libs\lumx\dist\scss\modules\_tooltip.scss" />
+    <Content Include="libs\lumx\dist\scss\objects\_bare-list.scss" />
+    <Content Include="libs\lumx\dist\scss\objects\_divider.scss" />
+    <Content Include="libs\lumx\dist\scss\objects\_z-depth.scss" />
+    <Content Include="libs\lumx\dist\scss\settings\_colors.scss" />
+    <Content Include="libs\lumx\dist\scss\settings\_defaults.scss" />
+    <Content Include="libs\lumx\dist\scss\settings\_responsive.scss" />
+    <Content Include="libs\lumx\dist\scss\tools\_functions.scss" />
+    <Content Include="libs\lumx\dist\scss\tools\_mixins.scss" />
+    <Content Include="libs\lumx\dist\scss\tools\_responsive.scss" />
+    <Content Include="libs\lumx\dist\scss\trumps\_helpers.scss" />
+    <Content Include="libs\lumx\dist\scss\trumps\_spacing.scss" />
+    <Content Include="libs\lumx\dist\scss\trumps\_widths.scss" />
+    <Content Include="libs\lumx\dist\scss\_lumx.scss" />
+    <Content Include="libs\lumx\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="libs\lumx\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="libs\lumx\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="libs\lumx\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="libs\lumx\modules\button\scss\_button.scss" />
+    <Content Include="libs\lumx\modules\card\scss\_card.scss" />
+    <Content Include="libs\lumx\modules\checkbox\scss\_checkbox.scss" />
+    <Content Include="libs\lumx\modules\data-table\scss\_data-table.scss" />
+    <Content Include="libs\lumx\modules\date-picker\scss\_date-picker.scss" />
+    <Content Include="libs\lumx\modules\dialog\scss\_dialog.scss" />
+    <Content Include="libs\lumx\modules\dropdown\scss\_dropdown.scss" />
+    <Content Include="libs\lumx\modules\fab\scss\_fab.scss" />
+    <Content Include="libs\lumx\modules\file-input\scss\_file-input.scss" />
+    <Content Include="libs\lumx\modules\flexbox\scss\_flexbox.scss" />
+    <Content Include="libs\lumx\modules\icon\scss\_icon.scss" />
+    <Content Include="libs\lumx\modules\list\scss\_list.scss" />
+    <Content Include="libs\lumx\modules\notification\scss\_notification.scss" />
+    <Content Include="libs\lumx\modules\progress\scss\_progress.scss" />
+    <Content Include="libs\lumx\modules\radio-button\scss\_radio-button.scss" />
+    <Content Include="libs\lumx\modules\ripple\scss\_ripple.scss" />
+    <Content Include="libs\lumx\modules\scrollbar\scss\_scrollbar.scss" />
+    <Content Include="libs\lumx\modules\search-filter\scss\_search-filter.scss" />
+    <Content Include="libs\lumx\modules\select\scss\_select.scss" />
+    <Content Include="libs\lumx\modules\switch\scss\_switch.scss" />
+    <Content Include="libs\lumx\modules\tabs\scss\_tabs.scss" />
+    <Content Include="libs\lumx\modules\text-field\scss\_text-field.scss" />
+    <Content Include="libs\lumx\modules\toolbar\scss\_toolbar.scss" />
+    <Content Include="libs\lumx\modules\tooltip\scss\_tooltip.scss" />
+    <Content Include="libs\mdi\.bower.json" />
+    <Content Include="libs\mdi\bower.json" />
+    <Content Include="libs\mdi\css\materialdesignicons.css.map" />
+    <Content Include="libs\mdi\css\materialdesignicons.min.css.map" />
+    <Content Include="libs\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="libs\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="libs\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="libs\mdi\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="libs\mdi\package.json" />
+    <Content Include="libs\mdi\scss\materialdesignicons.scss" />
+    <Content Include="libs\mdi\scss\_core.scss" />
+    <Content Include="libs\mdi\scss\_icons.scss" />
+    <Content Include="libs\mdi\scss\_path.scss" />
+    <Content Include="libs\mdi\scss\_variables.scss" />
+    <Content Include="libs\moment\.bower.json" />
+    <Content Include="libs\moment\bower.json" />
+    <Content Include="libs\moment\CHANGELOG.md" />
+    <Content Include="libs\moment\LICENSE" />
+    <Content Include="libs\moment\README.md" />
+    <Content Include="libs\velocity\.bower.json" />
+    <Content Include="libs\velocity\bower.json" />
+    <Content Include="Views\Directive\UserMenu.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Templates\AboutUs.cshtml" />
+    <Content Include="Views\Home\Templates\ContactUs.cshtml" />
+    <Content Include="Views\Home\Templates\Header.cshtml" />
+    <Content Include="Views\Home\Templates\Home.cshtml" />
+    <Content Include="Views\Home\Templates\OurServices.cshtml" />
+    <Content Include="Views\Home\Templates\Testimonials.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Templates\Appointment.cshtml" />
+    <Content Include="Views\User\Templates\Header.cshtml" />
+    <Content Include="Views\User\Templates\Notification.cshtml" />
+    <Content Include="Views\User\Templates\Setting.cshtml" />
+    <Content Include="Views\User\Templates\SideBar.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\filters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>31161</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:31161/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DentalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__RefactorLog">
+    <Key>
+      <PropertyRef Name="OperationKey" />
+    </Key>
+    <Property Name="OperationKey" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" />
+    <Property Name="DentistId" Type="Int32" />
+    <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AppointmentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DentistInformation" Relationship="Self.FK_Appointment_DentistId" FromRole="Appointment" ToRole="DentistInformation" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Appointment_PatientId" FromRole="Appointment" ToRole="User" />
+    <NavigationProperty Name="PatientDiagnosisHistoryMasters" Relationship="Self.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="Appointment" ToRole="PatientDiagnosisHistoryMaster" />
+  </EntityType>
+  <EntityType Name="CivilStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DentistInformations" Relationship="Self.FK_DentistInformation_CivilStatus" FromRole="CivilStatus" ToRole="DentistInformation" />
+    <NavigationProperty Name="PatientInformations" Relationship="Self.FK_PatientInformation_CivilStatusId" FromRole="CivilStatus" ToRole="PatientInformation" />
+  </EntityType>
+  <EntityType Name="DentistInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="CivilStatusId" Type="Int32" />
+    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_DentistId" FromRole="DentistInformation" ToRole="Appointment" />
+    <NavigationProperty Name="CivilStatu" Relationship="Self.FK_DentistInformation_CivilStatus" FromRole="DentistInformation" ToRole="CivilStatus" />
+    <NavigationProperty Name="ScheduleMasters" Relationship="Self.FK_ScheduleMaster_DentistId" FromRole="DentistInformation" ToRole="ScheduleMaster" />
+  </EntityType>
+  <EntityType Name="DiagnosisType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="Self.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" FromRole="DiagnosisType" ToRole="PatientDiagnosisHistoryDetail" />
+  </EntityType>
+  <EntityType Name="ImageUrl">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MouthTypes" Relationship="Self.FK_MouthType_ImageUrlId" FromRole="ImageUrl" ToRole="MouthType" />
+    <NavigationProperty Name="Teeth" Relationship="Self.FK_Tooth_ImageUrlId" FromRole="ImageUrl" ToRole="Tooth" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="SenderId" Type="Int32" />
+    <Property Name="ReceiverId" Type="Int32" />
+    <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ReceivedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_ReceiverId" FromRole="Message" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_User_SenderId" FromRole="Message" ToRole="User" />
+  </EntityType>
+  <EntityType Name="MouthType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ImageUrlId" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ImageUrl" Relationship="Self.FK_MouthType_ImageUrlId" FromRole="MouthType" ToRole="ImageUrl" />
+    <NavigationProperty Name="PatientMouths" Relationship="Self.FK_PatientMouth_MouthTypeId" FromRole="MouthType" ToRole="PatientMouth" />
+    <NavigationProperty Name="Teeth" Relationship="Self.FK_Tooth_MouthTypeId" FromRole="MouthType" ToRole="Tooth" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientDentalHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" />
+    <Property Name="Question1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question4" Type="Int32" />
+    <Property Name="Question5" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question6" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question7a" Type="Int32" />
+    <Property Name="Question7b" Type="Int32" />
+    <Property Name="Question7c" Type="Int32" />
+    <Property Name="Question7d" Type="Int32" />
+    <Property Name="Question7e" Type="Int32" />
+    <Property Name="Question7f" Type="Int32" />
+    <Property Name="Question7g" Type="Int32" />
+    <Property Name="Question7Others" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PatientDentalHistory_PatientId" FromRole="PatientDentalHistory" ToRole="User" />
+  </EntityType>
+  <EntityType Name="PatientDiagnosisHistoryDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PDHMasterId" Type="Int32" Nullable="false" />
+    <Property Name="DiagnosisTypeId" Type="Int32" />
+    <Property Name="TreatmentTypeId" Type="Int32" />
+    <Property Name="DiagnosedTeeth" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DiagnosisType" Relationship="Self.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="DiagnosisType" />
+    <NavigationProperty Name="PatientDiagnosisHistoryMaster" Relationship="Self.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryDetail" ToRole="PatientDiagnosisHistoryMaster" />
+    <NavigationProperty Name="TreatmentType" Relationship="Self.FK_PatientDiagnosisHistoryDetail_TreatmentTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="TreatmentType" />
+  </EntityType>
+  <EntityType Name="PatientDiagnosisHistoryMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="AppointmentId" Type="Int32" Nullable="false" />
+    <Property Name="Fee" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Paid" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DiagnosisStarted" Type="Time" Precision="7" />
+    <Property Name="DiagnosisEnded" Type="Time" Precision="7" />
+    <Property Name="DiagnosisDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Appointment" Relationship="Self.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="PatientDiagnosisHistoryMaster" ToRole="Appointment" />
+    <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="Self.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryMaster" ToRole="PatientDiagnosisHistoryDetail" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PatientDiagnosisHistoryMaster_PatientId" FromRole="PatientDiagnosisHistoryMaster" ToRole="User" />
+  </EntityType>
+  <EntityType Name="PatientInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="CivilStatusId" Type="Int32" />
+    <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CivilStatu" Relationship="Self.FK_PatientInformation_CivilStatusId" FromRole="PatientInformation" ToRole="CivilStatus" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PatientInformation_PatientId" FromRole="PatientInformation" ToRole="User" />
+    <NavigationProperty Name="PatientMouths" Relationship="Self.FK_PatientMouth_PatientId" FromRole="PatientInformation" ToRole="PatientMouth" />
+  </EntityType>
+  <EntityType Name="PatientMedicalHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="Question1" Type="DateTime" Precision="3" />
+    <Property Name="Question2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Question3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question4" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question5" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question6" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question7" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Question8" Type="Int32" />
+    <Property Name="Question9" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question10" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question11" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Question12" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question13" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question14" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Question15" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Question16" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Question17" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Question18" Type="Int32" />
+    <Property Name="Question19" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PatientMedicalHistory_PatientId" FromRole="PatientMedicalHistory" ToRole="User" />
+  </EntityType>
+  <EntityType Name="PatientMouth">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MouthTypeId" Type="Int32" />
+    <Property Name="PatientId" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MouthType" Relationship="Self.FK_PatientMouth_MouthTypeId" FromRole="PatientMouth" ToRole="MouthType" />
+    <NavigationProperty Name="PatientInformation" Relationship="Self.FK_PatientMouth_PatientId" FromRole="PatientMouth" ToRole="PatientInformation" />
+    <NavigationProperty Name="PatientTeeth" Relationship="Self.FK_PatientTooth_PatientMouthId" FromRole="PatientMouth" ToRole="PatientTooth" />
+  </EntityType>
+  <EntityType Name="PatientTooth">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientMouthId" Type="Int32" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="XAxis" Type="Int32" />
+    <Property Name="YAxis" Type="Int32" />
+    <Property Name="Width" Type="Int32" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="rotation" Type="Int32" />
+    <Property Name="ImageUrlId" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientMouth" Relationship="Self.FK_PatientTooth_PatientMouthId" FromRole="PatientTooth" ToRole="PatientMouth" />
+  </EntityType>
+  <EntityType Name="ScheduleDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ScheduleMasterId" Type="Int32" Nullable="false" />
+    <Property Name="From" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="To" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ScheduleMaster" Relationship="Self.FK_ScheduleDetail_ScheduLeMasterId" FromRole="ScheduleDetail" ToRole="ScheduleMaster" />
+  </EntityType>
+  <EntityType Name="ScheduleMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DentistId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="DentistInformation" Relationship="Self.FK_ScheduleMaster_DentistId" FromRole="ScheduleMaster" ToRole="DentistInformation" />
+    <NavigationProperty Name="ScheduleDetails" Relationship="Self.FK_ScheduleDetail_ScheduLeMasterId" FromRole="ScheduleMaster" ToRole="ScheduleDetail" />
+  </EntityType>
+  <EntityType Name="Tooth">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MouthTypeId" Type="Int32" />
+    <Property Name="Position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="XAxis" Type="Int32" />
+    <Property Name="YAxis" Type="Int32" />
+    <Property Name="Width" Type="Int32" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="rotation" Type="Int32" />
+    <Property Name="ImageUrlId" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="ImageUrl" Relationship="Self.FK_Tooth_ImageUrlId" FromRole="Tooth" ToRole="ImageUrl" />
+    <NavigationProperty Name="MouthType" Relationship="Self.FK_Tooth_MouthTypeId" FromRole="Tooth" ToRole="MouthType" />
+  </EntityType>
+  <EntityType Name="TreatmentType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="Self.FK_PatientDiagnosisHistoryDetail_TreatmentTypeId" FromRole="TreatmentType" ToRole="PatientDiagnosisHistoryDetail" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_PatientId" FromRole="User" ToRole="Appointment" />
+    <NavigationProperty Name="Messages" Relationship="Self.FK_User_ReceiverId" FromRole="User" ToRole="Message" />
+    <NavigationProperty Name="Messages1" Relationship="Self.FK_User_SenderId" FromRole="User" ToRole="Message" />
+    <NavigationProperty Name="PatientDentalHistories" Relationship="Self.FK_PatientDentalHistory_PatientId" FromRole="User" ToRole="PatientDentalHistory" />
+    <NavigationProperty Name="PatientDiagnosisHistoryMasters" Relationship="Self.FK_PatientDiagnosisHistoryMaster_PatientId" FromRole="User" ToRole="PatientDiagnosisHistoryMaster" />
+    <NavigationProperty Name="PatientInformations" Relationship="Self.FK_PatientInformation_PatientId" FromRole="User" ToRole="PatientInformation" />
+    <NavigationProperty Name="PatientMedicalHistories" Relationship="Self.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserMenu" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_UserTypeId" FromRole="UserType" ToRole="User" />
+    <NavigationProperty Name="UserMenus" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserType" ToRole="UserMenu" />
+  </EntityType>
+  <Association Name="FK_Appointment_DentistId">
+    <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="0..1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DentistInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="DentistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appointment_PatientId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDiagnosisHistoryMaster_AppointmentId">
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
+    <End Role="PatientDiagnosisHistoryMaster" Type="Self.PatientDiagnosisHistoryMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Appointment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDiagnosisHistoryMaster">
+        <PropertyRef Name="AppointmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DentistInformation_CivilStatus">
+    <End Role="CivilStatus" Type="Self.CivilStatu" Multiplicity="0..1" />
+    <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CivilStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DentistInformation">
+        <PropertyRef Name="CivilStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientInformation_CivilStatusId">
+    <End Role="CivilStatus" Type="Self.CivilStatu" Multiplicity="0..1" />
+    <End Role="PatientInformation" Type="Self.PatientInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CivilStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientInformation">
+        <PropertyRef Name="CivilStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduleMaster_DentistId">
+    <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="1" />
+    <End Role="ScheduleMaster" Type="Self.ScheduleMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DentistInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduleMaster">
+        <PropertyRef Name="DentistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
+    <End Role="DiagnosisType" Type="Self.DiagnosisType" Multiplicity="0..1" />
+    <End Role="PatientDiagnosisHistoryDetail" Type="Self.PatientDiagnosisHistoryDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiagnosisType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDiagnosisHistoryDetail">
+        <PropertyRef Name="DiagnosisTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MouthType_ImageUrlId">
+    <End Role="ImageUrl" Type="Self.ImageUrl" Multiplicity="0..1" />
+    <End Role="MouthType" Type="Self.MouthType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImageUrl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MouthType">
+        <PropertyRef Name="ImageUrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tooth_ImageUrlId">
+    <End Role="ImageUrl" Type="Self.ImageUrl" Multiplicity="0..1" />
+    <End Role="Tooth" Type="Self.Tooth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImageUrl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tooth">
+        <PropertyRef Name="ImageUrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_ReceiverId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="ReceiverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_SenderId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="SenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientMouth_MouthTypeId">
+    <End Role="MouthType" Type="Self.MouthType" Multiplicity="0..1" />
+    <End Role="PatientMouth" Type="Self.PatientMouth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MouthType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientMouth">
+        <PropertyRef Name="MouthTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tooth_MouthTypeId">
+    <End Role="MouthType" Type="Self.MouthType" Multiplicity="0..1" />
+    <End Role="Tooth" Type="Self.Tooth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MouthType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tooth">
+        <PropertyRef Name="MouthTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDentalHistory_PatientId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientDentalHistory" Type="Self.PatientDentalHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDentalHistory">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDiagnosisHistoryDetail_PDHMasterId">
+    <End Role="PatientDiagnosisHistoryMaster" Type="Self.PatientDiagnosisHistoryMaster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientDiagnosisHistoryDetail" Type="Self.PatientDiagnosisHistoryDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDiagnosisHistoryMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDiagnosisHistoryDetail">
+        <PropertyRef Name="PDHMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDiagnosisHistoryDetail_TreatmentTypeId">
+    <End Role="TreatmentType" Type="Self.TreatmentType" Multiplicity="0..1" />
+    <End Role="PatientDiagnosisHistoryDetail" Type="Self.PatientDiagnosisHistoryDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TreatmentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDiagnosisHistoryDetail">
+        <PropertyRef Name="TreatmentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDiagnosisHistoryMaster_PatientId">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientDiagnosisHistoryMaster" Type="Self.PatientDiagnosisHistoryMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDiagnosisHistoryMaster">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientInformation_PatientId">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientInformation" Type="Self.PatientInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientInformation">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientMouth_PatientId">
+    <End Role="PatientInformation" Type="Self.PatientInformation" Multiplicity="0..1" />
+    <End Role="PatientMouth" Type="Self.PatientMouth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientInformation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientMouth">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientMedicalHistory_PatientId">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientMedicalHistory" Type="Self.PatientMedicalHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientMedicalHistory">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientTooth_PatientMouthId">
+    <End Role="PatientMouth" Type="Self.PatientMouth" Multiplicity="0..1" />
+    <End Role="PatientTooth" Type="Self.PatientTooth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientMouth">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientTooth">
+        <PropertyRef Name="PatientMouthId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduleDetail_ScheduLeMasterId">
+    <End Role="ScheduleMaster" Type="Self.ScheduleMaster" Multiplicity="1" />
+    <End Role="ScheduleDetail" Type="Self.ScheduleDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ScheduleMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduleDetail">
+        <PropertyRef Name="ScheduleMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserTypeId">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMenu_UserTypeId">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+    <End Role="UserMenu" Type="Self.UserMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMenu">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DentalDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+    <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+    <EntitySet Name="CivilStatus" EntityType="Self.CivilStatu" />
+    <EntitySet Name="DentistInformations" EntityType="Self.DentistInformation" />
+    <EntitySet Name="DiagnosisTypes" EntityType="Self.DiagnosisType" />
+    <EntitySet Name="ImageUrls" EntityType="Self.ImageUrl" />
+    <EntitySet Name="Logs" EntityType="Self.Log" />
+    <EntitySet Name="Messages" EntityType="Self.Message" />
+    <EntitySet Name="MouthTypes" EntityType="Self.MouthType" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="PatientDentalHistories" EntityType="Self.PatientDentalHistory" />
+    <EntitySet Name="PatientDiagnosisHistoryDetails" EntityType="Self.PatientDiagnosisHistoryDetail" />
+    <EntitySet Name="PatientDiagnosisHistoryMasters" EntityType="Self.PatientDiagnosisHistoryMaster" />
+    <EntitySet Name="PatientInformations" EntityType="Self.PatientInformation" />
+    <EntitySet Name="PatientMedicalHistories" EntityType="Self.PatientMedicalHistory" />
+    <EntitySet Name="PatientMouths" EntityType="Self.PatientMouth" />
+    <EntitySet Name="PatientTeeth" EntityType="Self.PatientTooth" />
+    <EntitySet Name="ScheduleDetails" EntityType="Self.ScheduleDetail" />
+    <EntitySet Name="ScheduleMasters" EntityType="Self.ScheduleMaster" />
+    <EntitySet Name="Teeth" EntityType="Self.Tooth" />
+    <EntitySet Name="TreatmentTypes" EntityType="Self.TreatmentType" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserMenus" EntityType="Self.UserMenu" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_Appointment_DentistId" Association="Self.FK_Appointment_DentistId">
+      <End Role="DentistInformation" EntitySet="DentistInformations" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appointment_PatientId" Association="Self.FK_Appointment_PatientId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDiagnosisHistoryMaster_AppointmentId" Association="Self.FK_PatientDiagnosisHistoryMaster_AppointmentId">
+      <End Role="Appointment" EntitySet="Appointments" />
+      <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DentistInformation_CivilStatus" Association="Self.FK_DentistInformation_CivilStatus">
+      <End Role="CivilStatus" EntitySet="CivilStatus" />
+      <End Role="DentistInformation" EntitySet="DentistInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientInformation_CivilStatusId" Association="Self.FK_PatientInformation_CivilStatusId">
+      <End Role="CivilStatus" EntitySet="CivilStatus" />
+      <End Role="PatientInformation" EntitySet="PatientInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduleMaster_DentistId" Association="Self.FK_ScheduleMaster_DentistId">
+      <End Role="DentistInformation" EntitySet="DentistInformations" />
+      <End Role="ScheduleMaster" EntitySet="ScheduleMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" Association="Self.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
+      <End Role="DiagnosisType" EntitySet="DiagnosisTypes" />
+      <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MouthType_ImageUrlId" Association="Self.FK_MouthType_ImageUrlId">
+      <End Role="ImageUrl" EntitySet="ImageUrls" />
+      <End Role="MouthType" EntitySet="MouthTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tooth_ImageUrlId" Association="Self.FK_Tooth_ImageUrlId">
+      <End Role="ImageUrl" EntitySet="ImageUrls" />
+      <End Role="Tooth" EntitySet="Teeth" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_ReceiverId" Association="Self.FK_User_ReceiverId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_SenderId" Association="Self.FK_User_SenderId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientMouth_MouthTypeId" Association="Self.FK_PatientMouth_MouthTypeId">
+      <End Role="MouthType" EntitySet="MouthTypes" />
+      <End Role="PatientMouth" EntitySet="PatientMouths" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tooth_MouthTypeId" Association="Self.FK_Tooth_MouthTypeId">
+      <End Role="MouthType" EntitySet="MouthTypes" />
+      <End Role="Tooth" EntitySet="Teeth" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDentalHistory_PatientId" Association="Self.FK_PatientDentalHistory_PatientId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientDentalHistory" EntitySet="PatientDentalHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_PDHMasterId" Association="Self.FK_PatientDiagnosisHistoryDetail_PDHMasterId">
+      <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMasters" />
+      <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_TreatmentTypeId" Association="Self.FK_PatientDiagnosisHistoryDetail_TreatmentTypeId">
+      <End Role="TreatmentType" EntitySet="TreatmentTypes" />
+      <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDiagnosisHistoryMaster_PatientId" Association="Self.FK_PatientDiagnosisHistoryMaster_PatientId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientInformation_PatientId" Association="Self.FK_PatientInformation_PatientId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientInformation" EntitySet="PatientInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientMouth_PatientId" Association="Self.FK_PatientMouth_PatientId">
+      <End Role="PatientInformation" EntitySet="PatientInformations" />
+      <End Role="PatientMouth" EntitySet="PatientMouths" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientMedicalHistory_PatientId" Association="Self.FK_PatientMedicalHistory_PatientId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientTooth_PatientMouthId" Association="Self.FK_PatientTooth_PatientMouthId">
+      <End Role="PatientMouth" EntitySet="PatientMouths" />
+      <End Role="PatientTooth" EntitySet="PatientTeeth" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduleDetail_ScheduLeMasterId" Association="Self.FK_ScheduleDetail_ScheduLeMasterId">
+      <End Role="ScheduleMaster" EntitySet="ScheduleMasters" />
+      <End Role="ScheduleDetail" EntitySet="ScheduleDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserTypeId" Association="Self.FK_User_UserTypeId">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMenu_UserTypeId" Association="Self.FK_UserMenu_UserTypeId">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="UserMenu" EntitySet="UserMenus" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

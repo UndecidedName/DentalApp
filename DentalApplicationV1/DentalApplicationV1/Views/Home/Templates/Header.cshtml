@@ -1,0 +1,99 @@
+﻿<header class="header">
+    <!--Logo-->
+    <h1 class="main-logo">
+        <a ui-sref="Home" class="main-logo__link" lx-ripple="white">
+            <img src="/images/logo/lumx-white.png">
+        </a>
+    </h1>
+
+    <!--Menu for Desktop-->
+    <nav class="main-nav main-nav--lap-and-up">
+        <ul>
+            <li>@*<a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">Our Services</a>*@
+                <a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">
+                    <i class="icon icon--s icon--white icon--flat mdi mdi-factory"
+                       lx-tooltip="Our Services" tooltip-position="bottom"></i>
+                </a>
+            </li>
+            <li>@*<a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">Contact Us</a>*@
+                <a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">
+                    <i class="icon icon--s icon--white icon--flat mdi mdi-phone-in-talk"
+                       lx-tooltip="Contact Us" tooltip-position="bottom"></i>
+                </a>
+            </li>
+            <li>@*<a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">Testimonials</a>*@
+                <a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">
+                    <i class="icon icon--s icon--white icon--flat mdi mdi-pen"
+                       lx-tooltip="Testimonials" tooltip-position="bottom"></i>
+                </a>
+            </li>
+            <li>@*<a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">About Us</a>*@
+                <a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">
+                    <i class="icon icon--s icon--white icon--flat mdi mdi-account-multiple"
+                       lx-tooltip="About Us" tooltip-position="bottom"></i>
+                </a>
+            </li>
+            <li>
+                <a href="" class="main-nav__link" lx-ripple="white" ng-click="openLogin('LoginModal')">
+                    <i class="icon icon--s icon--white icon--flat mdi mdi-login"
+                       lx-tooltip="Login" tooltip-position="bottom"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!--Menu for Mobile-->
+    <nav class="main-nav main-nav--palm">
+        <lx-dropdown position="right" from-top>
+            <button class="btn btn--m btn--white btn--icon" lx-ripple="white" lx-dropdown-toggle>
+                <i class="mdi mdi-dots-vertical"></i>
+            </button>
+
+            <lx-dropdown-menu>
+                <ul>
+                    <li><a ui-sref="OurServices" class="dropdown-link" lx-ripple="white">Our Services</a></li>
+                    <li><a ui-sref="ContactUs" class="dropdown-link" lx-ripple="white">Contact Us</a></li>
+                    <li><a ui-sref="Testimonials" class="dropdown-link" lx-ripple="white">Testimonials</a></li>
+                    <li><a ui-sref="AboutUs" class="dropdown-link" lx-ripple="white">About Us</a></li>
+                    <li><a class="dropdown-link" lx-ripple=" white" ng-click="openLogin('LoginModal')">Login</a></li>
+                </ul>
+            </lx-dropdown-menu>
+        </lx-dropdown>
+    </nav>
+
+    <!--Login Modal Form-->
+    <lx-dialog class="dialog dialog--s" id="LoginModal" auto-close="true" onscrollend="scrollEndDialog()">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title text-center">
+                    {{loginModalHeader}}
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Username" error="invalidateInput(username)">
+                        <input type="text" ng-model="username">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Password" error="invalidateInput(password)">
+                        <input type="password" ng-model="password">
+                    </lx-text-field>
+                </div>
+            </div><br />
+            <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
+                <div class="checkbox">
+                    <input type="checkbox" id="rememberMe" class="checkbox__input" ng-model="rememberMe">
+                    <label for="rememberMe" class="checkbox__label">Remember me</label>
+                </div>
+            </div>
+        </div>
+        <div class="dialog__actions">
+            <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeLogin('LoginModal')">Cancel</button>
+            <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="loginRequest('LoginModal')">Login</button>
+        </div>
+</header>
