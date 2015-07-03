@@ -1,5 +1,5 @@
 /*
- LumX v0.3.50
+ LumX v0.3.60
  (c) 2014-2015 LumApps http://ui.lumapps.com
  License: MIT
 */
@@ -755,8 +755,7 @@ angular.module('lumx.dropdown', [])
             var scrollTop = dropdownMenu.scrollTop();
             dropdownMenu.removeAttr('style');
             dropdownMenu.css({
-                opacity: 1,
-                overflow: 'auto'
+                opacity: 1
             });
 
             var windowScrollTop = angular.element($window).scrollTop();
@@ -848,6 +847,9 @@ angular.module('lumx.dropdown', [])
                 }
 
                 dropdownMenu.scrollTop(scrollTop);
+                dropdownMenu.css({
+                    overflow: 'auto'
+                });
             }
         }
 
@@ -2518,7 +2520,7 @@ angular.module('lumx.select', [])
             transclude: true
         };
     })
-    .directive('lxSelectChoicesSelected', function($compile, $parse)
+    .directive('lxSelectChoicesSelected', ['$compile', '$parse', function($compile, $parse)
     {
         return {
             restrict: 'E',
@@ -2535,7 +2537,7 @@ angular.module('lumx.select', [])
                 }, true);
             }
         };
-    });
+    }]);
 
 /* global angular */
 'use strict'; // jshint ignore:line
