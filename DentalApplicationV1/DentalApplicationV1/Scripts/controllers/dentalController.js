@@ -70,8 +70,10 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                 $location.path("/User/Index");
                 //Save user info in cookie
                 if ($scope.userInfo.rememberMe == true) {
-                    $cookies.put('DentalUsername', $scope.userInfo.username);
-                    $cookies.put('DentalPassword', $scope.userInfo.password);
+                    var expiryDate = new Date();
+                    expiryDate.setDate(expiryDate.getDate() + 30);
+                    $cookies.put('DentalUsername', $scope.userInfo.username, { 'expires': expiryDate });
+                    $cookies.put('DentalPassword', $scope.userInfo.password, { 'expires': expiryDate });
                 }
                 //remove user info cookie
                 else {
@@ -127,6 +129,28 @@ function UserController(LxDialogService, LxNotificationService, LxDropdownServic
         });
     };
 };
-function AppointmentController() {};
+function AppointmentController($scope, LxNotificationService, LxDialogService, $interval, $filter) {
+    //Listen the changes of the scope
+    $scope.appointmenInfo = {
+        fromDate: $filter('date')(new Date() - 1, "MM/dd/yyyy")
+    };
+    $scope.showFromDate = function (dialogId) {
+
+        LxDialogService.open(dialogId);
+    };
+    $scope.closeFromDate = function (dialogId) {
+        var promise = $interval(function () {
+            if ($scope.appointmenInfo.fromDate.getDate() >= new Date().getDate()) {
+                $scope.appointmenInfo.fromDate = $filter('date')($scope.appointmenInfo.fromDate, "MM/dd/yyyy");
+                LxDialogService.close(dialogId);
+            }
+            else
+                LxNotificationService.error("Date selected must be greater than the current date.");
+            $interval.cancel(promise);
+            promise = undefined;
+        }, 100);
+
+    };
+};
 function SettingController() {};
 function NotificationController(LxDialogService, LxNotificationService, LxDropdownService, $scope, $rootScope) {};

@@ -137,3 +137,4 @@ D:\APPLICATION\ASP.NET\GitDental\DentalApplicationV1\DentalApplicationV1\bin\Sys
 D:\APPLICATION\ASP.NET\GitDental\DentalApplicationV1\DentalApplicationV1\obj\Debug\DentalApplicationV1.csprojResolveAssemblyReference.cache
 D:\APPLICATION\ASP.NET\GitDental\DentalApplicationV1\DentalApplicationV1\obj\Debug\DentalApplicationV1.dll
 D:\APPLICATION\ASP.NET\GitDental\DentalApplicationV1\DentalApplicationV1\obj\Debug\DentalApplicationV1.pdb
+D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalApplicationV1\obj\Debug\DentalApplicationV1.csprojResolveAssemblyReference.cache

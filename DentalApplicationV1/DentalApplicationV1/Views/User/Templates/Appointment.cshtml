@@ -2,7 +2,22 @@
     <h3 class="main-section__title">Appointment</h3>
 
     <div class="main-section__content">
-        This is the appointment
+        <div flex-container="row" flex-gutter="24" style="width:200px">
+            <div flex-item ng-click="showFromDate('fromDate')" ng-click="showFromDate('fromDate')">
+                <lx-text-field label="From" error="invalidateInput(userInfo.password)">
+                    <input type="text" name="From" ng-model="appointmenInfo.fromDate" pattern=".{4,50}">
+                </lx-text-field>
+            </div>
+        </div>
+        <lx-dialog class="dialog dialog--l" id="fromDate" auto-close="false">
+            <div class="dialog__header">
+            </div>
+            <div class="dialog__content">
+                <time-date-picker ng-model="appointmenInfo.fromDate" display-mode="date" orientation="false" on-save="saveFn(appointmenInfo.fromDate); closeFromDate('fromDate')"></time-date-picker>
+            </div>
+            <div class="dialog__actions">
+            </div>
+        </lx-dialog>
     </div>
 
 </div>

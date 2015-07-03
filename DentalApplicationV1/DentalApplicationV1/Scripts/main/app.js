@@ -1,4 +1,4 @@
-﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router', 'ngCookies'])
+﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router', 'ngCookies', 'mdDateTime'])
 .run(function ($rootScope, $http, $location) {
     $rootScope.browserWidth = true;
     $rootScope.isLogged = false;
