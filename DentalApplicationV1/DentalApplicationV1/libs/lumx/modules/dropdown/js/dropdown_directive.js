@@ -114,7 +114,8 @@ angular.module('lumx.dropdown', [])
             var scrollTop = dropdownMenu.scrollTop();
             dropdownMenu.removeAttr('style');
             dropdownMenu.css({
-                opacity: 1
+                opacity: 1,
+                overflow: 'auto'
             });
 
             var windowScrollTop = angular.element($window).scrollTop();
@@ -206,9 +207,6 @@ angular.module('lumx.dropdown', [])
                 }
 
                 dropdownMenu.scrollTop(scrollTop);
-                dropdownMenu.css({
-                    overflow: 'auto'
-                });
             }
         }
 

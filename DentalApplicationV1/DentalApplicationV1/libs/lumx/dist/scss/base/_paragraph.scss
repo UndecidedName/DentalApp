@@ -2,8 +2,9 @@
 //    #BASE-PARAGRAPH
 //\*------------------------------------*/
 
-// Paragraph mixin
-@mixin paragraph() {
+// Paragraph base styles
+.paragraph,
+%paragraph {
     h1, h2, h3, h4, h5, h6,
     ul, ol, dl,
     blockquote, p, address,
@@ -30,14 +31,4 @@
             text-decoration: underline;
         }
     }
-}
-
-
-
-
-
-// Paragraph base styles
-.paragraph,
-%paragraph {
-    @include paragraph;
 }
