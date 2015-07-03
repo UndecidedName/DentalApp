@@ -1,4 +1,4 @@
-﻿<header class="header">
+﻿<header class="header" ng-controller="HomeController">
     <!--Logo-->
     <h1 class="main-logo">
         <a ui-sref="Home" class="main-logo__link" lx-ripple="white">
@@ -9,25 +9,29 @@
     <!--Menu for Desktop-->
     <nav class="main-nav main-nav--lap-and-up">
         <ul>
-            <li>@*<a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">Our Services</a>*@
+            <li>
+                @*<a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">Our Services</a>*@
                 <a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-factory"
                        lx-tooltip="Our Services" tooltip-position="bottom"></i>
                 </a>
             </li>
-            <li>@*<a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">Contact Us</a>*@
+            <li>
+                @*<a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">Contact Us</a>*@
                 <a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-phone-in-talk"
                        lx-tooltip="Contact Us" tooltip-position="bottom"></i>
                 </a>
             </li>
-            <li>@*<a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">Testimonials</a>*@
+            <li>
+                @*<a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">Testimonials</a>*@
                 <a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-pen"
                        lx-tooltip="Testimonials" tooltip-position="bottom"></i>
                 </a>
             </li>
-            <li>@*<a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">About Us</a>*@
+            <li>
+                @*<a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">About Us</a>*@
                 <a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-account-multiple"
                        lx-tooltip="About Us" tooltip-position="bottom"></i>
@@ -62,7 +66,8 @@
     </nav>
 
     <!--Login Modal Form-->
-    <lx-dialog class="dialog dialog--s" id="LoginModal" auto-close="true" onscrollend="scrollEndDialog()">
+    <lx-dialog class="dialog dialog--s" id="LoginModal" auto-close="false" onscrollend="scrollEndDialog()">
+        <div id="loginProgress"></div>
         <div class="dialog__header">
             <div class="toolbar bgc-light-blue-500 pl++">
                 <span class="toolbar__label tc-white fs-title text-center">
@@ -73,27 +78,27 @@
         <div class="dialog__content">
             <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
                 <div flex-item>
-                    <lx-text-field label="Username" error="invalidateInput(username)">
-                        <input type="text" ng-model="username" pattern=".{4,50}">
+                    <lx-text-field label="Username" error="invalidateInput(userInfo.username)">
+                        <input type="text" name="Username" ng-model="userInfo.username" pattern=".{4,50}">
                     </lx-text-field>
                 </div>
             </div>
             <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
                 <div flex-item>
-                    <lx-text-field label="Password" error="invalidateInput(password)">
-                        <input type="password" ng-model="password" pattern=".{4,50}">
+                    <lx-text-field label="Password" error="invalidateInput(userInfo.password)">
+                        <input type="password" name="Password" ng-model="userInfo.password" pattern=".{4,50}">
                     </lx-text-field>
                 </div>
             </div><br />
             <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
                 <div class="checkbox">
-                    <input type="checkbox" id="rememberMe" class="checkbox__input" ng-model="rememberMe">
+                    <input type="checkbox" id="rememberMe" class="checkbox__input" ng-model="userInfo.rememberMe">
                     <label for="rememberMe" class="checkbox__label">Remember me</label>
                 </div>
             </div>
         </div>
         <div class="dialog__actions">
             <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeLogin('LoginModal')">Cancel</button>
-            <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="loginRequest('LoginModal')">Login</button>
+            <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="loginRequest('LoginModal')">Login</button>
         </div>
 </header>

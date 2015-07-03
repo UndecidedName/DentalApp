@@ -84,6 +84,7 @@
     <Build Include="dbo\ScheduleMaster.sql" />
     <Build Include="dbo\ScheduleDetail.sql" />
     <Build Include="dbo\DentalMenu.sql" />
+    <Build Include="dbo\V_UsersList.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DentalDB.refactorlog" />

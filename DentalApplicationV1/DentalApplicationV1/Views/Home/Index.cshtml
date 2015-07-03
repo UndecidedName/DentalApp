@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/libs/lumx/dist/lumx.css" />
     <link rel="stylesheet" href="~/libs/lumx/dist/roboto.css" />
 </head>
-<body ng-controller="HomeController">
+<body>
     <div ng-show="!isLogged" ng-include="'/Home/Templates/Header'"></div>
     <div ng-show="isLogged" ng-controller="UserController">
         <div ng-include="'/User/Templates/Header'"></div>
@@ -21,7 +21,8 @@
 <script src="~/libs/moment/min/moment-with-locales.js"></script>
 <script src="~/libs/angular/angular.js"></script>
 <script src="~/libs/lumx/dist/lumx.js"></script>
-<script src="~/Scripts/extras/angular-ui-router.min.js"></script>
+<script src="~/libs/angular/angular-ui-router.min.js"></script>
+<script src="~/libs/angular/angular-cookies.js"></script>
 <script src="~/Scripts/main/app.js"></script>
 <script src="~/Scripts/controllers/dentalController.js"></script>
 <script src="~/Scripts/services/dentalService.js"></script>

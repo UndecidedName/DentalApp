@@ -3,7 +3,7 @@ dentalApp.controller('UserController', UserController);
 dentalApp.controller('AppointmentController', AppointmentController);
 dentalApp.controller('SettingController', SettingController);
 dentalApp.controller('NotificationController', NotificationController);
-function HomeController(LxDialogService, LxNotificationService, $scope, $rootScope, $interval, $location, $compile) {
+function HomeController(LxProgressService, LxDialogService, LxNotificationService, $scope, $rootScope, $interval, $location, $compile, $http, $cookies) {
     if (!$rootScope.isLogged)
         LxNotificationService.success('Welcome to ' + $rootScope.appName + '!');
     
@@ -23,7 +23,23 @@ function HomeController(LxDialogService, LxNotificationService, $scope, $rootSco
             $location.path("/User/Index");
     }, 100);
 
+    $scope.initUser = function() {
+        $scope.userInfo = {
+            username: null,
+            password: null,
+            rememberMe: null
+        };
+    };
+
     $scope.openLogin = function (dialogId) {
+        LxProgressService.circular.hide();
+        $scope.initUser();
+        if (angular.isDefined($cookies.get('DentalUsername')))
+        {
+            $scope.userInfo.username = $cookies.get('DentalUsername')
+            $scope.userInfo.password = $cookies.get('DentalPassword')
+            $scope.userInfo.rememberMe = true;
+        }
         LxDialogService.open(dialogId);
     };
 
@@ -43,28 +59,39 @@ function HomeController(LxDialogService, LxNotificationService, $scope, $rootSco
     }
 
     $scope.loginRequest = function (dialogId) {
-        $rootScope.isLogged = true;
-        console.log('Logged');
-        $rootScope.userType = 1;
-        $scope.firstname = "Carl";
-        LxNotificationService.info('Hello ' + $scope.firstname + '!');
-        $location.path("/User/Index");
-        LxDialogService.close(dialogId);
+        LxProgressService.circular.show('#5fa2db', '#loginProgress');
+        var param = $scope.userInfo.username + "," + $scope.userInfo.password;
+        $http.get("/api/Users?userinfo=" + param.toString() + "&request=login")
+        .success(function (data, status) {
+            if (data.status == "SUCCESS") {
+                $rootScope.isLogged = true;
+                $rootScope.user = data.objParam1[0];
+                LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
+                $location.path("/User/Index");
+                //Save user info in cookie
+                if ($scope.userInfo.rememberMe == true) {
+                    $cookies.put('DentalUsername', $scope.userInfo.username);
+                    $cookies.put('DentalPassword', $scope.userInfo.password);
+                }
+                //remove user info cookie
+                else {
+                    if (angular.isDefined($cookies.get('DentalUsername'))) {
+                        $cookies.remove('DentalUsername')
+                        $cookies.remove('DentalPassword')
+                    }
+                }
+                LxProgressService.circular.hide();
+                LxDialogService.close(dialogId);
+            }
+            else {
+                LxProgressService.circular.hide();
+                LxNotificationService.error(data.message);
+            }
+        });
         
     };
-
-    $scope.logout = function () {
-        var element = document.getElementById('UserMenuChild');
-        element.parentNode.removeChild(element);
-        $rootScope.isLogged = false;
-        $rootScope.userType = null;
-        $rootScope.sideBarCompiled = false;
-        $location.path("/Home/Index");
-        LxNotificationService.info('Thank you for visiting ' + $rootScope.appName + '!');
-    };
-
 };
-function UserController(LxDialogService, LxNotificationService, LxDropdownService, $scope, $rootScope, Sidebar, $compile, $interval, $location) {
+function UserController(LxDialogService, LxNotificationService, LxDropdownService, $scope, $rootScope, Sidebar, $compile, $interval, $location, $http) {
     var $content, htmlMenu;
     $scope.Sidebar = Sidebar;
 
@@ -72,17 +99,32 @@ function UserController(LxDialogService, LxNotificationService, LxDropdownServic
         if (!$rootScope.isLogged) {
             $location.path("/Home/Index");
         }
-        if ($rootScope.isLogged && !$rootScope.sideBarCompiled) {
+        if ($rootScope.isLogged && (document.getElementById("UserMenuChild") == null)) {
             compileUserMenu();
-            $rootScope.sideBarCompiled = true;
+            $location.path("/User/Index");
         }
     }, 100);
 
     //Compiles User menu
     function compileUserMenu() {
-        htmlMenu = '<dir-generate-menu id="UserMenuChild" type="userType"></dir-generate-menu>';
+        htmlMenu = '<dir-generate-menu id="UserMenuChild" type="user.UserTypeId"></dir-generate-menu>';
         $content = angular.element(document.querySelector('#UserMenu')).html(htmlMenu);
         $compile($content)($scope);
+    };
+
+    $scope.logout = function () {
+        $http.get("/api/Users?userinfo=" + $rootScope.user.Username + "&request=logout")
+        .success(function (data, status) {
+            if (data.status == "SUCCESS") {
+                var element = document.getElementById('UserMenuChild');
+                element.parentNode.removeChild(element);
+                $rootScope.isLogged = false;
+                $rootScope.user = null;
+                $rootScope.sideBarCompiled = false;
+                $location.path("/Home/Index");
+                LxNotificationService.info('Thank you for visiting ' + $rootScope.appName + '!');
+            }
+        });
     };
 };
 function AppointmentController() {};

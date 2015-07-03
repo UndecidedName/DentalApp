@@ -299,7 +299,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserTypeId" Type="Int32" Nullable="false" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_PatientId" FromRole="User" ToRole="Appointment" />
@@ -333,6 +333,7 @@
     <Property Name="Status" Type="Int32" />
     <NavigationProperty Name="Users" Relationship="Self.FK_User_UserTypeId" FromRole="UserType" ToRole="User" />
     <NavigationProperty Name="UserMenus" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserType" ToRole="UserMenu" />
+    <NavigationProperty Name="DentalMenus" Relationship="DentalDBModel.FK_DentalMenu_UserTypeId" FromRole="UserType" ToRole="DentalMenu" />
   </EntityType>
   <Association Name="FK_Appointment_DentistId">
     <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="0..1" />
@@ -757,5 +758,66 @@
       <End Role="UserType" EntitySet="UserTypes" />
       <End Role="UserMenu" EntitySet="UserMenus" />
     </AssociationSet>
+    <EntitySet Name="V_UsersList" EntityType="DentalDBModel.V_UsersList" />
+    <EntitySet Name="DentalMenus" EntityType="DentalDBModel.DentalMenu" />
+    <AssociationSet Name="FK_DentalMenu_UserTypeId" Association="DentalDBModel.FK_DentalMenu_UserTypeId">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="DentalMenu" EntitySet="DentalMenus" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="V_UsersList">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="UserTypeId" />
+      <PropertyRef Name="BirthDate" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="PatientId" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CivilStatusId" Type="Int32" />
+    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="Weight" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DentalMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserTypeId" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_DentalMenu_UserTypeId" FromRole="DentalMenu" ToRole="UserType" />
+  </EntityType>
+  <Association Name="FK_DentalMenu_UserTypeId">
+    <End Type="DentalDBModel.UserType" Role="UserType" Multiplicity="0..1" />
+    <End Type="DentalDBModel.DentalMenu" Role="DentalMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DentalMenu">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

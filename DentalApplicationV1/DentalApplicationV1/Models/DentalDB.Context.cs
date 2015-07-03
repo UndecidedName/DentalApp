@@ -50,5 +50,7 @@ namespace DentalApplicationV1.Models
         public DbSet<User> Users { get; set; }
         public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<V_UsersList> V_UsersList { get; set; }
+        public DbSet<DentalMenu> DentalMenus { get; set; }
     }
 }

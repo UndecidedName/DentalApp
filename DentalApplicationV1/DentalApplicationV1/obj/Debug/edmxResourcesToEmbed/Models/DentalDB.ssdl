@@ -25,6 +25,16 @@
     <Property Name="Description" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="DentalMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserTypeId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="DentistInformation">
     <Key>
       <PropertyRef Name="Id" />
@@ -218,7 +228,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ScheduleMasterId" Type="int" Nullable="false" />
     <Property Name="From" Type="time" Precision="7" Nullable="false" />
     <Property Name="To" Type="time" Precision="7" Nullable="false" />
@@ -262,7 +272,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserTypeId" Type="int" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
@@ -285,6 +295,40 @@
     <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Status" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="V_UsersList">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="UserTypeId" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="BirthDate" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="UserTypeId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="CivilStatusId" Type="int" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Height" Type="int" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="100" />
+    <Property Name="Occupation" Type="varchar" MaxLength="100" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="Weight" Type="int" />
   </EntityType>
   <Association Name="FK_Appointment_DentistId">
     <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="0..1" />
@@ -309,6 +353,18 @@
       </Principal>
       <Dependent Role="Appointment">
         <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DentalMenu_UserTypeId">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+    <End Role="DentalMenu" Type="Self.DentalMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DentalMenu">
+        <PropertyRef Name="UserTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -592,6 +648,7 @@
     <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CivilStatus" EntityType="Self.CivilStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DentalMenu" EntityType="Self.DentalMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DentistInformation" EntityType="Self.DentistInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiagnosisType" EntityType="Self.DiagnosisType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageUrl" EntityType="Self.ImageUrl" Schema="dbo" store:Type="Tables" />
@@ -613,6 +670,28 @@
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserMenu" EntityType="Self.UserMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="V_UsersList" EntityType="Self.V_UsersList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[V_UsersList].[Id] AS [Id], 
+[V_UsersList].[Username] AS [Username], 
+[V_UsersList].[Password] AS [Password], 
+[V_UsersList].[UserTypeId] AS [UserTypeId], 
+[V_UsersList].[Status] AS [Status], 
+[V_UsersList].[Address] AS [Address], 
+[V_UsersList].[BirthDate] AS [BirthDate], 
+[V_UsersList].[CivilStatusId] AS [CivilStatusId], 
+[V_UsersList].[ContactNo] AS [ContactNo], 
+[V_UsersList].[EmailAddress] AS [EmailAddress], 
+[V_UsersList].[FirstName] AS [FirstName], 
+[V_UsersList].[Gender] AS [Gender], 
+[V_UsersList].[Height] AS [Height], 
+[V_UsersList].[LastName] AS [LastName], 
+[V_UsersList].[MiddleName] AS [MiddleName], 
+[V_UsersList].[Occupation] AS [Occupation], 
+[V_UsersList].[PatientId] AS [PatientId], 
+[V_UsersList].[Weight] AS [Weight]
+FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Appointment_DentistId" Association="Self.FK_Appointment_DentistId">
       <End Role="DentistInformation" EntitySet="DentistInformation" />
       <End Role="Appointment" EntitySet="Appointment" />
@@ -620,6 +699,10 @@
     <AssociationSet Name="FK_Appointment_PatientId" Association="Self.FK_Appointment_PatientId">
       <End Role="User" EntitySet="User" />
       <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DentalMenu_UserTypeId" Association="Self.FK_DentalMenu_UserTypeId">
+      <End Role="UserType" EntitySet="UserType" />
+      <End Role="DentalMenu" EntitySet="DentalMenu" />
     </AssociationSet>
     <AssociationSet Name="FK_DentistInformation_CivilStatus" Association="Self.FK_DentistInformation_CivilStatus">
       <End Role="CivilStatus" EntitySet="CivilStatus" />

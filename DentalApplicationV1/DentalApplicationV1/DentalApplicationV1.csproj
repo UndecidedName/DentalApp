@@ -103,7 +103,9 @@
     <Content Include="libs\angular-route\angular-route.js" />
     <Content Include="libs\angular-route\angular-route.min.js" />
     <Content Include="libs\angular-route\index.js" />
+    <Content Include="libs\angular\angular-cookies.js" />
     <Content Include="libs\angular\angular-csp.css" />
+    <Content Include="libs\angular\angular-ui-router.min.js" />
     <Content Include="libs\angular\angular.js" />
     <Content Include="libs\angular\angular.min.js" />
     <Content Include="libs\angular\index.js" />
@@ -581,6 +583,7 @@
     <Content Include="libs\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\controllers\dentalController.js" />
     <Content Include="Scripts\directives\dentalDirective.js" />
+    <Content Include="Scripts\extras\angular-cookies.js" />
     <Content Include="Scripts\extras\angular-ui-router.min.js" />
     <Content Include="Scripts\extras\bootstrap.min.js" />
     <Content Include="Scripts\main\app.js" />
@@ -588,12 +591,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIController\SessionControllerHandler.cs" />
+    <Compile Include="APIController\SessionRouteHandler.cs" />
+    <Compile Include="APIController\UserMenusController.cs" />
     <Compile Include="APIController\UsersController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DirectiveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -620,6 +627,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DentalDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DentalMenu.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DentistInformation.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
@@ -665,6 +675,7 @@
     <Compile Include="Models\PatientTooth.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Receiver.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\ScheduleDetail.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
@@ -685,6 +696,9 @@
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserType.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_UsersList.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

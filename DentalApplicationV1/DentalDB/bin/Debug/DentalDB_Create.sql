@@ -953,6 +953,31 @@ ALTER TABLE [dbo].[DentalMenu]
 
 
 GO
+PRINT N'Creating [dbo].[V_UsersList]...';
+
+
+GO
+CREATE VIEW [dbo].[V_UsersList]
+	AS SELECT	u.Id,
+				u.Username,
+				u.Password,
+				u.UserTypeId,
+				u.Status,
+				p.Address,
+				p.BirthDate,
+				p.CivilStatusId,
+				p.ContactNo,
+				p.EmailAddress,
+				p.FirstName,
+				p.Gender,
+				p.Height,
+				p.LastName,
+				p.MiddleName,
+				p.Occupation,
+				p.PatientId,
+				p.Weight
+	FROM [User] as u INNER JOIN [PatientInformation] as p ON u.Id = p.PatientId WHERE u.Status = 1
+GO
 -- Refactoring step to update target server with deployed transaction logs
 
 IF OBJECT_ID(N'dbo.__RefactorLog') IS NULL

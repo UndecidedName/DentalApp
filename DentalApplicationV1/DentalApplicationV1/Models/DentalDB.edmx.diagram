@@ -53,6 +53,9 @@
         <AssociationConnector Association="DentalDBModel.FK_ScheduleDetail_ScheduLeMasterId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_User_UserTypeId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_UserMenu_UserTypeId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DentalDBModel.V_UsersList" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DentalDBModel.DentalMenu" Width="1.5" PointX="3" PointY="16.375" />
+        <AssociationConnector Association="DentalDBModel.FK_DentalMenu_UserTypeId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

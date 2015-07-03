@@ -21,11 +21,11 @@ function dirGenerateMenu() {
             type: '='
         },
         controller: function ($http, $scope) {
-            //retrieve menu
-            $scope.data = [{
-                "Name": "Set Appointment",
-                "Url": "Appointment"
-            }];
+            $http.get("/api/UserMenus?userTypeId=" + $scope.type)
+            .success(function (data, status) {
+                if (data.status == "SUCCESS")
+                    $scope.data = data.objParam1;
+            });
         },
         templateUrl: '/Directive/UserMenu'
     }
