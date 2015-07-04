@@ -1,0 +1,21 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[DentalMenu]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[DF__tmp_ms_xx__Statu__236943A5] (Default Constraint)
+     Table rebuild
+       [dbo].[DentalMenu] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_DentalMenu_UserTypeId] (Foreign Key)
+     Create
+       [dbo].[FK_DentalMenu_UserTypeId] (Foreign Key)

@@ -604,9 +604,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIController\DentalMenusController.cs" />
     <Compile Include="APIController\SessionControllerHandler.cs" />
     <Compile Include="APIController\SessionRouteHandler.cs" />
-    <Compile Include="APIController\UserMenusController.cs" />
     <Compile Include="APIController\UsersController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -703,9 +703,6 @@
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>DentalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserMenu.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserType.cs">

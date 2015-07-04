@@ -289,18 +289,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserMenus">
-      <EntityTypeMapping TypeName="DentalDBModel.UserMenu">
-        <MappingFragment StoreEntitySet="UserMenu">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserTypes">
       <EntityTypeMapping TypeName="DentalDBModel.UserType">
         <MappingFragment StoreEntitySet="UserType">
@@ -339,6 +327,7 @@
       <EntityTypeMapping TypeName="DentalDBModel.DentalMenu">
         <MappingFragment StoreEntitySet="DentalMenu">
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />

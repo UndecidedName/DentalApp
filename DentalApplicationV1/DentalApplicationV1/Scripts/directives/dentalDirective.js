@@ -18,14 +18,20 @@ function dirGenerateMenu() {
     return {
         restrict: 'E',
         scope: {
-            type: '='
+            type: '=',
+            toggle: '&'
         },
-        controller: function ($http, $scope) {
-            $http.get("/api/UserMenus?userTypeId=" + $scope.type)
+        controller: function ($http, $scope, $interval) {
+            $http.get("/api/DentalMenus?userTypeId=" + $scope.type)
             .success(function (data, status) {
                 if (data.status == "SUCCESS")
                     $scope.data = data.objParam1;
+                console.log($scope.data);
             });
+
+            $scope.innerToggle = function () {
+                $scope.toggle();
+            }
         },
         templateUrl: '/Directive/UserMenu'
     }

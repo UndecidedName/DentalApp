@@ -29,10 +29,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserTypeId" Type="int" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="Url" Type="varchar" MaxLength="50" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DentistInformation">
@@ -274,17 +275,6 @@
     <Property Name="UserTypeId" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Status" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="UserMenu">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserTypeId" Type="int" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="200" />
-    <Property Name="Url" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserType">
@@ -546,18 +536,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ScheduleDetail_ScheduLeMasterId">
-    <End Role="ScheduleMaster" Type="Self.ScheduleMaster" Multiplicity="1" />
-    <End Role="ScheduleDetail" Type="Self.ScheduleDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ScheduleMaster">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ScheduleDetail">
-        <PropertyRef Name="ScheduleMasterId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ScheduleMaster_DentistId">
     <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="1" />
     <End Role="ScheduleMaster" Type="Self.ScheduleMaster" Multiplicity="*" />
@@ -632,18 +610,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserMenu_UserTypeId">
-    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
-    <End Role="UserMenu" Type="Self.UserMenu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserMenu">
-        <PropertyRef Name="UserTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DentalDBModelStoreContainer">
     <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
@@ -668,7 +634,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     <EntitySet Name="Tooth" EntityType="Self.Tooth" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TreatmentType" EntityType="Self.TreatmentType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserMenu" EntityType="Self.UserMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="V_UsersList" EntityType="Self.V_UsersList" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -760,10 +725,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
       <End Role="PatientMouth" EntitySet="PatientMouth" />
       <End Role="PatientTooth" EntitySet="PatientTooth" />
     </AssociationSet>
-    <AssociationSet Name="FK_ScheduleDetail_ScheduLeMasterId" Association="Self.FK_ScheduleDetail_ScheduLeMasterId">
-      <End Role="ScheduleMaster" EntitySet="ScheduleMaster" />
-      <End Role="ScheduleDetail" EntitySet="ScheduleDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_ScheduleMaster_DentistId" Association="Self.FK_ScheduleMaster_DentistId">
       <End Role="DentistInformation" EntitySet="DentistInformation" />
       <End Role="ScheduleMaster" EntitySet="ScheduleMaster" />
@@ -787,10 +748,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     <AssociationSet Name="FK_User_UserTypeId" Association="Self.FK_User_UserTypeId">
       <End Role="UserType" EntitySet="UserType" />
       <End Role="User" EntitySet="User" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserMenu_UserTypeId" Association="Self.FK_UserMenu_UserTypeId">
-      <End Role="UserType" EntitySet="UserType" />
-      <End Role="UserMenu" EntitySet="UserMenu" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

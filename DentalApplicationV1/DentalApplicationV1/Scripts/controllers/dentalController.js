@@ -66,6 +66,11 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
             if (data.status == "SUCCESS") {
                 $rootScope.isLogged = true;
                 $rootScope.user = data.objParam1[0];
+                $http.get("/api/UserMenus?userTypeId=" + $scope.type)
+                    .success(function (data, status) {
+                        if (data.status == "SUCCESS")
+                            $scope.data = data.objParam1;
+                });
                 LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
                 $location.path("/User/Index");
                 //Save user info in cookie
@@ -97,6 +102,10 @@ function UserController(LxDialogService, LxNotificationService, LxDropdownServic
     var $content, htmlMenu;
     $scope.Sidebar = Sidebar;
 
+    $scope.toggle = function () {
+        Sidebar.toggleSidebar();
+    }
+
     $interval(function () {
         if (!$rootScope.isLogged) {
             $location.path("/Home/Index");
@@ -109,7 +118,7 @@ function UserController(LxDialogService, LxNotificationService, LxDropdownServic
 
     //Compiles User menu
     function compileUserMenu() {
-        htmlMenu = '<dir-generate-menu id="UserMenuChild" type="user.UserTypeId"></dir-generate-menu>';
+        htmlMenu = '<dir-generate-menu toggle = "toggle()" id="UserMenuChild" type="user.UserTypeId"></dir-generate-menu>';
         $content = angular.element(document.querySelector('#UserMenu')).html(htmlMenu);
         $compile($content)($scope);
     };
@@ -132,10 +141,10 @@ function UserController(LxDialogService, LxNotificationService, LxDropdownServic
 function AppointmentController($scope, LxNotificationService, LxDialogService, $interval, $filter) {
     //Listen the changes of the scope
     $scope.appointmenInfo = {
-        fromDate: $filter('date')(new Date() - 1, "MM/dd/yyyy")
+        fromDate: $filter('date')(new Date() - 1, "MM/dd/yyyy"),
+        toDate: $filter('date')(new Date() - 1, "MM/dd/yyyy")
     };
-    $scope.showFromDate = function (dialogId) {
-
+    $scope.showDialog = function (dialogId) {
         LxDialogService.open(dialogId);
     };
     $scope.closeFromDate = function (dialogId) {
@@ -143,6 +152,23 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, $
             if ($scope.appointmenInfo.fromDate.getDate() >= new Date().getDate()) {
                 $scope.appointmenInfo.fromDate = $filter('date')($scope.appointmenInfo.fromDate, "MM/dd/yyyy");
                 LxDialogService.close(dialogId);
+            }
+            else
+                LxNotificationService.error("Date selected must be greater than the current date.");
+            $interval.cancel(promise);
+            promise = undefined;
+        }, 100);
+
+    };
+    $scope.closeToDate = function (dialogId) {
+        var promise = $interval(function () {
+            if ($scope.appointmenInfo.toDate.getDate() >= new Date().getDate()) {
+                if ($scope.appointmenInfo.toDate.getDate() < new Date($scope.appointmenInfo.fromDate).getDate())
+                    LxNotificationService.error("End Date must be greater than the start date.");
+                else {
+                    $scope.appointmenInfo.toDate = $filter('date')($scope.appointmenInfo.toDate, "MM/dd/yyyy");
+                    LxDialogService.close(dialogId);
+                }
             }
             else
                 LxNotificationService.error("Date selected must be greater than the current date.");

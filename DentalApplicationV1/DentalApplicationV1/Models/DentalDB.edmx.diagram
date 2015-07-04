@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="DentalDBModel.Tooth" Width="1.5" PointX="10.5" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.TreatmentType" Width="1.5" PointX="10.5" PointY="19.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.User" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentalDBModel.UserMenu" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.UserType" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
         <AssociationConnector Association="DentalDBModel.FK_Appointment_DentistId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_Appointment_PatientId" ManuallyRouted="false" />
@@ -52,9 +51,8 @@
         <AssociationConnector Association="DentalDBModel.FK_PatientTooth_PatientMouthId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_ScheduleDetail_ScheduLeMasterId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_User_UserTypeId" ManuallyRouted="false" />
-        <AssociationConnector Association="DentalDBModel.FK_UserMenu_UserTypeId" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DentalDBModel.V_UsersList" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="DentalDBModel.DentalMenu" Width="1.5" PointX="3" PointY="16.375" />
+        <EntityTypeShape EntityType="DentalDBModel.DentalMenu" Width="1.5" PointX="3" PointY="17.125" />
         <AssociationConnector Association="DentalDBModel.FK_DentalMenu_UserTypeId" />
       </Diagram>
     </edmx:Diagrams>

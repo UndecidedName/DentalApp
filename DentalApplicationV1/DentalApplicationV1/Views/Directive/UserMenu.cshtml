@@ -1,5 +1,5 @@
 ﻿<ul>   
     <li ng-repeat="menu in data">
-        <a ui-sref="{{menu.Url}}" class="sidebar-menu__link" ng-click="Sidebar.toggleSidebar()">{{menu.Name}}</a>
+        <a ui-sref="{{menu.Url}}" class="sidebar-menu__link" ng-click="innerToggle()">{{menu.Name}}</a>
     </li>
 </ul>

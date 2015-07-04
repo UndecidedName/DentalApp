@@ -163,21 +163,6 @@ IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
 
 
 GO
-PRINT N'Creating [dbo].[ScheduleDetail]...';
-
-
-GO
-CREATE TABLE [dbo].[ScheduleDetail] (
-    [Id]               INT      NOT NULL,
-    [ScheduleMasterId] INT      NOT NULL,
-    [From]             TIME (7) NOT NULL,
-    [To]               TIME (7) NOT NULL,
-    [Status]           INT      NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[ScheduleMaster]...';
 
 
@@ -542,15 +527,31 @@ CREATE TABLE [dbo].[PatientInformation] (
 
 
 GO
+PRINT N'Creating [dbo].[ScheduleDetail]...';
+
+
+GO
+CREATE TABLE [dbo].[ScheduleDetail] (
+    [Id]               INT      NOT NULL,
+    [ScheduleMasterId] INT      NOT NULL,
+    [From]             TIME (7) NOT NULL,
+    [To]               TIME (7) NOT NULL,
+    [Status]           INT      NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
 PRINT N'Creating [dbo].[DentalMenu]...';
 
 
 GO
 CREATE TABLE [dbo].[DentalMenu] (
-    [Id]          INT           NOT NULL,
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
     [UserTypeId]  INT           NULL,
     [Name]        VARCHAR (100) NOT NULL,
     [Description] VARCHAR (200) NULL,
+    [Url]         VARCHAR (50)  NULL,
     [Status]      INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
@@ -734,15 +735,6 @@ PRINT N'Creating Default Constraint on [dbo].[DentalMenu]....';
 GO
 ALTER TABLE [dbo].[DentalMenu]
     ADD DEFAULT 1 FOR [Status];
-
-
-GO
-PRINT N'Creating FK_ScheduleDetail_ScheduLeMasterId...';
-
-
-GO
-ALTER TABLE [dbo].[ScheduleDetail]
-    ADD CONSTRAINT [FK_ScheduleDetail_ScheduLeMasterId] FOREIGN KEY ([ScheduleMasterId]) REFERENCES [dbo].[ScheduleMaster] ([Id]);
 
 
 GO
@@ -949,7 +941,7 @@ PRINT N'Creating FK_DentalMenu_UserTypeId...';
 
 GO
 ALTER TABLE [dbo].[DentalMenu]
-    ADD CONSTRAINT [FK_DentalMenu_UserTypeId] FOREIGN KEY ([UserTypeId]) REFERENCES [dbo].[UserType] ([Id]) ON DELETE SET NULL;
+    ADD CONSTRAINT [FK_DentalMenu_UserTypeId] FOREIGN KEY ([UserTypeId]) REFERENCES [dbo].[UserType] ([Id]);
 
 
 GO

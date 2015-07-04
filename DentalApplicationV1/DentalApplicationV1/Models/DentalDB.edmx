@@ -34,10 +34,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserTypeId" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DentistInformation">
@@ -279,17 +280,6 @@
           <Property Name="UserTypeId" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserMenu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserTypeId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="200" />
-          <Property Name="Url" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserType">
@@ -551,18 +541,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ScheduleDetail_ScheduLeMasterId">
-          <End Role="ScheduleMaster" Type="Self.ScheduleMaster" Multiplicity="1" />
-          <End Role="ScheduleDetail" Type="Self.ScheduleDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ScheduleMaster">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ScheduleDetail">
-              <PropertyRef Name="ScheduleMasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ScheduleMaster_DentistId">
           <End Role="DentistInformation" Type="Self.DentistInformation" Multiplicity="1" />
           <End Role="ScheduleMaster" Type="Self.ScheduleMaster" Multiplicity="*" />
@@ -637,18 +615,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMenu_UserTypeId">
-          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
-          <End Role="UserMenu" Type="Self.UserMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserMenu">
-              <PropertyRef Name="UserTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DentalDBModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
@@ -673,7 +639,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
           <EntitySet Name="Tooth" EntityType="Self.Tooth" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TreatmentType" EntityType="Self.TreatmentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserMenu" EntityType="Self.UserMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="V_UsersList" EntityType="Self.V_UsersList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -765,10 +730,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <End Role="PatientMouth" EntitySet="PatientMouth" />
             <End Role="PatientTooth" EntitySet="PatientTooth" />
           </AssociationSet>
-          <AssociationSet Name="FK_ScheduleDetail_ScheduLeMasterId" Association="Self.FK_ScheduleDetail_ScheduLeMasterId">
-            <End Role="ScheduleMaster" EntitySet="ScheduleMaster" />
-            <End Role="ScheduleDetail" EntitySet="ScheduleDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_ScheduleMaster_DentistId" Association="Self.FK_ScheduleMaster_DentistId">
             <End Role="DentistInformation" EntitySet="DentistInformation" />
             <End Role="ScheduleMaster" EntitySet="ScheduleMaster" />
@@ -792,10 +753,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <AssociationSet Name="FK_User_UserTypeId" Association="Self.FK_User_UserTypeId">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserMenu_UserTypeId" Association="Self.FK_UserMenu_UserTypeId">
-            <End Role="UserType" EntitySet="UserType" />
-            <End Role="UserMenu" EntitySet="UserMenu" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1113,18 +1070,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="PatientMedicalHistories" Relationship="Self.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
         </EntityType>
-        <EntityType Name="UserMenu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserType" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserMenu" ToRole="UserType" />
-        </EntityType>
         <EntityType Name="UserType">
           <Key>
             <PropertyRef Name="Id" />
@@ -1134,7 +1079,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_UserTypeId" FromRole="UserType" ToRole="User" />
-          <NavigationProperty Name="UserMenus" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserType" ToRole="UserMenu" />
           <NavigationProperty Name="DentalMenus" Relationship="DentalDBModel.FK_DentalMenu_UserTypeId" FromRole="UserType" ToRole="DentalMenu" />
         </EntityType>
         <Association Name="FK_Appointment_DentistId">
@@ -1427,18 +1371,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMenu_UserTypeId">
-          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
-          <End Role="UserMenu" Type="Self.UserMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserMenu">
-              <PropertyRef Name="UserTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DentalDBEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Appointments" EntityType="Self.Appointment" />
@@ -1462,7 +1394,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySet Name="Teeth" EntityType="Self.Tooth" />
           <EntitySet Name="TreatmentTypes" EntityType="Self.TreatmentType" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserMenus" EntityType="Self.UserMenu" />
           <EntitySet Name="UserTypes" EntityType="Self.UserType" />
           <AssociationSet Name="FK_Appointment_DentistId" Association="Self.FK_Appointment_DentistId">
             <End Role="DentistInformation" EntitySet="DentistInformations" />
@@ -1556,10 +1487,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserMenu_UserTypeId" Association="Self.FK_UserMenu_UserTypeId">
-            <End Role="UserType" EntitySet="UserTypes" />
-            <End Role="UserMenu" EntitySet="UserMenus" />
-          </AssociationSet>
           <EntitySet Name="V_UsersList" EntityType="DentalDBModel.V_UsersList" />
           <EntitySet Name="DentalMenus" EntityType="DentalDBModel.DentalMenu" />
           <AssociationSet Name="FK_DentalMenu_UserTypeId" Association="DentalDBModel.FK_DentalMenu_UserTypeId">
@@ -1603,10 +1530,11 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeId" Type="Int32" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_DentalMenu_UserTypeId" FromRole="DentalMenu" ToRole="UserType" />
         </EntityType>
@@ -1916,18 +1844,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserMenus">
-            <EntityTypeMapping TypeName="DentalDBModel.UserMenu">
-              <MappingFragment StoreEntitySet="UserMenu">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserTypes">
             <EntityTypeMapping TypeName="DentalDBModel.UserType">
               <MappingFragment StoreEntitySet="UserType">
@@ -1966,6 +1882,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <EntityTypeMapping TypeName="DentalDBModel.DentalMenu">
               <MappingFragment StoreEntitySet="DentalMenu">
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />

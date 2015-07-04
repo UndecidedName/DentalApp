@@ -18,6 +18,7 @@ namespace DentalApplicationV1.Models
         public Nullable<int> UserTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Url { get; set; }
         public int Status { get; set; }
     
         public virtual UserType UserType { get; set; }

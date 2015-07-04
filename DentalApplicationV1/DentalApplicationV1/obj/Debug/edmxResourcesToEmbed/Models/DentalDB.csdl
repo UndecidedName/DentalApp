@@ -311,18 +311,6 @@
     <NavigationProperty Name="PatientMedicalHistories" Relationship="Self.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
     <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
   </EntityType>
-  <EntityType Name="UserMenu">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="UserType" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserMenu" ToRole="UserType" />
-  </EntityType>
   <EntityType Name="UserType">
     <Key>
       <PropertyRef Name="Id" />
@@ -332,7 +320,6 @@
     <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Status" Type="Int32" />
     <NavigationProperty Name="Users" Relationship="Self.FK_User_UserTypeId" FromRole="UserType" ToRole="User" />
-    <NavigationProperty Name="UserMenus" Relationship="Self.FK_UserMenu_UserTypeId" FromRole="UserType" ToRole="UserMenu" />
     <NavigationProperty Name="DentalMenus" Relationship="DentalDBModel.FK_DentalMenu_UserTypeId" FromRole="UserType" ToRole="DentalMenu" />
   </EntityType>
   <Association Name="FK_Appointment_DentistId">
@@ -625,18 +612,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserMenu_UserTypeId">
-    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
-    <End Role="UserMenu" Type="Self.UserMenu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserMenu">
-        <PropertyRef Name="UserTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DentalDBEntities" annotation:LazyLoadingEnabled="false">
     <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
     <EntitySet Name="Appointments" EntityType="Self.Appointment" />
@@ -660,7 +635,6 @@
     <EntitySet Name="Teeth" EntityType="Self.Tooth" />
     <EntitySet Name="TreatmentTypes" EntityType="Self.TreatmentType" />
     <EntitySet Name="Users" EntityType="Self.User" />
-    <EntitySet Name="UserMenus" EntityType="Self.UserMenu" />
     <EntitySet Name="UserTypes" EntityType="Self.UserType" />
     <AssociationSet Name="FK_Appointment_DentistId" Association="Self.FK_Appointment_DentistId">
       <End Role="DentistInformation" EntitySet="DentistInformations" />
@@ -754,10 +728,6 @@
       <End Role="UserType" EntitySet="UserTypes" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserMenu_UserTypeId" Association="Self.FK_UserMenu_UserTypeId">
-      <End Role="UserType" EntitySet="UserTypes" />
-      <End Role="UserMenu" EntitySet="UserMenus" />
-    </AssociationSet>
     <EntitySet Name="V_UsersList" EntityType="DentalDBModel.V_UsersList" />
     <EntitySet Name="DentalMenus" EntityType="DentalDBModel.DentalMenu" />
     <AssociationSet Name="FK_DentalMenu_UserTypeId" Association="DentalDBModel.FK_DentalMenu_UserTypeId">
@@ -801,10 +771,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserTypeId" Type="Int32" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_DentalMenu_UserTypeId" FromRole="DentalMenu" ToRole="UserType" />
   </EntityType>

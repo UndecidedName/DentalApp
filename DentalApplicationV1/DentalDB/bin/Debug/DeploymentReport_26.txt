@@ -1,0 +1,34 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       [dbo].[DentalMenu]
+       [dbo].[UserMenu]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column Name in table [dbo].[UserMenu] is currently  VARCHAR (100) NOT NULL but is being changed to  VARCHAR
+         (50) NULL. Data loss could occur.
+
+** User actions
+     Drop
+       on [dbo].[DentalMenu].[Status] (Default Constraint)
+       on [dbo].[UserMenu].[Status] (Default Constraint)
+     Table rebuild
+       [dbo].[DentalMenu] (Table)
+       [dbo].[UserMenu] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_DentalMenu_UserTypeId] (Foreign Key)
+       [dbo].[FK_UserMenu_UserTypeId] (Foreign Key)
+     Create
+       [dbo].[FK_DentalMenu_UserTypeId] (Foreign Key)
+       [dbo].[FK_UserMenu_UserTypeId] (Foreign Key)
+
+The type for column Name in table [dbo].[UserMenu] is currently  VARCHAR (100) NOT NULL but is being changed to  VARCHAR (50) NULL. Data loss could occur.
+
