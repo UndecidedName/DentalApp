@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/libs/lumx/dist/lumx.css" />
     <link rel="stylesheet" href="~/libs/lumx/dist/roboto.css" />
     <link rel='stylesheet' href='/libs/md-date-time/dist/md-date-time.css'>
+    <link rel="stylesheet" href="~/Content/customize-table.css" />
 </head>
 <body>
     <div ng-show="!isLogged" ng-include="'/Home/Templates/Header'"></div>
@@ -25,7 +26,17 @@
 <script src="~/libs/md-date-time/dist/md-date-time.js"></script>
 <script src="~/libs/angular/angular-ui-router.min.js"></script>
 <script src="~/libs/angular/angular-cookies.js"></script>
+<script src="~/libs/angular/angular-local-storage.js"></script>
 <script src="~/Scripts/main/app.js"></script>
 <script src="~/Scripts/services/dentalService.js"></script>
-<script src="~/Scripts/controllers/dentalController.js"></script>
 <script src="~/Scripts/directives/dentalDirective.js"></script>
+<script src="~/Scripts/directives/dataExport.js"></script>
+<script src="~/Scripts/directives/dataGrid1.js"></script>
+<script src="~/Scripts/directives/dataModal1.js"></script>
+<script src="~/Scripts/directives/scrollableContainer.js"></script>
+<script src="~/Scripts/controllers/HomeController.js"></script>
+<script src="~/Scripts/controllers/UserController.js"></script>
+<script src="~/Scripts/controllers/ScheduleController.js"></script>
+<script src="~/Scripts/controllers/SettingController.js"></script>
+<script src="~/Scripts/controllers/NotificationController.js"></script>
+<script src="~/Scripts/controllers/AppointmentController.js"></script>

@@ -21,12 +21,13 @@ function dirGenerateMenu() {
             type: '=',
             toggle: '&'
         },
-        controller: function ($http, $scope, $interval) {
+        controller: function ($http, $scope, $interval, LxProgressService) {
+            LxProgressService.circular.show('#5fa2db', '#progress');
             $http.get("/api/DentalMenus?userTypeId=" + $scope.type)
             .success(function (data, status) {
                 if (data.status == "SUCCESS")
                     $scope.data = data.objParam1;
-                console.log($scope.data);
+                LxProgressService.circular.hide();
             });
 
             $scope.innerToggle = function () {

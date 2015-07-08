@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Views/Shared/_DataTableLayout1.cshtml";
+}
+
+@section TableContent{
+    <div id="masterList"></div>
+}
+
+@section Tab1Content{
+    <div flex-container="row" flex-gutter="24">
+        <div flex-item>
+            <lx-text-field label="From" error="invalidateInput(dataDefinitionMaster.DataItem.FromDate)">
+                <input type="text"
+                       name="Date"
+                       ng-model="dataDefinitionMaster.DataItem.Date"
+                       pattern=".{4,50}"
+                       ng-disabled="dataDefinitionMaster.ViewOnly; (dataDefinitionMaster.DataItem.Id != null ? true: false)"
+                       ng-click="showDialog('Date')">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Dentist" error="invalidateInput(dataDefinitionMaster.DataItem.DentistName)" style="{{setStyle}}">
+                <input type="text"
+                       name="Dentist"
+                       ng-model="dataDefinitionMaster.DataItem.DentistName"
+                       pattern=".{4,50}"
+                       ng-disabled="dataDefinitionMaster.ViewOnly"
+                       ng-click="showDialog('dentistList')">
+            </lx-text-field>
+        </div>
+    </div>
+
+    <lx-dialog class="dialog dialog--l" id="Date" auto-close="false">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="dataDefinitionMaster.DataItem.Date" display-mode="date" orientation="false" on-save="saveFn(dataDefinitionMaster.DataItem.Date); closeDate('Date')"></time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+    <lx-dialog class="dialog dialog--l" id="dentistList" auto-close="false">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title">
+                    Dentist List
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <dir-data-modal1 datadefinition="dataDefinitionDentisList" otheractions="otherActionsDentisList(action)" closecontainer="closeDentistModal(dialog)"></dir-data-modal1>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+}
+
+@section Tab2Content{
+<div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+    <div flex-item>
+        <lx-text-field label="From" error="invalidateInput(dataDefinitionDetail.DataItem.FromTime)">
+            <input type="text"
+                   name="From"
+                   ng-model="dataDefinitionDetail.DataItem.FromTime"
+                   pattern=".{4,50}"
+                   ng-disabled="dataDefinitionDetail.ViewOnly"
+                   ng-click="showDialog('FromTime')">
+        </lx-text-field>
+    </div>
+    <div flex-item>
+        <lx-text-field label="To" error="invalidateInput(dataDefinitionDetail.DataItem.ToTime)">
+            <input type="text"
+                   name="To"
+                   ng-model="dataDefinitionDetail.DataItem.ToTime"
+                   pattern=".{4,50}"
+                   ng-disabled="dataDefinitionDetail.ViewOnly"
+                   ng-click="showDialog('ToTime')">
+        </lx-text-field>
+    </div>
+    <div flex-item style="padding-top:28px">
+        <button class="btn btn--m btn--blue btn--raised">Add</button>
+    </div>
+</div>
+<lx-dialog class="dialog dialog--l" id="FromTime" auto-close="false">
+    <div class="dialog__header">
+    </div>
+    <div class="dialog__content">
+        <div style="overflow-x:auto;">
+            <time-date-picker ng-model="dataDefinitionDetail.DataItem.FromTime" 
+                              display-mode="time" orientation="false" 
+                              on-save="saveFn(dataDefinitionDetail.DataItem.FromTime); closeTime('FromTime', 'From')"></time-date-picker>
+        </div>
+    </div>
+    <div class="dialog__actions">
+    </div>
+</lx-dialog>
+<lx-dialog class="dialog dialog--l" id="ToTime" auto-close="false">
+    <div class="dialog__header">
+    </div>
+    <div class="dialog__content">
+        <div style="overflow-x:auto;">
+            <time-date-picker ng-model="dataDefinitionDetail.DataItem.ToTime"
+                              display-mode="time" orientation="false"
+                              on-save="saveFn(dataDefinitionDetail.DataItem.ToTime); closeTime('ToTime', 'To')"></time-date-picker>
+        </div>
+    </div>
+    <div class="dialog__actions">
+    </div>
+</lx-dialog>
+}

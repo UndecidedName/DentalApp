@@ -16,10 +16,8 @@ namespace DentalApplicationV1.Models
     {
         public int Id { get; set; }
         public int ScheduleMasterId { get; set; }
-        public System.TimeSpan From { get; set; }
-        public System.TimeSpan To { get; set; }
         public int Status { get; set; }
-    
-        public virtual ScheduleMaster ScheduleMaster { get; set; }
+        public System.TimeSpan FromTime { get; set; }
+        public System.TimeSpan ToTime { get; set; }
     }
 }

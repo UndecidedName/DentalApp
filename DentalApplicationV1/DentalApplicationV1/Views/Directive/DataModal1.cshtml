@@ -1,0 +1,47 @@
+﻿<div class="myTableContainter" scrollable-container="getData()">
+    <!--For IE-->
+    <div id="progress"></div>
+    <iframe id="exportTemplate" style="display:none"></iframe>
+    <!--End of for IE-->
+    <div class="toolbar__left">
+        <i class="mdi mdi-magnify" style="font-size:150%; padding-top:5px; padding-left:10px;"></i>
+        <input type="text" ng-model="search" placeholder="Search..." class="filter-input" ng-change="change()" style="padding-left:5px;"/> 
+        <i class="mdi mdi-close-circle" style="font-size:100%; padding-top:12px; cursor:pointer;" ng-show="showClose" ng-click="showClose = false; search=''"></i>
+    </div>
+    <table class="myTableContent dir-export" id="export">
+        <thead>
+            <tr class="myTableRow-header" style="text-align:left">
+                <th class="myTableCell cell-seqno fs-subhead display-block tc-white">
+                    <strong>{{datadefinition.Header[datadefinition.Header.length - 1]}}</strong>
+                </th>
+                <th class="myTableCell cell-10 fs-subhead display-block tc-white"
+                    ng-repeat="header in datadefinition.Header" ng-if="$index != (datadefinition.Header.length - 1)"
+                    ng-click="processSorting(datadefinition.Keys[$index])">
+                    <strong>{{filterHeader(header)}}</strong>
+                    <span class="mdi mdi-sort-descending"
+                          ng-show="criteria === datadefinition.Keys[$index] || criteria === '-' + datadefinition.Keys[$index] ? sortByDesc: false">
+                    </span>
+                    <span class="mdi mdi-sort-ascending"
+                          ng-show="criteria === datadefinition.Keys[$index] || criteria === '-' + datadefinition.Keys[$index] ? sortByAsc: false">
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="myTableRow"
+                ng-repeat="data in datadefinition.DataList | filter:{$:search}| orderBy: criteria"
+                ng-click="getRecord(data); closecontainer({ dialog: datadefinition.Dialog });">
+                <td class="myTableCell cell-seqno fs-subhead display-block">
+                    {{$index + 1}}
+                </td>
+                <td class="myTableCell cell-10 fs-subhead display-block"
+                    ng-repeat="key in datadefinition.Keys">
+                    {{filterValue(data[key], $index)}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="toolbar__right">
+    <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closecontainer({ dialog: datadefinition.Dialog });">Cancel</button>
+</div>

@@ -273,4 +273,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Name" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="928c8ad2-6ef9-4020-a414-e992a286f900" ChangeDateTime="07/05/2015 10:52:11">
+    <Property Name="ElementName" Value="[dbo].[ScheduleMaster].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ScheduleMaster]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FromDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0676fde1-0b60-4625-94f3-aae25657374d" ChangeDateTime="07/07/2015 09:48:45">
+    <Property Name="ElementName" Value="[dbo].[ScheduleMaster].[ToDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ScheduleMaster]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Date" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="af34da0f-24c8-48d8-9b79-17008e7b7d72" ChangeDateTime="07/08/2015 00:42:11">
+    <Property Name="ElementName" Value="[dbo].[ScheduleMaster].[ToDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ScheduleMaster]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Date" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2f68d75b-2906-43e1-8343-94e5fd6bd460" ChangeDateTime="07/08/2015 05:06:19">
+    <Property Name="ElementName" Value="[dbo].[ScheduleDetail].[From]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ScheduleDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FromTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8c0d3bcb-fedc-4d52-92b9-28894e82d675" ChangeDateTime="07/08/2015 05:06:25">
+    <Property Name="ElementName" Value="[dbo].[ScheduleDetail].[To]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ScheduleDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ToTime" />
+  </Operation>
 </Operations>

@@ -1,0 +1,29 @@
+﻿<div class="main-section">
+    <h6 class="main-section__title">{{modelName}}</h6>
+    <div ng-show="!showForm">
+        <div class="main-section__content">
+            @RenderSection("TableContent")
+        </div>
+    </div>
+
+    <div ng-show="showForm" style="padding: 0px 5px 0px 5px;">
+        <div id="progress"></div>
+        <div class="card mt++">
+            <lx-tabs links-tc="light" links-bgc="light-blue-300" indicator="yellow-500" no-divider="true" z-depth="1">
+                <lx-tab heading="{{tabPages[0]}}">
+                    <div class="p+">@RenderSection("Tab1Content")</div>
+                    <div class="divider divider--dark"></div>
+                    <div class="dialog__actions">
+                        <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeForm()">Back</button>
+                        <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="submit()">{{submitButtonText}}</button>
+                    </div>
+                </lx-tab>
+
+                <lx-tab heading="{{tabPages[1]}}">
+                    <p class="p+">@RenderSection("Tab2Content")</p>
+                </lx-tab>
+            </lx-tabs>
+        </div>
+    </div>
+</div>
+

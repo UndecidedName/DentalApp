@@ -32,6 +32,7 @@
     <EntitySetMapping Name="DentistInformations">
       <EntityTypeMapping TypeName="DentalDBModel.DentistInformation">
         <MappingFragment StoreEntitySet="DentistInformation">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
@@ -235,20 +236,10 @@
     <EntitySetMapping Name="ScheduleDetails">
       <EntityTypeMapping TypeName="DentalDBModel.ScheduleDetail">
         <MappingFragment StoreEntitySet="ScheduleDetail">
+          <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+          <ScalarProperty Name="FromTime" ColumnName="FromTime" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ScheduleMasterId" ColumnName="ScheduleMasterId" />
-          <ScalarProperty Name="From" ColumnName="From" />
-          <ScalarProperty Name="To" ColumnName="To" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ScheduleMasters">
-      <EntityTypeMapping TypeName="DentalDBModel.ScheduleMaster">
-        <MappingFragment StoreEntitySet="ScheduleMaster">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="DentistId" ColumnName="DentistId" />
           <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -331,6 +322,16 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduleMasters">
+      <EntityTypeMapping TypeName="DentalDBModel.ScheduleMaster">
+        <MappingFragment StoreEntitySet="ScheduleMaster">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DentistId" ColumnName="DentistId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

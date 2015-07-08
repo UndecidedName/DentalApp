@@ -12,5 +12,6 @@
     [CivilStatusId] INT NULL,
     [ContactNo] VARCHAR(50) NULL, 
     [EmailAddress] VARCHAR(100) NULL,
-	CONSTRAINT [FK_DentistInformation_CivilStatus] FOREIGN KEY ([CivilStatusId]) REFERENCES [CivilStatus]([Id]) ON DELETE SET NULL
+	[Status] INT NULL, 
+    CONSTRAINT [FK_DentistInformation_CivilStatus] FOREIGN KEY ([CivilStatusId]) REFERENCES [CivilStatus]([Id]) ON DELETE SET NULL
 )

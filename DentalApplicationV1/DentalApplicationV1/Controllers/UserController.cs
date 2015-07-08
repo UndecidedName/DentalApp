@@ -28,6 +28,8 @@ namespace DentalWebApp.Controllers
                     return PartialView("~/Views/User/Templates/Notification.cshtml");
                 case "setting":
                     return PartialView("~/Views/User/Templates/Setting.cshtml");
+                case "schedule":
+                    return PartialView("~/Views/User/Templates/Schedule.cshtml");
                 default: throw new Exception("template not known");
             }
         }

@@ -14,17 +14,11 @@ namespace DentalApplicationV1.Models
     
     public partial class ScheduleMaster
     {
-        public ScheduleMaster()
-        {
-            this.ScheduleDetails = new HashSet<ScheduleDetail>();
-        }
-    
         public int Id { get; set; }
-        public System.DateTime Date { get; set; }
         public int DentistId { get; set; }
         public Nullable<int> Status { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual DentistInformation DentistInformation { get; set; }
-        public virtual ICollection<ScheduleDetail> ScheduleDetails { get; set; }
     }
 }

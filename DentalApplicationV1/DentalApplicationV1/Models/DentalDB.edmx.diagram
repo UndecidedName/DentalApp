@@ -23,7 +23,6 @@
         <EntityTypeShape EntityType="DentalDBModel.PatientMouth" Width="1.5" PointX="10.5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.PatientTooth" Width="1.5" PointX="12.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.ScheduleDetail" Width="1.5" PointX="10.5" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DentalDBModel.ScheduleMaster" Width="1.5" PointX="8.25" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.Tooth" Width="1.5" PointX="10.5" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.TreatmentType" Width="1.5" PointX="10.5" PointY="19.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DentalDBModel.User" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
@@ -33,7 +32,6 @@
         <AssociationConnector Association="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_DentistInformation_CivilStatus" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_PatientInformation_CivilStatusId" ManuallyRouted="false" />
-        <AssociationConnector Association="DentalDBModel.FK_ScheduleMaster_DentistId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_MouthType_ImageUrlId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_Tooth_ImageUrlId" ManuallyRouted="false" />
@@ -49,11 +47,12 @@
         <AssociationConnector Association="DentalDBModel.FK_PatientMouth_PatientId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_PatientMedicalHistory_PatientId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_PatientTooth_PatientMouthId" ManuallyRouted="false" />
-        <AssociationConnector Association="DentalDBModel.FK_ScheduleDetail_ScheduLeMasterId" ManuallyRouted="false" />
         <AssociationConnector Association="DentalDBModel.FK_User_UserTypeId" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DentalDBModel.V_UsersList" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="DentalDBModel.DentalMenu" Width="1.5" PointX="3" PointY="17.125" />
         <AssociationConnector Association="DentalDBModel.FK_DentalMenu_UserTypeId" />
+        <EntityTypeShape EntityType="DentalDBModel.ScheduleMaster" Width="1.5" PointX="8.25" PointY="19.875" />
+        <AssociationConnector Association="DentalDBModel.FK_ScheduleMaster_DentistId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

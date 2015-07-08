@@ -52,6 +52,7 @@
     <Property Name="CivilStatusId" Type="int" />
     <Property Name="ContactNo" Type="varchar" MaxLength="50" />
     <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="DiagnosisType">
     <Key>
@@ -231,8 +232,8 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ScheduleMasterId" Type="int" Nullable="false" />
-    <Property Name="From" Type="time" Precision="7" Nullable="false" />
-    <Property Name="To" Type="time" Precision="7" Nullable="false" />
+    <Property Name="FromTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="ToTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ScheduleMaster">

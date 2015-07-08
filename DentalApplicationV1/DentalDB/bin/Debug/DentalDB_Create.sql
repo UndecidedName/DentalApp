@@ -163,20 +163,6 @@ IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
 
 
 GO
-PRINT N'Creating [dbo].[ScheduleMaster]...';
-
-
-GO
-CREATE TABLE [dbo].[ScheduleMaster] (
-    [Id]        INT  IDENTITY (1, 1) NOT NULL,
-    [Date]      DATE NOT NULL,
-    [DentistId] INT  NOT NULL,
-    [Status]    INT  NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[Logs]...';
 
 
@@ -224,6 +210,7 @@ CREATE TABLE [dbo].[DentistInformation] (
     [CivilStatusId] INT           NULL,
     [ContactNo]     VARCHAR (50)  NULL,
     [EmailAddress]  VARCHAR (100) NULL,
+    [Status]        INT           NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -527,21 +514,6 @@ CREATE TABLE [dbo].[PatientInformation] (
 
 
 GO
-PRINT N'Creating [dbo].[ScheduleDetail]...';
-
-
-GO
-CREATE TABLE [dbo].[ScheduleDetail] (
-    [Id]               INT      NOT NULL,
-    [ScheduleMasterId] INT      NOT NULL,
-    [From]             TIME (7) NOT NULL,
-    [To]               TIME (7) NOT NULL,
-    [Status]           INT      NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[DentalMenu]...';
 
 
@@ -558,12 +530,32 @@ CREATE TABLE [dbo].[DentalMenu] (
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[ScheduleMaster]....';
+PRINT N'Creating [dbo].[ScheduleMaster]...';
 
 
 GO
-ALTER TABLE [dbo].[ScheduleMaster]
-    ADD DEFAULT 1 FOR [Status];
+CREATE TABLE [dbo].[ScheduleMaster] (
+    [Id]        INT  IDENTITY (1, 1) NOT NULL,
+    [Date]      DATE NOT NULL,
+    [DentistId] INT  NOT NULL,
+    [Status]    INT  NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[ScheduleDetail]...';
+
+
+GO
+CREATE TABLE [dbo].[ScheduleDetail] (
+    [Id]               INT      NOT NULL,
+    [ScheduleMasterId] INT      NOT NULL,
+    [FromTime]         TIME (7) NOT NULL,
+    [ToTime]           TIME (7) NOT NULL,
+    [Status]           INT      NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
 
 
 GO
@@ -738,12 +730,21 @@ ALTER TABLE [dbo].[DentalMenu]
 
 
 GO
-PRINT N'Creating FK_ScheduleMaster_DentistId...';
+PRINT N'Creating Default Constraint on [dbo].[ScheduleMaster]....';
 
 
 GO
 ALTER TABLE [dbo].[ScheduleMaster]
-    ADD CONSTRAINT [FK_ScheduleMaster_DentistId] FOREIGN KEY ([DentistId]) REFERENCES [dbo].[DentistInformation] ([Id]);
+    ADD DEFAULT 1 FOR [Status];
+
+
+GO
+PRINT N'Creating Default Constraint on [dbo].[ScheduleDetail]....';
+
+
+GO
+ALTER TABLE [dbo].[ScheduleDetail]
+    ADD DEFAULT 1 FOR [Status];
 
 
 GO
@@ -945,6 +946,15 @@ ALTER TABLE [dbo].[DentalMenu]
 
 
 GO
+PRINT N'Creating FK_ScheduleMaster_DentistId...';
+
+
+GO
+ALTER TABLE [dbo].[ScheduleMaster]
+    ADD CONSTRAINT [FK_ScheduleMaster_DentistId] FOREIGN KEY ([DentistId]) REFERENCES [dbo].[DentistInformation] ([Id]);
+
+
+GO
 PRINT N'Creating [dbo].[V_UsersList]...';
 
 
@@ -1056,6 +1066,16 @@ IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('94d4cbd2-8b2e-4901-a8ed-9c91c106076c')
 IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = 'c2fb1b46-6ba4-43ed-b1a1-abd72c2d4b8c')
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('c2fb1b46-6ba4-43ed-b1a1-abd72c2d4b8c')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = '928c8ad2-6ef9-4020-a414-e992a286f900')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('928c8ad2-6ef9-4020-a414-e992a286f900')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = '0676fde1-0b60-4625-94f3-aae25657374d')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('0676fde1-0b60-4625-94f3-aae25657374d')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = 'af34da0f-24c8-48d8-9b79-17008e7b7d72')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('af34da0f-24c8-48d8-9b79-17008e7b7d72')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = '2f68d75b-2906-43e1-8343-94e5fd6bd460')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('2f68d75b-2906-43e1-8343-94e5fd6bd460')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = '8c0d3bcb-fedc-4d52-92b9-28894e82d675')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('8c0d3bcb-fedc-4d52-92b9-28894e82d675')
 
 GO
 

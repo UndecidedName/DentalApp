@@ -32,6 +32,7 @@ namespace DentalApplicationV1.Models
         public Nullable<int> CivilStatusId { get; set; }
         public string ContactNo { get; set; }
         public string EmailAddress { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual CivilStatu CivilStatu { get; set; }

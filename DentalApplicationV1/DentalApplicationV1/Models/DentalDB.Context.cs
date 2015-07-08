@@ -44,12 +44,12 @@ namespace DentalApplicationV1.Models
         public DbSet<PatientMouth> PatientMouths { get; set; }
         public DbSet<PatientTooth> PatientTeeth { get; set; }
         public DbSet<ScheduleDetail> ScheduleDetails { get; set; }
-        public DbSet<ScheduleMaster> ScheduleMasters { get; set; }
         public DbSet<Tooth> Teeth { get; set; }
         public DbSet<TreatmentType> TreatmentTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<V_UsersList> V_UsersList { get; set; }
         public DbSet<DentalMenu> DentalMenus { get; set; }
+        public DbSet<ScheduleMaster> ScheduleMasters { get; set; }
     }
 }

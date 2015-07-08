@@ -1,9 +1,11 @@
 ﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router', 'ngCookies', 'mdDateTime'])
-.run(function ($rootScope, $http, $location) {
+.run(function ($rootScope, $http, $location, LxNotificationService) {
     $rootScope.browserWidth = true;
     $rootScope.isLogged = false;
     $rootScope.user = null;
     $rootScope.appName = "Smile Fairies Dental Suites";
+    $rootScope.scheduleMaster = [];
+    $rootScope.dentistInformation = [];
 
     //Check if user is already logged
     $http.get("/api/Users/userinfo?userinfo=none&request=CheckIfLogged")
@@ -13,6 +15,8 @@
                 $rootScope.isLogged = true;
                 $location.path("User/Index");
             }
+            else
+                LxNotificationService.success('Welcome to ' + $rootScope.appName + '!');
         });
 });
 
@@ -72,5 +76,11 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         url: "/User/Index",
         templateUrl: "User/Templates/Appointment",
         controller: "AppointmentController"
+    })
+
+    .state('Schedule', {
+        url: "/User/Index",
+        templateUrl: "User/Templates/Schedule",
+        controller: "ScheduleController"
     })
 });
