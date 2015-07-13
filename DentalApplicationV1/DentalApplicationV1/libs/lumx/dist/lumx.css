@@ -7722,7 +7722,7 @@ img {
   padding: 8px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   text-align: center; }
-
+    */
 .dialog-filter {
   position: fixed;
   top: 0;
@@ -7740,7 +7740,7 @@ img {
   transition-duration: 0.6s;
   -webkit-transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
   -moz-transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }*/
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
 
 .dialog-filter--is-shown {
   opacity: 1; }
