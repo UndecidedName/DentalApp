@@ -81,6 +81,7 @@ namespace DentalApplicationV1.APIController
                     response.status = "SUCCESS";
                     response.param1 = Session["Username"].ToString();
                     response.objParam1 = searchUser;
+                    //Include UserMenu
                     return Ok(response);
                 }
             }

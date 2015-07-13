@@ -298,7 +298,7 @@
                 //It should be outside of the PreAction statement
                 if (action == 'Load') {
                     if ($scope.otheractions({ action: 'PreLoadAction' }))
-                        $scope.loadData($scope.datadefinition.DataList.length)
+                        $scope.loadData($scope.datadefinition.DataList.length);
                     //set interval to make sure that the get call returns data before triggering some actions
                     stop = $interval(function () {
                         if ($scope.datadefinition.DataList.length > 0) {
@@ -363,7 +363,7 @@
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataItem.Id = data.objParam1.Id;
                             $scope.datadefinition.DataList.push($scope.datadefinition.DataItem);
-                            $scope.closecontainer();
+                            //$scope.closecontainer();
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostSave' });
                             return true;
@@ -386,7 +386,7 @@
                 $http.put($scope.datadefinition.APIUrl[1] + "/" + id, $scope.datadefinition.DataItem)
                     .success(function (data, status) {
                         if (data.status == "SUCCESS") {
-                            $scope.closecontainer();
+                            //$scope.closecontainer();
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostUpdate' });
                             return true;
@@ -410,7 +410,7 @@
                     .success(function (data, status) {
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataList.splice($scope.selectedIndex, 1);
-                            $scope.closecontainer();
+                            //$scope.closecontainer();
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostDelete' });
                             return true;

@@ -16,7 +16,9 @@ namespace DentalApplicationV1.Models
     {
         public int Id { get; set; }
         public string Username { get; set; }
+        public string Password { get; set; }
         public int UserTypeId { get; set; }
+        public int Status { get; set; }
         public string Address { get; set; }
         public System.DateTime BirthDate { get; set; }
         public Nullable<int> CivilStatusId { get; set; }
@@ -28,9 +30,7 @@ namespace DentalApplicationV1.Models
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public string Occupation { get; set; }
-        public int PatientId { get; set; }
+        public int UserId { get; set; }
         public Nullable<int> Weight { get; set; }
-        public int Status { get; set; }
-        public string Password { get; set; }
     }
 }

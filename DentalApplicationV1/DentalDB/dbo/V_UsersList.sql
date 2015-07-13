@@ -15,6 +15,6 @@
 				p.LastName,
 				p.MiddleName,
 				p.Occupation,
-				p.PatientId,
+				p.UserId,
 				p.Weight
-	FROM [User] as u INNER JOIN [PatientInformation] as p ON u.Id = p.PatientId WHERE u.Status = 1
+	FROM [User] as u INNER JOIN [UserInformation] as p ON u.Id = p.UserId WHERE u.Status = 1

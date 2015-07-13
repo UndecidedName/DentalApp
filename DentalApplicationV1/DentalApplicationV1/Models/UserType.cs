@@ -17,7 +17,7 @@ namespace DentalApplicationV1.Models
         public UserType()
         {
             this.Users = new HashSet<User>();
-            this.DentalMenus = new HashSet<DentalMenu>();
+            this.UserMenus = new HashSet<UserMenu>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace DentalApplicationV1.Models
         public Nullable<int> Status { get; set; }
     
         public virtual ICollection<User> Users { get; set; }
-        public virtual ICollection<DentalMenu> DentalMenus { get; set; }
+        public virtual ICollection<UserMenu> UserMenus { get; set; }
     }
 }

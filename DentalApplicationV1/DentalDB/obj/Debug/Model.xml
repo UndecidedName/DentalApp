@@ -59,22 +59,6 @@
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[0]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Notification]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[Notification].[Status]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
-		</Element>
-		<Element Type="SqlDefaultConstraint">
-			<Property Name="DefaultExpressionScript">
 				<Value><![CDATA[1]]></Value>
 			</Property>
 			<Relationship Name="DefiningTable">
@@ -87,23 +71,7 @@
 					<References Name="[dbo].[PatientTooth].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
-		</Element>
-		<Element Type="SqlDefaultConstraint">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[1]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[PatientMouth]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[PatientMouth].[Status]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -119,7 +87,7 @@
 					<References Name="[dbo].[ImageUrl].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -135,7 +103,7 @@
 					<References Name="[dbo].[Tooth].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -151,23 +119,7 @@
 					<References Name="[dbo].[MouthType].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
-		</Element>
-		<Element Type="SqlDefaultConstraint">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[1]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[TreatmentType]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[TreatmentType].[Status]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -183,7 +135,7 @@
 					<References Name="[dbo].[DiagnosisType].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -199,7 +151,7 @@
 					<References Name="[dbo].[UserType].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -215,7 +167,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryMaster].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -231,7 +183,7 @@
 					<References Name="[dbo].[PatientDentalHistory].[Question4]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -247,7 +199,7 @@
 					<References Name="[dbo].[PatientMedicalHistory].[Question8]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -263,7 +215,7 @@
 					<References Name="[dbo].[PatientMedicalHistory].[Question18]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -279,7 +231,7 @@
 					<References Name="[dbo].[PatientMedicalHistory].[Question19]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -293,6 +245,54 @@
 			<Relationship Name="ForColumn">
 				<Entry>
 					<References Name="[dbo].[PatientMedicalHistory].[Status]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
+		</Element>
+		<Element Type="SqlDefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[0]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[User]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[User].[Status]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+		</Element>
+		<Element Type="SqlDefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[1]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster].[Status]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+		</Element>
+		<Element Type="SqlDefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[1]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[PatientMouth]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[PatientMouth].[Status]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
@@ -315,19 +315,51 @@
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[0]]></Value>
+				<Value><![CDATA[1]]></Value>
 			</Property>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[User]" />
+					<References Name="[dbo].[TreatmentType]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForColumn">
 				<Entry>
-					<References Name="[dbo].[User].[Status]" />
+					<References Name="[dbo].[TreatmentType].[Status]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
+		</Element>
+		<Element Type="SqlDefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[0]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Notification]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[Notification].[Status]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
+		</Element>
+		<Element Type="SqlDefaultConstraint">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[1]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[UserMenu]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[UserMenu].[Status]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -343,23 +375,7 @@
 					<References Name="[dbo].[DentalMenu].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
-		</Element>
-		<Element Type="SqlDefaultConstraint">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[1]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[ScheduleMaster]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[ScheduleMaster].[Status]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -375,7 +391,7 @@
 					<References Name="[dbo].[ScheduleDetail].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -394,7 +410,7 @@
 					<References Name="[dbo].[Logs]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -413,45 +429,7 @@
 					<References Name="[dbo].[Message]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[DentistInformation].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[DentistInformation]" />
-				</Entry>
-			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[Notification].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Notification]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -470,26 +448,7 @@
 					<References Name="[dbo].[PatientTooth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[PatientMouth].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[PatientMouth]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -508,7 +467,7 @@
 					<References Name="[dbo].[ImageUrl]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -527,7 +486,7 @@
 					<References Name="[dbo].[Tooth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -546,26 +505,7 @@
 					<References Name="[dbo].[MouthType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[TreatmentType].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[TreatmentType]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -584,7 +524,7 @@
 					<References Name="[dbo].[DiagnosisType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -603,7 +543,7 @@
 					<References Name="[dbo].[UserType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="35" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -622,26 +562,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryDetail]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="36" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[Appointment].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Appointment]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -660,7 +581,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryMaster]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -679,7 +600,7 @@
 					<References Name="[dbo].[PatientDentalHistory]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="35" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -698,26 +619,7 @@
 					<References Name="[dbo].[PatientMedicalHistory]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="40" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[CivilStatus].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[CivilStatus]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="41" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="36" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -736,6 +638,101 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[ScheduleMaster].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[PatientMouth].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[PatientMouth]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[CivilStatus].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[CivilStatus]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="40" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[TreatmentType].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[TreatmentType]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="41" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Notification].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Notification]" />
+				</Entry>
+			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="42" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
@@ -744,7 +741,7 @@
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[Id]" />
+								<References Name="[dbo].[UserMenu].[Id]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -752,7 +749,7 @@
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[PatientInformation]" />
+					<References Name="[dbo].[UserMenu]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="43" />
@@ -782,7 +779,7 @@
 					<Element Type="SqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[dbo].[ScheduleMaster].[Id]" />
+								<References Name="[dbo].[UserInformation].[Id]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -790,7 +787,7 @@
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[ScheduleMaster]" />
+					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="45" />
@@ -814,6 +811,25 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="46" />
 		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Appointment].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Appointment]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="47" />
+		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Appointment]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
@@ -832,26 +848,11 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="37" />
+						<AttachedAnnotation Disambiguator="47" />
 					</Element>
 				</Entry>
 				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[Appointment].[PatientId]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Appointment].[DentistId]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -883,14 +884,29 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Appointment].[AppointmentDate]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Appointment].[ScheduleMasterId]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Appointment].[ScheduleDetailId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -920,8 +936,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="47" />
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="48" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="49" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="50" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[CivilStatus]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -941,7 +958,23 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="41" />
+						<AttachedAnnotation Disambiguator="40" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[CivilStatus].[Name]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
 					</Element>
 				</Entry>
 				<Entry>
@@ -950,7 +983,7 @@
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="20" />
+									<Property Name="Length" Value="200" />
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[varchar]" />
@@ -1007,7 +1040,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentalMenu].[UserTypeId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[DentalMenu].[ParentId]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -1084,7 +1117,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="21" />
+						<AttachedAnnotation Disambiguator="23" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -1093,227 +1126,6 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="49" />
-		</Element>
-		<Element Type="SqlTable" Name="[dbo].[DentistInformation]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[Id]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="26" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[FirstName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[MiddleName]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[LastName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[Gender]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="1" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[char]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[Height]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[Weight]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[BirthDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[Address]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="200" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[CivilStatusId]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[ContactNo]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[EmailAddress]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DentistInformation].[Status]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="50" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[DiagnosisType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1333,7 +1145,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="34" />
+						<AttachedAnnotation Disambiguator="31" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -1383,7 +1195,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="11" />
+						<AttachedAnnotation Disambiguator="8" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -1392,29 +1204,6 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Appointment_DentistId]">
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[dbo].[Appointment].[DentistId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Appointment]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[dbo].[DentistInformation].[Id]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[dbo].[DentistInformation]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="48" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Appointment_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1438,54 +1227,53 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="47" />
+			<AttachedAnnotation Disambiguator="48" />
 		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_DentalMenu_UserTypeId]">
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Appointment_ScheduleDetailId]">
 			<Relationship Name="Columns">
 				<Entry>
-					<References Name="[dbo].[DentalMenu].[UserTypeId]" />
+					<References Name="[dbo].[Appointment].[ScheduleDetailId]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[DentalMenu]" />
+					<References Name="[dbo].[Appointment]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignColumns">
 				<Entry>
-					<References Name="[dbo].[UserType].[Id]" />
+					<References Name="[dbo].[ScheduleDetail].[Id]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignTable">
 				<Entry>
-					<References Name="[dbo].[UserType]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="49" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_DentistInformation_CivilStatus]">
-			<Property Name="OnDeleteAction" Value="2" />
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[dbo].[DentistInformation].[CivilStatusId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[DentistInformation]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[dbo].[CivilStatus].[Id]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[dbo].[CivilStatus]" />
+					<References Name="[dbo].[ScheduleDetail]" />
 				</Entry>
 			</Relationship>
 			<AttachedAnnotation Disambiguator="50" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Appointment_ScheduleMasterId]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Appointment].[ScheduleMasterId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Appointment]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="49" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_MouthType_ImageUrlId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1511,6 +1299,29 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="51" />
 		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[Fk_Notification_UserId]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[Notification].[UserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Notification]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[User].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[User]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="52" />
+		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDentalHistory_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
 			<Relationship Name="Columns">
@@ -1533,7 +1344,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="52" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="53" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1557,7 +1368,7 @@
 					<References Name="[dbo].[DiagnosisType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="53" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="54" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryDetail_PDHMasterId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1581,7 +1392,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryMaster]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="54" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="55" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryDetail_TreatmentTypeId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1605,7 +1416,7 @@
 					<References Name="[dbo].[TreatmentType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="55" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="56" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId]">
 			<Relationship Name="Columns">
@@ -1628,7 +1439,7 @@
 					<References Name="[dbo].[Appointment]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="56" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="57" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryMaster_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1652,18 +1463,18 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="57" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="58" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientInformation_CivilStatusId]">
 			<Property Name="OnDeleteAction" Value="2" />
 			<Relationship Name="Columns">
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[CivilStatusId]" />
+					<References Name="[dbo].[UserInformation].[CivilStatusId]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[PatientInformation]" />
+					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignColumns">
@@ -1676,18 +1487,18 @@
 					<References Name="[dbo].[CivilStatus]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="58" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="59" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientInformation_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
 			<Relationship Name="Columns">
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[PatientId]" />
+					<References Name="[dbo].[UserInformation].[UserId]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[PatientInformation]" />
+					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignColumns">
@@ -1700,7 +1511,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="59" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="60" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientMedicalHistory_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1724,7 +1535,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="60" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="61" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientMouth_MouthTypeId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1748,7 +1559,7 @@
 					<References Name="[dbo].[MouthType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="61" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="62" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientMouth_PatientId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1764,15 +1575,15 @@
 			</Relationship>
 			<Relationship Name="ForeignColumns">
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[Id]" />
+					<References Name="[dbo].[UserInformation].[Id]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignTable">
 				<Entry>
-					<References Name="[dbo].[PatientInformation]" />
+					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="62" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="63" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientTooth_PatientMouthId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1796,7 +1607,31 @@
 					<References Name="[dbo].[PatientMouth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="63" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="64" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_ScheduleDetail_ScheduLeMasterId]">
+			<Property Name="OnDeleteAction" Value="1" />
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[ScheduleDetail].[ScheduleMasterId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[ScheduleDetail]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[ScheduleMaster]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="65" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_ScheduleMaster_DentistId]">
 			<Relationship Name="Columns">
@@ -1811,15 +1646,15 @@
 			</Relationship>
 			<Relationship Name="ForeignColumns">
 				<Entry>
-					<References Name="[dbo].[DentistInformation].[Id]" />
+					<References Name="[dbo].[UserInformation].[Id]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="ForeignTable">
 				<Entry>
-					<References Name="[dbo].[DentistInformation]" />
+					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="64" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="66" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Tooth_ImageUrlId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1843,7 +1678,7 @@
 					<References Name="[dbo].[ImageUrl]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="65" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="67" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Tooth_MouthTypeId]">
 			<Relationship Name="Columns">
@@ -1866,7 +1701,7 @@
 					<References Name="[dbo].[MouthType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="66" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="68" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_User_ReceiverId]">
 			<Relationship Name="Columns">
@@ -1889,7 +1724,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="67" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="69" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_User_SenderId]">
 			<Relationship Name="Columns">
@@ -1912,7 +1747,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="68" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="70" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_User_UserTypeId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1936,7 +1771,53 @@
 					<References Name="[dbo].[UserType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="69" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="71" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[Fk_UserMenu_MenuId]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[UserMenu].[MenuId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[UserMenu]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[DentalMenu].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[DentalMenu]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="72" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[Fk_UserMenu_UserTypeId]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[UserMenu].[UserTypeId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[UserMenu]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[UserType].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[UserType]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="73" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[ImageUrl]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1956,7 +1837,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="30" />
+						<AttachedAnnotation Disambiguator="28" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -1990,7 +1871,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="7" />
+						<AttachedAnnotation Disambiguator="5" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -2018,7 +1899,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="24" />
+						<AttachedAnnotation Disambiguator="25" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2079,7 +1960,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="25" />
+						<AttachedAnnotation Disambiguator="26" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2183,8 +2064,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="68" />
-			<AttachedAnnotation Disambiguator="67" />
+			<AttachedAnnotation Disambiguator="70" />
+			<AttachedAnnotation Disambiguator="69" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[MouthType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2204,7 +2085,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="32" />
+						<AttachedAnnotation Disambiguator="30" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2270,7 +2151,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="9" />
+						<AttachedAnnotation Disambiguator="7" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -2299,7 +2180,23 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="27" />
+						<AttachedAnnotation Disambiguator="42" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Notification].[UserId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
 					</Element>
 				</Entry>
 				<Entry>
@@ -2349,7 +2246,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="4" />
+						<AttachedAnnotation Disambiguator="21" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -2358,6 +2255,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+			<AttachedAnnotation Disambiguator="52" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientDentalHistory]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2377,7 +2275,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="39" />
+						<AttachedAnnotation Disambiguator="35" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2456,7 +2354,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="14" />
+						<AttachedAnnotation Disambiguator="11" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2617,7 +2515,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="52" />
+			<AttachedAnnotation Disambiguator="53" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientDiagnosisHistoryDetail]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2637,7 +2535,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="36" />
+						<AttachedAnnotation Disambiguator="33" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2708,9 +2606,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="54" />
-			<AttachedAnnotation Disambiguator="53" />
 			<AttachedAnnotation Disambiguator="55" />
+			<AttachedAnnotation Disambiguator="54" />
+			<AttachedAnnotation Disambiguator="56" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientDiagnosisHistoryMaster]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2730,7 +2628,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="38" />
+						<AttachedAnnotation Disambiguator="34" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2812,54 +2710,6 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientDiagnosisHistoryMaster].[DiagnosisStarted]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Scale" Value="7" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[time]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientDiagnosisHistoryMaster].[DiagnosisEnded]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Scale" Value="7" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[time]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientDiagnosisHistoryMaster].[DiagnosisDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[date]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientDiagnosisHistoryMaster].[Status]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
@@ -2873,7 +2723,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="13" />
+						<AttachedAnnotation Disambiguator="10" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -2882,246 +2732,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="57" />
-			<AttachedAnnotation Disambiguator="56" />
-		</Element>
-		<Element Type="SqlTable" Name="[dbo].[PatientInformation]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[Id]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="43" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[PatientId]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[FirstName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[MiddleName]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[LastName]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[Gender]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="1" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[char]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[Height]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[Weight]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[BirthDate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[datetime]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[Address]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="200" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[CivilStatusId]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[Occupation]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[ContactNo]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="50" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientInformation].[EmailAddress]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-			<AttachedAnnotation Disambiguator="59" />
 			<AttachedAnnotation Disambiguator="58" />
+			<AttachedAnnotation Disambiguator="57" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientMedicalHistory]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3141,7 +2753,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="40" />
+						<AttachedAnnotation Disambiguator="36" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3284,7 +2896,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="15" />
+						<AttachedAnnotation Disambiguator="12" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3444,7 +3056,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="16" />
+						<AttachedAnnotation Disambiguator="13" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3460,7 +3072,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="17" />
+						<AttachedAnnotation Disambiguator="14" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3477,7 +3089,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="18" />
+						<AttachedAnnotation Disambiguator="15" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3486,7 +3098,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="60" />
+			<AttachedAnnotation Disambiguator="61" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientMouth]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3506,7 +3118,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="29" />
+						<AttachedAnnotation Disambiguator="39" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3553,7 +3165,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="6" />
+						<AttachedAnnotation Disambiguator="18" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3562,8 +3174,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="61" />
 			<AttachedAnnotation Disambiguator="62" />
+			<AttachedAnnotation Disambiguator="63" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientTooth]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3583,7 +3195,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="28" />
+						<AttachedAnnotation Disambiguator="27" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3720,7 +3332,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="5" />
+						<AttachedAnnotation Disambiguator="4" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3729,7 +3341,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="63" />
+			<AttachedAnnotation Disambiguator="64" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[ScheduleDetail]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3737,6 +3349,7 @@
 				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[ScheduleDetail].[Id]">
 						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -3815,7 +3428,8 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="23" />
+						<AttachedAnnotation Disambiguator="65" />
+						<AttachedAnnotation Disambiguator="24" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3843,7 +3457,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="45" />
+						<AttachedAnnotation Disambiguator="38" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3891,7 +3505,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="22" />
+						<AttachedAnnotation Disambiguator="17" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3900,7 +3514,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="64" />
+			<AttachedAnnotation Disambiguator="66" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Tooth]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3920,7 +3534,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="31" />
+						<AttachedAnnotation Disambiguator="29" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3943,10 +3557,9 @@
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="10" />
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nchar]" />
+											<References ExternalSource="BuiltIns" Name="[int]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -4057,7 +3670,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="8" />
+						<AttachedAnnotation Disambiguator="6" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -4066,8 +3679,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="66" />
-			<AttachedAnnotation Disambiguator="65" />
+			<AttachedAnnotation Disambiguator="68" />
+			<AttachedAnnotation Disambiguator="67" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[TreatmentType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -4087,7 +3700,24 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="33" />
+						<AttachedAnnotation Disambiguator="41" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[TreatmentType].[Name]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
 					</Element>
 				</Entry>
 				<Entry>
@@ -4121,7 +3751,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="10" />
+						<AttachedAnnotation Disambiguator="20" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -4149,7 +3779,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="42" />
+						<AttachedAnnotation Disambiguator="37" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -4216,7 +3846,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="20" />
+						<AttachedAnnotation Disambiguator="16" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -4225,7 +3855,324 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="69" />
+			<AttachedAnnotation Disambiguator="71" />
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[UserInformation]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="45" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[UserId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[FirstName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[MiddleName]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[LastName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[Gender]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="1" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[char]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[Height]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[Weight]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[BirthDate]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[Address]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[CivilStatusId]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[Occupation]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[ContactNo]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="50" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserInformation].[EmailAddress]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="60" />
+			<AttachedAnnotation Disambiguator="59" />
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[UserMenu]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserMenu].[Id]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="43" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserMenu].[UserTypeId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserMenu].[MenuId]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[UserMenu].[Status]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="22" />
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="73" />
+			<AttachedAnnotation Disambiguator="72" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[UserType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -4245,7 +4192,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="35" />
+						<AttachedAnnotation Disambiguator="32" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -4295,7 +4242,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="12" />
+						<AttachedAnnotation Disambiguator="9" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -4304,6 +4251,117 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+		</Element>
+		<Element Type="SqlView" Name="[dbo].[V_UserMenu]">
+			<Property Name="QueryScript">
+				<Value><![CDATA[ SELECT	dm.Id,
+				dm.Name,
+				dm.Description,
+				dm.ParentId,
+				dm.Url,
+				um.UserTypeId
+	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UserMenu].[Id]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[DentalMenu].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UserMenu].[Name]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[DentalMenu].[Name]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UserMenu].[Description]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[DentalMenu].[Description]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UserMenu].[ParentId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[DentalMenu].[ParentId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UserMenu].[Url]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[DentalMenu].[Url]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UserMenu].[UserTypeId]">
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[UserMenu].[UserTypeId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="QueryDependencies">
+				<Entry>
+					<References Name="[dbo].[UserMenu]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[DentalMenu]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[UserMenu].[MenuId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[DentalMenu].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[DentalMenu].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[DentalMenu].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[DentalMenu].[ParentId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[DentalMenu].[Url]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[UserMenu].[UserTypeId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[UserMenu].[Status]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="223" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE VIEW [dbo].[V_UserMenu]&#xD;&#xA;&#x9;AS" />
+			</Annotation>
 		</Element>
 		<Element Type="SqlView" Name="[dbo].[V_UsersList]">
 			<Property Name="QueryScript">
@@ -4323,9 +4381,9 @@
 				p.LastName,
 				p.MiddleName,
 				p.Occupation,
-				p.PatientId,
+				p.UserId,
 				p.Weight
-	FROM [User] as u INNER JOIN [PatientInformation] as p ON u.Id = p.PatientId WHERE u.Status = 1]]></Value>
+	FROM [User] as u INNER JOIN [UserInformation] as p ON u.Id = p.UserId WHERE u.Status = 1]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
@@ -4378,7 +4436,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[Address]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[Address]" />
+								<References Name="[dbo].[UserInformation].[Address]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4387,7 +4445,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[BirthDate]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[BirthDate]" />
+								<References Name="[dbo].[UserInformation].[BirthDate]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4396,7 +4454,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[CivilStatusId]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[CivilStatusId]" />
+								<References Name="[dbo].[UserInformation].[CivilStatusId]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4405,7 +4463,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[ContactNo]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[ContactNo]" />
+								<References Name="[dbo].[UserInformation].[ContactNo]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4414,7 +4472,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[EmailAddress]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[EmailAddress]" />
+								<References Name="[dbo].[UserInformation].[EmailAddress]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4423,7 +4481,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[FirstName]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[FirstName]" />
+								<References Name="[dbo].[UserInformation].[FirstName]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4432,7 +4490,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[Gender]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[Gender]" />
+								<References Name="[dbo].[UserInformation].[Gender]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4441,7 +4499,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[Height]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[Height]" />
+								<References Name="[dbo].[UserInformation].[Height]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4450,7 +4508,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[LastName]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[LastName]" />
+								<References Name="[dbo].[UserInformation].[LastName]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4459,7 +4517,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[MiddleName]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[MiddleName]" />
+								<References Name="[dbo].[UserInformation].[MiddleName]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4468,16 +4526,16 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[Occupation]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[Occupation]" />
+								<References Name="[dbo].[UserInformation].[Occupation]" />
 							</Entry>
 						</Relationship>
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[PatientId]">
+					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[UserId]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[PatientId]" />
+								<References Name="[dbo].[UserInformation].[UserId]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4486,7 +4544,7 @@
 					<Element Type="SqlComputedColumn" Name="[dbo].[V_UsersList].[Weight]">
 						<Relationship Name="ExpressionDependencies">
 							<Entry>
-								<References Name="[dbo].[PatientInformation].[Weight]" />
+								<References Name="[dbo].[UserInformation].[Weight]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -4497,13 +4555,13 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation]" />
+					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[User].[Id]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[PatientId]" />
+					<References Name="[dbo].[UserInformation].[UserId]" />
 				</Entry>
 				<Entry>
 					<References Name="[dbo].[User].[Username]" />
@@ -4518,40 +4576,40 @@
 					<References Name="[dbo].[User].[Status]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[Address]" />
+					<References Name="[dbo].[UserInformation].[Address]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[BirthDate]" />
+					<References Name="[dbo].[UserInformation].[BirthDate]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[CivilStatusId]" />
+					<References Name="[dbo].[UserInformation].[CivilStatusId]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[ContactNo]" />
+					<References Name="[dbo].[UserInformation].[ContactNo]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[EmailAddress]" />
+					<References Name="[dbo].[UserInformation].[EmailAddress]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[FirstName]" />
+					<References Name="[dbo].[UserInformation].[FirstName]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[Gender]" />
+					<References Name="[dbo].[UserInformation].[Gender]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[Height]" />
+					<References Name="[dbo].[UserInformation].[Height]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[LastName]" />
+					<References Name="[dbo].[UserInformation].[LastName]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[MiddleName]" />
+					<References Name="[dbo].[UserInformation].[MiddleName]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[Occupation]" />
+					<References Name="[dbo].[UserInformation].[Occupation]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[PatientInformation].[Weight]" />
+					<References Name="[dbo].[UserInformation].[Weight]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="Schema">
@@ -4560,7 +4618,7 @@
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="444" />
+				<Property Name="Length" Value="435" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE VIEW [dbo].[V_UsersList]&#xD;&#xA;&#x9;AS" />

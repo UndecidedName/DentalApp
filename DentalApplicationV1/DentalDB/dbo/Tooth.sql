@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [MouthTypeId] INT NULL, 
-    [Position] NCHAR(10) NULL, 
+    [Position] INT NULL, 
     [XAxis] INT NULL, 
     [YAxis] INT NULL, 
     [Width] INT NULL, 

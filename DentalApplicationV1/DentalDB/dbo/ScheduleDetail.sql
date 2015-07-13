@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[ScheduleDetail]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [ScheduleMasterId] INT NOT NULL, 
     [FromTime] TIME NOT NULL, 
     [ToTime] TIME NOT NULL, 
     [Status] INT NOT NULL DEFAULT 1
-	--CONSTRAINT [FK_ScheduleDetail_ScheduLeMasterId] FOREIGN KEY ([ScheduLeMasterId]) REFERENCES [ScheduleMaster](Id)
+	CONSTRAINT [FK_ScheduleDetail_ScheduLeMasterId] FOREIGN KEY ([ScheduLeMasterId]) REFERENCES [ScheduleMaster]([Id]) ON DELETE CASCADE
 )

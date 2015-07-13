@@ -308,4 +308,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ToTime" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8f91b208-0948-4084-9a6f-309b9504aa13" ChangeDateTime="07/12/2015 01:44:24" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[PatientInformation].[PatientId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PatientInformation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8c5057e6-6667-45eb-ab0d-b9fc9f552ef8" ChangeDateTime="07/12/2015 02:03:22" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Appointment].[AppointmentDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Appointment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ScheduleMasterId" />
+  </Operation>
 </Operations>

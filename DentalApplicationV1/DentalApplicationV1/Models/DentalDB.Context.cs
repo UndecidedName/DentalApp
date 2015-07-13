@@ -27,9 +27,7 @@ namespace DentalApplicationV1.Models
         }
     
         public DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<CivilStatu> CivilStatus { get; set; }
-        public DbSet<DentistInformation> DentistInformations { get; set; }
         public DbSet<DiagnosisType> DiagnosisTypes { get; set; }
         public DbSet<ImageUrl> ImageUrls { get; set; }
         public DbSet<Log> Logs { get; set; }
@@ -39,17 +37,20 @@ namespace DentalApplicationV1.Models
         public DbSet<PatientDentalHistory> PatientDentalHistories { get; set; }
         public DbSet<PatientDiagnosisHistoryDetail> PatientDiagnosisHistoryDetails { get; set; }
         public DbSet<PatientDiagnosisHistoryMaster> PatientDiagnosisHistoryMasters { get; set; }
-        public DbSet<PatientInformation> PatientInformations { get; set; }
         public DbSet<PatientMedicalHistory> PatientMedicalHistories { get; set; }
         public DbSet<PatientMouth> PatientMouths { get; set; }
         public DbSet<PatientTooth> PatientTeeth { get; set; }
         public DbSet<ScheduleDetail> ScheduleDetails { get; set; }
+        public DbSet<ScheduleMaster> ScheduleMasters { get; set; }
         public DbSet<Tooth> Teeth { get; set; }
         public DbSet<TreatmentType> TreatmentTypes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserInformation> UserInformations { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<V_UsersList> V_UsersList { get; set; }
+        public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<DentalMenu> DentalMenus { get; set; }
-        public DbSet<ScheduleMaster> ScheduleMasters { get; set; }
+        public DbSet<V_UserMenu> V_UserMenu { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
     }
 }

@@ -23,18 +23,11 @@ namespace DentalApplicationV1.APIController
             return db.UserMenus;
         }
 
-        // GET: api/UserMenus?userTypeId=1
-        public IHttpActionResult GetUserMenus(int userTypeId)
+        public IQueryable<UserMenu> GetUserMenus(int userTypeId)
         {
-            response.status = "FAILURE";
-            var userMenu = (from um in db.UserMenus where um.UserTypeId == userTypeId select um);
-            if (userMenu != null)
-            {
-                response.status = "SUCCESS";
-                response.objParam1 = userMenu;
-            }
-            return Json(response);
+            return db.UserMenus;
         }
+
         // GET: api/UserMenus/5
         [ResponseType(typeof(UserMenu))]
         public IHttpActionResult GetUserMenu(int id)

@@ -21,13 +21,14 @@ namespace DentalApplicationV1.Models
     
         public int Id { get; set; }
         public Nullable<int> PatientId { get; set; }
-        public Nullable<int> DentistId { get; set; }
         public string Message { get; set; }
-        public System.DateTime AppointmentDate { get; set; }
+        public int ScheduleMasterId { get; set; }
+        public Nullable<int> ScheduleDetailId { get; set; }
         public int Status { get; set; }
     
-        public virtual DentistInformation DentistInformation { get; set; }
         public virtual User User { get; set; }
+        public virtual ScheduleDetail ScheduleDetail { get; set; }
+        public virtual ScheduleMaster ScheduleMaster { get; set; }
         public virtual ICollection<PatientDiagnosisHistoryMaster> PatientDiagnosisHistoryMasters { get; set; }
     }
 }

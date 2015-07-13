@@ -1,11 +1,12 @@
-﻿<div class="myTableContainter" scrollable-container="getData()">
+﻿
+<div class="myTableContainter" scrollable-container="getData()">
     <!--For IE-->
     <div id="progress"></div>
     <iframe id="exportTemplate" style="display:none"></iframe>
     <!--End of for IE-->
     <div class="toolbar__left">
         <i class="mdi mdi-magnify" style="font-size:150%; padding-top:5px; padding-left:10px;"></i>
-        <input type="text" ng-model="search" placeholder="Search..." class="filter-input" ng-change="change()" style="padding-left:5px;"/> 
+        <input type="text" ng-model="search" placeholder="Search..." class="filter-input" ng-change="change()" style="padding-left:5px;" />
         <i class="mdi mdi-close-circle" style="font-size:100%; padding-top:12px; cursor:pointer;" ng-show="showClose" ng-click="showClose = false; search=''"></i>
     </div>
     <table class="myTableContent dir-export" id="export">
@@ -42,6 +43,6 @@
         </tbody>
     </table>
 </div>
-<div class="toolbar__right">
+<div class="toolbar__right" style="padding:10px">
     <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closecontainer({ dialog: datadefinition.Dialog });">Cancel</button>
 </div>

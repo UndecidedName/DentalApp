@@ -16,7 +16,7 @@ namespace DentalApplicationV1.Models
     {
         public int Id { get; set; }
         public Nullable<int> MouthTypeId { get; set; }
-        public string Position { get; set; }
+        public Nullable<int> Position { get; set; }
         public Nullable<int> XAxis { get; set; }
         public Nullable<int> YAxis { get; set; }
         public Nullable<int> Width { get; set; }

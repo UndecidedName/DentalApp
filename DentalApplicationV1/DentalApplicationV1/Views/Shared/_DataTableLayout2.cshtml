@@ -1,0 +1,21 @@
+﻿<div class="main-section">
+    <div class="main-section__title">{{modelName}}</div>
+    <div ng-show="!showForm">
+        <div class="main-section__content">
+            @RenderSection("TableContent")
+        </div>
+    </div>
+
+    <div ng-show="showForm" style="padding: 0px 5px 0px 5px;">
+        <div id="progress"></div>
+        <div class="card mt++">
+            @RenderSection("FormContent")
+            <div class="divider divider--dark"></div>
+            <div class="dialog__actions" ng-show="selectedTab === 0">
+                <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeForm()">Back</button>
+                <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="submit()">{{submitButtonText}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+

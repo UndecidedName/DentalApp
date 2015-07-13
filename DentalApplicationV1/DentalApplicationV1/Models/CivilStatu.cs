@@ -16,15 +16,14 @@ namespace DentalApplicationV1.Models
     {
         public CivilStatu()
         {
-            this.DentistInformations = new HashSet<DentistInformation>();
-            this.PatientInformations = new HashSet<PatientInformation>();
+            this.UserInformations = new HashSet<UserInformation>();
         }
     
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int Status { get; set; }
     
-        public virtual ICollection<DentistInformation> DentistInformations { get; set; }
-        public virtual ICollection<PatientInformation> PatientInformations { get; set; }
+        public virtual ICollection<UserInformation> UserInformations { get; set; }
     }
 }

@@ -12,15 +12,16 @@ namespace DentalApplicationV1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PatientInformation
+    public partial class UserInformation
     {
-        public PatientInformation()
+        public UserInformation()
         {
             this.PatientMouths = new HashSet<PatientMouth>();
+            this.ScheduleMasters = new HashSet<ScheduleMaster>();
         }
     
         public int Id { get; set; }
-        public int PatientId { get; set; }
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -35,7 +36,8 @@ namespace DentalApplicationV1.Models
         public string EmailAddress { get; set; }
     
         public virtual CivilStatu CivilStatu { get; set; }
-        public virtual User User { get; set; }
         public virtual ICollection<PatientMouth> PatientMouths { get; set; }
+        public virtual ICollection<ScheduleMaster> ScheduleMasters { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -1,0 +1,24 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Appointment].[DentistId] is being dropped, data loss could occur.
+
+** User actions
+     Drop
+       [dbo].[FK_Appointment_DentistId] (Foreign Key)
+     Alter
+       [dbo].[Appointment] (Table)
+
+** Supporting actions
+
+The column [dbo].[Appointment].[DentistId] is being dropped, data loss could occur.
+

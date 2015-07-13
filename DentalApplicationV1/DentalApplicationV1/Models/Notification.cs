@@ -15,8 +15,11 @@ namespace DentalApplicationV1.Models
     public partial class Notification
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public string Description { get; set; }
         public System.DateTime Date { get; set; }
         public int Status { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

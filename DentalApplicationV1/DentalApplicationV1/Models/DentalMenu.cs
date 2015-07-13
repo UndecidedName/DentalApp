@@ -14,13 +14,18 @@ namespace DentalApplicationV1.Models
     
     public partial class DentalMenu
     {
+        public DentalMenu()
+        {
+            this.UserMenus = new HashSet<UserMenu>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> UserTypeId { get; set; }
+        public Nullable<int> ParentId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
         public int Status { get; set; }
     
-        public virtual UserType UserType { get; set; }
+        public virtual ICollection<UserMenu> UserMenus { get; set; }
     }
 }

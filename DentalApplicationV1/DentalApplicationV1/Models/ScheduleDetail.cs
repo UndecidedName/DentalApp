@@ -14,10 +14,18 @@ namespace DentalApplicationV1.Models
     
     public partial class ScheduleDetail
     {
+        public ScheduleDetail()
+        {
+            this.Appointments = new HashSet<Appointment>();
+        }
+    
         public int Id { get; set; }
         public int ScheduleMasterId { get; set; }
-        public int Status { get; set; }
         public System.TimeSpan FromTime { get; set; }
         public System.TimeSpan ToTime { get; set; }
+        public int Status { get; set; }
+    
+        public virtual ScheduleMaster ScheduleMaster { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }

@@ -832,6 +832,7 @@
     <Content Include="Scripts\controllers\SettingController.js" />
     <Content Include="Scripts\directives\dataExport.js" />
     <Content Include="Scripts\directives\dataGrid1.js" />
+    <Content Include="Scripts\directives\dataGrid2.js" />
     <Content Include="Scripts\directives\dataModal1.js" />
     <Content Include="Scripts\directives\dentalDirective.js" />
     <Content Include="Scripts\directives\scrollableContainer.js" />
@@ -844,12 +845,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIController\DentalMenusController.cs" />
-    <Compile Include="APIController\DentistInformationsController.cs" />
+    <Compile Include="APIController\AppointmentsController.cs" />
+    <Compile Include="APIController\UserInformationsController.cs" />
+    <Compile Include="APIController\ScheduleDetailsController.cs" />
     <Compile Include="APIController\ScheduleMastersController.cs" />
     <Compile Include="APIController\SessionControllerHandler.cs" />
     <Compile Include="APIController\SessionRouteHandler.cs" />
+    <Compile Include="APIController\UserMenusController.cs" />
     <Compile Include="APIController\UsersController.cs" />
+    <Compile Include="APIController\V_UserMenuController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DirectiveController.cs" />
@@ -886,9 +890,6 @@
     <Compile Include="Models\DentalMenu.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DentistInformation.cs">
-      <DependentUpon>DentalDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DiagnosisType.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
@@ -918,9 +919,6 @@
     <Compile Include="Models\PatientDiagnosisHistoryMaster.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientInformation.cs">
-      <DependentUpon>DentalDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PatientMedicalHistory.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
@@ -947,7 +945,16 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserInformation.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserMenu.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserType.cs">
+      <DependentUpon>DentalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_UserMenu.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_UsersList.cs">
@@ -1421,6 +1428,9 @@
     <Content Include="assets\skin\default_skin\less\theme_settings.less" />
     <Content Include="assets\skin\default_skin\less\theme_variables.less" />
     <Content Include="Views\Directive\DataModal1.cshtml" />
+    <Content Include="Views\Directive\DataGrid2.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_DataTableLayout2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

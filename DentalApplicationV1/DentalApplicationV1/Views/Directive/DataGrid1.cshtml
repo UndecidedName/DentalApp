@@ -40,7 +40,7 @@
                                     <li>
                                         <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)">
                                             <i class="{{contextMenuLabelImage[$index]}}"></i>
-                                            <span>{{menu}}</span>
+                                            <span>{{ $index === 0 ? 'Refresh':menu}}</span>
                                         </a>
                                     </li>
                                     <li ng-if="$index == 0" class="dropdown-divider"></li>
