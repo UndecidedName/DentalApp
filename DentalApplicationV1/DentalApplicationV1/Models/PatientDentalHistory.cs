@@ -30,6 +30,7 @@ namespace DentalApplicationV1.Models
         public Nullable<int> Question7f { get; set; }
         public Nullable<int> Question7g { get; set; }
         public Nullable<int> Question7Others { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual User User { get; set; }
     }

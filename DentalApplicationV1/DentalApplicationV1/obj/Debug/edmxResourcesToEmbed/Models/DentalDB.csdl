@@ -131,6 +131,10 @@
       <End Role="Appointment" EntitySet="Appointments" />
       <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMasters" />
     </AssociationSet>
+    <AssociationSet Name="FK_PatientTooth_ImageUrlId" Association="DentalDBModel.FK_PatientTooth_ImageUrlId">
+      <End Role="ImageUrl" EntitySet="ImageUrls" />
+      <End Role="PatientTooth" EntitySet="PatientTeeth" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="C__RefactorLog">
     <Key>
@@ -167,6 +171,7 @@
     <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="MouthTypes" Relationship="DentalDBModel.FK_MouthType_ImageUrlId" FromRole="ImageUrl" ToRole="MouthType" />
     <NavigationProperty Name="Teeth" Relationship="DentalDBModel.FK_Tooth_ImageUrlId" FromRole="ImageUrl" ToRole="Tooth" />
+    <NavigationProperty Name="PatientTeeth" Relationship="DentalDBModel.FK_PatientTooth_ImageUrlId" FromRole="ImageUrl" ToRole="PatientTooth" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -235,6 +240,7 @@
     <Property Name="Question7g" Type="Int32" />
     <Property Name="Question7Others" Type="Int32" />
     <NavigationProperty Name="User" Relationship="DentalDBModel.FK_PatientDentalHistory_PatientId" FromRole="PatientDentalHistory" ToRole="User" />
+    <Property Name="Status" Type="Int32" />
   </EntityType>
   <EntityType Name="PatientDiagnosisHistoryDetail">
     <Key>
@@ -319,6 +325,7 @@
     <Property Name="ImageUrlId" Type="Int32" />
     <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PatientMouth" Relationship="DentalDBModel.FK_PatientTooth_PatientMouthId" FromRole="PatientTooth" ToRole="PatientMouth" />
+    <NavigationProperty Name="ImageUrl" Relationship="DentalDBModel.FK_PatientTooth_ImageUrlId" FromRole="PatientTooth" ToRole="ImageUrl" />
   </EntityType>
   <EntityType Name="ScheduleDetail">
     <Key>
@@ -830,6 +837,18 @@
       </Principal>
       <Dependent Role="PatientDiagnosisHistoryMaster">
         <PropertyRef Name="AppointmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientTooth_ImageUrlId">
+    <End Type="DentalDBModel.ImageUrl" Role="ImageUrl" Multiplicity="0..1" />
+    <End Type="DentalDBModel.PatientTooth" Role="PatientTooth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImageUrl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientTooth">
+        <PropertyRef Name="ImageUrlId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

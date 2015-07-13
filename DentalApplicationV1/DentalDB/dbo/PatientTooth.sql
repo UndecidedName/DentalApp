@@ -10,5 +10,6 @@
     [rotation] INT NULL, 
     [ImageUrlId] INT NULL, 
     [Status] INT NOT NULL DEFAULT 1,
-	CONSTRAINT [FK_PatientTooth_PatientMouthId] FOREIGN KEY ([PatientMouthId]) REFERENCES [PatientMouth](Id) ON DELETE SET NULL 
+	CONSTRAINT [FK_PatientTooth_PatientMouthId] FOREIGN KEY ([PatientMouthId]) REFERENCES [PatientMouth](Id) ON DELETE SET NULL ,
+	CONSTRAINT [FK_PatientTooth_ImageUrlId] FOREIGN KEY ([ImageUrlId]) REFERENCES [ImageUrl](Id)
 )
