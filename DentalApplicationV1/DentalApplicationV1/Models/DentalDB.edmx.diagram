@@ -57,6 +57,7 @@
         <AssociationConnector Association="DentalDBModel.FK_Appointment_ScheduleDetailId" />
         <AssociationConnector Association="DentalDBModel.FK_Appointment_ScheduleMasterId" />
         <AssociationConnector Association="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" />
+        <AssociationConnector Association="DentalDBModel.FK_PatientTooth_ImageUrlId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

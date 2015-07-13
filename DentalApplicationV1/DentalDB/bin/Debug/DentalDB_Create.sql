@@ -193,26 +193,6 @@ CREATE TABLE [dbo].[Message] (
 
 
 GO
-PRINT N'Creating [dbo].[PatientTooth]...';
-
-
-GO
-CREATE TABLE [dbo].[PatientTooth] (
-    [Id]             INT IDENTITY (1, 1) NOT NULL,
-    [PatientMouthId] INT NULL,
-    [Position]       INT NULL,
-    [XAxis]          INT NULL,
-    [YAxis]          INT NULL,
-    [Width]          INT NULL,
-    [Height]         INT NULL,
-    [rotation]       INT NULL,
-    [ImageUrlId]     INT NULL,
-    [Status]         INT NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[ImageUrl]...';
 
 
@@ -316,32 +296,6 @@ CREATE TABLE [dbo].[PatientDiagnosisHistoryMaster] (
     [Paid]          MONEY NULL,
     [Balance]       MONEY NULL,
     [Status]        INT   NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-PRINT N'Creating [dbo].[PatientDentalHistory]...';
-
-
-GO
-CREATE TABLE [dbo].[PatientDentalHistory] (
-    [Id]              INT           IDENTITY (1, 1) NOT NULL,
-    [PatientId]       INT           NULL,
-    [Question1]       VARCHAR (500) NULL,
-    [Question2]       VARCHAR (500) NULL,
-    [Question3]       VARCHAR (500) NULL,
-    [Question4]       INT           NULL,
-    [Question5]       VARCHAR (500) NULL,
-    [Question6]       VARCHAR (500) NULL,
-    [Question7a]      INT           NULL,
-    [Question7b]      INT           NULL,
-    [Question7c]      INT           NULL,
-    [Question7d]      INT           NULL,
-    [Question7e]      INT           NULL,
-    [Question7f]      INT           NULL,
-    [Question7g]      INT           NULL,
-    [Question7Others] INT           NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -500,20 +454,20 @@ PRINT N'Creating [dbo].[UserInformation]...';
 
 GO
 CREATE TABLE [dbo].[UserInformation] (
-    [Id]            INT           IDENTITY (1, 1) NOT NULL,
-    [UserId]        INT           NOT NULL,
-    [FirstName]     VARCHAR (100) NOT NULL,
-    [MiddleName]    VARCHAR (100) NULL,
-    [LastName]      VARCHAR (100) NOT NULL,
-    [Gender]        CHAR (1)      NOT NULL,
-    [Height]        INT           NULL,
-    [Weight]        INT           NULL,
-    [BirthDate]     DATETIME      NOT NULL,
-    [Address]       VARCHAR (200) NULL,
-    [CivilStatusId] INT           NULL,
-    [Occupation]    VARCHAR (100) NULL,
-    [ContactNo]     VARCHAR (50)  NULL,
-    [EmailAddress]  VARCHAR (100) NULL,
+    [Id]            INT             IDENTITY (1, 1) NOT NULL,
+    [UserId]        INT             NOT NULL,
+    [FirstName]     VARCHAR (100)   NOT NULL,
+    [MiddleName]    VARCHAR (100)   NULL,
+    [LastName]      VARCHAR (100)   NOT NULL,
+    [Gender]        CHAR (1)        NOT NULL,
+    [Height]        DECIMAL (18, 2) NULL,
+    [Weight]        DECIMAL (18, 2) NULL,
+    [BirthDate]     DATETIME        NOT NULL,
+    [Address]       VARCHAR (200)   NULL,
+    [CivilStatusId] INT             NULL,
+    [Occupation]    VARCHAR (100)   NULL,
+    [ContactNo]     VARCHAR (50)    NULL,
+    [EmailAddress]  VARCHAR (100)   NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -550,21 +504,59 @@ CREATE TABLE [dbo].[Appointment] (
 
 
 GO
+PRINT N'Creating [dbo].[PatientDentalHistory]...';
+
+
+GO
+CREATE TABLE [dbo].[PatientDentalHistory] (
+    [Id]              INT           IDENTITY (1, 1) NOT NULL,
+    [PatientId]       INT           NULL,
+    [Question1]       VARCHAR (500) NULL,
+    [Question2]       VARCHAR (500) NULL,
+    [Question3]       VARCHAR (500) NULL,
+    [Question4]       INT           NULL,
+    [Question5]       VARCHAR (500) NULL,
+    [Question6]       VARCHAR (500) NULL,
+    [Question7a]      INT           NULL,
+    [Question7b]      INT           NULL,
+    [Question7c]      INT           NULL,
+    [Question7d]      INT           NULL,
+    [Question7e]      INT           NULL,
+    [Question7f]      INT           NULL,
+    [Question7g]      INT           NULL,
+    [Question7Others] INT           NULL,
+    [Status]          INT           NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[PatientTooth]...';
+
+
+GO
+CREATE TABLE [dbo].[PatientTooth] (
+    [Id]             INT IDENTITY (1, 1) NOT NULL,
+    [PatientMouthId] INT NULL,
+    [Position]       INT NULL,
+    [XAxis]          INT NULL,
+    [YAxis]          INT NULL,
+    [Width]          INT NULL,
+    [Height]         INT NULL,
+    [rotation]       INT NULL,
+    [ImageUrlId]     INT NULL,
+    [Status]         INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
 PRINT N'Creating Default Constraint on [dbo].[Message]....';
 
 
 GO
 ALTER TABLE [dbo].[Message]
     ADD DEFAULT 0 FOR [Status];
-
-
-GO
-PRINT N'Creating Default Constraint on [dbo].[PatientTooth]....';
-
-
-GO
-ALTER TABLE [dbo].[PatientTooth]
-    ADD DEFAULT 1 FOR [Status];
 
 
 GO
@@ -619,15 +611,6 @@ PRINT N'Creating Default Constraint on [dbo].[PatientDiagnosisHistoryMaster]....
 GO
 ALTER TABLE [dbo].[PatientDiagnosisHistoryMaster]
     ADD DEFAULT 1 FOR [Status];
-
-
-GO
-PRINT N'Creating Default Constraint on [dbo].[PatientDentalHistory]....';
-
-
-GO
-ALTER TABLE [dbo].[PatientDentalHistory]
-    ADD DEFAULT 0 FOR [Question4];
 
 
 GO
@@ -748,6 +731,33 @@ ALTER TABLE [dbo].[ScheduleDetail]
 
 
 GO
+PRINT N'Creating Default Constraint on [dbo].[PatientDentalHistory]....';
+
+
+GO
+ALTER TABLE [dbo].[PatientDentalHistory]
+    ADD DEFAULT 0 FOR [Question4];
+
+
+GO
+PRINT N'Creating Default Constraint on [dbo].[PatientDentalHistory]....';
+
+
+GO
+ALTER TABLE [dbo].[PatientDentalHistory]
+    ADD DEFAULT 1 FOR [Status];
+
+
+GO
+PRINT N'Creating Default Constraint on [dbo].[PatientTooth]....';
+
+
+GO
+ALTER TABLE [dbo].[PatientTooth]
+    ADD DEFAULT 1 FOR [Status];
+
+
+GO
 PRINT N'Creating FK_User_SenderId...';
 
 
@@ -763,15 +773,6 @@ PRINT N'Creating FK_User_ReceiverId...';
 GO
 ALTER TABLE [dbo].[Message]
     ADD CONSTRAINT [FK_User_ReceiverId] FOREIGN KEY ([ReceiverId]) REFERENCES [dbo].[User] ([Id]);
-
-
-GO
-PRINT N'Creating FK_PatientTooth_PatientMouthId...';
-
-
-GO
-ALTER TABLE [dbo].[PatientTooth]
-    ADD CONSTRAINT [FK_PatientTooth_PatientMouthId] FOREIGN KEY ([PatientMouthId]) REFERENCES [dbo].[PatientMouth] ([Id]) ON DELETE SET NULL;
 
 
 GO
@@ -844,15 +845,6 @@ PRINT N'Creating FK_PatientDiagnosisHistoryMaster_AppointmentId...';
 GO
 ALTER TABLE [dbo].[PatientDiagnosisHistoryMaster]
     ADD CONSTRAINT [FK_PatientDiagnosisHistoryMaster_AppointmentId] FOREIGN KEY ([AppointmentId]) REFERENCES [dbo].[Appointment] ([Id]);
-
-
-GO
-PRINT N'Creating FK_PatientDentalHistory_PatientId...';
-
-
-GO
-ALTER TABLE [dbo].[PatientDentalHistory]
-    ADD CONSTRAINT [FK_PatientDentalHistory_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
 
 
 GO
@@ -979,6 +971,33 @@ PRINT N'Creating FK_Appointment_ScheduleDetailId...';
 GO
 ALTER TABLE [dbo].[Appointment]
     ADD CONSTRAINT [FK_Appointment_ScheduleDetailId] FOREIGN KEY ([ScheduleDetailId]) REFERENCES [dbo].[ScheduleDetail] ([Id]);
+
+
+GO
+PRINT N'Creating FK_PatientDentalHistory_PatientId...';
+
+
+GO
+ALTER TABLE [dbo].[PatientDentalHistory]
+    ADD CONSTRAINT [FK_PatientDentalHistory_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
+
+
+GO
+PRINT N'Creating FK_PatientTooth_PatientMouthId...';
+
+
+GO
+ALTER TABLE [dbo].[PatientTooth]
+    ADD CONSTRAINT [FK_PatientTooth_PatientMouthId] FOREIGN KEY ([PatientMouthId]) REFERENCES [dbo].[PatientMouth] ([Id]) ON DELETE SET NULL;
+
+
+GO
+PRINT N'Creating FK_PatientTooth_ImageUrlId...';
+
+
+GO
+ALTER TABLE [dbo].[PatientTooth]
+    ADD CONSTRAINT [FK_PatientTooth_ImageUrlId] FOREIGN KEY ([ImageUrlId]) REFERENCES [dbo].[ImageUrl] ([Id]);
 
 
 GO

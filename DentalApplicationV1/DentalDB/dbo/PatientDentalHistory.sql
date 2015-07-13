@@ -16,5 +16,6 @@
 	[Question7f] INT NULL, 
 	[Question7g] INT NULL, 
 	[Question7Others] INT NULL,
-	CONSTRAINT [FK_PatientDentalHistory_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [User]([Id]) ON DELETE CASCADE
+	[Status] INT NULL DEFAULT 1, 
+    CONSTRAINT [FK_PatientDentalHistory_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [User]([Id]) ON DELETE CASCADE
 )

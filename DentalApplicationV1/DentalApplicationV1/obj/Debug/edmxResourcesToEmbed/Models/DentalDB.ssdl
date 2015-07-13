@@ -114,6 +114,7 @@
     <Property Name="Question7f" Type="int" />
     <Property Name="Question7g" Type="int" />
     <Property Name="Question7Others" Type="int" />
+    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="PatientDiagnosisHistoryDetail">
     <Key>
@@ -251,8 +252,8 @@
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Height" Type="int" />
-    <Property Name="Weight" Type="int" />
+    <Property Name="Height" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Weight" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="200" />
     <Property Name="CivilStatusId" Type="int" />
@@ -320,12 +321,12 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
     <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Height" Type="int" />
+    <Property Name="Height" Type="decimal" Precision="18" Scale="2" />
     <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="Occupation" Type="varchar" MaxLength="100" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Weight" Type="int" />
+    <Property Name="Weight" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <Association Name="FK_Appointment_PatientId">
     <End Role="User" Type="Self.User" Multiplicity="0..1">
@@ -528,6 +529,18 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       </Principal>
       <Dependent Role="PatientMouth">
         <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientTooth_ImageUrlId">
+    <End Role="ImageUrl" Type="Self.ImageUrl" Multiplicity="0..1" />
+    <End Role="PatientTooth" Type="Self.PatientTooth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImageUrl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientTooth">
+        <PropertyRef Name="ImageUrlId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -775,6 +788,10 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     <AssociationSet Name="FK_PatientMouth_PatientId" Association="Self.FK_PatientMouth_PatientId">
       <End Role="UserInformation" EntitySet="UserInformation" />
       <End Role="PatientMouth" EntitySet="PatientMouth" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientTooth_ImageUrlId" Association="Self.FK_PatientTooth_ImageUrlId">
+      <End Role="ImageUrl" EntitySet="ImageUrl" />
+      <End Role="PatientTooth" EntitySet="PatientTooth" />
     </AssociationSet>
     <AssociationSet Name="FK_PatientTooth_PatientMouthId" Association="Self.FK_PatientTooth_PatientMouthId">
       <End Role="PatientMouth" EntitySet="PatientMouth" />

@@ -1,0 +1,28 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column Height in table [dbo].[UserInformation] is currently  INT NULL but is being changed to  DECIMAL (18,
+         2) NULL. Data loss could occur.
+       The type for column Weight in table [dbo].[UserInformation] is currently  INT NULL but is being changed to  DECIMAL (18,
+         2) NULL. Data loss could occur.
+
+** User actions
+     Alter
+       [dbo].[UserInformation] (Table)
+
+** Supporting actions
+     Refresh
+       [dbo].[V_UsersList] (View)
+
+The type for column Height in table [dbo].[UserInformation] is currently  INT NULL but is being changed to  DECIMAL (18, 2) NULL. Data loss could occur.
+The type for column Weight in table [dbo].[UserInformation] is currently  INT NULL but is being changed to  DECIMAL (18, 2) NULL. Data loss could occur.
+

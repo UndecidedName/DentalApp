@@ -84,6 +84,7 @@
     <EntitySetMapping Name="PatientDentalHistories">
       <EntityTypeMapping TypeName="DentalDBModel.PatientDentalHistory">
         <MappingFragment StoreEntitySet="PatientDentalHistory">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Question7Others" ColumnName="Question7Others" />
           <ScalarProperty Name="Question7g" ColumnName="Question7g" />
           <ScalarProperty Name="Question7f" ColumnName="Question7f" />
