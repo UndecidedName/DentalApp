@@ -264,26 +264,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserInformations">
-      <EntityTypeMapping TypeName="DentalDBModel.UserInformation">
-        <MappingFragment StoreEntitySet="UserInformation">
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
-          <ScalarProperty Name="CivilStatusId" ColumnName="CivilStatusId" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="Height" ColumnName="Height" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserMenus">
       <EntityTypeMapping TypeName="DentalDBModel.UserMenu">
         <MappingFragment StoreEntitySet="UserMenu">
@@ -312,6 +292,26 @@
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInformations">
+      <EntityTypeMapping TypeName="DentalDBModel.UserInformation">
+        <MappingFragment StoreEntitySet="UserInformation">
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+          <ScalarProperty Name="CivilStatusId" ColumnName="CivilStatusId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

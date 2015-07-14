@@ -37,8 +37,8 @@ namespace DentalApplicationV1.APIController
             response.status = "FAILURE";
 
             if (!(request.Equals("logout") || request.Equals("CheckIfLogged")))
-            { 
-                String [] userinformation = userinfo.Split(',');
+            {
+                String[] userinformation = userinfo.Split(',');
                 username = userinformation[0];
                 password = userinformation[1];
             }

@@ -1,0 +1,93 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Appointment] (Table)
+       [dbo].[CivilStatus] (Table)
+       [dbo].[DentalMenu] (Table)
+       [dbo].[DiagnosisType] (Table)
+       [dbo].[ImageUrl] (Table)
+       [dbo].[Logs] (Table)
+       [dbo].[Message] (Table)
+       [dbo].[MouthType] (Table)
+       [dbo].[Notification] (Table)
+       [dbo].[PatientDentalHistory] (Table)
+       [dbo].[PatientDiagnosisHistoryDetail] (Table)
+       [dbo].[PatientDiagnosisHistoryMaster] (Table)
+       [dbo].[PatientMedicalHistory] (Table)
+       [dbo].[PatientMouth] (Table)
+       [dbo].[PatientTooth] (Table)
+       [dbo].[ScheduleDetail] (Table)
+       [dbo].[ScheduleMaster] (Table)
+       [dbo].[Tooth] (Table)
+       [dbo].[TreatmentType] (Table)
+       [dbo].[User] (Table)
+       [dbo].[UserInformation] (Table)
+       [dbo].[UserMenu] (Table)
+       [dbo].[UserType] (Table)
+       Default Constraint on [dbo].[CivilStatus].[Status] (Default Constraint)
+       Default Constraint on [dbo].[DentalMenu].[Status] (Default Constraint)
+       Default Constraint on [dbo].[DiagnosisType].[Status] (Default Constraint)
+       Default Constraint on [dbo].[ImageUrl].[Status] (Default Constraint)
+       Default Constraint on [dbo].[Message].[Status] (Default Constraint)
+       Default Constraint on [dbo].[MouthType].[Status] (Default Constraint)
+       Default Constraint on [dbo].[Notification].[Status] (Default Constraint)
+       Default Constraint on [dbo].[PatientDentalHistory].[Question4] (Default Constraint)
+       Default Constraint on [dbo].[PatientDentalHistory].[Status] (Default Constraint)
+       Default Constraint on [dbo].[PatientDiagnosisHistoryMaster].[Status] (Default Constraint)
+       Default Constraint on [dbo].[PatientMedicalHistory].[Question8] (Default Constraint)
+       Default Constraint on [dbo].[PatientMedicalHistory].[Question18] (Default Constraint)
+       Default Constraint on [dbo].[PatientMedicalHistory].[Question19] (Default Constraint)
+       Default Constraint on [dbo].[PatientMedicalHistory].[Status] (Default Constraint)
+       Default Constraint on [dbo].[PatientMouth].[Status] (Default Constraint)
+       Default Constraint on [dbo].[PatientTooth].[Status] (Default Constraint)
+       Default Constraint on [dbo].[ScheduleDetail].[Status] (Default Constraint)
+       Default Constraint on [dbo].[ScheduleMaster].[Status] (Default Constraint)
+       Default Constraint on [dbo].[Tooth].[Status] (Default Constraint)
+       Default Constraint on [dbo].[TreatmentType].[Status] (Default Constraint)
+       Default Constraint on [dbo].[User].[Status] (Default Constraint)
+       Default Constraint on [dbo].[UserMenu].[Status] (Default Constraint)
+       Default Constraint on [dbo].[UserType].[Status] (Default Constraint)
+       [dbo].[FK_Appointment_PatientId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleMasterId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleDetailId] (Foreign Key)
+       [dbo].[FK_User_SenderId] (Foreign Key)
+       [dbo].[FK_User_ReceiverId] (Foreign Key)
+       [dbo].[FK_MouthType_ImageUrlId] (Foreign Key)
+       [dbo].[Fk_Notification_UserId] (Foreign Key)
+       [dbo].[FK_PatientDentalHistory_PatientId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryDetail_PDHMasterId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryDetail_TreatmentTypeId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryMaster_PatientId] (Foreign Key)
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_PatientMedicalHistory_PatientId] (Foreign Key)
+       [dbo].[FK_PatientMouth_MouthTypeId] (Foreign Key)
+       [dbo].[FK_PatientMouth_PatientId] (Foreign Key)
+       [dbo].[FK_PatientTooth_PatientMouthId] (Foreign Key)
+       [dbo].[FK_PatientTooth_ImageUrlId] (Foreign Key)
+       [dbo].[FK_ScheduleDetail_ScheduLeMasterId] (Foreign Key)
+       [dbo].[FK_ScheduleMaster_DentistId] (Foreign Key)
+       [dbo].[FK_Tooth_MouthTypeId] (Foreign Key)
+       [dbo].[FK_Tooth_ImageUrlId] (Foreign Key)
+       [dbo].[FK_User_UserTypeId] (Foreign Key)
+       [dbo].[FK_UserInformation_PatientId] (Foreign Key)
+       [dbo].[FK_UserInformation_CivilStatusId] (Foreign Key)
+       [dbo].[Fk_UserMenu_UserTypeId] (Foreign Key)
+       [dbo].[Fk_UserMenu_MenuId] (Foreign Key)
+       [dbo].[V_UserMenu] (View)
+       [dbo].[V_UsersList] (View)
+
+** Supporting actions

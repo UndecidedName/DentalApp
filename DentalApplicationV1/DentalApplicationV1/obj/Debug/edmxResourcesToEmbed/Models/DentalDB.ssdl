@@ -252,8 +252,8 @@
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Height" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="Weight" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Height" Type="float" />
+    <Property Name="Weight" Type="float" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="200" />
     <Property Name="CivilStatusId" Type="int" />
@@ -320,11 +320,11 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
     <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Height" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Height" Type="float" />
     <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="Occupation" Type="varchar" MaxLength="100" />
-    <Property Name="Weight" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Weight" Type="float" />
   </EntityType>
   <Association Name="FK_Appointment_PatientId">
     <End Role="User" Type="Self.User" Multiplicity="0..1">
