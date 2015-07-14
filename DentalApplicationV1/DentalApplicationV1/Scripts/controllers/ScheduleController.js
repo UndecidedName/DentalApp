@@ -235,6 +235,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             "Type": ['Formatted-Time', 'Formatted-Time'],
             "DataList": $rootScope.scheduleDetail,
             "DataItem": {},
+            "ViewOnly": false,
             "CurrentLength": $rootScope.scheduleDetail.length,
             "APIUrl":['/api/ScheduleDetails?length= &masterId=' + $scope.dataDefinitionMaster.DataItem.Id,//get
                        '/api/ScheduleDetails' //post, put, delete
@@ -243,6 +244,11 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
         //Do Overriding or Overloading in this function
         $scope.otherActionsDetail = function (action) {
             switch (action) {
+                case 'PreAction':
+                    if ($scope.dataDefinitionMaster.ViewOnly == true)
+                        return false;
+                    else
+                        return true;
                 case 'PreLoadAction':
                     if (angular.isDefined($scope.dataDefinitionMaster.DataItem.Id))
                         return true;
@@ -269,9 +275,10 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             $scope.toSeconds = new Date((new Date() - 1)).getTime();
         };
         $scope.showFormErrorDetail = function (message) {
+            $scope.resetDetailItem();
             LxNotificationService.error(message);
-            $scope.dataDefinitionDetail.DataItem.FromTime = $filter('date')(new Date($scope.fromSeconds), "hh:mm a")
-            $scope.dataDefinitionDetail.DataItem.ToTime = $filter('date')(new Date($scope.toSeconds), "hh:mm a")
+            $scope.dataDefinitionDetail.DataItem.FromTime = $filter('date')(new Date($scope.fromSeconds), "hh:mm a");
+            $scope.dataDefinitionDetail.DataItem.ToTime = $filter('date')(new Date($scope.toSeconds), "hh:mm a");
         };
         //Submit Detail
         $scope.submitDetail = function () {

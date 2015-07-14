@@ -252,8 +252,8 @@
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Height" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Weight" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Height" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Weight" Type="numeric" Precision="18" Scale="2" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="200" />
     <Property Name="CivilStatusId" Type="int" />
@@ -307,7 +307,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       <PropertyRef Name="FirstName" />
       <PropertyRef Name="Gender" />
       <PropertyRef Name="LastName" />
-      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
@@ -321,12 +320,11 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
     <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Height" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Height" Type="numeric" Precision="18" Scale="2" />
     <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="Occupation" Type="varchar" MaxLength="100" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Weight" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Weight" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
   <Association Name="FK_Appointment_PatientId">
     <End Role="User" Type="Self.User" Multiplicity="0..1">
@@ -465,32 +463,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       </Principal>
       <Dependent Role="PatientDiagnosisHistoryMaster">
         <PropertyRef Name="PatientId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PatientInformation_CivilStatusId">
-    <End Role="CivilStatus" Type="Self.CivilStatus" Multiplicity="0..1" />
-    <End Role="UserInformation" Type="Self.UserInformation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CivilStatus">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserInformation">
-        <PropertyRef Name="CivilStatusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PatientInformation_PatientId">
-    <End Role="User" Type="Self.User" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="UserInformation" Type="Self.UserInformation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserInformation">
-        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -644,6 +616,32 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserInformation_CivilStatusId">
+    <End Role="CivilStatus" Type="Self.CivilStatus" Multiplicity="0..1" />
+    <End Role="UserInformation" Type="Self.UserInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CivilStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInformation">
+        <PropertyRef Name="CivilStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInformation_PatientId">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserInformation" Type="Self.UserInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInformation">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Fk_UserMenu_MenuId">
     <End Role="DentalMenu" Type="Self.DentalMenu" Multiplicity="1" />
     <End Role="UserMenu" Type="Self.UserMenu" Multiplicity="*" />
@@ -721,7 +719,6 @@ FROM [dbo].[V_UserMenu] AS [V_UserMenu]</DefiningQuery>
 [V_UsersList].[LastName] AS [LastName], 
 [V_UsersList].[MiddleName] AS [MiddleName], 
 [V_UsersList].[Occupation] AS [Occupation], 
-[V_UsersList].[UserId] AS [UserId], 
 [V_UsersList].[Weight] AS [Weight]
 FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     </EntitySet>
@@ -768,14 +765,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     <AssociationSet Name="FK_PatientDiagnosisHistoryMaster_PatientId" Association="Self.FK_PatientDiagnosisHistoryMaster_PatientId">
       <End Role="User" EntitySet="User" />
       <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMaster" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PatientInformation_CivilStatusId" Association="Self.FK_PatientInformation_CivilStatusId">
-      <End Role="CivilStatus" EntitySet="CivilStatus" />
-      <End Role="UserInformation" EntitySet="UserInformation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PatientInformation_PatientId" Association="Self.FK_PatientInformation_PatientId">
-      <End Role="User" EntitySet="User" />
-      <End Role="UserInformation" EntitySet="UserInformation" />
     </AssociationSet>
     <AssociationSet Name="FK_PatientMedicalHistory_PatientId" Association="Self.FK_PatientMedicalHistory_PatientId">
       <End Role="User" EntitySet="User" />
@@ -824,6 +813,14 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     <AssociationSet Name="FK_User_UserTypeId" Association="Self.FK_User_UserTypeId">
       <End Role="UserType" EntitySet="UserType" />
       <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInformation_CivilStatusId" Association="Self.FK_UserInformation_CivilStatusId">
+      <End Role="CivilStatus" EntitySet="CivilStatus" />
+      <End Role="UserInformation" EntitySet="UserInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInformation_PatientId" Association="Self.FK_UserInformation_PatientId">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserInformation" EntitySet="UserInformation" />
     </AssociationSet>
     <AssociationSet Name="Fk_UserMenu_MenuId" Association="Self.Fk_UserMenu_MenuId">
       <End Role="DentalMenu" EntitySet="DentalMenu" />

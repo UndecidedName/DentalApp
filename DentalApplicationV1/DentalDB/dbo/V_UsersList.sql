@@ -15,6 +15,5 @@
 				p.LastName,
 				p.MiddleName,
 				p.Occupation,
-				p.UserId,
 				p.Weight
 	FROM [User] as u INNER JOIN [UserInformation] as p ON u.Id = p.UserId WHERE u.Status = 1

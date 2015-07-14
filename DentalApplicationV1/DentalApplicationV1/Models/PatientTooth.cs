@@ -25,7 +25,7 @@ namespace DentalApplicationV1.Models
         public Nullable<int> ImageUrlId { get; set; }
         public int Status { get; set; }
     
-        public virtual PatientMouth PatientMouth { get; set; }
         public virtual ImageUrl ImageUrl { get; set; }
+        public virtual PatientMouth PatientMouth { get; set; }
     }
 }

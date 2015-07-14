@@ -26,8 +26,8 @@ namespace DentalApplicationV1.Models
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
-        public Nullable<int> Height { get; set; }
-        public Nullable<int> Weight { get; set; }
+        public Nullable<decimal> Height { get; set; }
+        public Nullable<decimal> Weight { get; set; }
         public System.DateTime BirthDate { get; set; }
         public string Address { get; set; }
         public Nullable<int> CivilStatusId { get; set; }

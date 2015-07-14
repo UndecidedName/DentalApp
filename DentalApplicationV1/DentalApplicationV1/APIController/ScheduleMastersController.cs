@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DentalApplicationV1.Models;
 using YbanezNacua.Models;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace DentalApplicationV1.APIController
 {
@@ -26,17 +28,17 @@ namespace DentalApplicationV1.APIController
 
         // GET: api/ScheduleMasters?length=1
         public IQueryable<ScheduleMaster> GetScheduleMasters(int length)
-        {
+        {   
             int fetch;
-
-            if (db.ScheduleMasters.Count() > length)
+            var records = db.ScheduleMasters.Where(sm => sm.Status != 2).Count();
+            if (records > length)
             {
-                if ((db.ScheduleMasters.Count() - length) > pageSize)
+                if ((records - length) > pageSize)
                     fetch = pageSize;
                 else
-                    fetch = db.ScheduleMasters.Count() - length;
+                    fetch = records - length;
 
-                return db.ScheduleMasters
+                return db.ScheduleMasters.Where(sm => sm.Status != 2)
                     .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
                     .OrderBy(sm => sm.Date).Skip((length)).Take(fetch);
             }
@@ -112,8 +114,7 @@ namespace DentalApplicationV1.APIController
             }
             try
             {
-                var searchDate = db.ScheduleMasters.Where(sm => sm.Date == scheduleMaster.Date && sm.DentistId == scheduleMaster.DentistId);
-                if (searchDate.Count() == 0) {
+                if(validateForSave(scheduleMaster.Date, scheduleMaster.DentistId)){
                     scheduleMaster.Status = 0;
                     db.ScheduleMasters.Add(scheduleMaster);
                     db.SaveChanges();
@@ -144,9 +145,18 @@ namespace DentalApplicationV1.APIController
             }
             try
             {
-                db.ScheduleMasters.Remove(scheduleMaster);
-                db.SaveChanges();
-                response.status = "SUCCESS";
+                if (validateForInactive(id))
+                {
+                    var scheduleMasterEdited = db.ScheduleMasters.Find(id);
+                    //Set status to 2 for inactive
+                    scheduleMasterEdited.Status = 2;
+                    db.Entry(scheduleMaster).CurrentValues.SetValues(scheduleMasterEdited);
+                    db.Entry(scheduleMaster).State = EntityState.Modified;
+                    db.SaveChanges();
+                    response.status = "SUCCESS";
+                }
+                else
+                    response.message = "Schedule is already used.";
             }
             catch (Exception e) {
                 response.message = e.InnerException.InnerException.Message.ToString();
@@ -163,6 +173,24 @@ namespace DentalApplicationV1.APIController
             base.Dispose(disposing);
         }
 
+        private bool validateForInactive(int id){ 
+            var scheduleMasterDetailEdited = db.ScheduleDetails.Where(sde => sde.ScheduleMasterId == id).ToArray();
+            for (var i = 0; i < scheduleMasterDetailEdited.Length; i++)
+            { 
+                //Check if there are schedule that is used
+                if (scheduleMasterDetailEdited[i].Status == 1)
+                    return false;
+            }
+            return true;
+        }
+        private bool validateForSave(DateTime date, int dentisId)
+        {
+            var searchDate = db.ScheduleMasters.Where(sm => sm.Date == date && sm.DentistId == dentisId && sm.Status != 2);
+            if (searchDate.Count() == 0)
+                return true;
+            else
+                return false;
+        }
         private bool ScheduleMasterExists(int id)
         {
             return db.ScheduleMasters.Count(e => e.Id == id) > 0;

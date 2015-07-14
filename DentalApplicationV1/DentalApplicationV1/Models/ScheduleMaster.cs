@@ -16,8 +16,8 @@ namespace DentalApplicationV1.Models
     {
         public ScheduleMaster()
         {
-            this.ScheduleDetails = new HashSet<ScheduleDetail>();
             this.Appointments = new HashSet<Appointment>();
+            this.ScheduleDetails = new HashSet<ScheduleDetail>();
         }
     
         public int Id { get; set; }
@@ -25,8 +25,8 @@ namespace DentalApplicationV1.Models
         public int DentistId { get; set; }
         public Nullable<int> Status { get; set; }
     
+        public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<ScheduleDetail> ScheduleDetails { get; set; }
         public virtual UserInformation UserInformation { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }

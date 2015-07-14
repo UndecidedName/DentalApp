@@ -19,7 +19,7 @@ namespace DentalApplicationV1.Models
         public int MenuId { get; set; }
         public int Status { get; set; }
     
-        public virtual UserType UserType { get; set; }
         public virtual DentalMenu DentalMenu { get; set; }
+        public virtual UserType UserType { get; set; }
     }
 }

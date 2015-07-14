@@ -14,11 +14,11 @@ namespace DentalApplicationV1.Models
     
     public partial class V_UserMenu
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> ParentId { get; set; }
         public string Url { get; set; }
         public int UserTypeId { get; set; }
-        public int Id { get; set; }
     }
 }

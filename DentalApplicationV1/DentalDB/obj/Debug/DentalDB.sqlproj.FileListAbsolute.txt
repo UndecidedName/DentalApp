@@ -13,7 +13,3 @@ D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\bin\Debug\Denta
 D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\bin\Debug\DentalDB.pdb
 D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\obj\Debug\DentalDB.dll
 D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\obj\Debug\DentalDB.pdb
-D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\obj\Debug\Model.xml
-D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\obj\Debug\refactor.xml
-D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\obj\Debug\postdeploy.sql
-D:\Carl\Projects\Personal\DentalApp\DentalApplicationV1\DentalDB\obj\Debug\predeploy.sql

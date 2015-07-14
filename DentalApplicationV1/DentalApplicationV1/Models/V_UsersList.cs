@@ -26,11 +26,10 @@ namespace DentalApplicationV1.Models
         public string EmailAddress { get; set; }
         public string FirstName { get; set; }
         public string Gender { get; set; }
-        public Nullable<int> Height { get; set; }
+        public Nullable<decimal> Height { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public string Occupation { get; set; }
-        public int UserId { get; set; }
-        public Nullable<int> Weight { get; set; }
+        public Nullable<decimal> Weight { get; set; }
     }
 }

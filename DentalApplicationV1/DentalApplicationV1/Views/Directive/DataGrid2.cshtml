@@ -29,7 +29,7 @@
                 <tr class="myTableRow"
                     ng-repeat="data in datadefinition.DataList | orderBy: criteria">
                     <td class="myTableCell cell-seqno fs-subhead display-block tc-white">
-                        <lx-dropdown position="right" from-top="true">
+                        <lx-dropdown position="{{menuPosition}}" from-top="true">
                             <button class="btn btn--m btn--black btn--icon" lx-ripple lx-dropdown-toggle>
                                 <i class="mdi mdi-dots-vertical"></i>
                             </button>
@@ -37,9 +37,9 @@
                                 <div id="menu"></div>
                                 <ul ng-repeat="menu in contextMenuLabelDefault">
                                     <li>
-                                        <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)">
+                                        <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)" ng-disabled="datadefinition.ViewOnly">
                                             <i class="{{contextMenuLabelImage[$index]}}"></i>
-                                            <span>{{menu}}</span>
+                                            <span>{{ $index === 0 ? 'Refresh':menu}}</span>
                                         </a>
                                     </li>
                                     <li ng-if="$index == 0" class="dropdown-divider"></li>

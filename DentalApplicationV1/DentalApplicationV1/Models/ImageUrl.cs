@@ -17,8 +17,8 @@ namespace DentalApplicationV1.Models
         public ImageUrl()
         {
             this.MouthTypes = new HashSet<MouthType>();
-            this.Teeth = new HashSet<Tooth>();
             this.PatientTeeth = new HashSet<PatientTooth>();
+            this.Teeth = new HashSet<Tooth>();
         }
     
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace DentalApplicationV1.Models
         public int Status { get; set; }
     
         public virtual ICollection<MouthType> MouthTypes { get; set; }
-        public virtual ICollection<Tooth> Teeth { get; set; }
         public virtual ICollection<PatientTooth> PatientTeeth { get; set; }
+        public virtual ICollection<Tooth> Teeth { get; set; }
     }
 }

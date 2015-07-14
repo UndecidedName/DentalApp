@@ -25,7 +25,7 @@ namespace DentalApplicationV1.Models
         public System.TimeSpan ToTime { get; set; }
         public int Status { get; set; }
     
-        public virtual ScheduleMaster ScheduleMaster { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ScheduleMaster ScheduleMaster { get; set; }
     }
 }

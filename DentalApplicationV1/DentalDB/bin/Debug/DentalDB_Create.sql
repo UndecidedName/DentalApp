@@ -449,30 +449,6 @@ CREATE TABLE [dbo].[DentalMenu] (
 
 
 GO
-PRINT N'Creating [dbo].[UserInformation]...';
-
-
-GO
-CREATE TABLE [dbo].[UserInformation] (
-    [Id]            INT             IDENTITY (1, 1) NOT NULL,
-    [UserId]        INT             NOT NULL,
-    [FirstName]     VARCHAR (100)   NOT NULL,
-    [MiddleName]    VARCHAR (100)   NULL,
-    [LastName]      VARCHAR (100)   NOT NULL,
-    [Gender]        CHAR (1)        NOT NULL,
-    [Height]        DECIMAL (18, 2) NULL,
-    [Weight]        DECIMAL (18, 2) NULL,
-    [BirthDate]     DATETIME        NOT NULL,
-    [Address]       VARCHAR (200)   NULL,
-    [CivilStatusId] INT             NULL,
-    [Occupation]    VARCHAR (100)   NULL,
-    [ContactNo]     VARCHAR (50)    NULL,
-    [EmailAddress]  VARCHAR (100)   NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[ScheduleDetail]...';
 
 
@@ -546,6 +522,30 @@ CREATE TABLE [dbo].[PatientTooth] (
     [rotation]       INT NULL,
     [ImageUrlId]     INT NULL,
     [Status]         INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[UserInformation]...';
+
+
+GO
+CREATE TABLE [dbo].[UserInformation] (
+    [Id]            INT             IDENTITY (1, 1) NOT NULL,
+    [UserId]        INT             NOT NULL,
+    [FirstName]     VARCHAR (100)   NOT NULL,
+    [MiddleName]    VARCHAR (100)   NULL,
+    [LastName]      VARCHAR (100)   NOT NULL,
+    [Gender]        CHAR (1)        NOT NULL,
+    [Height]        NUMERIC (18, 2) NULL,
+    [Weight]        NUMERIC (18, 2) NULL,
+    [BirthDate]     DATETIME        NOT NULL,
+    [Address]       VARCHAR (200)   NULL,
+    [CivilStatusId] INT             NULL,
+    [Occupation]    VARCHAR (100)   NULL,
+    [ContactNo]     VARCHAR (50)    NULL,
+    [EmailAddress]  VARCHAR (100)   NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -920,24 +920,6 @@ ALTER TABLE [dbo].[UserMenu]
 
 
 GO
-PRINT N'Creating FK_PatientInformation_PatientId...';
-
-
-GO
-ALTER TABLE [dbo].[UserInformation]
-    ADD CONSTRAINT [FK_PatientInformation_PatientId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
-
-
-GO
-PRINT N'Creating FK_PatientInformation_CivilStatusId...';
-
-
-GO
-ALTER TABLE [dbo].[UserInformation]
-    ADD CONSTRAINT [FK_PatientInformation_CivilStatusId] FOREIGN KEY ([CivilStatusId]) REFERENCES [dbo].[CivilStatus] ([Id]) ON DELETE SET NULL;
-
-
-GO
 PRINT N'Creating FK_ScheduleDetail_ScheduLeMasterId...';
 
 
@@ -1001,6 +983,37 @@ ALTER TABLE [dbo].[PatientTooth]
 
 
 GO
+PRINT N'Creating FK_UserInformation_PatientId...';
+
+
+GO
+ALTER TABLE [dbo].[UserInformation]
+    ADD CONSTRAINT [FK_UserInformation_PatientId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
+
+
+GO
+PRINT N'Creating FK_UserInformation_CivilStatusId...';
+
+
+GO
+ALTER TABLE [dbo].[UserInformation]
+    ADD CONSTRAINT [FK_UserInformation_CivilStatusId] FOREIGN KEY ([CivilStatusId]) REFERENCES [dbo].[CivilStatus] ([Id]) ON DELETE SET NULL;
+
+
+GO
+PRINT N'Creating [dbo].[V_UserMenu]...';
+
+
+GO
+CREATE VIEW [dbo].[V_UserMenu]
+	AS SELECT	dm.Id,
+				dm.Name,
+				dm.Description,
+				dm.ParentId,
+				dm.Url,
+				um.UserTypeId
+	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1
+GO
 PRINT N'Creating [dbo].[V_UsersList]...';
 
 
@@ -1022,22 +1035,8 @@ CREATE VIEW [dbo].[V_UsersList]
 				p.LastName,
 				p.MiddleName,
 				p.Occupation,
-				p.UserId,
 				p.Weight
 	FROM [User] as u INNER JOIN [UserInformation] as p ON u.Id = p.UserId WHERE u.Status = 1
-GO
-PRINT N'Creating [dbo].[V_UserMenu]...';
-
-
-GO
-CREATE VIEW [dbo].[V_UserMenu]
-	AS SELECT	dm.Id,
-				dm.Name,
-				dm.Description,
-				dm.ParentId,
-				dm.Url,
-				um.UserTypeId
-	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1
 GO
 -- Refactoring step to update target server with deployed transaction logs
 

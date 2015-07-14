@@ -78,6 +78,16 @@
             $scope.contextMenuLabelDefault = ['Load', 'Create', 'Edit', 'Delete', 'View'];
             $scope.contextMenuLabelImage = ['mdi mdi-reload', 'mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye'];
 
+            $interval(function () {
+                var width = window.innerWidth;
+                if (width < 650) {
+                    $scope.menuPosition = "left";
+                }
+                else {
+                    $scope.menuPosition = "right";
+                }
+            }, 100);
+
             $scope.getData = function () {
                 if ($scope.datadefinition.CurrentLength != $scope.datadefinition.DataList.length) {
                     $scope.actionForm('Load');
@@ -207,6 +217,14 @@
                             else
                                 $scope.filteredValue = "Male";
                             break;
+                        case 'Status-Approver':
+                            if (value == 0)
+                                $scope.filteredValue = "For Approval";
+                            else if (value == 1)
+                                $scope.filteredValue = "Approved";
+                            else
+                                $scope.filteredValue = "Disapproved";
+                            break;
                         default:
                             $scope.filteredValue = value;
                     }
@@ -305,6 +323,7 @@
                             $interval.cancel(stop);
                             $scope.datadefinition.CurrentLength = 0;
                             stop = undefined;
+                            $scope.processSorting($scope.criteria);
                             $scope.otheractions({ action: 'PostLoadAction' });
                             $scope.otheractions({ action: 'PostAction' });
                         }
@@ -410,7 +429,6 @@
                     .success(function (data, status) {
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataList.splice($scope.selectedIndex, 1);
-                            //$scope.closecontainer();
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostDelete' });
                             return true;

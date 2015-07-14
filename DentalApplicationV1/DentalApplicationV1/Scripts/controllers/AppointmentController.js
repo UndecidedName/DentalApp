@@ -30,10 +30,10 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, $
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Create";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Dentist Name', 'Appointment Date', 'Message', 'No'],
-            "Keys": ['DentistName', 'AppointmentDate', 'Message'],
-            "RequiredFields": ['DentistName-Dentist Name', 'AppointmentDate-Appointment Date'],
-            "Type": ['String', 'Date', 'String-Default'],
+            "Header": ['Dentist Name', 'Date', 'Time', 'Message', 'Status', 'No'],
+            "Keys": ['DentistName', 'AppointmentDate', 'AppointmenTime', 'Message', 'Status'],
+            "RequiredFields": ['DentistName-Dentist Name', 'AppointmentDate-Appointment Date', 'AppointmenTime-Appointment Time', 'Message-Message'],
+            "Type": ['String', 'Date', 'Time','String-Default', 'Status-Approver'],
             "DataList": $rootScope.appointment,
             "CurrentLength": $rootScope.appointment.length,
             "APIUrl": ['/api/Appointments?length=',//get

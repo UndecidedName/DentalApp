@@ -55,6 +55,16 @@
             $scope.contextMenuLabelDefault = ['Load', 'Delete'];
             $scope.contextMenuLabelImage = ['mdi mdi-reload', 'mdi mdi-delete'];
 
+            $interval(function () {
+                var width = window.innerWidth;
+                if (width < 650) {
+                    $scope.menuPosition = "left";
+                }
+                else {
+                    $scope.menuPosition = "right";
+                }
+            }, 100);
+
             $scope.getData = function () {
                 if ($scope.datadefinition.CurrentLength != $scope.datadefinition.DataList.length) {
                     $scope.actionForm('Load');
@@ -208,6 +218,7 @@
                             $interval.cancel(stop);
                             $scope.datadefinition.CurrentLength = 0;
                             stop = undefined;
+                            $scope.processSorting($scope.criteria);
                             $scope.otheractions({ action: 'PostLoadAction' });
                             $scope.otheractions({ action: 'PostAction' });
                         }

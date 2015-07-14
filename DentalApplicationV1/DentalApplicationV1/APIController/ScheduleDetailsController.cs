@@ -27,7 +27,8 @@ namespace DentalApplicationV1.APIController
         public IQueryable<ScheduleDetail> GetScheduleDetails(int length, int masterId)
         {
             int fetch;
-            var records = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == masterId).Count();
+            var records = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == masterId)
+                                            .Where(sd => sd.Status != 2).Count();
             if (records  > length)
             {
                 if ((records - length) > pageSize)
@@ -37,6 +38,7 @@ namespace DentalApplicationV1.APIController
 
                 return db.ScheduleDetails
                     .Where(sd => sd.ScheduleMasterId == masterId)
+                    .Where(sd => sd.Status != 2)
                     .OrderBy(sd => sd.FromTime).Skip((length)).Take(fetch);
             }
             else
@@ -99,9 +101,6 @@ namespace DentalApplicationV1.APIController
         public IHttpActionResult PostScheduleDetail(ScheduleDetail scheduleDetail)
         {
             response.status = "FAILURE";
-            bool validSchedule = false;
-            int recordNo = 0;
-            int i = 0;
             if (!ModelState.IsValid)
             {
                 response.message = "Bad request.";
@@ -110,26 +109,7 @@ namespace DentalApplicationV1.APIController
 
             try
             {
-                var scheduledTime = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == scheduleDetail.ScheduleMasterId).OrderBy(sd => sd.FromTime).ToArray();
-                if (scheduledTime.Length == 0)
-                    validSchedule = true;
-                else if (scheduleDetail.ToTime < scheduledTime[0].FromTime)
-                    validSchedule = true;
-                else if (scheduleDetail.FromTime > scheduledTime[scheduledTime.Length - 1].ToTime)
-                    validSchedule = true;
-                else
-                {
-                    for (i = 0; i < scheduledTime.Length; i++)
-                    {
-                        if (scheduleDetail.FromTime > scheduledTime[i].ToTime)
-                        {
-                            if (scheduleDetail.ToTime < scheduledTime[i + 1].FromTime)
-                                validSchedule = true;
-                        }
-                    }
-                }
-
-                if (validSchedule)
+                if (validateForSave(scheduleDetail.ScheduleMasterId, scheduleDetail.FromTime, scheduleDetail.ToTime))
                 {
                     scheduleDetail.Status = 0;
                     db.ScheduleDetails.Add(scheduleDetail);
@@ -154,7 +134,7 @@ namespace DentalApplicationV1.APIController
         public IHttpActionResult DeleteScheduleDetail(int id)
         {
             response.status = "FAILURE";
-            ScheduleDetail scheduleDetail = db.ScheduleDetails.Find(id);
+            var scheduleDetail = db.ScheduleDetails.Find(id);
             if (scheduleDetail == null)
             {
                 response.message = "Schedule not found.";
@@ -162,9 +142,17 @@ namespace DentalApplicationV1.APIController
             }
             try
             {
-                db.ScheduleDetails.Remove(scheduleDetail);
-                db.SaveChanges();
-                response.status = "SUCCESS";
+                if (validateForInactive(scheduleDetail.Status))
+                {
+                    var ScheduleDetailsHolder = db.ScheduleDetails.Find(id);
+                    ScheduleDetailsHolder.Status = 2;
+                    db.Entry(scheduleDetail).CurrentValues.SetValues(ScheduleDetailsHolder);
+                    db.Entry(scheduleDetail).State = EntityState.Modified;
+                    db.SaveChanges();
+                    response.status = "SUCCESS";
+                }
+                else
+                    response.message = "Schedule is already used.";
             }
             catch (Exception e) {
                 response.message = e.InnerException.InnerException.Message.ToString();
@@ -172,7 +160,35 @@ namespace DentalApplicationV1.APIController
 
             return Ok(response);
         }
-
+        public bool validateForInactive(int status)
+        {
+            if (status == 0)
+                return true;
+            else
+                return false;
+        }
+        public bool validateForSave(int id, TimeSpan fromTime, TimeSpan toTime)
+        {
+            var scheduledTime = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == id && sd.Status != 2).OrderBy(sd => sd.FromTime).ToArray();
+            if (scheduledTime.Length == 0)
+                return true;
+            else if (toTime < scheduledTime[0].FromTime)
+                return true;
+            else if (fromTime > scheduledTime[scheduledTime.Length - 1].ToTime)
+                return true;
+            else
+            {
+                for (int i = 0; i < scheduledTime.Length; i++)
+                {
+                    if (fromTime > scheduledTime[i].ToTime)
+                    {
+                        if (toTime < scheduledTime[i + 1].FromTime)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -181,7 +197,6 @@ namespace DentalApplicationV1.APIController
             }
             base.Dispose(disposing);
         }
-
         private bool ScheduleDetailExists(int id)
         {
             return db.ScheduleDetails.Count(e => e.Id == id) > 0;

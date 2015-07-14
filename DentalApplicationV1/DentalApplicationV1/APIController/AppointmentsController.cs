@@ -15,11 +15,34 @@ namespace DentalApplicationV1.APIController
     public class AppointmentsController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
-
+        int pageSize = 20;
         // GET: api/Appointments
         public IQueryable<Appointment> GetAppointments()
         {
             return db.Appointments;
+        }
+
+        public IQueryable<Appointment> GetScheduleMasters(int length)
+        {
+            int fetch;
+            var records = db.Appointments.Count();
+            if (records > length)
+            {
+                if ((records - length) > pageSize)
+                    fetch = pageSize;
+                else
+                    fetch = records - length;
+
+                return db.Appointments
+                    .Include(a => a.ScheduleMaster)
+                    .Include(a => a.ScheduleDetail)
+                    .OrderBy(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch);
+            }
+            else
+            {
+                IQueryable<Appointment> a = new List<Appointment>().AsQueryable();
+                return a;
+            }
         }
 
         // GET: api/Appointments/5
