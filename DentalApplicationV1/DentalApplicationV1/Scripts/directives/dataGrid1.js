@@ -27,6 +27,7 @@
                                                           If Get url parameter is more than one, separate it by using space.
                                                           (Ex. /api/Truck?length=1 &truckerId=1&truckerName=2&......)
                                             DataItem    - Contains the data of the selected item in DataGrid List
+                                            ServerData  - contains the data from the server response
                                             DataTarget  - Contains the data target for the context-menu
                                             ViewOnly    - Determine if the fields of the selected item are editable or not
                                             ContextMenu - Actions to be passed in each context menu item
@@ -66,6 +67,8 @@
                                         */
             resetdata: '&',             //function that will reset the dataitem
             showformerror: '&',         //function that will trigger when an error occured
+            contextMenuLabel: '=',
+            contextMenuLabelImage: '='
         },
         templateUrl: '/Directive/DataGrid1',
         controller: function ($scope, $http, $interval, $filter, $parse, $compile, LxProgressService) {
@@ -75,8 +78,13 @@
             $scope.criteria = $scope.datadefinition.Keys[0];
             $scope.selectedIndex = null;
             $scope.filteredValue = "";
-            $scope.contextMenuLabelDefault = ['Load', 'Create', 'Edit', 'Delete', 'View'];
-            $scope.contextMenuLabelImage = ['mdi mdi-reload', 'mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye'];
+           
+            //Set the focus on top of the page during load
+            $scope.focusOnTop = function () {
+                $(document).ready(function () {
+                    $(this).scrollTop(0);
+                });
+            };
 
             $interval(function () {
                 var width = window.innerWidth;
@@ -94,13 +102,6 @@
                     $scope.datadefinition.CurrentLength = $scope.datadefinition.DataList.length;
                 }
             }
-
-            $scope.addMenuItem = function () {
-                for (var i = 0; i < $scope.datadefinition.ContextMenu.length; i++) {
-                    $scope.contextMenuDefault.push($scope.datadefinition.ContextMenu[i]);
-                    $scope.contextMenuLabelDefault.push($scope.datadefinition.ContextMenuImage[i]);
-                }
-            };
 
             //Export data to Excel or word
             function fnExcelReport(type) {
@@ -184,7 +185,7 @@
             $scope.filterValue = function (value, index) {
                 var type = $scope.datadefinition.Type[index];
                 if (value == null)
-                    $scope.filteredValue = "None";
+                    $scope.filteredValue = "";
                 else {
                     switch (type) {
                         case 'String':
@@ -224,6 +225,16 @@
                                 $scope.filteredValue = "Approved";
                             else
                                 $scope.filteredValue = "Disapproved";
+                            break;
+                        case 'Status-Default':
+                            if (value == 0)
+                                $scope.filteredValue = "Open";
+                            else if (value == 1)
+                                $scope.filteredValue = "Closed";
+                            break;
+                        case 'Formatted-Time':
+                            var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
+                            $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
                         default:
                             $scope.filteredValue = value;
@@ -316,14 +327,35 @@
                 //It should be outside of the PreAction statement
                 if (action == 'Load') {
                     if ($scope.otheractions({ action: 'PreLoadAction' }))
-                        $scope.loadData($scope.datadefinition.DataList.length);
+                    {
+                        if ($scope.datadefinition.CurrentLength == 0)
+                            $scope.loadData($scope.datadefinition.DataList.length);
+                        else {
+                            if ($scope.datadefinition.CurrentLength == 20)
+                                $scope.datadefinition.DataList.splice(($scope.datadefinition.DataList.length - 1), 1);
+                        }
+                    }
                     //set interval to make sure that the get call returns data before triggering some actions
                     stop = $interval(function () {
                         if ($scope.datadefinition.DataList.length > 0) {
                             $interval.cancel(stop);
                             $scope.datadefinition.CurrentLength = 0;
                             stop = undefined;
-                            $scope.processSorting($scope.criteria);
+                            $scope.otheractions({ action: 'PostLoadAction' });
+                            $scope.otheractions({ action: 'PostAction' });
+                        }
+                    }, 100);
+                }
+                if (action == 'Refresh') {
+                    $scope.datadefinition.DataList = [];
+                    if ($scope.otheractions({ action: 'PreLoadAction' }))
+                        $scope.loadData(0);
+                    //set interval to make sure that the get call returns data before triggering some actions
+                    stop = $interval(function () {
+                        if ($scope.datadefinition.DataList.length > 0) {
+                            $interval.cancel(stop);
+                            $scope.datadefinition.CurrentLength = 0;
+                            stop = undefined;
                             $scope.otheractions({ action: 'PostLoadAction' });
                             $scope.otheractions({ action: 'PostAction' });
                         }
@@ -382,6 +414,8 @@
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataItem.Id = data.objParam1.Id;
                             $scope.datadefinition.DataList.push($scope.datadefinition.DataItem);
+                            $scope.datadefinition.ServerData = [];
+                            $scope.datadefinition.ServerData.push(data);
                             //$scope.closecontainer();
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostSave' });
@@ -407,6 +441,8 @@
                         if (data.status == "SUCCESS") {
                             //$scope.closecontainer();
                             LxProgressService.circular.hide();
+                            $scope.datadefinition.ServerData = [];
+                            $scope.datadefinition.ServerData.push(data);
                             $scope.otheractions({ action: 'PostUpdate' });
                             return true;
                         }
@@ -430,6 +466,8 @@
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataList.splice($scope.selectedIndex, 1);
                             LxProgressService.circular.hide();
+                            $scope.datadefinition.ServerData = [];
+                            $scope.datadefinition.ServerData.push(data);
                             $scope.otheractions({ action: 'PostDelete' });
                             return true;
                         }

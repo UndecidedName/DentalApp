@@ -4,9 +4,18 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     $scope.showForm = false;
     $scope.tabPages = ['Date'];
     $scope.selectedTab = 0;
+    
+    $scope.dentistInformation = [];
     $scope.setSelectedTab = function (index) {
         $scope.selectedTab = index;
     };
+
+    $scope.validateInput = function (input) {
+        if (input == null || input == "")
+            return true;
+        return false;
+    };
+
     //Listen the changes of the scope
     $interval(function () {
         var width = window.innerWidth;
@@ -28,7 +37,9 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     };
     $scope.closeDate = function (dialogId) {
         var promise = $interval(function () {
-            $scope.dataDefinitionMaster.DataItem.Date = $filter('date')($scope.dataDefinitionMaster.DataItem.Date, "MM/dd/yyyy");
+            $scope.dataDefinitionMaster.DataItem.Date = "";
+            $scope.dataDefinitionMaster.DataItem.DateHolder = $filter('date')($scope.dataDefinitionMaster.DataItem.DateHolder, "MM/dd/yyyy");
+            $scope.dataDefinitionMaster.DataItem.Date = $scope.dataDefinitionMaster.DataItem.DateHolder;
             $interval.cancel(promise);
             promise = undefined;
             LxDialogService.close(dialogId);
@@ -66,16 +77,16 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
         }
     };
     $scope.getDentistList = function () {
-        $http.get("/api/UserInformations?length=" + $rootScope.dentistInformation.length + "&userType=4")
+        $http.get("/api/UserInformations?length=" + $scope.dentistInformation.length + "&userType=4")
         .success(function (data, status) {
             for (var j = 0; j < data.length; j++)
-                $rootScope.dentistInformation.push(data[j]);
+                $scope.dentistInformation.push(data[j]);
             $scope.dataDefinitionDentisList = {
                 "Header": ['First Name', 'Middle Name', 'Last Name', 'Gender', 'Contact No.', 'No'],
                 "Keys": ['FirstName', 'MiddleName', 'LastName', 'Gender', 'ContactNo'],
                 "Type": ['String', 'String', 'String', 'Gender', 'Number'],
-                "DataList": $rootScope.dentistInformation,
-                "CurrentLength": $rootScope.dentistInformation.length,
+                "DataList": $scope.dentistInformation,
+                "CurrentLength": $scope.dentistInformation.length,
                 "DataItem": {},
                 "APIUrl": ['/api/UserInformations?length= &userType=4'],
                 "Dialog": "dentistList"
@@ -84,6 +95,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     };
 
     $scope.loadMaster = function () {
+        $scope.scheduleMaster = [];
         $scope.loadMasterDataGrid();
         $scope.initMasterDataGridParameters();
     };
@@ -110,19 +122,20 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Create";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Date', 'Dentist', 'No'],
-            "Keys": ['Date', 'DentistName'],
+            "Header": ['Date', 'Dentist', 'Status', 'No'],
+            "Keys": ['Date', 'DentistName', 'Status'],
             "RequiredFields": ['DentistName-Dentist Name'],
-            "Type": ['Date', 'String'],
-            "DataList": $rootScope.scheduleMaster,
-            "CurrentLength": $rootScope.scheduleMaster.length,
+            "Type": ['Date', 'String', 'Status-Default'],
+            "DataList": $scope.scheduleMaster,
+            "CurrentLength": $scope.scheduleMaster.length,
             "APIUrl": ['/api/ScheduleMasters?length=',//get
                        '/api/ScheduleMasters' //post, put, delete
             ],
             "DataItem": {},
+            "ServerData": [],
             "ViewOnly": false,
-            "ContextMenu": [],
-            "ContextMenuImage": []
+            "contextMenuLabel": ['Create', 'Edit', 'Delete', 'View'],
+            "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
         };
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
@@ -134,17 +147,20 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                 case 'PostEditAction':
                     $scope.dataDefinitionMaster.DataItem.Date = $filter('date')($scope.dataDefinitionMaster.DataItem.Date, "MM/dd/yyyy");
                     $scope.tabPages = ['Date', 'Time'];
+                    $scope.initializeStatusHolder();
                     $scope.loadDetail();
                     return true;
                 case 'PostViewAction':
                     $scope.dataDefinitionMaster.DataItem.Date = $filter('date')($scope.dataDefinitionMaster.DataItem.Date, "MM/dd/yyyy");
                     $scope.tabPages = ['Date', 'Time'];
+                    $scope.initializeStatusHolder();
                     $scope.loadDetail();
                     $scope.dataDefinitionDetail.ViewOnly = true;
                     return true;
                 case 'PostDeleteAction':
                     $scope.dataDefinitionMaster.DataItem.Date = $filter('date')($scope.dataDefinitionMaster.DataItem.Date, "MM/dd/yyyy");
                     $scope.tabPages = ['Date', 'Time'];
+                    $scope.initializeStatusHolder();
                     $scope.loadDetail();
                     $scope.dataDefinitionDetail.ViewOnly = true;
                     return true;
@@ -168,11 +184,11 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                     return true;
                 case 'PostLoadAction':
                     for (var i = $scope.dataDefinitionMaster.CurrentLength; i < $scope.dataDefinitionMaster.DataList.length; i++) {
-                        for (var j = 0; j < $rootScope.dentistInformation.length; j++) {
-                            if ($scope.dataDefinitionMaster.DataList[i].DentistId === $rootScope.dentistInformation[j].Id)
-                                $scope.dataDefinitionMaster.DataList[i].DentistName = $rootScope.dentistInformation[j].FirstName + " "
-                                                                                    + $rootScope.dentistInformation[j].MiddleName + " "
-                                                                                    + $rootScope.dentistInformation[j].LastName;
+                        for (var j = 0; j < $scope.dentistInformation.length; j++) {
+                            if ($scope.dataDefinitionMaster.DataList[i].DentistId === $scope.dentistInformation[j].Id)
+                                $scope.dataDefinitionMaster.DataList[i].DentistName = $scope.dentistInformation[j].FirstName + " "
+                                                                                    + $scope.dentistInformation[j].MiddleName + " "
+                                                                                    + $scope.dentistInformation[j].LastName;
                         }
                     }
                     return true;
@@ -184,8 +200,11 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             $scope.dataDefinitionMaster.DataItem = {
                 Id: null,
                 Date: $filter('date')(new Date() - 1, "MM/dd/yyyy"),
+                DateHolder: $filter('date')(new Date() - 1, "MM/dd/yyyy"),
                 DentistId: null,
-                DentistName: null
+                DentistName: null,
+                Status: 0,
+                StatusHolder:null
             }
         };
         $scope.showFormErrorMaster = function (message) {
@@ -195,8 +214,10 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
         $scope.closeForm = function () {
             $scope.showForm = false;
             var element = document.getElementById("grid2");
-            element.parentNode.removeChild(element);
-            $rootScope.scheduleDetail = [];
+            if (element != null) {
+                element.parentNode.removeChild(element);
+                $scope.ScheduleDetail = [];
+            }
         };
         //Show main form
         $scope.showMainForm = function () {
@@ -211,9 +232,19 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             $scope.actionCreateMaster = true;
             $scope.showForm = true;
         };
+        $scope.initializeStatusHolder = function () {
+            switch ($scope.dataDefinitionMaster.DataItem.Status) {
+                case 0:
+                    $scope.dataDefinitionMaster.DataItem.StatusHolder = "Open";
+                    break;
+                default: $scope.dataDefinitionMaster.DataItem.StatusHolder = "Closed";
+                    break;
+            }
+        };
     };
 
     $scope.loadDetail = function () {
+        $scope.scheduleDetail = [];
         $scope.loadDetailDataGrid();
         $scope.initDetailDataGridParameters();
     };
@@ -230,16 +261,17 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     $scope.initDetailDataGridParameters = function () {
         $scope.actionCreateDetail = false;
         $scope.dataDefinitionDetail = {
-            "Header": ['Start Time', 'End Time', 'No'],
-            "Keys": ['FromTime', 'ToTime'],
-            "Type": ['Formatted-Time', 'Formatted-Time'],
-            "DataList": $rootScope.scheduleDetail,
+            "Header": ['Start Time', 'End Time', 'Status', 'No'],
+            "Keys": ['FromTime', 'ToTime', 'Status'],
+            "Type": ['Formatted-Time', 'Formatted-Time', 'Status-Default'],
+            "DataList": $scope.scheduleDetail,
             "DataItem": {},
             "ViewOnly": false,
-            "CurrentLength": $rootScope.scheduleDetail.length,
+            "CurrentLength": $scope.scheduleDetail.length,
             "APIUrl":['/api/ScheduleDetails?length= &masterId=' + $scope.dataDefinitionMaster.DataItem.Id,//get
                        '/api/ScheduleDetails' //post, put, delete
-                    ]
+            ],
+            "ServerData": []
         };
         //Do Overriding or Overloading in this function
         $scope.otherActionsDetail = function (action) {
@@ -255,12 +287,17 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                     else
                         return false;
                 case 'PreSave':
-                    return $scope.validateInput();
+                    return $scope.validateTime();
                 case 'PostSave':
                     $scope.resetDetailItem();
+                    $scope.initializeDataGridMasterStatus();
                     return true;
                 case 'PostDelete':
                     $scope.resetDetailItem();
+                    $scope.initializeDataGridMasterStatus();
+                    return true;
+                case 'PostSubmit':
+                    return true;
                 default: return true;
             }
         };
@@ -269,7 +306,8 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                 Id: null,
                 ScheduleMasterId: null,
                 FromTime: $filter('date')((new Date() - 1), "hh:mm a"),
-                ToTime: $filter('date')((new Date() - 1), "hh:mm a")
+                ToTime: $filter('date')((new Date() - 1), "hh:mm a"),
+                Status: 0
             }
             $scope.fromSeconds = new Date((new Date() - 1)).getTime();
             $scope.toSeconds = new Date((new Date() - 1)).getTime();
@@ -280,17 +318,26 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             $scope.dataDefinitionDetail.DataItem.FromTime = $filter('date')(new Date($scope.fromSeconds), "hh:mm a");
             $scope.dataDefinitionDetail.DataItem.ToTime = $filter('date')(new Date($scope.toSeconds), "hh:mm a");
         };
-        //Submit Detail
         $scope.submitDetail = function () {
             $scope.submitButtonListenerDetail = true;
         };
-
-        $scope.validateInput = function () {
+        $scope.initializeDataGridMasterStatus = function () {
+            for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
+                if ($scope.dataDefinitionMaster.DataItem.Id == $scope.dataDefinitionMaster.DataList[i].Id) {
+                    $scope.dataDefinitionMaster.DataList[i].Status = $scope.dataDefinitionDetail.ServerData[0].intParam1;
+                    $scope.dataDefinitionMaster.DataItem.Status = $scope.dataDefinitionMaster.DataList[i].Status;
+                    $scope.initializeStatusHolder();
+                    i = $scope.dataDefinitionMaster.DataList.length;
+                }
+            }
+        }
+        $scope.validateTime = function () {
             if ($scope.fromSeconds < $scope.toSeconds) {
                 $scope.dataDefinitionDetail.DataItem.FromTime = $filter('date')(new Date($scope.fromSeconds), "HH:mm")
                 $scope.dataDefinitionDetail.DataItem.ToTime = $filter('date')(new Date($scope.toSeconds), "HH:mm")
                 $scope.dataDefinitionDetail.DataItem.ScheduleMasterId = $scope.dataDefinitionMaster.DataItem.Id;
                 delete $scope.dataDefinitionDetail.DataItem.Id;
+                $scope.dataDefinitionDetail.DataItem.Status = 0;
                 return true;
             } else {
                 LxNotificationService.error("Start time must be less than the end time.");

@@ -11,6 +11,8 @@
     <EntitySetMapping Name="Appointments">
       <EntityTypeMapping TypeName="DentalDBModel.Appointment">
         <MappingFragment StoreEntitySet="Appointment">
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ScheduleDetailId" ColumnName="ScheduleDetailId" />
           <ScalarProperty Name="ScheduleMasterId" ColumnName="ScheduleMasterId" />
@@ -256,6 +258,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="DentalDBModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Username" ColumnName="Username" />

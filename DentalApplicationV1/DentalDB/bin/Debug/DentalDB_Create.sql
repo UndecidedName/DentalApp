@@ -392,22 +392,6 @@ CREATE TABLE [dbo].[PatientDiagnosisHistoryDetail] (
 
 
 GO
-PRINT N'Creating [dbo].[Appointment]...';
-
-
-GO
-CREATE TABLE [dbo].[Appointment] (
-    [Id]               INT           IDENTITY (1, 1) NOT NULL,
-    [PatientId]        INT           NULL,
-    [Message]          VARCHAR (500) NOT NULL,
-    [ScheduleMasterId] INT           NOT NULL,
-    [ScheduleDetailId] INT           NULL,
-    [Status]           INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[PatientDiagnosisHistoryMaster]...';
 
 
@@ -498,21 +482,6 @@ CREATE TABLE [dbo].[CivilStatus] (
 
 
 GO
-PRINT N'Creating [dbo].[User]...';
-
-
-GO
-CREATE TABLE [dbo].[User] (
-    [Id]         INT           IDENTITY (1, 1) NOT NULL,
-    [UserTypeId] INT           NOT NULL,
-    [Username]   VARCHAR (200) NOT NULL,
-    [Password]   VARCHAR (200) NOT NULL,
-    [Status]     INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[UserInformation]...';
 
 
@@ -546,6 +515,40 @@ CREATE TABLE [dbo].[UserMenu] (
     [UserTypeId] INT NOT NULL,
     [MenuId]     INT NOT NULL,
     [Status]     INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[User]...';
+
+
+GO
+CREATE TABLE [dbo].[User] (
+    [Id]         INT           IDENTITY (1, 1) NOT NULL,
+    [UserTypeId] INT           NOT NULL,
+    [Username]   VARCHAR (200) NOT NULL,
+    [Password]   VARCHAR (200) NOT NULL,
+    [Url]        VARCHAR (50)  NULL,
+    [Status]     INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Appointment]...';
+
+
+GO
+CREATE TABLE [dbo].[Appointment] (
+    [Id]               INT           IDENTITY (1, 1) NOT NULL,
+    [PatientId]        INT           NULL,
+    [Message]          VARCHAR (500) NOT NULL,
+    [ScheduleMasterId] INT           NOT NULL,
+    [ScheduleDetailId] INT           NULL,
+    [Remarks]          VARCHAR (500) NULL,
+    [TransactionDate]  DATETIME      NULL,
+    [Status]           INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -740,21 +743,21 @@ ALTER TABLE [dbo].[CivilStatus]
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[User]....';
-
-
-GO
-ALTER TABLE [dbo].[User]
-    ADD DEFAULT 0 FOR [Status];
-
-
-GO
 PRINT N'Creating Default Constraint on [dbo].[UserMenu]....';
 
 
 GO
 ALTER TABLE [dbo].[UserMenu]
     ADD DEFAULT 1 FOR [Status];
+
+
+GO
+PRINT N'Creating Default Constraint on [dbo].[User]....';
+
+
+GO
+ALTER TABLE [dbo].[User]
+    ADD DEFAULT 0 FOR [Status];
 
 
 GO
@@ -893,33 +896,6 @@ ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
 
 
 GO
-PRINT N'Creating FK_Appointment_PatientId...';
-
-
-GO
-ALTER TABLE [dbo].[Appointment]
-    ADD CONSTRAINT [FK_Appointment_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
-
-
-GO
-PRINT N'Creating FK_Appointment_ScheduleMasterId...';
-
-
-GO
-ALTER TABLE [dbo].[Appointment]
-    ADD CONSTRAINT [FK_Appointment_ScheduleMasterId] FOREIGN KEY ([ScheduleMasterId]) REFERENCES [dbo].[ScheduleMaster] ([Id]);
-
-
-GO
-PRINT N'Creating FK_Appointment_ScheduleDetailId...';
-
-
-GO
-ALTER TABLE [dbo].[Appointment]
-    ADD CONSTRAINT [FK_Appointment_ScheduleDetailId] FOREIGN KEY ([ScheduleDetailId]) REFERENCES [dbo].[ScheduleDetail] ([Id]);
-
-
-GO
 PRINT N'Creating FK_PatientDiagnosisHistoryMaster_PatientId...';
 
 
@@ -956,15 +932,6 @@ ALTER TABLE [dbo].[PatientMedicalHistory]
 
 
 GO
-PRINT N'Creating FK_User_UserTypeId...';
-
-
-GO
-ALTER TABLE [dbo].[User]
-    ADD CONSTRAINT [FK_User_UserTypeId] FOREIGN KEY ([UserTypeId]) REFERENCES [dbo].[UserType] ([Id]) ON DELETE CASCADE;
-
-
-GO
 PRINT N'Creating FK_UserInformation_PatientId...';
 
 
@@ -998,6 +965,42 @@ PRINT N'Creating Fk_UserMenu_MenuId...';
 GO
 ALTER TABLE [dbo].[UserMenu]
     ADD CONSTRAINT [Fk_UserMenu_MenuId] FOREIGN KEY ([MenuId]) REFERENCES [dbo].[DentalMenu] ([Id]);
+
+
+GO
+PRINT N'Creating FK_User_UserTypeId...';
+
+
+GO
+ALTER TABLE [dbo].[User]
+    ADD CONSTRAINT [FK_User_UserTypeId] FOREIGN KEY ([UserTypeId]) REFERENCES [dbo].[UserType] ([Id]) ON DELETE CASCADE;
+
+
+GO
+PRINT N'Creating FK_Appointment_PatientId...';
+
+
+GO
+ALTER TABLE [dbo].[Appointment]
+    ADD CONSTRAINT [FK_Appointment_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
+
+
+GO
+PRINT N'Creating FK_Appointment_ScheduleMasterId...';
+
+
+GO
+ALTER TABLE [dbo].[Appointment]
+    ADD CONSTRAINT [FK_Appointment_ScheduleMasterId] FOREIGN KEY ([ScheduleMasterId]) REFERENCES [dbo].[ScheduleMaster] ([Id]);
+
+
+GO
+PRINT N'Creating FK_Appointment_ScheduleDetailId...';
+
+
+GO
+ALTER TABLE [dbo].[Appointment]
+    ADD CONSTRAINT [FK_Appointment_ScheduleDetailId] FOREIGN KEY ([ScheduleDetailId]) REFERENCES [dbo].[ScheduleDetail] ([Id]);
 
 
 GO

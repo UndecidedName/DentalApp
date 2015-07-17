@@ -1,0 +1,29 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       [dbo].[Appointment]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Table rebuild
+       [dbo].[Appointment] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_Appointment_PatientId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleMasterId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleDetailId] (Foreign Key)
+     Create
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_Appointment_PatientId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleMasterId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleDetailId] (Foreign Key)

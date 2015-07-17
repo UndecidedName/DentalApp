@@ -45,7 +45,7 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
         LxNotificationService.info('Dialog scroll end!');
     };
 
-    $scope.invalidateInput = function (input) {
+    $scope.validateInput = function (input) {
         if (input == null || input == "")
             return true;
         return false;

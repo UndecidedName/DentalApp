@@ -19,7 +19,7 @@ namespace DentalApplicationV1.APIController
     {
         private DentalDBEntities db = new DentalDBEntities();
         private int pageSize = 20;
-        Response response = new Response();
+        private Response response = new Response();
         // GET: api/ScheduleMasters
         public IQueryable<ScheduleMaster> GetScheduleMasters()
         {
@@ -43,6 +43,29 @@ namespace DentalApplicationV1.APIController
                     .OrderBy(sm => sm.Date).Skip((length)).Take(fetch);
             }
             else{
+                IQueryable<ScheduleMaster> sm = new List<ScheduleMaster>().AsQueryable();
+                return sm;
+            }
+        }
+
+        // GET: api/ScheduleMasters?length=1&status=0
+        public IQueryable<ScheduleMaster> GetScheduleMasters(int length, int status)
+        {
+            int fetch;
+            var records = db.ScheduleMasters.Where(sm => sm.Status == status).Count();
+            if (records > length)
+            {
+                if ((records - length) > pageSize)
+                    fetch = pageSize;
+                else
+                    fetch = records - length;
+
+                return db.ScheduleMasters.Where(sm => sm.Status == status)
+                    .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                    .OrderBy(sm => sm.Date).Skip((length)).Take(fetch);
+            }
+            else
+            {
                 IQueryable<ScheduleMaster> sm = new List<ScheduleMaster>().AsQueryable();
                 return sm;
             }
@@ -115,9 +138,7 @@ namespace DentalApplicationV1.APIController
             try
             {
                 if(validateForSave(scheduleMaster.Date, scheduleMaster.DentistId)){
-                    scheduleMaster.Status = 0;
-                    db.ScheduleMasters.Add(scheduleMaster);
-                    db.SaveChanges();
+                    saveScheduleMaster(scheduleMaster, "dummy");
                     response.status = "SUCCESS";
                     response.objParam1 = scheduleMaster;
                 }
@@ -147,12 +168,7 @@ namespace DentalApplicationV1.APIController
             {
                 if (validateForInactive(id))
                 {
-                    var scheduleMasterEdited = db.ScheduleMasters.Find(id);
-                    //Set status to 2 for inactive
-                    scheduleMasterEdited.Status = 2;
-                    db.Entry(scheduleMaster).CurrentValues.SetValues(scheduleMasterEdited);
-                    db.Entry(scheduleMaster).State = EntityState.Modified;
-                    db.SaveChanges();
+                    inactivateScheduleMaster(id);
                     response.status = "SUCCESS";
                 }
                 else
@@ -172,7 +188,6 @@ namespace DentalApplicationV1.APIController
             }
             base.Dispose(disposing);
         }
-
         private bool validateForInactive(int id){ 
             var scheduleMasterDetailEdited = db.ScheduleDetails.Where(sde => sde.ScheduleMasterId == id).ToArray();
             for (var i = 0; i < scheduleMasterDetailEdited.Length; i++)
@@ -194,6 +209,38 @@ namespace DentalApplicationV1.APIController
         private bool ScheduleMasterExists(int id)
         {
             return db.ScheduleMasters.Count(e => e.Id == id) > 0;
+        }
+        public void inactivateScheduleMaster(int id)
+        {
+            ScheduleMaster scheduleMaster = db.ScheduleMasters.Find(id);
+            var scheduleMasterEdited = db.ScheduleMasters.Find(id);
+            //Set status to 2 for inactive
+            scheduleMasterEdited.Status = 2;
+            db.Entry(scheduleMaster).CurrentValues.SetValues(scheduleMasterEdited);
+            db.Entry(scheduleMaster).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+        public void updateScheduleMasterStatus(int id, ref int status)
+        {
+            //get all schedule details that are not cancelled
+            var countScheduleDetail = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == id && sd.Status != 2).ToArray();
+            //get all closed schedule details
+            var scheduleDetail = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == id && sd.Status == 1).ToArray();
+            ScheduleMaster scheduleMaster = db.ScheduleMasters.Find(id);
+            ScheduleMaster scheduleMasterEdited = db.ScheduleMasters.Find(id);
+            if (scheduleDetail.Length == countScheduleDetail.Length)
+                scheduleMasterEdited.Status = 1;
+            else
+                scheduleMasterEdited.Status = 0;
+            db.Entry(scheduleMaster).CurrentValues.SetValues(scheduleMasterEdited);
+            db.Entry(scheduleMaster).State = EntityState.Modified;
+            db.SaveChanges();
+            status = (int)scheduleMaster.Status;
+        }
+        public void saveScheduleMaster(ScheduleMaster scheduleMaster, string dummy)
+        {
+            db.ScheduleMasters.Add(scheduleMaster);
+            db.SaveChanges();
         }
     }
 }

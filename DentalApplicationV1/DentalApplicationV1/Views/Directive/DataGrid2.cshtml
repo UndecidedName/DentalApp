@@ -8,7 +8,9 @@
         <table class="myTableContent dir-export" id="export">
             <thead>
                 <tr class="myTableRow-header" style="text-align:left">
-                    <th></th>
+                    <th class="myTableCell cell-seqno fs-subhead display-block tc-white" ng-click="actionForm('Refresh')">
+                        <i class="icon icon--s icon--white icon--flat mdi mdi-reload" lx-tooltip="Refresh" tooltip-position="bottom"></i>
+                    </th>
                     <th class="myTableCell cell-seqno fs-subhead display-block tc-white">
                         <strong>{{datadefinition.Header[datadefinition.Header.length - 1]}}</strong>
                     </th>
@@ -39,10 +41,9 @@
                                     <li>
                                         <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)" ng-disabled="datadefinition.ViewOnly">
                                             <i class="{{contextMenuLabelImage[$index]}}"></i>
-                                            <span>{{ $index === 0 ? 'Refresh':menu}}</span>
+                                            <span>{{menu}}</span>
                                         </a>
                                     </li>
-                                    <li ng-if="$index == 0" class="dropdown-divider"></li>
                                 </ul>
                             </lx-dropdown-menu>
                         </lx-dropdown>

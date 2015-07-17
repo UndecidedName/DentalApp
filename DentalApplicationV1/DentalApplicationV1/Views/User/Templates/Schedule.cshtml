@@ -10,7 +10,7 @@
     <div ng-show="selectedTab === 0">
         <div flex-container="row" flex-gutter="24" ng-show="selectedTab === 0" style="padding-left:20px; padding-right:20px;">
             <div flex-item>
-                <lx-text-field label="From" error="invalidateInput(dataDefinitionMaster.DataItem.FromDate)">
+                <lx-text-field label="From" error="validateInput(dataDefinitionMaster.DataItem.Date)">
                     <input type="text"
                            name="Date"
                            ng-model="dataDefinitionMaster.DataItem.Date"
@@ -20,13 +20,21 @@
                 </lx-text-field>
             </div>
             <div flex-item>
-                <lx-text-field label="Dentist" error="invalidateInput(dataDefinitionMaster.DataItem.DentistName)" style="{{setStyle}}">
+                <lx-text-field label="Dentist" error="validateInput(dataDefinitionMaster.DataItem.DentistName)" style="{{setStyle}}">
                     <input type="text"
                            name="Dentist"
                            ng-model="dataDefinitionMaster.DataItem.DentistName"
                            pattern=".{4,50}"
                            ng-disabled="dataDefinitionMaster.ViewOnly"
                            ng-click="showDialog('dentistList', '')">
+                </lx-text-field>
+            </div>
+            <div flex-item>
+                <lx-text-field label="Status">
+                    <input type="text"
+                           name="Status"
+                           ng-model="dataDefinitionMaster.DataItem.StatusHolder"
+                           ng-disabled="true" />
                 </lx-text-field>
             </div>
         </div>
@@ -36,7 +44,7 @@
             </div>
             <div class="dialog__content">
                 <div style="overflow-x:auto;">
-                    <time-date-picker ng-model="dataDefinitionMaster.DataItem.Date" display-mode="date" orientation="false" on-save="saveFn(dataDefinitionMaster.DataItem.Date); closeDate('Date')"></time-date-picker>
+                    <time-date-picker ng-model="dataDefinitionMaster.DataItem.DateHolder" display-mode="date" orientation="false" on-save="saveFn(dataDefinitionMaster.DataItem.DateHolder); closeDate('Date')"></time-date-picker>
                 </div>
             </div>
             <div class="dialog__actions">
@@ -51,7 +59,7 @@
                 </div>
             </div>
             <div class="dialog__content">
-                <dir-data-modal1 datadefinition="dataDefinitionDentisList" otheractions="otherActionsDentisList(action)" closecontainer="closeDentistModal(dialog)"></dir-data-modal1>
+                <dir-data-modal1 datadefinition="dataDefinitionDentisList" otheractions="" closecontainer="closeDentistModal(dialog)"></dir-data-modal1>
             </div>
             <div class="dialog__actions">
             </div>
@@ -64,7 +72,7 @@
         <div id="progress"></div>
         <div flex-container="row" flex-gutter="24" ng-show="selectedTab === 1" style="padding-left:20px; padding-right:20px;">
             <div flex-item>
-                <lx-text-field label="From" error="invalidateInput(dataDefinitionDetail.DataItem.FromTime)">
+                <lx-text-field label="From" error="validateInput(dataDefinitionDetail.DataItem.FromTime)">
                     <input type="text"
                            name="From"
                            ng-model="dataDefinitionDetail.DataItem.FromTime"
@@ -74,7 +82,7 @@
                 </lx-text-field>
             </div>
             <div flex-item>
-                <lx-text-field label="To" error="invalidateInput(dataDefinitionDetail.DataItem.ToTime)">
+                <lx-text-field label="To" error="validateInput(dataDefinitionDetail.DataItem.ToTime)">
                     <input type="text"
                            name="To"
                            ng-model="dataDefinitionDetail.DataItem.ToTime"

@@ -825,6 +825,7 @@
     <Content Include="libs\velocity\velocity.min.js" />
     <Content Include="libs\velocity\velocity.ui.js" />
     <Content Include="libs\velocity\velocity.ui.min.js" />
+    <Content Include="Scripts\controllers\AppointmentApprovalController.js" />
     <Content Include="Scripts\controllers\AppointmentController.js" />
     <Content Include="Scripts\controllers\HomeController.js" />
     <Content Include="Scripts\controllers\NotificationController.js" />
@@ -928,7 +929,6 @@
     <Compile Include="Models\PatientTooth.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Receiver.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\ScheduleDetail.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
@@ -1429,8 +1429,8 @@
     <Content Include="assets\skin\default_skin\less\theme_variables.less" />
     <Content Include="Views\Directive\DataModal1.cshtml" />
     <Content Include="Views\Directive\DataGrid2.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_DataTableLayout2.cshtml" />
+    <Content Include="Views\User\Templates\AppointmentApproval.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

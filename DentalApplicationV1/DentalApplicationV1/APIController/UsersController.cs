@@ -18,9 +18,8 @@ namespace DentalApplicationV1.APIController
     public class UsersController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
-        string header, body, footer;
-        Response response = new Response();
-        MyGenerator generator = new MyGenerator();
+        private Response response = new Response();
+        private MyGenerator generator = new MyGenerator();
 
         // GET: api/Users
         public IQueryable<User> GetUsers()

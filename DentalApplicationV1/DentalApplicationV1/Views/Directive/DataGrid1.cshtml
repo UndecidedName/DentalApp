@@ -8,7 +8,8 @@
         <table class="myTableContent dir-export" id="export">
             <thead>
                 <tr class="myTableRow-header" style="text-align:left">
-                    <th class="myTableCell cell-seqno fs-subhead display-block tc-white">
+                    <th class="myTableCell cell-seqno fs-subhead display-block tc-white" ng-click="actionForm('Refresh')">
+                        <i class="icon icon--s icon--white icon--flat mdi mdi-reload" lx-tooltip="Refresh" tooltip-position="bottom"></i>
                     </th>
                     <th class="myTableCell cell-seqno fs-subhead display-block tc-white">
                         <strong>{{datadefinition.Header[datadefinition.Header.length - 1]}}</strong>
@@ -36,14 +37,13 @@
                             </button>
                             <lx-dropdown-menu>
                                 <div id="menu"></div>
-                                <ul ng-repeat="menu in contextMenuLabelDefault">
+                                <ul ng-repeat="menu in datadefinition.contextMenuLabel">
                                     <li>
                                         <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)">
-                                            <i class="{{contextMenuLabelImage[$index]}}"></i>
-                                            <span>{{ $index === 0 ? 'Refresh':menu}}</span>
+                                            <i class="{{datadefinition.contextMenuLabelImage[$index]}}"></i>
+                                            <span>{{menu}}</span>
                                         </a>
                                     </li>
-                                    <li ng-if="$index == 0" class="dropdown-divider"></li>
                                 </ul>
                             </lx-dropdown-menu>
                         </lx-dropdown>

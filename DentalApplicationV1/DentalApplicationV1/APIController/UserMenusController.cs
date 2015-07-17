@@ -16,7 +16,7 @@ namespace DentalApplicationV1.APIController
     public class UserMenusController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
-        Response response = new Response();
+        private Response response = new Response();
         // GET: api/UserMenus
         public IQueryable<UserMenu> GetUserMenus()
         {

@@ -17,6 +17,7 @@ namespace DentalWebApp.Controllers
         }
         public ActionResult Templates(string id)
         {
+            
             switch (id.ToLower()) { 
                 case "header":
                     return PartialView("~/Views/User/Templates/Header.cshtml");
@@ -30,6 +31,8 @@ namespace DentalWebApp.Controllers
                     return PartialView("~/Views/User/Templates/Setting.cshtml");
                 case "schedule":
                     return PartialView("~/Views/User/Templates/Schedule.cshtml");
+                case "appointmentapproval":
+                    return PartialView("~/Views/User/Templates/AppointmentApproval.cshtml");
                 default: throw new Exception("template not known");
             }
         }

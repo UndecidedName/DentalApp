@@ -78,14 +78,14 @@
         <div class="dialog__content">
             <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
                 <div flex-item>
-                    <lx-text-field label="Username" error="invalidateInput(userInfo.username)">
+                    <lx-text-field label="Username" error="validateInput(userInfo.username)">
                         <input type="text" name="Username" ng-model="userInfo.username" pattern=".{4,50}">
                     </lx-text-field>
                 </div>
             </div>
             <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
                 <div flex-item>
-                    <lx-text-field label="Password" error="invalidateInput(userInfo.password)">
+                    <lx-text-field label="Password" error="validateInput(userInfo.password)">
                         <input type="password" name="Password" ng-model="userInfo.password" pattern=".{4,50}">
                     </lx-text-field>
                 </div>

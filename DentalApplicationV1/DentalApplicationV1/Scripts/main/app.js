@@ -4,10 +4,6 @@
     $rootScope.isLogged = false;
     $rootScope.user = null;
     $rootScope.appName = "Smile Fairies Dental Suites";
-    $rootScope.scheduleMaster = [];
-    $rootScope.scheduleDetail = [];
-    $rootScope.dentistInformation = [];
-    $rootScope.appointment = [];
 
     //Check if user is already logged
     $http.get("/api/Users/userinfo?userinfo=none&request=CheckIfLogged")
@@ -79,10 +75,15 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "User/Templates/Appointment",
         controller: "AppointmentController"
     })
-
+    
     .state('Schedule', {
         url: "/User/Index",
         templateUrl: "User/Templates/Schedule",
         controller: "ScheduleController"
+    })
+    .state('AppointmentApproval', {
+        url: "/User/Index",
+        templateUrl: "User/Templates/AppointmentApproval",
+        controller: "AppointmentApprovalController"
     })
 });

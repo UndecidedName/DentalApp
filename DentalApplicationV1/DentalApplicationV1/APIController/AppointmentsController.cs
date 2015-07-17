@@ -9,23 +9,27 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DentalApplicationV1.Models;
+using YbanezNacua.Models;
 
 namespace DentalApplicationV1.APIController
 {
     public class AppointmentsController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
-        int pageSize = 20;
+        private ScheduleDetailsController ScheduleDetail = new ScheduleDetailsController();
+        private ScheduleMastersController ScheduleMaster = new ScheduleMastersController();
+        private Response response = new Response();
+        private int pageSize = 20;
         // GET: api/Appointments
         public IQueryable<Appointment> GetAppointments()
         {
             return db.Appointments;
         }
 
-        public IQueryable<Appointment> GetScheduleMasters(int length)
+        public IQueryable<Appointment> GetAppointment(int length, int userId)
         {
             int fetch;
-            var records = db.Appointments.Count();
+            var records = db.Appointments.Where(a => a.PatientId == userId && a.Status != 3).Count();
             if (records > length)
             {
                 if ((records - length) > pageSize)
@@ -34,8 +38,10 @@ namespace DentalApplicationV1.APIController
                     fetch = records - length;
 
                 return db.Appointments
+                    .Where(a => a.PatientId == userId && a.Status != 3)
                     .Include(a => a.ScheduleMaster)
                     .Include(a => a.ScheduleDetail)
+                    .Include(a => a.ScheduleMaster.UserInformation)
                     .OrderBy(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch);
             }
             else
@@ -62,14 +68,17 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAppointment(int id, Appointment appointment)
         {
+            response.status = "FAILURE";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                response.message = "Bad request.";
+                return Ok(response);
             }
 
             if (id != appointment.Id)
             {
-                return BadRequest();
+                response.message = "Appointment not found.";
+                return Ok(response);
             }
 
             db.Entry(appointment).State = EntityState.Modified;
@@ -77,51 +86,81 @@ namespace DentalApplicationV1.APIController
             try
             {
                 db.SaveChanges();
+                response.status = "SUCCESS";
+                response.objParam1 = appointment;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!AppointmentExists(id))
                 {
-                    return NotFound();
+                    response.message = "Appointment not found.";
                 }
                 else
                 {
-                    throw;
+                    response.message = e.InnerException.InnerException.Message.ToString();
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
 
         // POST: api/Appointments
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult PostAppointment(Appointment appointment)
         {
+            int scheduleMasterStatus = 0;
+            response.status = "FAILURE";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                response.message = "Bad request.";
+                return Ok(response);
+            }
+            try
+            {
+                //save appointment
+                saveAppointment(appointment, "dummy");
+                //close schedule detail status
+                ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 1);
+                //update schedule master status
+                ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+                response.objParam1 = appointment;
+                response.status = "SUCCESS";
+            }
+            catch (Exception e) {
+                response.message = e.InnerException.InnerException.Message.ToString();
             }
 
-            db.Appointments.Add(appointment);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = appointment.Id }, appointment);
+            return Ok(response);
         }
 
         // DELETE: api/Appointments/5
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult DeleteAppointment(int id)
         {
+            int scheduleMasterStatus = 0;
+            response.status = "FAILURE";
             Appointment appointment = db.Appointments.Find(id);
             if (appointment == null)
             {
-                return NotFound();
+                response.message = "Appointment not found.";
+                return Ok(response);
+            }
+            try
+            {
+                //cancel appointment status
+                updateAppointmentStatus(id, 3);
+                //open schedule detail status
+                ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
+                //update schedule master status
+                ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+                response.status = "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                response.message = e.InnerException.InnerException.Message.ToString();
             }
 
-            db.Appointments.Remove(appointment);
-            db.SaveChanges();
-
-            return Ok(appointment);
+            return Ok(response);
         }
 
         protected override void Dispose(bool disposing)
@@ -136,6 +175,21 @@ namespace DentalApplicationV1.APIController
         private bool AppointmentExists(int id)
         {
             return db.Appointments.Count(e => e.Id == id) > 0;
+        }
+
+        public void saveAppointment(Appointment appointment, string dummy)
+        {
+            db.Appointments.Add(appointment);
+            db.SaveChanges();
+        }
+
+        public void updateAppointmentStatus(int id, int status) {
+            Appointment appointment = db.Appointments.Find(id);
+            Appointment appointmentEdited = db.Appointments.Find(id);
+            appointmentEdited.Status = status;
+            db.Entry(appointment).CurrentValues.SetValues(appointmentEdited);
+            db.Entry(appointment).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

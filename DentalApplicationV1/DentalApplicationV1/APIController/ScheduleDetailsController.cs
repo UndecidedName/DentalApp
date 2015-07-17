@@ -16,8 +16,9 @@ namespace DentalApplicationV1.APIController
     public class ScheduleDetailsController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
+        private ScheduleMastersController ScheduleMaster = new ScheduleMastersController();
         private int pageSize = 20;
-        Response response = new Response();
+        private Response response = new Response();
         // GET: api/ScheduleDetails
         public IQueryable<ScheduleDetail> GetScheduleDetails()
         {
@@ -39,6 +40,31 @@ namespace DentalApplicationV1.APIController
                 return db.ScheduleDetails
                     .Where(sd => sd.ScheduleMasterId == masterId)
                     .Where(sd => sd.Status != 2)
+                    .OrderBy(sd => sd.FromTime).Skip((length)).Take(fetch);
+            }
+            else
+            {
+                IQueryable<ScheduleDetail> sd = new List<ScheduleDetail>().AsQueryable();
+                return sd;
+            }
+        }
+
+        // GET: api/ScheduleDetails?length=0&masterId=1&status=0
+        public IQueryable<ScheduleDetail> GetScheduleDetails(int length, int masterId, int status)
+        {
+            int fetch;
+            var records = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == masterId)
+                                            .Where(sd => sd.Status == status).Count();
+            if (records > length)
+            {
+                if ((records - length) > pageSize)
+                    fetch = pageSize;
+                else
+                    fetch = records - length;
+
+                return db.ScheduleDetails
+                    .Where(sd => sd.ScheduleMasterId == masterId)
+                    .Where(sd => sd.Status == status)
                     .OrderBy(sd => sd.FromTime).Skip((length)).Take(fetch);
             }
             else
@@ -100,6 +126,7 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(ScheduleDetail))]
         public IHttpActionResult PostScheduleDetail(ScheduleDetail scheduleDetail)
         {
+            int scheduleMasterStatus = 0;
             response.status = "FAILURE";
             if (!ModelState.IsValid)
             {
@@ -111,11 +138,14 @@ namespace DentalApplicationV1.APIController
             {
                 if (validateForSave(scheduleDetail.ScheduleMasterId, scheduleDetail.FromTime, scheduleDetail.ToTime))
                 {
-                    scheduleDetail.Status = 0;
-                    db.ScheduleDetails.Add(scheduleDetail);
-                    db.SaveChanges();
+                    //save scheduleDetail
+                    saveScheduleDetail(scheduleDetail, "dummy");
+                    //Update schedule master if closed/open
+                    ScheduleMaster.updateScheduleMasterStatus(scheduleDetail.ScheduleMasterId, ref scheduleMasterStatus);
+                    ScheduleMaster scheduleMaster = db.ScheduleMasters.Find(scheduleDetail.ScheduleMasterId);
                     response.status = "SUCCESS";
                     response.objParam1 = scheduleDetail;
+                    response.intParam1 = scheduleMasterStatus;
                 }
                 else
                     response.message = "Time scheduled is conflict to other schedule.";
@@ -133,6 +163,7 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(ScheduleDetail))]
         public IHttpActionResult DeleteScheduleDetail(int id)
         {
+            int scheduleMasterStatus = 0;
             response.status = "FAILURE";
             var scheduleDetail = db.ScheduleDetails.Find(id);
             if (scheduleDetail == null)
@@ -144,11 +175,11 @@ namespace DentalApplicationV1.APIController
             {
                 if (validateForInactive(scheduleDetail.Status))
                 {
-                    var ScheduleDetailsHolder = db.ScheduleDetails.Find(id);
-                    ScheduleDetailsHolder.Status = 2;
-                    db.Entry(scheduleDetail).CurrentValues.SetValues(ScheduleDetailsHolder);
-                    db.Entry(scheduleDetail).State = EntityState.Modified;
-                    db.SaveChanges();
+                    //update schedule detail status to 2 for cancel
+                    updateScheduleDetailStatus(id, 2);
+                    //Update schedule master if closed/open
+                    ScheduleMaster.updateScheduleMasterStatus(scheduleDetail.ScheduleMasterId, ref scheduleMasterStatus);
+                    response.intParam1 = scheduleMasterStatus;
                     response.status = "SUCCESS";
                 }
                 else
@@ -160,6 +191,7 @@ namespace DentalApplicationV1.APIController
 
             return Ok(response);
         }
+        
         public bool validateForInactive(int status)
         {
             if (status == 0)
@@ -200,6 +232,19 @@ namespace DentalApplicationV1.APIController
         private bool ScheduleDetailExists(int id)
         {
             return db.ScheduleDetails.Count(e => e.Id == id) > 0;
+        }
+        public void saveScheduleDetail(ScheduleDetail scheduleDetail, string dummy)
+        {
+            db.ScheduleDetails.Add(scheduleDetail);
+            db.SaveChanges();
+        }
+        public void updateScheduleDetailStatus(int id, int status) {
+            var scheduleDetail = db.ScheduleDetails.Find(id);
+            var ScheduleDetailsHolder = db.ScheduleDetails.Find(id);
+            ScheduleDetailsHolder.Status = status;
+            db.Entry(scheduleDetail).CurrentValues.SetValues(ScheduleDetailsHolder);
+            db.Entry(scheduleDetail).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

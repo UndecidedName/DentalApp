@@ -156,6 +156,8 @@
     <NavigationProperty Name="ScheduleDetail" Relationship="DentalDBModel.FK_Appointment_ScheduleDetailId" FromRole="Appointment" ToRole="ScheduleDetail" />
     <NavigationProperty Name="ScheduleMaster" Relationship="DentalDBModel.FK_Appointment_ScheduleMasterId" FromRole="Appointment" ToRole="ScheduleMaster" />
     <NavigationProperty Name="PatientDiagnosisHistoryMasters" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="Appointment" ToRole="PatientDiagnosisHistoryMaster" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="CivilStatu">
     <Key>
@@ -423,6 +425,7 @@
     <NavigationProperty Name="PatientMedicalHistories" Relationship="DentalDBModel.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
     <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
     <NavigationProperty Name="UserInformations" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="User" ToRole="UserInformation" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="UserMenu">
     <Key>

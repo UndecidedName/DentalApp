@@ -24,6 +24,7 @@ function dirDataModal1() {
             $scope.selectedIndex = null;
             $scope.filteredValue = "";
             $scope.showClose = false;
+
             $scope.getData = function () {
                 if ($scope.datadefinition.CurrentLength != $scope.datadefinition.DataList.length) {
                     $scope.actionForm('Load');
@@ -63,7 +64,7 @@ function dirDataModal1() {
             $scope.filterValue = function (value, index) {
                 var type = $scope.datadefinition.Type[index];
                 if (value == null)
-                    $scope.filteredValue = "None";
+                    $scope.filteredValue = "";
                 else {
                     switch (type) {
                         case 'String':
@@ -84,17 +85,35 @@ function dirDataModal1() {
                         case 'Number':
                             $scope.filteredValue = value;
                             break;
-                        case 'Gender':
-                            if(value == "F")
-                                $scope.filteredValue = "Female";
-                            else
-                                $scope.filteredValue = "Male";
-                            break;
                         case 'Boolean':
                             if (value)
                                 $scope.filteredValue = "Yes";
                             else
                                 $scope.filteredValue = "No";
+                            break;
+                        case 'Gender':
+                            if (value == "F")
+                                $scope.filteredValue = "Female";
+                            else
+                                $scope.filteredValue = "Male";
+                            break;
+                        case 'Status-Approver':
+                            if (value == 0)
+                                $scope.filteredValue = "For Approval";
+                            else if (value == 1)
+                                $scope.filteredValue = "Approved";
+                            else
+                                $scope.filteredValue = "Disapproved";
+                            break;
+                        case 'Status-Default':
+                            if (value == 0)
+                                $scope.filteredValue = "Open";
+                            else if (value == 1)
+                                $scope.filteredValue = "Closed";
+                            break;
+                        case 'Formatted-Time':
+                            var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
+                            $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
                         default:
                             $scope.filteredValue = value;

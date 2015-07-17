@@ -22,6 +22,7 @@
                                     Type        - Type of the Columns/Keys(String,Date,DateTime,Time)
                                     CurrentLength - Contains the current length of the data list
                                     APIUrl      - Contains the API Url for data retrieval
+                                    ServerData  - contains the data from the server response
                                         */
             otheractions: '&',          /*
                                             Function that will trigger when other actions is passed 
@@ -52,8 +53,15 @@
             $scope.criteria = $scope.datadefinition.Keys[0];
             $scope.filteredValue = "";
             $scope.selectedIndex = null;
-            $scope.contextMenuLabelDefault = ['Load', 'Delete'];
-            $scope.contextMenuLabelImage = ['mdi mdi-reload', 'mdi mdi-delete'];
+            $scope.contextMenuLabelDefault = ['Delete'];
+            $scope.contextMenuLabelImage = ['mdi mdi-delete'];
+
+            //Set the focus on top of the page during load
+            $scope.focusOnTop = function () {
+                $(document).ready(function () {
+                    $(this).scrollTop(0);
+                });
+            };
 
             $interval(function () {
                 var width = window.innerWidth;
@@ -105,7 +113,7 @@
             $scope.filterValue = function (value, index) {
                 var type = $scope.datadefinition.Type[index];
                 if (value == null)
-                    $scope.filteredValue = "None";
+                    $scope.filteredValue = "";
                 else {
                     switch (type) {
                         case 'String':
@@ -121,11 +129,7 @@
                             $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy");
                             break;
                         case 'Time':
-                            $scope.filteredValue = $filter('date')(value, "hh:mm a");
-                            break;
-                        case 'Formatted-Time':
-                            var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
-                            $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
+                            $scope.filteredValue = $filter('date')(value, "HH:mm:ss");
                             break;
                         case 'Number':
                             $scope.filteredValue = value;
@@ -141,6 +145,24 @@
                                 $scope.filteredValue = "Female";
                             else
                                 $scope.filteredValue = "Male";
+                            break;
+                        case 'Status-Approver':
+                            if (value === 0)
+                                $scope.filteredValue = "For Approval";
+                            else if (value === 1)
+                                $scope.filteredValue = "Approved";
+                            else
+                                $scope.filteredValue = "Disapproved";
+                            break;
+                        case 'Status-Default':
+                            if (value === 0)
+                                $scope.filteredValue = "Open";
+                            else if (value === 1)
+                                $scope.filteredValue = "Closed";
+                            break;
+                        case 'Formatted-Time':
+                            var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
+                            $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
                         default:
                             $scope.filteredValue = value;
@@ -224,6 +246,21 @@
                         }
                     }, 100);
                 }
+                if (action == 'Refresh') {
+                    $scope.datadefinition.DataList = [];
+                    if ($scope.otheractions({ action: 'PreLoadAction' }))
+                        $scope.loadData(0);
+                    //set interval to make sure that the get call returns data before triggering some actions
+                    stop = $interval(function () {
+                        if ($scope.datadefinition.DataList.length > 0) {
+                            $interval.cancel(stop);
+                            $scope.datadefinition.CurrentLength = 0;
+                            stop = undefined;
+                            $scope.otheractions({ action: 'PostLoadAction' });
+                            $scope.otheractions({ action: 'PostAction' });
+                        }
+                    }, 100);
+                }
                 if ($scope.otheractions({ action: 'PreAction' })) {
                     switch (action) {
                         case 'Delete':
@@ -248,6 +285,8 @@
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataItem.Id = data.objParam1.Id;
                             $scope.datadefinition.DataList.push($scope.datadefinition.DataItem);
+                            $scope.datadefinition.ServerData = [];
+                            $scope.datadefinition.ServerData.push(data);
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostSave' });
                             return true;
@@ -271,6 +310,8 @@
                     .success(function (data, status) {
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataList.splice($scope.selectedIndex, 1);
+                            $scope.datadefinition.ServerData = [];
+                            $scope.datadefinition.ServerData.push(data);
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostDelete' });
                             return true;
