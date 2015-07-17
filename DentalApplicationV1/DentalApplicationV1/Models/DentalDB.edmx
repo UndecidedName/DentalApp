@@ -17,7 +17,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PatientId" Type="int" />
-          <Property Name="Message" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="500" />
           <Property Name="ScheduleMasterId" Type="int" Nullable="false" />
           <Property Name="ScheduleDetailId" Type="int" />
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
@@ -991,7 +991,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PatientId" Type="Int32" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ScheduleMasterId" Type="Int32" Nullable="false" />
           <Property Name="ScheduleDetailId" Type="Int32" />
           <Property Name="Status" Type="Int32" Nullable="false" />

@@ -543,7 +543,7 @@ GO
 CREATE TABLE [dbo].[Appointment] (
     [Id]               INT           IDENTITY (1, 1) NOT NULL,
     [PatientId]        INT           NULL,
-    [Message]          VARCHAR (500) NOT NULL,
+    [Message]          VARCHAR (500) NULL,
     [ScheduleMasterId] INT           NOT NULL,
     [ScheduleDetailId] INT           NULL,
     [Remarks]          VARCHAR (500) NULL,

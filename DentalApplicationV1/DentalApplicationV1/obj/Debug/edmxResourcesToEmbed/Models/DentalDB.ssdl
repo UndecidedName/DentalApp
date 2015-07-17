@@ -12,7 +12,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PatientId" Type="int" />
-    <Property Name="Message" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="500" />
     <Property Name="ScheduleMasterId" Type="int" Nullable="false" />
     <Property Name="ScheduleDetailId" Type="int" />
     <Property Name="Remarks" Type="varchar" MaxLength="500" />

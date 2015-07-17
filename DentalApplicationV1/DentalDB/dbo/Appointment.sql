@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [PatientId] INT NULL, 
-    [Message] VARCHAR(500) NOT NULL, 
+    [Message] VARCHAR(500) NULL, 
     [ScheduleMasterId] INT NOT NULL, 
     [ScheduleDetailId] INT NULL, 
     [Remarks] VARCHAR(500) NULL, 

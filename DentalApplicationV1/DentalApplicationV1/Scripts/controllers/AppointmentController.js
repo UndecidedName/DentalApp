@@ -146,6 +146,9 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {
+                case 'PostCreateAction':
+                    $scope.initializeStatusHolder();
+                    return true;
                 case 'PostEditAction':
                     $scope.initializeStatusHolder();
                     return true;
@@ -201,7 +204,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 ScheduleTime: null,
                 DentistName: null,
                 Status: 0,
-                StatusHolder: null
+                StatusHolder: 0
             }
         };
         $scope.showFormErrorMaster = function (message) {

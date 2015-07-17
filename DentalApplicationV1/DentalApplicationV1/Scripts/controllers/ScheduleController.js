@@ -144,6 +144,9 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                     $scope.tabPages = ['Date'];
                     $scope.selectedTab = 0;
                     return true;
+                case 'PostCreateAction':
+                    $scope.initializeStatusHolder();
+                    return true;
                 case 'PostEditAction':
                     $scope.dataDefinitionMaster.DataItem.Date = $filter('date')($scope.dataDefinitionMaster.DataItem.Date, "MM/dd/yyyy");
                     $scope.tabPages = ['Date', 'Time'];
@@ -204,7 +207,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                 DentistId: null,
                 DentistName: null,
                 Status: 0,
-                StatusHolder:null
+                StatusHolder:0
             }
         };
         $scope.showFormErrorMaster = function (message) {
