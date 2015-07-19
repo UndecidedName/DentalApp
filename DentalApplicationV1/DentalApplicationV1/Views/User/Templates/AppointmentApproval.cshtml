@@ -10,17 +10,15 @@
     <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
         <div id="progress"></div>
         <div flex-item>
-            <lx-text-field label="Date" error="validateInput(dataDefinitionMaster.DataItem.ScheduleDate)">
+            <lx-text-field label="Date">
                 <input type="text"
                        name="Date"
                        ng-model="dataDefinitionMaster.DataItem.ScheduleDate"
-                       pattern=".{4,50}"
-                       ng-disabled="dataDefinitionMaster.ViewOnly; (dataDefinitionMaster.DataItem.Id != null ? true: false)"
-                       ng-click="showDialog('ScheduleDate')">
+                       ng-disabled="true">
             </lx-text-field>
         </div>
         <div flex-item>
-            <lx-text-field label="Time" error="validateInput(dataDefinitionMaster.DataItem.ScheduleTime)">
+            <lx-text-field label="Time">
                 <input type="text"
                        name="Time"
                        ng-model="dataDefinitionMaster.DataItem.ScheduleTime"
@@ -28,7 +26,7 @@
             </lx-text-field>
         </div>
         <div flex-item>
-            <lx-text-field label="Dentist" error="validateInput(dataDefinitionMaster.DataItem.DentistName)">
+            <lx-text-field label="Dentist">
                 <input type="text"
                        name="Dentist"
                        ng-model="dataDefinitionMaster.DataItem.DentistName"
@@ -42,7 +40,7 @@
                 <input type="text"
                        name="Message"
                        ng-model="dataDefinitionMaster.DataItem.Message"
-                       ng-disabled="dataDefinitionMaster.ViewOnly" />
+                       ng-disabled="true" />
             </lx-text-field>
         </div>
     </div>
@@ -55,11 +53,11 @@
     </div>
     <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
         <div flex-item>
-            <lx-text-field label="Remarks">
+            <lx-text-field label="Remarks" error="validateInput(dataDefinitionMaster.DataItem.Remarks)">
                 <input type="text"
                        name="Remarks"
                        ng-model="dataDefinitionMaster.DataItem.Remarks"
-                       ng-disabled="true" />
+                       ng-disabled="dataDefinitionMaster.ViewOnly" />
             </lx-text-field>
         </div>
     </div>
@@ -72,36 +70,23 @@
                        ng-disabled="true" />
             </lx-text-field>
         </div>
+        <div flex-item>
+            <lx-text-field label="Status">
+                <input type="text"
+                       name="Status"
+                       ng-model="dataDefinitionMaster.DataItem.StatusHolder"
+                       ng-disabled="true" />
+            </lx-text-field>
+        </div>
+        <div flex-item style="{{checkBoxStyle}}">
+            <div class="checkbox">
+                <input type="checkbox" 
+                       id="transactionStatus" 
+                       class="checkbox__input" 
+                       ng-model="dataDefinitionMaster.DataItem.TransactionStatus" 
+                       ng-disabled="dataDefinitionMaster.ViewOnly">
+                <label for="transactionStatus" class="checkbox__label">{{transactionStatusLabel}}</label>
+            </div>
+        </div>
     </div>
-    <br />
-    <lx-dialog class="dialog dialog--l" id="ScheduleDate" auto-close="true">
-        <div class="dialog__header">
-            <div class="toolbar bgc-light-blue-500 pl++">
-                <span class="toolbar__label tc-white fs-title">
-                    Available Schedules
-                </span>
-            </div>
-        </div>
-        <div class="dialog__content">
-            <dir-data-modal1 datadefinition="dataDefinitionScheduleDateList" otheractions="otherActionScheduleDate(action)" closecontainer="closeScheduleDate(dialog)"></dir-data-modal1>
-        </div>
-        <div class="dialog__actions">
-        </div>
-    </lx-dialog>
-
-    <lx-dialog class="dialog dialog--l" id="ScheduleTime" auto-close="true">
-        <div class="dialog__header">
-            <div class="toolbar bgc-light-blue-500 pl++">
-                <span class="toolbar__label tc-white fs-title">
-                    Available Schedules for {{dataDefinitionScheduleDateList.DataItem.Date}}
-                </span>
-            </div>
-        </div>
-        <div class="dialog__content">
-            <dir-data-modal1 datadefinition="dataDefinitionScheduleTimeList" otheractions="otherActionScheduleTime(action)" closecontainer="closeScheduleTime(dialog)"></dir-data-modal1>
-        </div>
-        <div class="dialog__actions">
-        </div>
-    </lx-dialog>
 }
-

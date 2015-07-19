@@ -222,6 +222,8 @@ namespace DentalApplicationV1.APIController
         }
         public void updateScheduleMasterStatus(int id, ref int status)
         {
+            //ref int status parameter is to get the master status after this function executed
+
             //get all schedule details that are not cancelled
             var countScheduleDetail = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == id && sd.Status != 2).ToArray();
             //get all closed schedule details

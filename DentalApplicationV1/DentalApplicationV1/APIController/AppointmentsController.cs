@@ -50,7 +50,32 @@ namespace DentalApplicationV1.APIController
                 return a;
             }
         }
+        // GET: api/Appointments?length=0&type=appointments
+        public IQueryable<Appointment> GetAppointment(int length, String type)
+        {
+            int fetch;
+            var records = db.Appointments.Where(a => a.Status != 3).Count();
+            if (records > length)
+            {
+                if ((records - length) > pageSize)
+                    fetch = pageSize;
+                else
+                    fetch = records - length;
 
+                return db.Appointments
+                    .Where(a => a.Status != 3)
+                    .Include(a => a.User.UserInformations)
+                    .Include(a => a.ScheduleMaster)
+                    .Include(a => a.ScheduleDetail)
+                    .Include(a => a.ScheduleMaster.UserInformation)
+                    .OrderBy(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch);
+            }
+            else
+            {
+                IQueryable<Appointment> a = new List<Appointment>().AsQueryable();
+                return a;
+            }
+        }
         // GET: api/Appointments/5
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult GetAppointment(int id)
@@ -68,6 +93,7 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAppointment(int id, Appointment appointment)
         {
+            int scheduleMasterStatus = 0;
             response.status = "FAILURE";
             if (!ModelState.IsValid)
             {
@@ -85,6 +111,13 @@ namespace DentalApplicationV1.APIController
 
             try
             {
+
+                if (appointment.Status == 2)
+                {
+                    //open schedule detail and schedule master status if appointment is disapproved
+                    ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
+                    ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+                }
                 db.SaveChanges();
                 response.status = "SUCCESS";
                 response.objParam1 = appointment;
@@ -147,13 +180,19 @@ namespace DentalApplicationV1.APIController
             }
             try
             {
-                //cancel appointment status
-                updateAppointmentStatus(id, 3);
-                //open schedule detail status
-                ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
-                //update schedule master status
-                ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
-                response.status = "SUCCESS";
+                if (appointment.Status == 0 || appointment.Status == 2)
+                {
+                    //cancel appointment status
+                    updateAppointmentStatus(id, 3);
+                    //open schedule detail status
+                    ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
+                    //update schedule master status
+                    ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+                    response.status = "SUCCESS";
+                }
+                else {
+                    response.message = "You cannot delete approved appointments.";
+                }
             }
             catch (Exception e)
             {

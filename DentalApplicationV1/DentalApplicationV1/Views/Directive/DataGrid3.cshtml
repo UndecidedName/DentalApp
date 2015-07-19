@@ -1,0 +1,62 @@
+﻿<!--Data Table Content-->
+<div class="card">
+    <div class="myTableContainter" scrollable-container="getData()">
+        <!--For IE-->
+        <div id="progress"></div>
+        <iframe id="exportTemplate" style="display:none"></iframe>
+        <!--End of for IE-->
+        <table class="myTableContent dir-export" id="export">
+            <thead>
+                <tr class="myTableRow-header" style="text-align:left">
+                    <th class="myTableCell cell-seqno fs-subhead display-block tc-white" ng-click="actionForm('Refresh')">
+                        <i class="icon icon--s icon--white icon--flat mdi mdi-reload" lx-tooltip="Refresh" tooltip-position="bottom"></i>
+                    </th>
+                    <th class="myTableCell cell-seqno fs-subhead display-block tc-white">
+                        <strong>{{datadefinition.Header[datadefinition.Header.length - 1]}}</strong>
+                    </th>
+                    <th class="myTableCell cell-10 fs-subhead display-block tc-white"
+                        ng-repeat="header in datadefinition.Header" ng-if="$index != (datadefinition.Header.length - 1)"
+                        ng-click="processSorting(datadefinition.Keys[$index])">
+                        <strong>{{filterHeader(header)}}</strong>
+                        <span class="mdi mdi-sort-descending"
+                              ng-show="criteria === datadefinition.Keys[$index] || criteria === '-' + datadefinition.Keys[$index] ? sortByDesc: false">
+                        </span>
+                        <span class="mdi mdi-sort-ascending"
+                              ng-show="criteria === datadefinition.Keys[$index] || criteria === '-' + datadefinition.Keys[$index] ? sortByAsc: false">
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="myTableRow"
+                    ng-repeat="data in datadefinition.DataList | orderBy: criteria">
+                    <td>
+                        <lx-dropdown position="{{menuPosition}}" from-top="true">
+                            <button class="btn btn--m btn--black btn--icon" lx-ripple lx-dropdown-toggle>
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                            <lx-dropdown-menu>
+                                <div id="menu"></div>
+                                <ul ng-repeat="menu in datadefinition.contextMenuLabel">
+                                    <li>
+                                        <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)">
+                                            <i class="{{datadefinition.contextMenuLabelImage[$index]}}"></i>
+                                            <span>{{menu}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </lx-dropdown-menu>
+                        </lx-dropdown>
+                    </td>
+                    <td class="myTableCell cell-seqno fs-subhead display-block">
+                        {{$index + 1}}
+                    </td>
+                    <td class="myTableCell cell-10 fs-subhead display-block"
+                        ng-repeat="key in datadefinition.Keys">
+                        {{filterValue(data[key], $index)}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

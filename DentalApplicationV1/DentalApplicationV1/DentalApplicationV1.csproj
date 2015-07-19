@@ -834,6 +834,7 @@
     <Content Include="Scripts\directives\dataExport.js" />
     <Content Include="Scripts\directives\dataGrid1.js" />
     <Content Include="Scripts\directives\dataGrid2.js" />
+    <Content Include="Scripts\directives\dataGrid3.js" />
     <Content Include="Scripts\directives\dataModal1.js" />
     <Content Include="Scripts\directives\dentalDirective.js" />
     <Content Include="Scripts\directives\scrollableContainer.js" />
@@ -1431,6 +1432,7 @@
     <Content Include="Views\Directive\DataGrid2.cshtml" />
     <Content Include="Views\Shared\_DataTableLayout2.cshtml" />
     <Content Include="Views\User\Templates\AppointmentApproval.cshtml" />
+    <Content Include="Views\Directive\DataGrid3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

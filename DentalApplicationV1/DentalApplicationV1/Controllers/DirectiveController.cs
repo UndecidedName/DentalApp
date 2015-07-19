@@ -25,6 +25,11 @@ namespace DentalWebApp.Controllers
             return View();
         }
 
+        public ActionResult DataGrid3()
+        {
+            return View();
+        }
+
         public ActionResult DataModal1()
         {
             return View();
