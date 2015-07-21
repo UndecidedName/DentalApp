@@ -147,18 +147,24 @@
                                 $scope.filteredValue = "Male";
                             break;
                         case 'Status-Approver':
-                            if (value === 0)
+                            if (value == 0)
                                 $scope.filteredValue = "For Approval";
-                            else if (value === 1)
+                            else if (value == 1)
                                 $scope.filteredValue = "Approved";
                             else
                                 $scope.filteredValue = "Disapproved";
                             break;
                         case 'Status-Default':
-                            if (value === 0)
+                            if (value == 0)
                                 $scope.filteredValue = "Open";
-                            else if (value === 1)
+                            else if (value == 1)
                                 $scope.filteredValue = "Closed";
+                            break;
+                        case 'Status-Maintenance':
+                            if (value == 0)
+                                $scope.filteredValue = "Inactive";
+                            else if (value == 1)
+                                $scope.filteredValue = "Active";
                             break;
                         case 'Formatted-Time':
                             var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;

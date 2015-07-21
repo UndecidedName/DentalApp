@@ -827,7 +827,9 @@
     <Content Include="libs\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\controllers\AppointmentApprovalController.js" />
     <Content Include="Scripts\controllers\AppointmentController.js" />
+    <Content Include="Scripts\controllers\CivilStatusController.js" />
     <Content Include="Scripts\controllers\HomeController.js" />
+    <Content Include="Scripts\controllers\MenuController.js" />
     <Content Include="Scripts\controllers\NotificationController.js" />
     <Content Include="Scripts\controllers\ScheduleController.js" />
     <Content Include="Scripts\controllers\SettingController.js" />
@@ -848,6 +850,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIController\AppointmentsController.cs" />
+    <Compile Include="APIController\CivilStatusController.cs" />
+    <Compile Include="APIController\DentalMenusController.cs" />
     <Compile Include="APIController\UserInformationsController.cs" />
     <Compile Include="APIController\ScheduleDetailsController.cs" />
     <Compile Include="APIController\ScheduleMastersController.cs" />
@@ -1433,6 +1437,8 @@
     <Content Include="Views\Shared\_DataTableLayout2.cshtml" />
     <Content Include="Views\User\Templates\AppointmentApproval.cshtml" />
     <Content Include="Views\Directive\DataGrid3.cshtml" />
+    <Content Include="Views\User\Templates\Menu.cshtml" />
+    <Content Include="Views\User\Templates\CivilStatus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

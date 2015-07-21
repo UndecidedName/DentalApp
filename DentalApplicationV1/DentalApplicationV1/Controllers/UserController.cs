@@ -33,6 +33,10 @@ namespace DentalWebApp.Controllers
                     return PartialView("~/Views/User/Templates/Schedule.cshtml");
                 case "appointmentapproval":
                     return PartialView("~/Views/User/Templates/AppointmentApproval.cshtml");
+                case "menu":
+                    return PartialView("~/Views/User/Templates/Menu.cshtml");
+                case "civilstatus":
+                    return PartialView("~/Views/User/Templates/CivilStatus.cshtml");
                 default: throw new Exception("template not known");
             }
         }

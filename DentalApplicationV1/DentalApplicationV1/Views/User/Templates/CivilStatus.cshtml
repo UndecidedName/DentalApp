@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_DataTableLayout2.cshtml";
+}
+
+@section TableContent{
+    <div id="masterList"></div>
+}
+
+@section FormContent{
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item style="{{textBoxStyle}}">
+            <lx-text-field label="Name" error="validateInput(dataDefinitionMaster.DataItem.Name)">
+                <input type="text"
+                       name="Name"
+                       ng-model="dataDefinitionMaster.DataItem.Name"
+                       ng-disabled="dataDefinitionMaster.ViewOnly"/>
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Description">
+                <input type="text"
+                       name="Description"
+                       ng-model="dataDefinitionMaster.DataItem.Description"
+                       ng-disabled="dataDefinitionMaster.ViewOnly" />
+            </lx-text-field>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div flex-item style="{{checkBoxStyle}}">
+            <div class="checkbox">
+                <input type="checkbox"
+                       id="Status"
+                       class="checkbox__input"
+                       ng-model="dataDefinitionMaster.DataItem.StatusHolder"
+                       ng-disabled="dataDefinitionMaster.ViewOnly">
+                <label for="Status" class="checkbox__label">{{statusLabel}}</label>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+

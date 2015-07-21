@@ -233,6 +233,12 @@
                             else if (value == 1)
                                 $scope.filteredValue = "Closed";
                             break;
+                        case 'Status-Maintenance':
+                            if (value == 0)
+                                $scope.filteredValue = "Inactive";
+                            else if (value == 1)
+                                $scope.filteredValue = "Active";
+                            break;
                         case 'Formatted-Time':
                             var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
                             $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");

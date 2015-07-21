@@ -48,10 +48,10 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Edit";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Status', 'Patient Name', 'Dentist Name', 'Date', 'Time', 'Message', 'Remarks', 'Remarks Date', 'No'],
-            "Keys": ['Status', 'PatientName', 'DentistName', 'ScheduleDate', 'ScheduleTime', 'Message', 'Remarks', 'TransactionDate'],
+            "Header": ['Date', 'Time', 'Patient Name', 'Dentist Name', 'Message', 'Status', 'Remarks', 'Remarks Date', 'No'],
+            "Keys": ['ScheduleDate', 'ScheduleTime', 'PatientName', 'DentistName', 'Message', 'Status', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['Remarks-Remarks'],
-            "Type": ['Status-Approver', 'String', 'String', 'Date', 'Time', 'String-Default', 'String-Default', 'DateTime'],
+            "Type": ['Date', 'Time', 'String', 'String', 'String-Default', 'Status-Approver', 'String-Default', 'Date'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &type=appointments',//get
@@ -178,7 +178,7 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                     i = $scope.dataDefinitionMaster.DataList.length;
                 }
             }
-        }
+        };
     };
 
     $scope.loadMaster();

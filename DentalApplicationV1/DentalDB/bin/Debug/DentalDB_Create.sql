@@ -474,8 +474,8 @@ PRINT N'Creating [dbo].[CivilStatus]...';
 GO
 CREATE TABLE [dbo].[CivilStatus] (
     [Id]          INT           IDENTITY (1, 1) NOT NULL,
-    [Name]        VARCHAR (50)  NULL,
-    [Description] VARCHAR (200) NOT NULL,
+    [Name]        VARCHAR (50)  NOT NULL,
+    [Description] VARCHAR (200) NULL,
     [Status]      INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
