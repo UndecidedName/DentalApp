@@ -5,17 +5,42 @@
     $rootScope.user = null;
     $rootScope.appName = "Smile Fairies Dental Suites";
 
+    $rootScope.notification = $.connection.notificationHub;
+
     //Check if user is already logged
     $http.get("/api/Users/userinfo?userinfo=none&request=CheckIfLogged")
         .success(function (data, status) {
             if (data.status == "SUCCESS") {
                 $rootScope.user = data.objParam1[0];
                 $rootScope.isLogged = true;
+                //Start the connection
+                $.connection.hub.start().done(function () {
+                    $rootScope.addClient($rootScope.user.Username, $.connection.hub.id);
+                });
                 $location.path("User/Index");
             }
             else
                 LxNotificationService.success('Welcome to ' + $rootScope.appName + '!');
+
         });
+
+    //function that will be called in broadcasting the notification to a client
+    $rootScope.notification.client.broadcastNotification = function (notificationDate, notification) {
+        //code for compiling the notification in DOM
+        $('#chats').append('<div class="border"><span style="color:blue">' + notificationDate + '</span>: ' + notification + '</div>');
+    };
+
+    //Start the connection
+    $.connection.hub.start().done(function () {
+        //function that add the client to the clientDictionary
+        $rootScope.addClient = function (clientName, clientId) {
+            $rootScope.notification.server.addClient(clientName, clientId);
+        }
+        //function that send notification to a specific client registered in clientDictionary
+        $rootScope.sendNotification = function (notificationDate, notification, clientName) {
+            $rootScope.notification.server.sendToClient(notificationDate, notification, clientName);
+        }
+    });
 });
 
 dentalApp.config(function ($stateProvider, $urlRouterProvider) {

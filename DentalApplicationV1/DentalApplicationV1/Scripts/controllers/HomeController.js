@@ -61,6 +61,7 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                 $rootScope.user = data.objParam1[0];
                 LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
                 $location.path("/User/Index");
+
                 //Save user info in cookie
                 if ($scope.userInfo.rememberMe == true) {
                     var expiryDate = new Date();
@@ -75,6 +76,7 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                         $cookies.remove('DentalPassword')
                     }
                 }
+                $rootScope.addClient($rootScope.user.Username, $.connection.hub.id);
                 LxProgressService.circular.hide();
                 LxDialogService.close(dialogId);
             }
