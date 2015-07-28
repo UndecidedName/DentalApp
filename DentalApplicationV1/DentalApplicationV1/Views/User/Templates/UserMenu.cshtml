@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_DataTableLayout2.cshtml";
+}
+
+@section TableContent{
+    <div id="masterList"></div>
+}
+
+@section FormContent{
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item style="{{textBoxStyle}}">
+            <lx-text-field label="User Type Name">
+                <input type="text"
+                       name="name"
+                       ng-model="dataDefinitionMaster.DataItem.Name"
+                       ng-disabled="true">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Description">
+                <input type="text"
+                       name="Description"
+                       ng-model="dataDefinitionMaster.DataItem.Description"
+                       ng-disabled="true">
+            </lx-text-field>
+        </div>
+        <div flex-item style="{{textBoxStyle}}">
+            <lx-text-field label="Status">
+                <input type="text"
+                       name="Status"
+                       ng-model="dataDefinitionMaster.DataItem.StatusHolder"
+                       ng-disabled="true" />
+            </lx-text-field>
+        </div>
+    </div><br>
+    <div id="progress"></div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div flex-item style="{{textBoxStyle}}">
+            <lx-text-field label="Menu Name">
+                <input type="text"
+                       name="menu"
+                       ng-model="dataDefinitionDetail.DataItem.Name"
+                       ng-click="showDialog('Menu')">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Description">
+                <input type="text"
+                       name="description"
+                       ng-model="dataDefinitionDetail.DataItem.Description"
+                       ng-disabled = "true">
+            </lx-text-field>
+        </div>
+        <div flex-item style="padding-top:28px">
+            <button class="btn btn--m btn--blue btn--raised" ng-click="submitDetail()" ng-disabled="dataDefinitionDetail.DataItem.Name != null ? false : true">Add</button>
+        </div>
+    </div> <br />
+    <div id="detailList" style="padding-left:20px; padding-right:20px;"></div>
+    <lx-dialog class="dialog dialog--l" id="Menu" auto-close="true">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title">
+                    Menu List
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <dir-data-modal1 datadefinition="dataDefinitionMenuList" otheractions="otherActionMenu(action)" closecontainer="closeMenu(dialog)"></dir-data-modal1>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+}

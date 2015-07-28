@@ -76,7 +76,18 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                         $cookies.remove('DentalPassword')
                     }
                 }
-                $rootScope.addClient($rootScope.user.Username, $.connection.hub.id);
+                $rootScope.addClient($rootScope.user.Id.toString(), $.connection.hub.id);
+                //retrieve notifications
+                var promise = $interval(function () {
+                    if ($rootScope.user != null) {
+                        $http.get("api/Notifications?userid=" + $rootScope.user.Id + "&length=0")
+                        .success(function (data, status) {
+                            $rootScope.notificationList = data;
+                            $interval.cancel(promise);
+                            promise = undefined;
+                        })
+                    }
+                }, 500);
                 LxProgressService.circular.hide();
                 LxDialogService.close(dialogId);
             }

@@ -341,6 +341,7 @@
     <Content Include="assets\js\utility\waypoints\jquery.waypoints.min.js" />
     <Content Include="assets\skin\default_skin\css\theme.css" />
     <Content Include="assets\skin\default_skin\css\updates.css" />
+    <Content Include="audio\notification.mp3" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customize-table.css" />
@@ -851,6 +852,7 @@
     <Content Include="Scripts\controllers\NotificationController.js" />
     <Content Include="Scripts\controllers\ScheduleController.js" />
     <Content Include="Scripts\controllers\SettingController.js" />
+    <Content Include="Scripts\controllers\UserMenu.js" />
     <Content Include="Scripts\directives\dataExport.js" />
     <Content Include="Scripts\directives\dataGrid1.js" />
     <Content Include="Scripts\directives\dataGrid2.js" />
@@ -872,6 +874,7 @@
     <Compile Include="APIController\AppointmentsController.cs" />
     <Compile Include="APIController\CivilStatusController.cs" />
     <Compile Include="APIController\DentalMenusController.cs" />
+    <Compile Include="APIController\NotificationsController.cs" />
     <Compile Include="APIController\UserInformationsController.cs" />
     <Compile Include="APIController\ScheduleDetailsController.cs" />
     <Compile Include="APIController\ScheduleMastersController.cs" />
@@ -879,6 +882,7 @@
     <Compile Include="APIController\SessionRouteHandler.cs" />
     <Compile Include="APIController\UserMenusController.cs" />
     <Compile Include="APIController\UsersController.cs" />
+    <Compile Include="APIController\UserTypesController.cs" />
     <Compile Include="APIController\V_UserMenuController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1461,6 +1465,7 @@
     <Content Include="Views\Directive\DataGrid3.cshtml" />
     <Content Include="Views\User\Templates\Menu.cshtml" />
     <Content Include="Views\User\Templates\CivilStatus.cshtml" />
+    <Content Include="Views\User\Templates\UserMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

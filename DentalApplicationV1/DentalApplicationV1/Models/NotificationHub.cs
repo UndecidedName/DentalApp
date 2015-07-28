@@ -22,11 +22,11 @@ namespace DentalApplicationV1.Models
             if (!(clientsDictionary.ContainsKey(clientName)))
                 clientsDictionary.TryAdd(clientName, clientId);
         }
-        public void sendToClient(DateTime notificationDate, string notification, string clientName)
+        public void sendToClient(Notification notification, string clientName)
         {
             // Call the broadcastMessage method to update clients.
-            Clients.Caller.broadcastMessage(notificationDate, notification);
-            Clients.Client(clientsDictionary[clientName]).broadcastNotification(notificationDate, notification);
+            //Clients.Caller.broadcastMessage(notification.Date, notification.Description);
+            Clients.Client(clientsDictionary[clientName]).broadcastNotification(notification);
         }
         public override Task OnDisconnected()
         { 

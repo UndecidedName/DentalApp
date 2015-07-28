@@ -1,0 +1,36 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[PatientDentalHistory].[Status] is being dropped, data loss could occur.
+       The column [dbo].[PatientMedicalHistory].[Status] is being dropped, data loss could occur.
+       The column [dbo].[PatientMouth].[Status] is being dropped, data loss could occur.
+       The column [dbo].[PatientTooth].[Status] is being dropped, data loss could occur.
+
+** User actions
+     Drop
+       on [dbo].[PatientDentalHistory].[Status] (Default Constraint)
+       on [dbo].[PatientMedicalHistory].[Status] (Default Constraint)
+       on [dbo].[PatientMouth].[Status] (Default Constraint)
+       on [dbo].[PatientTooth].[Status] (Default Constraint)
+     Alter
+       [dbo].[PatientDentalHistory] (Table)
+       [dbo].[PatientMedicalHistory] (Table)
+       [dbo].[PatientMouth] (Table)
+       [dbo].[PatientTooth] (Table)
+
+** Supporting actions
+
+The column [dbo].[PatientDentalHistory].[Status] is being dropped, data loss could occur.
+The column [dbo].[PatientMedicalHistory].[Status] is being dropped, data loss could occur.
+The column [dbo].[PatientMouth].[Status] is being dropped, data loss could occur.
+The column [dbo].[PatientTooth].[Status] is being dropped, data loss could occur.
+

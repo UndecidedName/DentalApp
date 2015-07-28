@@ -35,7 +35,6 @@ namespace DentalApplicationV1.Models
         public string Question17 { get; set; }
         public Nullable<int> Question18 { get; set; }
         public Nullable<int> Question19 { get; set; }
-        public int Status { get; set; }
     
         public virtual User User { get; set; }
     }

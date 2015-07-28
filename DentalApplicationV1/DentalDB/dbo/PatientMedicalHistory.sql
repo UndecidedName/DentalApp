@@ -21,6 +21,5 @@
     [Question17] VARCHAR(100) NULL, 
     [Question18] INT NULL DEFAULT 0, 
     [Question19] INT NULL DEFAULT 0,
-    [Status] INT NOT NULL DEFAULT 1,
     CONSTRAINT [FK_PatientMedicalHistory_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [User]([Id]) ON DELETE CASCADE
 )

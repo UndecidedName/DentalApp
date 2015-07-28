@@ -30,9 +30,8 @@ function UserController(LxDialogService, LxNotificationService, LxDropdownServic
             if (data.status == "SUCCESS") {
                 var element = document.getElementById('UserMenuChild');
                 element.parentNode.removeChild(element);
-                $rootScope.isLogged = false;
-                $rootScope.user = null;
-                $rootScope.sideBarCompiled = false;
+                $rootScope.reset();
+                //$rootScope.sideBarCompiled = false;
                 $location.path("/Home/Index");
                 LxNotificationService.info('Thank you for visiting ' + $rootScope.appName + '!');
             }

@@ -3,6 +3,7 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
     $scope.modelName = "Appointment Approval";
     $scope.showForm = false;
     $scope.appointment = [];
+    $scope.notification = {};
 
     $interval(function () {
         var width = window.innerWidth;
@@ -60,6 +61,7 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
             "DataItem": {},
             "ServerData": [],
             "ViewOnly": false,
+            "contextMenu": ['Edit', 'View'],
             "contextMenuLabel": ['Edit','View'],
             "contextMenuLabelImage": ['mdi mdi-table-edit', 'mdi mdi-eye']
         };
@@ -94,7 +96,14 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                     $scope.dataDefinitionMaster.DataItem.Status = ($scope.dataDefinitionMaster.DataItem.TransactionStatus == true ? 1 : 2);
                     return true;
                 case 'PostUpdate':
-                    $scope.initializeDataGridMasterStatus();
+                    $scope.initializeDataGridMasterStatus
+                    $scope.notification = {
+                        Date: $filter('date')(new Date(), "MM/dd/yyyy"),
+                        Description: "Test Notification",
+                        UserId: $scope.dataDefinitionMaster.DataItem.PatientId,
+                        Status: 0
+                    };
+                    $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
                     $scope.closeForm();
                     return true;
                 case 'PostLoadAction':

@@ -24,9 +24,9 @@ namespace DentalApplicationV1.Models
         public string Message { get; set; }
         public int ScheduleMasterId { get; set; }
         public Nullable<int> ScheduleDetailId { get; set; }
-        public int Status { get; set; }
         public string Remarks { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
+        public int Status { get; set; }
     
         public virtual User User { get; set; }
         public virtual ScheduleDetail ScheduleDetail { get; set; }

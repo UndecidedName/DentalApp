@@ -47,10 +47,10 @@ namespace DentalApplicationV1.Models
         public DbSet<Tooth> Teeth { get; set; }
         public DbSet<TreatmentType> TreatmentTypes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserInformation> UserInformations { get; set; }
         public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<V_UserMenu> V_UserMenu { get; set; }
-        public DbSet<UserInformation> UserInformations { get; set; }
         public DbSet<V_UsersList> V_UsersList { get; set; }
     }
 }

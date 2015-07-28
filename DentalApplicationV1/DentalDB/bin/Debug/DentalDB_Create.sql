@@ -267,7 +267,6 @@ CREATE TABLE [dbo].[PatientTooth] (
     [Height]         INT NULL,
     [rotation]       INT NULL,
     [ImageUrlId]     INT NULL,
-    [Status]         INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -281,7 +280,6 @@ CREATE TABLE [dbo].[PatientMouth] (
     [Id]          INT IDENTITY (1, 1) NOT NULL,
     [MouthTypeId] INT NULL,
     [PatientId]   INT NULL,
-    [Status]      INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -448,7 +446,6 @@ CREATE TABLE [dbo].[PatientDentalHistory] (
     [Question7f]      INT           NULL,
     [Question7g]      INT           NULL,
     [Question7Others] INT           NULL,
-    [Status]          INT           NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -480,7 +477,6 @@ CREATE TABLE [dbo].[PatientMedicalHistory] (
     [Question17] VARCHAR (100) NULL,
     [Question18] INT           NULL,
     [Question19] INT           NULL,
-    [Status]     INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -599,24 +595,6 @@ ALTER TABLE [dbo].[Notification]
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[PatientTooth]....';
-
-
-GO
-ALTER TABLE [dbo].[PatientTooth]
-    ADD DEFAULT 1 FOR [Status];
-
-
-GO
-PRINT N'Creating Default Constraint on [dbo].[PatientMouth]....';
-
-
-GO
-ALTER TABLE [dbo].[PatientMouth]
-    ADD DEFAULT 1 FOR [Status];
-
-
-GO
 PRINT N'Creating Default Constraint on [dbo].[ImageUrl]....';
 
 
@@ -689,15 +667,6 @@ ALTER TABLE [dbo].[PatientDentalHistory]
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[PatientDentalHistory]....';
-
-
-GO
-ALTER TABLE [dbo].[PatientDentalHistory]
-    ADD DEFAULT 1 FOR [Status];
-
-
-GO
 PRINT N'Creating Default Constraint on [dbo].[PatientMedicalHistory]....';
 
 
@@ -722,15 +691,6 @@ PRINT N'Creating Default Constraint on [dbo].[PatientMedicalHistory]....';
 GO
 ALTER TABLE [dbo].[PatientMedicalHistory]
     ADD DEFAULT 0 FOR [Question19];
-
-
-GO
-PRINT N'Creating Default Constraint on [dbo].[PatientMedicalHistory]....';
-
-
-GO
-ALTER TABLE [dbo].[PatientMedicalHistory]
-    ADD DEFAULT 1 FOR [Status];
 
 
 GO

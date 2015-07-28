@@ -23,7 +23,6 @@ namespace DentalApplicationV1.Models
         public Nullable<int> Height { get; set; }
         public Nullable<int> rotation { get; set; }
         public Nullable<int> ImageUrlId { get; set; }
-        public int Status { get; set; }
     
         public virtual ImageUrl ImageUrl { get; set; }
         public virtual PatientMouth PatientMouth { get; set; }

@@ -116,7 +116,6 @@
     <Property Name="Question7f" Type="int" />
     <Property Name="Question7g" Type="int" />
     <Property Name="Question7Others" Type="int" />
-    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="PatientDiagnosisHistoryDetail">
     <Key>
@@ -165,7 +164,6 @@
     <Property Name="Question17" Type="varchar" MaxLength="100" />
     <Property Name="Question18" Type="int" />
     <Property Name="Question19" Type="int" />
-    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatientMouth">
     <Key>
@@ -174,7 +172,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MouthTypeId" Type="int" />
     <Property Name="PatientId" Type="int" />
-    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatientTooth">
     <Key>
@@ -189,7 +186,6 @@
     <Property Name="Height" Type="int" />
     <Property Name="rotation" Type="int" />
     <Property Name="ImageUrlId" Type="int" />
-    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ScheduleDetail">
     <Key>

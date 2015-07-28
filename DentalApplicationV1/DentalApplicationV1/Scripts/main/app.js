@@ -1,33 +1,41 @@
 ﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router', 'ngCookies', 'mdDateTime'])
-.run(function ($rootScope, $http, $location, LxNotificationService) {
-    $rootScope.browserWidth = true;
-    $rootScope.isLogged = false;
-    $rootScope.user = null;
-    $rootScope.appName = "Smile Fairies Dental Suites";
-
+.run(function ($rootScope, $http, $location, LxNotificationService, $interval) {
+    $rootScope.reset = function () {
+        $rootScope.browserWidth = true;
+        $rootScope.isLogged = false;
+        $rootScope.user = null;
+        $rootScope.appName = "Smile Fairies Dental Suites";
+        $rootScope.notificationList = [];
+    }
+    $rootScope.reset();
+    $rootScope.notification = null;
+    //NotificationHub Instance
     $rootScope.notification = $.connection.notificationHub;
 
     //Check if user is already logged
     $http.get("/api/Users/userinfo?userinfo=none&request=CheckIfLogged")
-        .success(function (data, status) {
-            if (data.status == "SUCCESS") {
-                $rootScope.user = data.objParam1[0];
-                $rootScope.isLogged = true;
-                //Start the connection
-                $.connection.hub.start().done(function () {
-                    $rootScope.addClient($rootScope.user.Username, $.connection.hub.id);
-                });
-                $location.path("User/Index");
-            }
-            else
-                LxNotificationService.success('Welcome to ' + $rootScope.appName + '!');
+    .success(function (data, status) {
+        if (data.status == "SUCCESS") {
+            $rootScope.user = data.objParam1[0];
+            $rootScope.isLogged = true;
 
-        });
+            //Start the connection
+            $.connection.hub.start().done(function () {
+                $rootScope.addClient($rootScope.user.Id.toString(), $.connection.hub.id);
+            });
+            $location.path("User/Index");
+        }
+        else
+            LxNotificationService.success('Welcome to ' + $rootScope.appName + '!');
+
+    });
 
     //function that will be called in broadcasting the notification to a client
-    $rootScope.notification.client.broadcastNotification = function (notificationDate, notification) {
-        //code for compiling the notification in DOM
-        $('#chats').append('<div class="border"><span style="color:blue">' + notificationDate + '</span>: ' + notification + '</div>');
+    $rootScope.notification.client.broadcastNotification = function (notification) {
+        $rootScope.notificationList.push(notification);
+        var snd = undefined;
+        var snd = new Audio("/audio/notification.mp3"); // buffers automatically when created
+        snd.play();
     };
 
     //Start the connection
@@ -37,8 +45,14 @@
             $rootScope.notification.server.addClient(clientName, clientId);
         }
         //function that send notification to a specific client registered in clientDictionary
-        $rootScope.sendNotification = function (notificationDate, notification, clientName) {
-            $rootScope.notification.server.sendToClient(notificationDate, notification, clientName);
+        $rootScope.sendNotification = function (notification, clientName) {
+            //Save notification
+            $http.post("/api/Notifications", notification)
+            .success(function (data, status) {
+                if (data.status == "SUCCESS")
+                    //send the notification to server for broadcasting
+                    $rootScope.notification.server.sendToClient(data.objParam1, clientName);
+            })
         }
     });
 });
@@ -121,4 +135,10 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "User/Templates/CivilStatus",
         controller: "CivilStatusController"
     })
+
+    .state('UserMenu', {
+         url: "/User/Index",
+         templateUrl: "User/Templates/UserMenu",
+         controller: "UserMenuController"
+     })
 });

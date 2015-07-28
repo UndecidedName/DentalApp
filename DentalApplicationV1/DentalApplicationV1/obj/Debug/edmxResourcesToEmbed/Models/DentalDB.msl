@@ -11,9 +11,9 @@
     <EntitySetMapping Name="Appointments">
       <EntityTypeMapping TypeName="DentalDBModel.Appointment">
         <MappingFragment StoreEntitySet="Appointment">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
           <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ScheduleDetailId" ColumnName="ScheduleDetailId" />
           <ScalarProperty Name="ScheduleMasterId" ColumnName="ScheduleMasterId" />
           <ScalarProperty Name="Message" ColumnName="Message" />
@@ -110,7 +110,6 @@
     <EntitySetMapping Name="PatientDentalHistories">
       <EntityTypeMapping TypeName="DentalDBModel.PatientDentalHistory">
         <MappingFragment StoreEntitySet="PatientDentalHistory">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Question7Others" ColumnName="Question7Others" />
           <ScalarProperty Name="Question7g" ColumnName="Question7g" />
           <ScalarProperty Name="Question7f" ColumnName="Question7f" />
@@ -157,7 +156,6 @@
     <EntitySetMapping Name="PatientMedicalHistories">
       <EntityTypeMapping TypeName="DentalDBModel.PatientMedicalHistory">
         <MappingFragment StoreEntitySet="PatientMedicalHistory">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Question19" ColumnName="Question19" />
           <ScalarProperty Name="Question18" ColumnName="Question18" />
           <ScalarProperty Name="Question17" ColumnName="Question17" />
@@ -185,7 +183,6 @@
     <EntitySetMapping Name="PatientMouths">
       <EntityTypeMapping TypeName="DentalDBModel.PatientMouth">
         <MappingFragment StoreEntitySet="PatientMouth">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="PatientId" ColumnName="PatientId" />
           <ScalarProperty Name="MouthTypeId" ColumnName="MouthTypeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -195,7 +192,6 @@
     <EntitySetMapping Name="PatientTeeth">
       <EntityTypeMapping TypeName="DentalDBModel.PatientTooth">
         <MappingFragment StoreEntitySet="PatientTooth">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ImageUrlId" ColumnName="ImageUrlId" />
           <ScalarProperty Name="rotation" ColumnName="rotation" />
           <ScalarProperty Name="Height" ColumnName="Height" />
@@ -258,11 +254,31 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="DentalDBModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInformations">
+      <EntityTypeMapping TypeName="DentalDBModel.UserInformation">
+        <MappingFragment StoreEntitySet="UserInformation">
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+          <ScalarProperty Name="CivilStatusId" ColumnName="CivilStatusId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -295,26 +311,6 @@
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserInformations">
-      <EntityTypeMapping TypeName="DentalDBModel.UserInformation">
-        <MappingFragment StoreEntitySet="UserInformation">
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
-          <ScalarProperty Name="CivilStatusId" ColumnName="CivilStatusId" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="Height" ColumnName="Height" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -22,10 +22,9 @@ namespace DentalApplicationV1.Models
         public int Id { get; set; }
         public Nullable<int> MouthTypeId { get; set; }
         public Nullable<int> PatientId { get; set; }
-        public int Status { get; set; }
     
         public virtual MouthType MouthType { get; set; }
-        public virtual ICollection<PatientTooth> PatientTeeth { get; set; }
         public virtual UserInformation UserInformation { get; set; }
+        public virtual ICollection<PatientTooth> PatientTeeth { get; set; }
     }
 }

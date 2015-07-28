@@ -2,6 +2,19 @@
     <h3 class="main-section__title">Notifications</h3>
 
     <div class="main-section__content">
-        <div id="chats" style="width: 80%; float: left;"></div>
+        <div class="card">
+            <div class="myTableContainter" scrollable-container="getData()">
+                <div id="progress"></div>
+                <table class="myTableContent dir-export" id="export">
+                    <tbody>
+                        <tr class="myTableRow"
+                            ng-repeat="notifications in notificationList">
+                            <td class="myTableCell cell-10">{{notifications.Description}}</td>
+                            <td class="myTableCell cell-fixed-10 padding-right-20">{{filterValue(notifications.Date, $index, 'Date')}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

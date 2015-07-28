@@ -39,7 +39,7 @@
                                 <div id="menu"></div>
                                 <ul ng-repeat="menu in datadefinition.contextMenuLabel">
                                     <li>
-                                        <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(menu)">
+                                        <a class="dropdown-link dropdown-link--is-large" ng-click="setSelected(data.Id); actionForm(datadefinition.contextMenu[$index])">
                                             <i class="{{datadefinition.contextMenuLabelImage[$index]}}"></i>
                                             <span>{{menu}}</span>
                                         </a>

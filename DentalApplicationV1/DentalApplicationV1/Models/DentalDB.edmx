@@ -121,7 +121,6 @@
           <Property Name="Question7f" Type="int" />
           <Property Name="Question7g" Type="int" />
           <Property Name="Question7Others" Type="int" />
-          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="PatientDiagnosisHistoryDetail">
           <Key>
@@ -170,7 +169,6 @@
           <Property Name="Question17" Type="varchar" MaxLength="100" />
           <Property Name="Question18" Type="int" />
           <Property Name="Question19" Type="int" />
-          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientMouth">
           <Key>
@@ -179,7 +177,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MouthTypeId" Type="int" />
           <Property Name="PatientId" Type="int" />
-          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientTooth">
           <Key>
@@ -194,7 +191,6 @@
           <Property Name="Height" Type="int" />
           <Property Name="rotation" Type="int" />
           <Property Name="ImageUrlId" Type="int" />
-          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ScheduleDetail">
           <Key>
@@ -865,9 +861,11 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySet Name="Teeth" EntityType="DentalDBModel.Tooth" />
           <EntitySet Name="TreatmentTypes" EntityType="DentalDBModel.TreatmentType" />
           <EntitySet Name="Users" EntityType="DentalDBModel.User" />
+          <EntitySet Name="UserInformations" EntityType="DentalDBModel.UserInformation" />
           <EntitySet Name="UserMenus" EntityType="DentalDBModel.UserMenu" />
           <EntitySet Name="UserTypes" EntityType="DentalDBModel.UserType" />
           <EntitySet Name="V_UserMenu" EntityType="DentalDBModel.V_UserMenu" />
+          <EntitySet Name="V_UsersList" EntityType="DentalDBModel.V_UsersList" />
           <AssociationSet Name="FK_Appointment_PatientId" Association="DentalDBModel.FK_Appointment_PatientId">
             <End Role="User" EntitySet="Users" />
             <End Role="Appointment" EntitySet="Appointments" />
@@ -883,6 +881,10 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <AssociationSet Name="FK_PatientDiagnosisHistoryMaster_AppointmentId" Association="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId">
             <End Role="Appointment" EntitySet="Appointments" />
             <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInformation_CivilStatusId" Association="DentalDBModel.FK_UserInformation_CivilStatusId">
+            <End Role="CivilStatu" EntitySet="CivilStatus" />
+            <End Role="UserInformation" EntitySet="UserInformations" />
           </AssociationSet>
           <AssociationSet Name="Fk_UserMenu_MenuId" Association="DentalDBModel.Fk_UserMenu_MenuId">
             <End Role="DentalMenu" EntitySet="DentalMenus" />
@@ -944,6 +946,10 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <End Role="User" EntitySet="Users" />
             <End Role="PatientMedicalHistory" EntitySet="PatientMedicalHistories" />
           </AssociationSet>
+          <AssociationSet Name="FK_PatientMouth_PatientId" Association="DentalDBModel.FK_PatientMouth_PatientId">
+            <End Role="UserInformation" EntitySet="UserInformations" />
+            <End Role="PatientMouth" EntitySet="PatientMouths" />
+          </AssociationSet>
           <AssociationSet Name="FK_PatientTooth_PatientMouthId" Association="DentalDBModel.FK_PatientTooth_PatientMouthId">
             <End Role="PatientMouth" EntitySet="PatientMouths" />
             <End Role="PatientTooth" EntitySet="PatientTeeth" />
@@ -952,31 +958,21 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <End Role="ScheduleMaster" EntitySet="ScheduleMasters" />
             <End Role="ScheduleDetail" EntitySet="ScheduleDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_UserTypeId" Association="DentalDBModel.FK_User_UserTypeId">
-            <End Role="UserType" EntitySet="UserTypes" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="Fk_UserMenu_UserTypeId" Association="DentalDBModel.Fk_UserMenu_UserTypeId">
-            <End Role="UserType" EntitySet="UserTypes" />
-            <End Role="UserMenu" EntitySet="UserMenus" />
-          </AssociationSet>
-          <EntitySet Name="UserInformations" EntityType="DentalDBModel.UserInformation" />
-          <EntitySet Name="V_UsersList" EntityType="DentalDBModel.V_UsersList" />
-          <AssociationSet Name="FK_UserInformation_CivilStatusId" Association="DentalDBModel.FK_UserInformation_CivilStatusId">
-            <End Role="CivilStatu" EntitySet="CivilStatus" />
-            <End Role="UserInformation" EntitySet="UserInformations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientMouth_PatientId" Association="DentalDBModel.FK_PatientMouth_PatientId">
-            <End Role="UserInformation" EntitySet="UserInformations" />
-            <End Role="PatientMouth" EntitySet="PatientMouths" />
-          </AssociationSet>
           <AssociationSet Name="FK_ScheduleMaster_DentistId" Association="DentalDBModel.FK_ScheduleMaster_DentistId">
             <End Role="UserInformation" EntitySet="UserInformations" />
             <End Role="ScheduleMaster" EntitySet="ScheduleMasters" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_UserTypeId" Association="DentalDBModel.FK_User_UserTypeId">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserInformation_PatientId" Association="DentalDBModel.FK_UserInformation_PatientId">
             <End Role="User" EntitySet="Users" />
             <End Role="UserInformation" EntitySet="UserInformations" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_UserMenu_UserTypeId" Association="DentalDBModel.Fk_UserMenu_UserTypeId">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="UserMenu" EntitySet="UserMenus" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__RefactorLog">
@@ -994,20 +990,20 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ScheduleMasterId" Type="Int32" Nullable="false" />
           <Property Name="ScheduleDetailId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="DentalDBModel.FK_Appointment_PatientId" FromRole="Appointment" ToRole="User" />
           <NavigationProperty Name="ScheduleDetail" Relationship="DentalDBModel.FK_Appointment_ScheduleDetailId" FromRole="Appointment" ToRole="ScheduleDetail" />
           <NavigationProperty Name="ScheduleMaster" Relationship="DentalDBModel.FK_Appointment_ScheduleMasterId" FromRole="Appointment" ToRole="ScheduleMaster" />
           <NavigationProperty Name="PatientDiagnosisHistoryMasters" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="Appointment" ToRole="PatientDiagnosisHistoryMaster" />
-          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="CivilStatu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserInformations" Relationship="DentalDBModel.FK_UserInformation_CivilStatusId" FromRole="CivilStatu" ToRole="UserInformation" />
@@ -1111,7 +1107,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Question7f" Type="Int32" />
           <Property Name="Question7g" Type="Int32" />
           <Property Name="Question7Others" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="User" Relationship="DentalDBModel.FK_PatientDentalHistory_PatientId" FromRole="PatientDentalHistory" ToRole="User" />
         </EntityType>
         <EntityType Name="PatientDiagnosisHistoryDetail">
@@ -1167,7 +1162,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Question17" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Question18" Type="Int32" />
           <Property Name="Question19" Type="Int32" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="DentalDBModel.FK_PatientMedicalHistory_PatientId" FromRole="PatientMedicalHistory" ToRole="User" />
         </EntityType>
         <EntityType Name="PatientMouth">
@@ -1177,10 +1171,9 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MouthTypeId" Type="Int32" />
           <Property Name="PatientId" Type="Int32" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MouthType" Relationship="DentalDBModel.FK_PatientMouth_MouthTypeId" FromRole="PatientMouth" ToRole="MouthType" />
-          <NavigationProperty Name="PatientTeeth" Relationship="DentalDBModel.FK_PatientTooth_PatientMouthId" FromRole="PatientMouth" ToRole="PatientTooth" />
           <NavigationProperty Name="UserInformation" Relationship="DentalDBModel.FK_PatientMouth_PatientId" FromRole="PatientMouth" ToRole="UserInformation" />
+          <NavigationProperty Name="PatientTeeth" Relationship="DentalDBModel.FK_PatientTooth_PatientMouthId" FromRole="PatientMouth" ToRole="PatientTooth" />
         </EntityType>
         <EntityType Name="PatientTooth">
           <Key>
@@ -1195,7 +1188,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Height" Type="Int32" />
           <Property Name="rotation" Type="Int32" />
           <Property Name="ImageUrlId" Type="Int32" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ImageUrl" Relationship="DentalDBModel.FK_PatientTooth_ImageUrlId" FromRole="PatientTooth" ToRole="ImageUrl" />
           <NavigationProperty Name="PatientMouth" Relationship="DentalDBModel.FK_PatientTooth_PatientMouthId" FromRole="PatientTooth" ToRole="PatientMouth" />
         </EntityType>
@@ -1258,6 +1250,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointments" Relationship="DentalDBModel.FK_Appointment_PatientId" FromRole="User" ToRole="Appointment" />
           <NavigationProperty Name="Messages" Relationship="DentalDBModel.FK_User_ReceiverId" FromRole="User" ToRole="Message" />
@@ -1268,7 +1261,29 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="PatientMedicalHistories" Relationship="DentalDBModel.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
           <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
           <NavigationProperty Name="UserInformations" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="User" ToRole="UserInformation" />
-          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CivilStatusId" Type="Int32" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CivilStatu" Relationship="DentalDBModel.FK_UserInformation_CivilStatusId" FromRole="UserInformation" ToRole="CivilStatu" />
+          <NavigationProperty Name="PatientMouths" Relationship="DentalDBModel.FK_PatientMouth_PatientId" FromRole="UserInformation" ToRole="PatientMouth" />
+          <NavigationProperty Name="ScheduleMasters" Relationship="DentalDBModel.FK_ScheduleMaster_DentistId" FromRole="UserInformation" ToRole="ScheduleMaster" />
+          <NavigationProperty Name="User" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="UserInformation" ToRole="User" />
         </EntityType>
         <EntityType Name="UserMenu">
           <Key>
@@ -1304,6 +1319,36 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="ParentId" Type="Int32" />
           <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_UsersList">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="LastName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CivilStatusId" Type="Int32" />
+          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Double" />
         </EntityType>
         <Association Name="FK_Appointment_PatientId">
           <End Type="DentalDBModel.User" Role="User" Multiplicity="0..1">
@@ -1352,6 +1397,18 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Principal>
             <Dependent Role="PatientDiagnosisHistoryMaster">
               <PropertyRef Name="AppointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInformation_CivilStatusId">
+          <End Type="DentalDBModel.CivilStatu" Role="CivilStatu" Multiplicity="0..1" />
+          <End Type="DentalDBModel.UserInformation" Role="UserInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CivilStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInformation">
+              <PropertyRef Name="CivilStatusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1543,6 +1600,18 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PatientMouth_PatientId">
+          <End Type="DentalDBModel.UserInformation" Role="UserInformation" Multiplicity="0..1" />
+          <End Type="DentalDBModel.PatientMouth" Role="PatientMouth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientMouth">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientTooth_PatientMouthId">
           <End Type="DentalDBModel.PatientMouth" Role="PatientMouth" Multiplicity="0..1" />
           <End Type="DentalDBModel.PatientTooth" Role="PatientTooth" Multiplicity="*" />
@@ -1569,6 +1638,18 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ScheduleMaster_DentistId">
+          <End Type="DentalDBModel.UserInformation" Role="UserInformation" Multiplicity="1" />
+          <End Type="DentalDBModel.ScheduleMaster" Role="ScheduleMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleMaster">
+              <PropertyRef Name="DentistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserTypeId">
           <End Type="DentalDBModel.UserType" Role="UserType" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1583,107 +1664,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Fk_UserMenu_UserTypeId">
-          <End Type="DentalDBModel.UserType" Role="UserType" Multiplicity="1" />
-          <End Type="DentalDBModel.UserMenu" Role="UserMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserMenu">
-              <PropertyRef Name="UserTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="UserInformation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Height" Type="Double" />
-          <Property Name="Weight" Type="Double" />
-          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CivilStatusId" Type="Int32" />
-          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CivilStatu" Relationship="DentalDBModel.FK_UserInformation_CivilStatusId" FromRole="UserInformation" ToRole="CivilStatu" />
-          <NavigationProperty Name="PatientMouths" Relationship="DentalDBModel.FK_PatientMouth_PatientId" FromRole="UserInformation" ToRole="PatientMouth" />
-          <NavigationProperty Name="ScheduleMasters" Relationship="DentalDBModel.FK_ScheduleMaster_DentistId" FromRole="UserInformation" ToRole="ScheduleMaster" />
-          <NavigationProperty Name="User" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="UserInformation" ToRole="User" />
-        </EntityType>
-        <EntityType Name="V_UsersList">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Username" />
-            <PropertyRef Name="Password" />
-            <PropertyRef Name="UserTypeId" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="BirthDate" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="Gender" />
-            <PropertyRef Name="LastName" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CivilStatusId" Type="Int32" />
-          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Height" Type="Double" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Weight" Type="Double" />
-        </EntityType>
-        <Association Name="FK_UserInformation_CivilStatusId">
-          <End Type="DentalDBModel.CivilStatu" Role="CivilStatu" Multiplicity="0..1" />
-          <End Type="DentalDBModel.UserInformation" Role="UserInformation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CivilStatu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserInformation">
-              <PropertyRef Name="CivilStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientMouth_PatientId">
-          <End Type="DentalDBModel.UserInformation" Role="UserInformation" Multiplicity="0..1" />
-          <End Type="DentalDBModel.PatientMouth" Role="PatientMouth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserInformation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientMouth">
-              <PropertyRef Name="PatientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ScheduleMaster_DentistId">
-          <End Type="DentalDBModel.UserInformation" Role="UserInformation" Multiplicity="1" />
-          <End Type="DentalDBModel.ScheduleMaster" Role="ScheduleMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserInformation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ScheduleMaster">
-              <PropertyRef Name="DentistId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserInformation_PatientId">
           <End Type="DentalDBModel.User" Role="User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1695,6 +1675,18 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Principal>
             <Dependent Role="UserInformation">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_UserMenu_UserTypeId">
+          <End Type="DentalDBModel.UserType" Role="UserType" Multiplicity="1" />
+          <End Type="DentalDBModel.UserMenu" Role="UserMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMenu">
+              <PropertyRef Name="UserTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1714,9 +1706,9 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="DentalDBModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ScheduleDetailId" ColumnName="ScheduleDetailId" />
                 <ScalarProperty Name="ScheduleMasterId" ColumnName="ScheduleMasterId" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
@@ -1813,7 +1805,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="PatientDentalHistories">
             <EntityTypeMapping TypeName="DentalDBModel.PatientDentalHistory">
               <MappingFragment StoreEntitySet="PatientDentalHistory">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Question7Others" ColumnName="Question7Others" />
                 <ScalarProperty Name="Question7g" ColumnName="Question7g" />
                 <ScalarProperty Name="Question7f" ColumnName="Question7f" />
@@ -1860,7 +1851,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="PatientMedicalHistories">
             <EntityTypeMapping TypeName="DentalDBModel.PatientMedicalHistory">
               <MappingFragment StoreEntitySet="PatientMedicalHistory">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Question19" ColumnName="Question19" />
                 <ScalarProperty Name="Question18" ColumnName="Question18" />
                 <ScalarProperty Name="Question17" ColumnName="Question17" />
@@ -1888,7 +1878,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="PatientMouths">
             <EntityTypeMapping TypeName="DentalDBModel.PatientMouth">
               <MappingFragment StoreEntitySet="PatientMouth">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="MouthTypeId" ColumnName="MouthTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1898,7 +1887,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="PatientTeeth">
             <EntityTypeMapping TypeName="DentalDBModel.PatientTooth">
               <MappingFragment StoreEntitySet="PatientTooth">
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ImageUrlId" ColumnName="ImageUrlId" />
                 <ScalarProperty Name="rotation" ColumnName="rotation" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
@@ -1961,11 +1949,31 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DentalDBModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInformations">
+            <EntityTypeMapping TypeName="DentalDBModel.UserInformation">
+              <MappingFragment StoreEntitySet="UserInformation">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="CivilStatusId" ColumnName="CivilStatusId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1998,26 +2006,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInformations">
-            <EntityTypeMapping TypeName="DentalDBModel.UserInformation">
-              <MappingFragment StoreEntitySet="UserInformation">
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
-                <ScalarProperty Name="CivilStatusId" ColumnName="CivilStatusId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

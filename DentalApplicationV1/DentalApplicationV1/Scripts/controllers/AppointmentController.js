@@ -140,6 +140,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
             "DataItem": {},
             "ServerData": [],
             "ViewOnly": false,
+            "contextMenu": ['Create', 'Edit', 'Delete', 'View'],
             "contextMenuLabel": ['Create', 'Edit', 'Delete', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
         };
