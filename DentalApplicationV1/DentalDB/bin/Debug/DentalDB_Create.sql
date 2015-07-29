@@ -340,7 +340,7 @@ GO
 CREATE TABLE [dbo].[TreatmentType] (
     [Id]          INT           IDENTITY (1, 1) NOT NULL,
     [Name]        VARCHAR (50)  NOT NULL,
-    [Description] VARCHAR (100) NOT NULL,
+    [Description] VARCHAR (100) NULL,
     [Status]      INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );

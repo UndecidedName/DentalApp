@@ -9,12 +9,14 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DentalApplicationV1.Models;
+using YbanezNacua.Models;
 
 namespace DentalApplicationV1.APIController
 {
     public class UserTypesController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
+        private Response response = new Response();
         private int pageSize = 20;
         // GET: api/UserTypes
         public IQueryable<UserType> GetUserTypes()
@@ -82,14 +84,11 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUserType(int id, UserType userType)
         {
-            if (!ModelState.IsValid)
+            response.status = "SUCCESS";
+            if (!ModelState.IsValid || id != userType.Id)
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != userType.Id)
-            {
-                return BadRequest();
+                response.message = "Bad request.";
+                return Ok(response);
             }
 
             db.Entry(userType).State = EntityState.Modified;
@@ -97,51 +96,71 @@ namespace DentalApplicationV1.APIController
             try
             {
                 db.SaveChanges();
+                response.status = "SUCCESS";
+                response.objParam1 = userType;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!UserTypeExists(id))
                 {
-                    return NotFound();
+                    response.message = "User type doesn't exist.";
                 }
                 else
                 {
-                    throw;
+                    response.message = e.InnerException.InnerException.Message.ToString();
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
 
         // POST: api/UserTypes
         [ResponseType(typeof(UserType))]
         public IHttpActionResult PostUserType(UserType userType)
         {
+            response.status = "FAILURE";
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                response.message = "Bad request.";
+                return Ok(response);
+            }
+            try
+            {
+                db.UserTypes.Add(userType);
+                db.SaveChanges();
+                response.status = "SUCCESS";
+                response.objParam1 = userType;
+            }
+            catch (Exception e) {
+                response.message = e.InnerException.InnerException.Message.ToString();
             }
 
-            db.UserTypes.Add(userType);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = userType.Id }, userType);
+            return Ok(response);
         }
 
         // DELETE: api/UserTypes/5
         [ResponseType(typeof(UserType))]
         public IHttpActionResult DeleteUserType(int id)
         {
+            response.status = "FAILURE";
             UserType userType = db.UserTypes.Find(id);
             if (userType == null)
             {
-                return NotFound();
+                response.message = "User Type doesn't exist.";
+                return Ok(response);
+            }
+            try
+            {
+                db.UserTypes.Remove(userType);
+                db.SaveChanges();
+                response.status = "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                response.message = e.InnerException.InnerException.Message.ToString();
             }
 
-            db.UserTypes.Remove(userType);
-            db.SaveChanges();
-
-            return Ok(userType);
+            return Ok(response);
         }
 
         protected override void Dispose(bool disposing)

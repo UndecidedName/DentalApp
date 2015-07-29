@@ -852,7 +852,9 @@
     <Content Include="Scripts\controllers\NotificationController.js" />
     <Content Include="Scripts\controllers\ScheduleController.js" />
     <Content Include="Scripts\controllers\SettingController.js" />
-    <Content Include="Scripts\controllers\UserMenu.js" />
+    <Content Include="Scripts\controllers\TreatmentTypeController.js" />
+    <Content Include="Scripts\controllers\UserMenuController.js" />
+    <Content Include="Scripts\controllers\UserTypeController.js" />
     <Content Include="Scripts\directives\dataExport.js" />
     <Content Include="Scripts\directives\dataGrid1.js" />
     <Content Include="Scripts\directives\dataGrid2.js" />
@@ -875,6 +877,7 @@
     <Compile Include="APIController\CivilStatusController.cs" />
     <Compile Include="APIController\DentalMenusController.cs" />
     <Compile Include="APIController\NotificationsController.cs" />
+    <Compile Include="APIController\TreatmentTypesController.cs" />
     <Compile Include="APIController\UserInformationsController.cs" />
     <Compile Include="APIController\ScheduleDetailsController.cs" />
     <Compile Include="APIController\ScheduleMastersController.cs" />
@@ -1466,6 +1469,8 @@
     <Content Include="Views\User\Templates\Menu.cshtml" />
     <Content Include="Views\User\Templates\CivilStatus.cshtml" />
     <Content Include="Views\User\Templates\UserMenu.cshtml" />
+    <Content Include="Views\User\Templates\UserType.cshtml" />
+    <Content Include="Views\User\Templates\TreatmentType.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

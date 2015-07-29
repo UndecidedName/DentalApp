@@ -227,7 +227,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
