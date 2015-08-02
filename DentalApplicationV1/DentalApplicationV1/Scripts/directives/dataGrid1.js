@@ -30,8 +30,9 @@
                                             ServerData  - contains the data from the server response
                                             DataTarget  - Contains the data target for the context-menu
                                             ViewOnly    - Determine if the fields of the selected item are editable or not
-                                            ContextMenu - Actions to be passed in each context menu item
-                                            ContextMenuLabel - Lable for each context menu item
+                                            contextMenu - Actions to be passed in each context menu item
+                                            contextMenuLabel - Lable for each context menu item
+                                            contextMenuLabelImage - Image for the menu
                                         */
             submitbuttontext: '=',      //scope that holds the submit button label
             submitbuttonlistener: '=',  //scope that will serve as listener that will identify if the user submit an action  
@@ -67,18 +68,22 @@
                                         */
             resetdata: '&',             //function that will reset the dataitem
             showformerror: '&',         //function that will trigger when an error occured
-            contextMenuLabel: '=',
-            contextMenuLabelImage: '='
         },
         templateUrl: '/Directive/DataGrid1',
         controller: function ($scope, $http, $interval, $filter, $parse, $compile, LxProgressService) {
             var stop;
-            $scope.sortByDesc = true;
-            $scope.sortByAsc = false;
             $scope.criteria = $scope.datadefinition.Keys[0];
             $scope.selectedIndex = null;
             $scope.filteredValue = "";
-           
+
+            if ($scope.datadefinition.Type[0] == 'DateTime' || $scope.datadefinition.Type[0] == 'Date' || $scope.datadefinition.Type[0] == 'Time' || $scope.datadefinition.Type[0] == 'Formatted-Time') {
+                $scope.sortByDesc = false;
+                $scope.sortByAsc = true;
+            }
+            else {
+                $scope.sortByDesc = true;
+                $scope.sortByAsc = false;
+            }
             //Set the focus on top of the page during load
             $scope.focusOnTop = function () {
                 $(document).ready(function () {
@@ -302,10 +307,23 @@
                 $scope.selectedIndex = $scope.searchData(id);
             };
 
+            //Initialize submit button text
+            $scope.initializeSubmitButtonText = function (action) {
+                for (var i = 0; i < $scope.datadefinition.contextMenu.length; i++)
+                {
+                    if ($scope.datadefinition.contextMenu[i] == action) {
+                        if (action != 'View')
+                            $scope.submitbuttontext = $scope.datadefinition.contextMenuLabel[i];
+                        else
+                            $scope.submitbuttontext = "Close";
+                    }
+                }
+            }
+
             //Manage the main action
             $scope.action = function (action) {
-                $scope.submitbuttontext = "Submit";
                 $scope.datadefinition.ViewOnly = false;
+                $scope.initializeSubmitButtonText(action);
                 switch (action) {
                     case 'Create':
                         $scope.resetdata();
@@ -315,12 +333,10 @@
                         break;
                     case 'Delete':
                         $scope.datadefinition.DataItem = $scope.datadefinition.DataList[$scope.selectedIndex];
-                        $scope.submitbuttontext = "Delete";
                         $scope.datadefinition.ViewOnly = true;
                         break;
                     case 'View':
                         $scope.datadefinition.DataItem = $scope.datadefinition.DataList[$scope.selectedIndex];
-                        $scope.submitbuttontext = "Close";
                         $scope.datadefinition.ViewOnly = true;
                         break;
                 }
@@ -417,11 +433,11 @@
                 LxProgressService.circular.show('#5fa2db', '#progress');
                 $http.post($scope.datadefinition.APIUrl[1], $scope.datadefinition.DataItem)
                     .success(function (data, status) {
+                        $scope.datadefinition.ServerData = [];
+                        $scope.datadefinition.ServerData.push(data);
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataItem.Id = data.objParam1.Id;
                             $scope.datadefinition.DataList.push($scope.datadefinition.DataItem);
-                            $scope.datadefinition.ServerData = [];
-                            $scope.datadefinition.ServerData.push(data);
                             //$scope.closecontainer();
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostSave' });
@@ -444,11 +460,11 @@
                 LxProgressService.circular.show('#5fa2db', '#progress');
                 $http.put($scope.datadefinition.APIUrl[1] + "/" + id, $scope.datadefinition.DataItem)
                     .success(function (data, status) {
+                        $scope.datadefinition.ServerData = [];
+                        $scope.datadefinition.ServerData.push(data);
                         if (data.status == "SUCCESS") {
                             //$scope.closecontainer();
                             LxProgressService.circular.hide();
-                            $scope.datadefinition.ServerData = [];
-                            $scope.datadefinition.ServerData.push(data);
                             $scope.otheractions({ action: 'PostUpdate' });
                             return true;
                         }
@@ -469,11 +485,11 @@
                 LxProgressService.circular.show('#5fa2db', '#progress');
                 $http.delete($scope.datadefinition.APIUrl[1] + "/" + id)
                     .success(function (data, status) {
+                        $scope.datadefinition.ServerData = [];
+                        $scope.datadefinition.ServerData.push(data);
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataList.splice($scope.selectedIndex, 1);
                             LxProgressService.circular.hide();
-                            $scope.datadefinition.ServerData = [];
-                            $scope.datadefinition.ServerData.push(data);
                             $scope.otheractions({ action: 'PostDelete' });
                             return true;
                         }
@@ -499,8 +515,12 @@
             };
 
             //Function that check required fields
-            $scope.checkRequiredFields = function () {
+            $scope.checkRequiredFields = function (action) {
                 var key = "", label = "";
+
+                if (action == 'View')
+                    return true;
+
                 for (var i = 0; i < $scope.datadefinition.RequiredFields.length; i++) {
                     var split = $scope.datadefinition.RequiredFields[i].split("-");
                     key = split[0];
@@ -530,7 +550,7 @@
             //Manage the submition of data base on the user action
             $scope.submit = function (action) {
                 if ($scope.otheractions({ action: 'PreSubmit' })) {
-                    if ($scope.checkRequiredFields()) {
+                    if ($scope.checkRequiredFields(action)) {
                         switch (action) {
                             case 'Create':
                                 if ($scope.otheractions({ action: 'PreSave' }))
@@ -578,6 +598,7 @@
                         $scope.datadefinition.DataList.splice(($scope.datadefinition.DataList.length - 1), 1);
                 }
                 $scope.processSorting($scope.criteria);
+                $scope.focusOnTop();
             };
 
             init();

@@ -11,6 +11,7 @@
     <EntitySetMapping Name="Appointments">
       <EntityTypeMapping TypeName="DentalDBModel.Appointment">
         <MappingFragment StoreEntitySet="Appointment">
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
           <ScalarProperty Name="Remarks" ColumnName="Remarks" />

@@ -38,7 +38,10 @@ namespace DentalApplicationV1.APIController
 
                 return db.Notifications
                     .Where(n => n.UserId == userId)
-                    .OrderByDescending(n=> n.Date).Skip((length)).Take(fetch);
+                    .OrderByDescending(n => n.Status)
+                    .OrderByDescending(n => n.Date)
+                    .OrderByDescending(n => n.Id)
+                    .Skip((length)).Take(fetch);
             }
             else
             {

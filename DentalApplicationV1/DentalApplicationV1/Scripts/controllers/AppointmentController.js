@@ -128,10 +128,10 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Create";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Date', 'Time', 'Dentist Name', 'Message', 'Status', 'Remarks', 'Remarks Date', 'No'],
-            "Keys": ['ScheduleDate', 'ScheduleTime', 'DentistName', 'Message', 'Status', 'Remarks', 'TransactionDate'],
+            "Header": ['Date', 'Time', 'Status', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
+            "Keys": ['ScheduleDate', 'ScheduleTime', 'Status', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['ScheduleDate-Date', 'ScheduleTime-Time', 'DentistName-Dentist Name'],
-            "Type": ['Date', 'Time', 'String', 'String-Default', 'Status-Approver', 'String-Default', 'Date'],
+            "Type": ['Date', 'Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'Date'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &userId=' + $rootScope.user.Id,//get
@@ -141,12 +141,15 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
             "ServerData": [],
             "ViewOnly": false,
             "contextMenu": ['Create', 'Edit', 'Delete', 'View'],
-            "contextMenuLabel": ['Create', 'Edit', 'Delete', 'View'],
+            "contextMenuLabel": ['Create', 'Edit', 'Cancel', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
         };
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {
+                case "PostAction":
+                    $scope.dataDefinitionMaster.DataItem.TransactionDate = $filter('date')($scope.dataDefinitionMaster.DataItem.TransactionDate, "MM/dd/yyyy hh:mm:ss a")
+                    return true;
                 case 'PostCreateAction':
                     $scope.initializeStatusHolder();
                     return true;
@@ -162,6 +165,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 case 'PreSave':
                     delete $scope.dataDefinitionMaster.DataItem.Id;
                     $scope.dataDefinitionMaster.DataItem.PatientId = $rootScope.user.Id;
+                    $scope.dataDefinitionMaster.DataItem.User.UserTypeId = $rootScope.user.UserTypeId;
                     return true;
                 case 'PreUpdate':
                     delete $scope.dataDefinitionMaster.DataItem.PatientDiagnosisHistoryMasters;
@@ -172,9 +176,52 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                     return true;
                 case 'PostSave':
                     $scope.dataDefinitionMaster.DataItem.Date = $filter('date')($scope.dataDefinitionMaster.DataItem.Date, "MM/dd/yyyy");
+                    //Send notification to dentist(s) and secretar(y/ies)
+                    for (var i = 0; i < $rootScope.usersForNotification.length; i++) {
+                        $scope.notification = {
+                            Date: $filter('date')(new Date(), "MM/dd/yyyy hh:mm:ss"),
+                            Description: null,
+                            UserId: $rootScope.usersForNotification[i].Id,
+                            Status: 0
+                        };
+                        $scope.data = angular.copy($scope.dataDefinitionMaster.DataItem);
+                        var patient =   $rootScope.user.FirstName + " " +
+                                        $rootScope.user.MiddleName + " " +
+                                        $rootScope.user.LastName;
+                        $scope.notification.Description = patient + " has set an appointment on " + $scope.data.ScheduleDate + " at " + $scope.data.ScheduleTime + ".";
+                        $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
+                    }
                     $scope.closeForm();
                     return true;
+                case 'PreDelete':
+                    if ($scope.dataDefinitionMaster.DataItem.Status == 2) {
+                        $scope.showFormErrorMaster("Appointment is already disapproved, no need for you to cancel.");
+                        return false;
+                    }
+                    else
+                        return true;
                 case 'PostDelete':
+                    //Send notification to dentist(s) and secretar(y/ies)
+                    for (var i = 0; i < $rootScope.usersForNotification.length; i++) {
+                        $scope.notification = {
+                            Date: $filter('date')(new Date(), "MM/dd/yyyy hh:mm:ss"),
+                            Description: null,
+                            UserId: $rootScope.usersForNotification[i].Id,
+                            Status: 0
+                        };
+                        $scope.data = angular.copy($scope.dataDefinitionMaster.ServerData[0].objParam1);
+                        var patient = $scope.data[0].User.UserInformations[0].FirstName + " " +
+                                        $scope.data[0].User.UserInformations[0].MiddleName + " " +
+                                        $scope.data[0].User.UserInformations[0].LastName;
+                        var gender = ($scope.data[0].User.UserInformations[0].Gender == 'M' ? 'his' : 'her');
+                        var date = $filter('date')($scope.data[0].ScheduleMaster.Date, "MM/dd/yyyy");
+                        var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
+                        var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
+                        startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
+                        endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
+                        $scope.notification.Description = patient + " has cancelled " + gender + " appointment on " + date + " at " + startTime + " - " + endTime + ".";
+                        $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
+                    }
                     $scope.closeForm();
                     return true;
                 case 'PostLoadAction':
@@ -204,7 +251,9 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 ScheduleDate: null,
                 ScheduleTime: null,
                 DentistName: null,
+                User: { UserTypeId: null },
                 Status: 0,
+                Type: "NormalAppointment",
                 StatusHolder: 0
             }
         };

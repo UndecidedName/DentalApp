@@ -25,8 +25,8 @@ namespace DentalApplicationV1.APIController
         {
             return db.Appointments;
         }
-
-        public IQueryable<Appointment> GetAppointment(int length, int userId)
+        // GET: api/Appointments?length=0&userId=1
+        public IHttpActionResult GetAppointment(int length, int userId)
         {
             int fetch;
             var records = db.Appointments.Where(a => a.PatientId == userId && a.Status != 3).Count();
@@ -36,46 +36,115 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.Appointments
-                    .Where(a => a.PatientId == userId && a.Status != 3)
+                var appointments = db.Appointments
                     .Include(a => a.ScheduleMaster)
                     .Include(a => a.ScheduleDetail)
                     .Include(a => a.ScheduleMaster.UserInformation)
-                    .OrderBy(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch);
+                    .Where(a => a.PatientId == userId && a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).ToArray();
+                appointments[0].Message = null;
+                appointments[0].User = null;
+                appointments[0].PatientDiagnosisHistoryMasters = null;
+                appointments[0].ScheduleMaster.Appointments = null;
+                appointments[0].ScheduleMaster.ScheduleDetails = null;
+                appointments[0].ScheduleDetail.Appointments = null;
+                appointments[0].ScheduleDetail.ScheduleMaster = null;
+                appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
+                appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                appointments[0].ScheduleMaster.UserInformation.User = null;
+
+                return Ok(appointments.Skip((length)).Take(fetch));
             }
             else
             {
-                IQueryable<Appointment> a = new List<Appointment>().AsQueryable();
-                return a;
+                return Ok();
             }
         }
-        // GET: api/Appointments?length=0&type=appointments
-        public IQueryable<Appointment> GetAppointment(int length, String type)
+
+        // GET: api/Appointments?length=0&type=AllAppointments
+        public IHttpActionResult GetAppointment(int length, String type)
         {
             int fetch;
-            var records = db.Appointments.Where(a => a.Status != 3).Count();
-            if (records > length)
+            if (type.Equals("AllAppointments"))
             {
-                if ((records - length) > pageSize)
-                    fetch = pageSize;
+                var records = db.Appointments.Where(a => a.Status != 3).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var appointments = db.Appointments
+                        .Include(a => a.User.UserInformations)
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).ToArray();
+                    appointments[0].User.Appointments = null;
+                    appointments[0].User.Messages = null;
+                    appointments[0].User.Messages1 = null;
+                    appointments[0].User.Notifications = null;
+                    appointments[0].User.PatientDentalHistories = null;
+                    appointments[0].User.PatientDiagnosisHistoryMasters = null;
+                    appointments[0].User.PatientMedicalHistories = null;
+                    appointments[0].User.UserType = null;
+                    appointments[0].PatientDiagnosisHistoryMasters = null;
+                    appointments[0].ScheduleMaster.Appointments = null;
+                    appointments[0].ScheduleMaster.ScheduleDetails = null;
+                    appointments[0].ScheduleDetail.Appointments = null;
+                    appointments[0].ScheduleDetail.ScheduleMaster = null;
+                    appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
+                    appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                    appointments[0].ScheduleMaster.UserInformation.CivilStatu = null;
+                    appointments[0].ScheduleMaster.UserInformation.User = null;
+                    return Ok(appointments.Skip((length)).Take(fetch));
+                }
                 else
-                    fetch = records - length;
-
-                return db.Appointments
-                    .Where(a => a.Status != 3)
-                    .Include(a => a.User.UserInformations)
-                    .Include(a => a.ScheduleMaster)
-                    .Include(a => a.ScheduleDetail)
-                    .Include(a => a.ScheduleMaster.UserInformation)
-                    .OrderBy(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch);
+                {
+                    return Ok();
+                }
             }
+            //Special Appointments
             else
             {
-                IQueryable<Appointment> a = new List<Appointment>().AsQueryable();
-                return a;
+                var records = db.Appointments.Where(a => a.Status != 3 && a.Type.Equals("SpecialAppointment")).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var appointments = db.Appointments
+                        .Include(a => a.User.UserInformations)
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).ToArray();
+                    appointments[0].User.Appointments = null;
+                    appointments[0].User.Messages = null;
+                    appointments[0].User.Messages1 = null;
+                    appointments[0].User.Notifications = null;
+                    appointments[0].User.PatientDentalHistories = null;
+                    appointments[0].User.PatientDiagnosisHistoryMasters = null;
+                    appointments[0].User.PatientMedicalHistories = null;
+                    appointments[0].User.UserType = null;
+                    appointments[0].PatientDiagnosisHistoryMasters = null;
+                    appointments[0].ScheduleMaster.Appointments = null;
+                    appointments[0].ScheduleMaster.ScheduleDetails = null;
+                    appointments[0].ScheduleDetail.Appointments = null;
+                    appointments[0].ScheduleDetail.ScheduleMaster = null;
+                    appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
+                    appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                    appointments[0].ScheduleMaster.UserInformation.CivilStatu = null;
+                    appointments[0].ScheduleMaster.UserInformation.User = null;
+                    return Ok(appointments.Skip((length)).Take(fetch));
+                }
+                else
+                {
+                    return Ok();
+                }
             }
         }
+
         // GET: api/Appointments/5
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult GetAppointment(int id)
@@ -111,16 +180,35 @@ namespace DentalApplicationV1.APIController
 
             try
             {
+                switch (appointment.Status) { 
+                    case 2:
+                        //open schedule detail and schedule master status if appointment is disapproved
+                        ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
+                        ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+                        break;
+                    default:
+                        //close schedule detail and schedule master status if appointment is approved
+                        ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 1);
+                        ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+                        break;
 
-                if (appointment.Status == 2)
-                {
-                    //open schedule detail and schedule master status if appointment is disapproved
-                    ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
-                    ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
                 }
                 db.SaveChanges();
+                //Get appointment details for notification
+                var getAppointment = db.Appointments.Where(a => a.Id == appointment.Id)
+                    .Include(a => a.ScheduleMaster)
+                    .Include(a => a.ScheduleDetail).ToArray();
+                getAppointment[0].User = null;
+                getAppointment[0].Message = null;
+                getAppointment[0].PatientDiagnosisHistoryMasters = null;
+                getAppointment[0].ScheduleMaster.Appointments = null;
+                getAppointment[0].ScheduleMaster.ScheduleDetails = null;
+                getAppointment[0].ScheduleMaster.UserInformation = null;
+                getAppointment[0].ScheduleDetail.Appointments = null;
+                getAppointment[0].ScheduleDetail.ScheduleMaster = null;
+
                 response.status = "SUCCESS";
-                response.objParam1 = appointment;
+                response.objParam1 = getAppointment;
             }
             catch (Exception e)
             {
@@ -150,6 +238,10 @@ namespace DentalApplicationV1.APIController
             }
             try
             {
+                //Appointment that are made by the secretary or dentist will be approved directly
+                if (appointment.User.UserTypeId == 4 || appointment.User.UserTypeId == 5)
+                    appointment.Status = 1;
+                appointment.User = null;
                 //save appointment
                 saveAppointment(appointment, "dummy");
                 //close schedule detail status
@@ -178,21 +270,44 @@ namespace DentalApplicationV1.APIController
                 response.message = "Appointment not found.";
                 return Ok(response);
             }
+            //Check if appointment is already a reference in patient's diagnosis history
+            var searchDiagnosis = db.PatientDiagnosisHistoryMasters.Where(phm => phm.AppointmentId == id).ToArray();
+            if (searchDiagnosis.Length > 0)
+            {
+                response.message = "Appointment is already used in one of your session.";
+                return Ok(response);
+            }
             try
             {
-                if (appointment.Status == 0 || appointment.Status == 2)
-                {
-                    //cancel appointment status
-                    updateAppointmentStatus(id, 3);
-                    //open schedule detail status
-                    ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
-                    //update schedule master status
-                    ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
-                    response.status = "SUCCESS";
-                }
-                else {
-                    response.message = "You cannot delete approved appointments.";
-                }
+                //cancel appointment status
+                updateAppointmentStatus(id, 3);
+                //open schedule detail status
+                ScheduleDetail.updateScheduleDetailStatus((int)appointment.ScheduleDetailId, 0);
+                //update schedule master status
+                ScheduleMaster.updateScheduleMasterStatus((int)appointment.ScheduleMasterId, ref scheduleMasterStatus);
+
+                //Get Appointment Details for notification
+                var getAppointment = db.Appointments.Where(a => a.Id == appointment.Id)
+                    .Include(a => a.User.UserInformations)
+                    .Include(a => a.ScheduleMaster)
+                    .Include(a => a.ScheduleDetail).ToArray();
+                getAppointment[0].User.Appointments = null;
+                getAppointment[0].User.Messages = null;
+                getAppointment[0].User.Messages1 = null;
+                getAppointment[0].User.Notifications = null;
+                getAppointment[0].User.PatientDentalHistories = null;
+                getAppointment[0].User.PatientDiagnosisHistoryMasters = null;
+                getAppointment[0].User.PatientMedicalHistories = null;
+                getAppointment[0].User.UserType = null;
+                getAppointment[0].Message = null;
+                getAppointment[0].PatientDiagnosisHistoryMasters = null;
+                getAppointment[0].ScheduleMaster.Appointments = null;
+                getAppointment[0].ScheduleMaster.ScheduleDetails = null;
+                getAppointment[0].ScheduleMaster.UserInformation = null;
+                getAppointment[0].ScheduleDetail.Appointments = null;
+                getAppointment[0].ScheduleDetail.ScheduleMaster = null;
+                response.status = "SUCCESS";
+                response.objParam1 = getAppointment;
             }
             catch (Exception e)
             {

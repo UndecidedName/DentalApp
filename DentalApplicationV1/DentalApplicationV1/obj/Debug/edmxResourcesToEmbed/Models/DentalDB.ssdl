@@ -17,6 +17,7 @@
     <Property Name="ScheduleDetailId" Type="int" />
     <Property Name="Remarks" Type="varchar" MaxLength="500" />
     <Property Name="TransactionDate" Type="datetime" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CivilStatus">

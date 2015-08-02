@@ -1,8 +1,11 @@
 ﻿dentalApp.controller('NotificationController', NotificationController);
-function NotificationController(LxDialogService, LxNotificationService, LxDropdownService, LxProgressService, $http, $scope, $rootScope, $filter) {
+function NotificationController(LxDialogService, LxNotificationService, LxDropdownService, LxProgressService, $http, $scope, $rootScope, $interval, $filter) {
     $scope.getData = function () {
         $scope.loadData($rootScope.notificationList.length);
     }
+    //Trick to listen when scopes value are changed
+    $interval(function () {
+    }, 500)
 
     //Load data
     $scope.loadData = function (length) {
@@ -10,7 +13,7 @@ function NotificationController(LxDialogService, LxNotificationService, LxDropdo
         $http.get("api/Notifications?userid=" + $rootScope.user.Id + "&length=" + length)
             .success(function (data, status) {
                 for (var j = 0; j < data.length; j++)
-                    $scope.datadefinition.DataList.push(data[j]);
+                    $rootScope.notificationList.push(data[j]);
                 LxProgressService.circular.hide();
             })
             .error(function (data, status) {
@@ -86,4 +89,16 @@ function NotificationController(LxDialogService, LxNotificationService, LxDropdo
         }
         return $scope.filteredValue;
     };
+
+    //retrieve notifications
+    var promise = $interval(function () {
+        if ($rootScope.user != null) {
+            $http.get("api/Notifications?userid=" + $rootScope.user.Id + "&length=0")
+            .success(function (data, status) {
+                $rootScope.notificationList = data;
+                $interval.cancel(promise);
+                promise = undefined;
+            })
+        }
+    }, 500);
 };

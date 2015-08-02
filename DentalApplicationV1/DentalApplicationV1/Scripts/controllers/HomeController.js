@@ -62,6 +62,9 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                 LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
                 $location.path("/User/Index");
 
+                //get all users which are userType 4 for Dentist and 5 for Secretary
+                $rootScope.usersForNotification = data.objParam2;
+
                 //Save user info in cookie
                 if ($scope.userInfo.rememberMe == true) {
                     var expiryDate = new Date();
@@ -76,18 +79,9 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                         $cookies.remove('DentalPassword')
                     }
                 }
+                //Add user to Notification dictionary
                 $rootScope.addClient($rootScope.user.Id.toString(), $.connection.hub.id);
-                //retrieve notifications
-                var promise = $interval(function () {
-                    if ($rootScope.user != null) {
-                        $http.get("api/Notifications?userid=" + $rootScope.user.Id + "&length=0")
-                        .success(function (data, status) {
-                            $rootScope.notificationList = data;
-                            $interval.cancel(promise);
-                            promise = undefined;
-                        })
-                    }
-                }, 500);
+
                 LxProgressService.circular.hide();
                 LxDialogService.close(dialogId);
             }

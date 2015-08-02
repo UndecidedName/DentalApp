@@ -49,20 +49,20 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Edit";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Date', 'Time', 'Patient Name', 'Dentist Name', 'Message', 'Status', 'Remarks', 'Remarks Date', 'No'],
-            "Keys": ['ScheduleDate', 'ScheduleTime', 'PatientName', 'DentistName', 'Message', 'Status', 'Remarks', 'TransactionDate'],
+            "Header": ['Date', 'Time', 'Status', 'Patient Name', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
+            "Keys": ['ScheduleDate', 'ScheduleTime', 'Status', 'PatientName', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['Remarks-Remarks'],
-            "Type": ['Date', 'Time', 'String', 'String', 'String-Default', 'Status-Approver', 'String-Default', 'Date'],
+            "Type": ['Date', 'Time', 'Status-Approver', 'String', 'String', 'String-Default', 'String-Default', 'Date'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
-            "APIUrl": ['/api/Appointments?length= &type=appointments',//get
+            "APIUrl": ['/api/Appointments?length= &type=AllAppointments',//get
                        '/api/Appointments' //post, put, delete
             ],
             "DataItem": {},
             "ServerData": [],
             "ViewOnly": false,
             "contextMenu": ['Edit', 'View'],
-            "contextMenuLabel": ['Edit','View'],
+            "contextMenuLabel": ['Decide','View'],
             "contextMenuLabelImage": ['mdi mdi-table-edit', 'mdi mdi-eye']
         };
         //Do Overriding or Overloading in this function
@@ -73,10 +73,10 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                     return true;
                 case 'PostAction':
                     $scope.initializeStatusHolder();
-                    $scope.dataDefinitionMaster.DataItem.TransactionDate = $filter('date')(new Date(), "MM/dd/yyyy");
+                    $scope.dataDefinitionMaster.DataItem.TransactionDate = $filter('date')(new Date(), "MM/dd/yyyy hh:mm:ss");
                     return true;
                 case 'PostEditAction':
-                    $scope.dataDefinitionMaster.ViewOnly = ($scope.dataDefinitionMaster.DataItem.Status == 0 ? false : true);
+                    //$scope.dataDefinitionMaster.ViewOnly = ($scope.dataDefinitionMaster.DataItem.Status == 0 ? false : true);
                     $scope.dataDefinitionMaster.DataItem.TransactionStatus = ($scope.dataDefinitionMaster.DataItem.Status == 1 ? true :
                                                                              ($scope.dataDefinitionMaster.DataItem.Status == 0 ? true : false));
                     $scope.dataDefinitionMaster.DataItem.Remarks = ($scope.dataDefinitionMaster.DataItem.Status == 0 ? "" : $scope.dataDefinitionMaster.DataItem.Remarks);
@@ -88,21 +88,29 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                                                                              ($scope.dataDefinitionMaster.DataItem.Status == 0 ? true : false));
                     return true;
                 case 'PreUpdate':
-                    delete $scope.dataDefinitionMaster.DataItem.PatientDiagnosisHistoryMasters;
-                    delete $scope.dataDefinitionMaster.DataItem.User;
-                    delete $scope.dataDefinitionMaster.DataItem.ScheduleMaster;
-                    delete $scope.dataDefinitionMaster.DataItem.ScheduleDetail;
-                    //if approve set status to 1 for approve else 2 for disapprove
-                    $scope.dataDefinitionMaster.DataItem.Status = ($scope.dataDefinitionMaster.DataItem.TransactionStatus == true ? 1 : 2);
-                    return true;
+                        delete $scope.dataDefinitionMaster.DataItem.PatientDiagnosisHistoryMasters;
+                        delete $scope.dataDefinitionMaster.DataItem.User;
+                        delete $scope.dataDefinitionMaster.DataItem.ScheduleMaster;
+                        delete $scope.dataDefinitionMaster.DataItem.ScheduleDetail;
+                        //if approve set status to 1 for approve else 2 for disapprove
+                        $scope.dataDefinitionMaster.DataItem.Status = ($scope.dataDefinitionMaster.DataItem.TransactionStatus == true ? 1 : 2);
+                        return true;
                 case 'PostUpdate':
-                    $scope.initializeDataGridMasterStatus
+                    $scope.initializeDataGridMasterStatus();
                     $scope.notification = {
-                        Date: $filter('date')(new Date(), "MM/dd/yyyy"),
-                        Description: "Test Notification",
+                        Date: $filter('date')(new Date(), "MM/dd/yyyy hh:mm:ss a"),
+                        Description: null,
                         UserId: $scope.dataDefinitionMaster.DataItem.PatientId,
                         Status: 0
                     };
+                    $scope.data = angular.copy($scope.dataDefinitionMaster.ServerData[0].objParam1);
+                    var date = $filter('date')($scope.data[0].ScheduleMaster.Date, "MM/dd/yyyy");
+                    var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
+                    var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
+                    startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
+                    endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
+                    $scope.notification.Description = "Your appointment on " + date + " at " + startTime + " - "
+                                       + endTime + " has been" + ($scope.data[0].Status == 1 ? ' approved,' : ' disapproved,') + " please see remarks.";
                     $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
                     $scope.closeForm();
                     return true;

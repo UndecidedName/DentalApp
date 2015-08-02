@@ -26,7 +26,8 @@ namespace DentalApplicationV1.Models
         {
             // Call the broadcastMessage method to update clients.
             //Clients.Caller.broadcastMessage(notification.Date, notification.Description);
-            Clients.Client(clientsDictionary[clientName]).broadcastNotification(notification);
+            if (clientsDictionary.ContainsKey(clientName))
+                Clients.Client(clientsDictionary[clientName]).broadcastNotification(notification);
         }
         public override Task OnDisconnected()
         { 

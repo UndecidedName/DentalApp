@@ -23,26 +23,25 @@ namespace DentalApplicationV1.APIController
         }
 
         // GET: api/UserInformations?length=0&userType=1
-        public IQueryable<UserInformation> GetUserInformations(int length, int userType)
+        public IHttpActionResult GetUserInformations(int length, int userType)
         {
             int fetch;
-
-            //fetch Dentist only
-            if (db.UserInformations.Count() > length)
+            var records = db.UserInformations.Where(ui => ui.User.UserTypeId == userType && ui.User.Status == 1).Count();
+            if (records > length)
             {
-                if ((db.UserInformations.Where(ui => ui.User.UserTypeId == userType).Count() - length) > pageSize)
+                if ((records - length) > pageSize)
                     fetch = pageSize;
                 else
-                    fetch = db.UserInformations.Where(ui => ui.User.UserTypeId == userType).Count() - length;
-
-                return db.UserInformations.Where(ui => ui.User.UserTypeId == userType)
-                    .OrderBy(di => di.Id).Skip((length)).Take(fetch);
+                    fetch = records - length;
+                var userInformations = db.UserInformations.Where(ui => ui.User.UserTypeId == userType && ui.User.Status == 1).ToArray();
+                userInformations[0].User = null;
+                userInformations[0].ScheduleMasters = null;
+                userInformations[0].PatientMouths = null;
+                userInformations[0].CivilStatu = null;
+                return Ok(userInformations.Skip((length)).Take(fetch));
             }
             else
-            {
-                IQueryable<UserInformation> di = new List<UserInformation>().AsQueryable();
-                return di;
-            }
+                return Ok();
         }
 
         // GET: api/UserInformations/5

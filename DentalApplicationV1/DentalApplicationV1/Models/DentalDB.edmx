@@ -22,6 +22,7 @@
           <Property Name="ScheduleDetailId" Type="int" />
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CivilStatus">
@@ -997,6 +998,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="ScheduleDetail" Relationship="DentalDBModel.FK_Appointment_ScheduleDetailId" FromRole="Appointment" ToRole="ScheduleDetail" />
           <NavigationProperty Name="ScheduleMaster" Relationship="DentalDBModel.FK_Appointment_ScheduleMasterId" FromRole="Appointment" ToRole="ScheduleMaster" />
           <NavigationProperty Name="PatientDiagnosisHistoryMasters" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="Appointment" ToRole="PatientDiagnosisHistoryMaster" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CivilStatu">
           <Key>
@@ -1706,6 +1708,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="DentalDBModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />

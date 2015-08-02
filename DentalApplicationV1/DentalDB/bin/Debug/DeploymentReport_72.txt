@@ -1,0 +1,35 @@
+﻿** Warnings
+     The object reference [dbo].[ScheduleDetail].[ScheduLeMasterId] differs only by case from the object definition
+       [dbo].[ScheduleDetail].[ScheduleMasterId].
+
+** Highlights
+     Tables that will be rebuilt
+       [dbo].[Appointment]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Appointment].[Type] on table [dbo].[Appointment] must be added, but the column has no default value
+         and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must
+         either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults
+         as a deployment option.
+
+** User actions
+     Table rebuild
+       [dbo].[Appointment] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_Appointment_PatientId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleMasterId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleDetailId] (Foreign Key)
+     Create
+       [dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId] (Foreign Key)
+       [dbo].[FK_Appointment_PatientId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleMasterId] (Foreign Key)
+       [dbo].[FK_Appointment_ScheduleDetailId] (Foreign Key)
+
+The column [dbo].[Appointment].[Type] on table [dbo].[Appointment] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

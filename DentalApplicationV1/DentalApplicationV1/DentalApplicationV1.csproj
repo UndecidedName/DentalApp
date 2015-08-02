@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -852,6 +853,7 @@
     <Content Include="Scripts\controllers\NotificationController.js" />
     <Content Include="Scripts\controllers\ScheduleController.js" />
     <Content Include="Scripts\controllers\SettingController.js" />
+    <Content Include="Scripts\controllers\SpecialAppointments.js" />
     <Content Include="Scripts\controllers\TreatmentTypeController.js" />
     <Content Include="Scripts\controllers\UserMenuController.js" />
     <Content Include="Scripts\controllers\UserTypeController.js" />
@@ -1471,6 +1473,7 @@
     <Content Include="Views\User\Templates\UserMenu.cshtml" />
     <Content Include="Views\User\Templates\UserType.cshtml" />
     <Content Include="Views\User\Templates\TreatmentType.cshtml" />
+    <Content Include="Views\User\Templates\SpecialAppointments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

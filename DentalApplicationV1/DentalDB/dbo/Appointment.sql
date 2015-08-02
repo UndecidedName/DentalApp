@@ -7,6 +7,7 @@
     [ScheduleDetailId] INT NULL, 
     [Remarks] VARCHAR(500) NULL, 
     [TransactionDate] DATETIME NULL, 
+    [Type] VARCHAR(50) NOT NULL, 
     [Status] INT NOT NULL,
     CONSTRAINT [FK_Appointment_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [User]([Id]) ON DELETE CASCADE,
 	CONSTRAINT [FK_Appointment_ScheduleMasterId] FOREIGN KEY ([ScheduleMasterId]) REFERENCES [ScheduleMaster]([Id]),

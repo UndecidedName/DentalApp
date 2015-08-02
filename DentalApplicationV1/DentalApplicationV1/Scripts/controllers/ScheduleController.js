@@ -187,14 +187,20 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                     $scope.closeForm();
                     return true;
                 case 'PostLoadAction':
-                    for (var i = $scope.dataDefinitionMaster.CurrentLength; i < $scope.dataDefinitionMaster.DataList.length; i++) {
-                        for (var j = 0; j < $scope.dentistInformation.length; j++) {
-                            if ($scope.dataDefinitionMaster.DataList[i].DentistId === $scope.dentistInformation[j].Id)
-                                $scope.dataDefinitionMaster.DataList[i].DentistName = $scope.dentistInformation[j].FirstName + " "
-                                                                                    + $scope.dentistInformation[j].MiddleName + " "
-                                                                                    + $scope.dentistInformation[j].LastName;
+                    var promise = $interval(function () {
+                        if ($scope.dentistInformation.length > 0) {
+                            for (var i = $scope.dataDefinitionMaster.CurrentLength; i < $scope.dataDefinitionMaster.DataList.length; i++) {
+                                for (var j = 0; j < $scope.dentistInformation.length; j++) {
+                                    if ($scope.dataDefinitionMaster.DataList[i].DentistId === $scope.dentistInformation[j].Id)
+                                        $scope.dataDefinitionMaster.DataList[i].DentistName = $scope.dentistInformation[j].FirstName + " "
+                                                                                            + $scope.dentistInformation[j].MiddleName + " "
+                                                                                            + $scope.dentistInformation[j].LastName;
+                                }
+                            }
+                            $interval.cancel(promise);
+                            promise = undefined;
                         }
-                    }
+                    }, 100);
                     return true;
                 default:
                     return true;

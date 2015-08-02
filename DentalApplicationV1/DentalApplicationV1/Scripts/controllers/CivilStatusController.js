@@ -74,6 +74,7 @@ function CivilStatusController($scope, LxNotificationService, LxDialogService, L
                 case 'PostUpdate':
                     $scope.initializeDataGridMasterStatus();
                     $scope.closeForm();
+                    console.log($scope.dataDefinitionMaster.ServerData);
                     return true;
                 default:
                     return true;

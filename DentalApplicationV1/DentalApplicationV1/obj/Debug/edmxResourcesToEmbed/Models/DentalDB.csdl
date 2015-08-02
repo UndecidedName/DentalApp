@@ -158,6 +158,7 @@
     <NavigationProperty Name="ScheduleDetail" Relationship="DentalDBModel.FK_Appointment_ScheduleDetailId" FromRole="Appointment" ToRole="ScheduleDetail" />
     <NavigationProperty Name="ScheduleMaster" Relationship="DentalDBModel.FK_Appointment_ScheduleMasterId" FromRole="Appointment" ToRole="ScheduleMaster" />
     <NavigationProperty Name="PatientDiagnosisHistoryMasters" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="Appointment" ToRole="PatientDiagnosisHistoryMaster" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CivilStatu">
     <Key>

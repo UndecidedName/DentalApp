@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_DataTableLayout2.cshtml";
+}
+
+@section TableContent{
+    <div id="masterList"></div>
+}
+
+@section FormContent{
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item>
+            <lx-text-field label="Date" error="validateInput(dataDefinitionMaster.DataItem.ScheduleDate)">
+                <input type="text"
+                       name="Date"
+                       ng-model="dataDefinitionMaster.DataItem.ScheduleDate"
+                       pattern=".{4,50}"
+                       ng-disabled="dataDefinitionMaster.ViewOnly; (dataDefinitionMaster.DataItem.Id != null ? true: false)"
+                       ng-click="showDialog('ScheduleDate')">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Time" error="validateInput(dataDefinitionMaster.DataItem.ScheduleTime)">
+                <input type="text"
+                       name="Time"
+                       ng-model="dataDefinitionMaster.DataItem.ScheduleTime"
+                       ng-disabled="true">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Dentist" error="validateInput(dataDefinitionMaster.DataItem.DentistName)">
+                <input type="text"
+                       name="Dentist"
+                       ng-model="dataDefinitionMaster.DataItem.DentistName"
+                       ng-disabled="true" />
+            </lx-text-field>
+        </div>
+    </div>
+    <br />
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div flex-item>
+            <lx-text-field label="Remarks">
+                <input type="text"
+                       name="Remarks"
+                       ng-model="dataDefinitionMaster.DataItem.Remarks"
+                       ng-disabled="dataDefinitionMaster.ViewOnly" />
+            </lx-text-field>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div flex-item>
+            <lx-text-field label="Patient" error="validateInput(dataDefinitionMaster.DataItem.PatientName)">
+                <input type="text"
+                       name="Patient"
+                       ng-model="dataDefinitionMaster.DataItem.PatientName"
+                       ng-disabled="true" />
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Remarks Date">
+                <input type="text"
+                       name="Remarks Date"
+                       ng-model="dataDefinitionMaster.DataItem.TransactionDate"
+                       ng-disabled="true" />
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Status">
+                <input type="text"
+                       name="Status"
+                       ng-model="dataDefinitionMaster.DataItem.StatusHolder"
+                       ng-disabled="true" />
+            </lx-text-field>
+        </div>
+    </div>
+    <br />
+    <lx-dialog class="dialog dialog--l" id="ScheduleDate" auto-close="true">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title">
+                    Available Schedules
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <dir-data-modal1 datadefinition="dataDefinitionScheduleDateList" otheractions="otherActionScheduleDate(action)" closecontainer="closeScheduleDate(dialog)"></dir-data-modal1>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+
+    <lx-dialog class="dialog dialog--l" id="ScheduleTime" auto-close="true">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title">
+                    Available Schedules for {{dataDefinitionScheduleDateList.DataItem.Date}}
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <dir-data-modal1 datadefinition="dataDefinitionScheduleTimeList" otheractions="otherActionScheduleTime(action)" closecontainer="closeScheduleTime(dialog)"></dir-data-modal1>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+
+    <lx-dialog class="dialog dialog--l" id="Patients" auto-close="true">
+    <div class="dialog__header">
+        <div class="toolbar bgc-light-blue-500 pl++">
+            <span class="toolbar__label tc-white fs-title">
+                Patient List
+            </span>
+        </div>
+    </div>
+    <div class="dialog__content">
+        <dir-data-modal1 datadefinition="dataDefinitionPatientList" otheractions="otherActionPatient(action)" closecontainer="closePatient(dialog)"></dir-data-modal1>
+    </div>
+    <div class="dialog__actions">
+    </div>
+</lx-dialog>
+}

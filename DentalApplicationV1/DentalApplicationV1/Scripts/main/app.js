@@ -6,9 +6,11 @@
         $rootScope.user = null;
         $rootScope.appName = "Smile Fairies Dental Suites";
         $rootScope.notificationList = [];
+        $rootScope.usersForNotification = [];
     }
     $rootScope.reset();
     $rootScope.notification = null;
+
     //NotificationHub Instance
     $rootScope.notification = $.connection.notificationHub;
 
@@ -18,6 +20,9 @@
         if (data.status == "SUCCESS") {
             $rootScope.user = data.objParam1[0];
             $rootScope.isLogged = true;
+
+            //get all users which are userType 4 for Dentist and 5 for Secretary
+            $rootScope.usersForNotification = data.objParam2;
 
             //Start the connection
             $.connection.hub.start().done(function () {
@@ -149,5 +154,10 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         url: "/User/Index",
         templateUrl: "User/Templates/TreatmentType",
         controller: "TreatmentTypeController"
+    })
+    .state('SpecialAppointments', {
+        url: "/User/Index",
+        templateUrl: "User/Templates/SpecialAppointments",
+        controller: "SpecialAppointmentsController"
     })
 });

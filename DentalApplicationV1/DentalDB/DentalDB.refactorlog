@@ -322,4 +322,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ScheduleMasterId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="dac869cd-ec15-4324-8b41-f4460e752510" ChangeDateTime="08/02/2015 11:05:13">
+    <Property Name="ElementName" Value="[dbo].[Appointment].[type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Appointment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Type" />
+  </Operation>
 </Operations>

@@ -48,13 +48,20 @@
         templateUrl: '/Directive/DataGrid2',
         controller: function ($scope, $http, $interval, $filter, $parse, $compile, LxProgressService) {
             var stop;
-            $scope.sortByDesc = true;
-            $scope.sortByAsc = false;
             $scope.criteria = $scope.datadefinition.Keys[0];
             $scope.filteredValue = "";
             $scope.selectedIndex = null;
             $scope.contextMenuLabelDefault = ['Delete'];
             $scope.contextMenuLabelImage = ['mdi mdi-delete'];
+
+            if ($scope.datadefinition.Type[0] == 'DateTime' || $scope.datadefinition.Type[0] == 'Date' || $scope.datadefinition.Type[0] == 'Time' || $scope.datadefinition.Type[0] == 'Formatted-Time') {
+                $scope.sortByDesc = false;
+                $scope.sortByAsc = true;
+            }
+            else {
+                $scope.sortByDesc = true;
+                $scope.sortByAsc = false;
+            }
 
             //Set the focus on top of the page during load
             $scope.focusOnTop = function () {
@@ -288,11 +295,11 @@
                 LxProgressService.circular.show('#5fa2db', '#progressDataGrid2');
                 $http.post($scope.datadefinition.APIUrl[1], $scope.datadefinition.DataItem)
                     .success(function (data, status) {
+                        $scope.datadefinition.ServerData = [];
+                        $scope.datadefinition.ServerData.push(data);
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataItem.Id = data.objParam1.Id;
                             $scope.datadefinition.DataList.push($scope.datadefinition.DataItem);
-                            $scope.datadefinition.ServerData = [];
-                            $scope.datadefinition.ServerData.push(data);
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostSave' });
                             return true;
@@ -314,10 +321,10 @@
                 LxProgressService.circular.show('#5fa2db', '#progressDataGrid2');
                 $http.delete($scope.datadefinition.APIUrl[1] + "/" + id)
                     .success(function (data, status) {
+                        $scope.datadefinition.ServerData = [];
+                        $scope.datadefinition.ServerData.push(data);
                         if (data.status == "SUCCESS") {
                             $scope.datadefinition.DataList.splice($scope.selectedIndex, 1);
-                            $scope.datadefinition.ServerData = [];
-                            $scope.datadefinition.ServerData.push(data);
                             LxProgressService.circular.hide();
                             $scope.otheractions({ action: 'PostDelete' });
                             return true;
@@ -394,6 +401,7 @@
                         $scope.datadefinition.DataList.splice(($scope.datadefinition.DataList.length - 1), 1);
                 }
                 $scope.processSorting($scope.criteria);
+                $scope.focusOnTop();
             };
 
             init();

@@ -390,24 +390,6 @@ CREATE TABLE [dbo].[PatientDiagnosisHistoryDetail] (
 
 
 GO
-PRINT N'Creating [dbo].[Appointment]...';
-
-
-GO
-CREATE TABLE [dbo].[Appointment] (
-    [Id]               INT           IDENTITY (1, 1) NOT NULL,
-    [PatientId]        INT           NULL,
-    [Message]          VARCHAR (500) NULL,
-    [ScheduleMasterId] INT           NOT NULL,
-    [ScheduleDetailId] INT           NULL,
-    [Remarks]          VARCHAR (500) NULL,
-    [TransactionDate]  DATETIME      NULL,
-    [Status]           INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[PatientDiagnosisHistoryMaster]...';
 
 
@@ -545,6 +527,25 @@ CREATE TABLE [dbo].[UserMenu] (
     [UserTypeId] INT NOT NULL,
     [MenuId]     INT NOT NULL,
     [Status]     INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Appointment]...';
+
+
+GO
+CREATE TABLE [dbo].[Appointment] (
+    [Id]               INT           IDENTITY (1, 1) NOT NULL,
+    [PatientId]        INT           NULL,
+    [Message]          VARCHAR (500) NULL,
+    [ScheduleMasterId] INT           NOT NULL,
+    [ScheduleDetailId] INT           NULL,
+    [Remarks]          VARCHAR (500) NULL,
+    [TransactionDate]  DATETIME      NULL,
+    [Type]             VARCHAR (50)  NOT NULL,
+    [Status]           INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -856,33 +857,6 @@ ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
 
 
 GO
-PRINT N'Creating FK_Appointment_PatientId...';
-
-
-GO
-ALTER TABLE [dbo].[Appointment]
-    ADD CONSTRAINT [FK_Appointment_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
-
-
-GO
-PRINT N'Creating FK_Appointment_ScheduleMasterId...';
-
-
-GO
-ALTER TABLE [dbo].[Appointment]
-    ADD CONSTRAINT [FK_Appointment_ScheduleMasterId] FOREIGN KEY ([ScheduleMasterId]) REFERENCES [dbo].[ScheduleMaster] ([Id]);
-
-
-GO
-PRINT N'Creating FK_Appointment_ScheduleDetailId...';
-
-
-GO
-ALTER TABLE [dbo].[Appointment]
-    ADD CONSTRAINT [FK_Appointment_ScheduleDetailId] FOREIGN KEY ([ScheduleDetailId]) REFERENCES [dbo].[ScheduleDetail] ([Id]);
-
-
-GO
 PRINT N'Creating FK_PatientDiagnosisHistoryMaster_PatientId...';
 
 
@@ -961,6 +935,33 @@ PRINT N'Creating Fk_UserMenu_MenuId...';
 GO
 ALTER TABLE [dbo].[UserMenu]
     ADD CONSTRAINT [Fk_UserMenu_MenuId] FOREIGN KEY ([MenuId]) REFERENCES [dbo].[DentalMenu] ([Id]);
+
+
+GO
+PRINT N'Creating FK_Appointment_PatientId...';
+
+
+GO
+ALTER TABLE [dbo].[Appointment]
+    ADD CONSTRAINT [FK_Appointment_PatientId] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE;
+
+
+GO
+PRINT N'Creating FK_Appointment_ScheduleMasterId...';
+
+
+GO
+ALTER TABLE [dbo].[Appointment]
+    ADD CONSTRAINT [FK_Appointment_ScheduleMasterId] FOREIGN KEY ([ScheduleMasterId]) REFERENCES [dbo].[ScheduleMaster] ([Id]);
+
+
+GO
+PRINT N'Creating FK_Appointment_ScheduleDetailId...';
+
+
+GO
+ALTER TABLE [dbo].[Appointment]
+    ADD CONSTRAINT [FK_Appointment_ScheduleDetailId] FOREIGN KEY ([ScheduleDetailId]) REFERENCES [dbo].[ScheduleDetail] ([Id]);
 
 
 GO
@@ -1101,6 +1102,8 @@ IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('8f91b208-0948-4084-9a6f-309b9504aa13')
 IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = '8c5057e6-6667-45eb-ab0d-b9fc9f552ef8')
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('8c5057e6-6667-45eb-ab0d-b9fc9f552ef8')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = 'dac869cd-ec15-4324-8b41-f4460e752510')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('dac869cd-ec15-4324-8b41-f4460e752510')
 
 GO
 
