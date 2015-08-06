@@ -13,6 +13,10 @@ namespace DentalWebApp.Controllers
         {
             return View();
         }
+        public ActionResult NotFound() 
+        {
+            return View();
+        }
         public ActionResult Templates(string id)
         {
             switch (id.ToLower())

@@ -1474,6 +1474,8 @@
     <Content Include="Views\User\Templates\UserType.cshtml" />
     <Content Include="Views\User\Templates\TreatmentType.cshtml" />
     <Content Include="Views\User\Templates\SpecialAppointments.cshtml" />
+    <Content Include="Views\User\Verification.cshtml" />
+    <Content Include="Views\Home\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

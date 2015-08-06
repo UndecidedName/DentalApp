@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DentalApplicationV1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using YbanezNacua.Models;
 
 namespace DentalWebApp.Controllers
 {
@@ -15,6 +17,13 @@ namespace DentalWebApp.Controllers
         {
             return View();
         }
+
+        //public ActionResult Verification(string url) {
+        //    VerificationInformation info = new VerificationInformation();
+        //    info = url;
+        //    return View(response);
+        //}
+
         public ActionResult Templates(string id)
         {
             

@@ -27,6 +27,33 @@ namespace DentalApplicationV1.APIController
             return db.Users;
         }
 
+        public HttpResponseMessage GetUsers(string url, string username)
+        {
+            try
+            {
+                var Session = HttpContext.Current.Session;
+                var rootUrl = Url.Content("~/");
+                var redirect = Request.CreateResponse(HttpStatusCode.Moved);
+
+                //Search username and get url
+                var users = db.Users.Where(u => u.Username.Equals(username)).ToArray();
+                if (users.Length > 0 && users[0].Url.Equals(url))
+                {
+                    var user = db.Users.Find(users[0].Id);
+                    users[0].Status = 1;
+                    db.Entry(user).State = EntityState.Modified;
+                    db.Entry(user).CurrentValues.SetValues(users[0]);
+                    db.SaveChanges();
+                    Session["Username"] = username;
+                    redirect.Headers.Location = new Uri(rootUrl + "#/Home/Index");
+                }
+                else
+                    redirect.Headers.Location = new Uri(rootUrl + "Home/NotFound");
+                return redirect;
+            }catch(Exception){
+                 throw;
+            }
+        }
         // GET: api/Users?userinfo&request=something
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(string userinfo, string request)
