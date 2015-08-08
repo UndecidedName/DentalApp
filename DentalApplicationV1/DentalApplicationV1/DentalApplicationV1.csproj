@@ -971,6 +971,7 @@
     <Compile Include="Models\ScheduleMaster.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StringManipulation.cs" />
     <Compile Include="Models\Tooth.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>

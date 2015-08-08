@@ -40,7 +40,7 @@ namespace DentalApplicationV1.APIController
                     .Include(a => a.ScheduleMaster)
                     .Include(a => a.ScheduleDetail)
                     .Include(a => a.ScheduleMaster.UserInformation)
-                    .Where(a => a.PatientId == userId && a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).ToArray();
+                    .Where(a => a.PatientId == userId && a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
                 appointments[0].Message = null;
                 appointments[0].User = null;
                 appointments[0].PatientDiagnosisHistoryMasters = null;
@@ -52,7 +52,7 @@ namespace DentalApplicationV1.APIController
                 appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
                 appointments[0].ScheduleMaster.UserInformation.User = null;
 
-                return Ok(appointments.Skip((length)).Take(fetch));
+                return Ok(appointments);
             }
             else
             {
@@ -78,7 +78,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
-                        .Where(a => a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).ToArray();
+                        .Where(a => a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
                     appointments[0].User.Appointments = null;
                     appointments[0].User.Messages = null;
                     appointments[0].User.Messages1 = null;
@@ -96,7 +96,7 @@ namespace DentalApplicationV1.APIController
                     appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
                     appointments[0].ScheduleMaster.UserInformation.CivilStatu = null;
                     appointments[0].ScheduleMaster.UserInformation.User = null;
-                    return Ok(appointments.Skip((length)).Take(fetch));
+                    return Ok(appointments);
                 }
                 else
                 {
@@ -118,7 +118,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
-                        .Where(a => a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).ToArray();
+                        .Where(a => a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
                     appointments[0].User.Appointments = null;
                     appointments[0].User.Messages = null;
                     appointments[0].User.Messages1 = null;
@@ -136,7 +136,7 @@ namespace DentalApplicationV1.APIController
                     appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
                     appointments[0].ScheduleMaster.UserInformation.CivilStatu = null;
                     appointments[0].ScheduleMaster.UserInformation.User = null;
-                    return Ok(appointments.Skip((length)).Take(fetch));
+                    return Ok(appointments);
                 }
                 else
                 {
@@ -145,6 +145,131 @@ namespace DentalApplicationV1.APIController
             }
         }
 
+        public IHttpActionResult GetAppointment(int length, int userId, string property, string value)
+        {
+            Appointment []  appointments = new Appointment[pageSize];
+            this.filterRecord(length, userId, property, value, ref appointments);
+            return Ok(appointments);
+        }
+       // GET: /api/Appointments?length=0&userid=4&property=TransactionDate&value=08-02-2015
+        public void filterRecord(int length, int userId, string property, string value, ref Appointment [] appointments)
+        {
+            /* Fields that can be filter
+             * TransactionDate
+             * Scheduled Date
+             * Scheduled From Time
+             * Scheduled To Time
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            appointments = null;
+            if (property.Equals("TransactionDate"))
+            {
+                StringManipulation strManipulate = new StringManipulation(value, "Date");
+                var records = db.Appointments.Where(a => a.TransactionDate >= strManipulate.dateValue && a.PatientId == userId).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getAppointments = db.Appointments
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.TransactionDate >= strManipulate.dateValue && a.PatientId == userId).OrderByDescending(a => a.TransactionDate).Skip((length)).Take(fetch).ToArray();
+                    appointments = getAppointments;
+                }
+            }
+            else if (property.Equals("ScheduledDate"))
+            {
+                StringManipulation strManipulate = new StringManipulation(value, "Date");
+                var records = db.Appointments.Where(a => a.ScheduleMaster.Date == strManipulate.dateValue && a.PatientId == userId).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getAppointments = db.Appointments
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.ScheduleMaster.Date == strManipulate.dateValue && a.PatientId == userId).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
+                    appointments = getAppointments;
+                }
+            }
+            else if (property.Equals("ScheduledFromTime"))
+            {
+                StringManipulation strManipulate = new StringManipulation(value, "Time");
+                var records = db.Appointments.Where(a => a.ScheduleDetail.FromTime == strManipulate.timeValue && a.PatientId == userId).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getAppointments = db.Appointments
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.ScheduleDetail.FromTime == strManipulate.timeValue && a.PatientId == userId).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
+                    appointments = getAppointments;
+                }
+            }
+            else if (property.Equals("ScheduledToTime"))
+            {
+                StringManipulation strManipulate = new StringManipulation(value, "Time");
+                var records = db.Appointments.Where(a => a.ScheduleDetail.ToTime == strManipulate.timeValue && a.PatientId == userId).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getAppointments = db.Appointments
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.ScheduleDetail.ToTime == strManipulate.timeValue && a.PatientId == userId).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
+                    appointments = getAppointments;
+                }
+            }
+            //status
+            else
+            {
+                StringManipulation strManipulate = new StringManipulation(value, "Integer");
+                var records = db.Appointments.Where(a => a.Status == strManipulate.intValue && a.PatientId == userId).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getAppointments = db.Appointments
+                        .Include(a => a.ScheduleMaster)
+                        .Include(a => a.ScheduleDetail)
+                        .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => a.Status == strManipulate.intValue && a.PatientId == userId).OrderBy(a => a.Status).Skip((length)).Take(fetch).ToArray();
+                    appointments = getAppointments;
+                }
+            }
+            for (int i = 0; i < appointments.Length; i++)
+            {
+                appointments[i].Message = null;
+                appointments[i].User = null;
+                appointments[i].PatientDiagnosisHistoryMasters = null;
+                appointments[i].ScheduleMaster.Appointments = null;
+                appointments[i].ScheduleMaster.ScheduleDetails = null;
+                appointments[i].ScheduleDetail.Appointments = null;
+                appointments[i].ScheduleDetail.ScheduleMaster = null;
+                appointments[i].ScheduleMaster.UserInformation.PatientMouths = null;
+                appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                appointments[i].ScheduleMaster.UserInformation.User = null;
+            }
+            
+        }
         // GET: api/Appointments/5
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult GetAppointment(int id)
