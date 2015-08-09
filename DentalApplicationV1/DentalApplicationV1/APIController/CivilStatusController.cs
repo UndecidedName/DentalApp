@@ -25,7 +25,7 @@ namespace DentalApplicationV1.APIController
             return db.CivilStatus;
         }
 
-        public IQueryable<CivilStatu> GetCivilStatus(int length)
+        public IHttpActionResult GetCivilStatus(int length)
         {
             int fetch;
             var records = db.CivilStatus.Count();
@@ -36,17 +36,21 @@ namespace DentalApplicationV1.APIController
                 else
                     fetch = records - length;
 
-                return db.CivilStatus
-                    .OrderBy(m => m.Name).Skip((length)).Take(fetch);
+                var getCivilStatus = db.CivilStatus
+                                     .OrderBy(m => m.Name).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getCivilStatus.Length; i++)
+                {
+                    getCivilStatus[i].UserInformations = null;
+                }
+                    return Ok(getCivilStatus);
             }
             else
             {
-                IQueryable<CivilStatu> m = new List<CivilStatu>().AsQueryable();
-                return m;
+                return Ok();
             }
         }
 
-        public IQueryable<CivilStatu> GetCivilStatus(int length, int status)
+        public IHttpActionResult GetCivilStatus(int length, int status)
         {
             int fetch;
             var records = db.CivilStatus.Where(dm => dm.Status == status).Count();
@@ -57,14 +61,19 @@ namespace DentalApplicationV1.APIController
                 else
                     fetch = records - length;
 
-                return db.CivilStatus
+                var getCivilStatus = db.CivilStatus
                     .Where(dm => dm.Status == status)
-                    .OrderBy(m => m.Name).Skip((length)).Take(fetch);
+                    .OrderBy(m => m.Name).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getCivilStatus.Length; i++)
+                {
+                    getCivilStatus[i].UserInformations = null;
+                }
+                return Ok(getCivilStatus);
+                    
             }
             else
             {
-                IQueryable<CivilStatu> m = new List<CivilStatu>().AsQueryable();
-                return m;
+                return Ok();
             }
         }
 
@@ -73,6 +82,7 @@ namespace DentalApplicationV1.APIController
         public IHttpActionResult GetCivilStatu(int id)
         {
             CivilStatu civilStatu = db.CivilStatus.Find(id);
+            civilStatu.UserInformations = null;
             if (civilStatu == null)
             {
                 return NotFound();

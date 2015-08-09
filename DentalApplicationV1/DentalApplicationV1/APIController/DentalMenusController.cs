@@ -24,7 +24,7 @@ namespace DentalApplicationV1.APIController
             return db.DentalMenus;
         }
 
-        public IQueryable<DentalMenu> GetDentalMenus(int length)
+        public IHttpActionResult GetDentalMenus(int length)
         {
             int fetch;
             var records = db.DentalMenus.Count();
@@ -34,18 +34,21 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.DentalMenus
-                    .OrderBy(m => m.Name).Skip((length)).Take(fetch);
+                var getDentalMenus = db.DentalMenus
+                    .OrderBy(m => m.Name).Skip((length)).Take(fetch).ToArray();
+                for(int i = 0; i < getDentalMenus.Length; i++)
+                {
+                    getDentalMenus[i].UserMenus = null;
+                }
+                return Ok(getDentalMenus);
             }
             else
             {
-                IQueryable<DentalMenu> m = new List<DentalMenu>().AsQueryable();
-                return m;
+                return Ok();
             }
         }
 
-        public IQueryable<DentalMenu> GetDentalMenus(int length, int status)
+        public IHttpActionResult GetDentalMenus(int length, int status)
         {
             int fetch;
             var records = db.DentalMenus.Where(dm => dm.Status == status).Count();
@@ -55,15 +58,14 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.DentalMenus
+                var getDentalMenus = db.DentalMenus
                     .Where(dm => dm.Status == status)
-                    .OrderBy(m => m.Name).Skip((length)).Take(fetch);
+                    .OrderBy(m => m.Name).Skip((length)).Take(fetch).ToArray();
+                return Ok(getDentalMenus);
             }
             else
             {
-                IQueryable<DentalMenu> m = new List<DentalMenu>().AsQueryable();
-                return m;
+                return Ok();
             }
         }
 

@@ -16,10 +16,10 @@ namespace DentalApplicationV1.Models
     public class StringManipulation
     {
         public string value { get; set; }
-
+        public string value2 { get; set; }
         public string type { get; set; }
-
         public DateTime dateValue { get; set; }
+        public DateTime dateValue2 { get; set; }
         public TimeSpan timeValue { get; set; }
         public int intValue { get; set; }
         public decimal decimalValue { get; set; }
@@ -31,9 +31,10 @@ namespace DentalApplicationV1.Models
             this.type = null;
             this.dateValue = DateTime.Now;
         }
-        public StringManipulation(string value, string type)
+        public StringManipulation(string value, string value2, string type)
         {
-            this.value = value;
+            this.value = value; 
+            this.value2 = value2;
             this.type = type;
             this.manipulateString();
         }
@@ -42,6 +43,7 @@ namespace DentalApplicationV1.Models
             if(this.type.Equals("Date"))
             {
                 this.dateValue = Convert.ToDateTime(this.value);
+                this.dateValue2 = Convert.ToDateTime(this.value2);
             }
             else if (this.type.Equals("Time"))
             {

@@ -92,16 +92,6 @@
                 });
             };
 
-            $interval(function () {
-                var width = window.innerWidth;
-                if (width < 650) {
-                    $scope.menuPosition = "left";
-                }
-                else {
-                    $scope.menuPosition = "right";
-                }
-            }, 100);
-
             $scope.getData = function () {
                 if ($scope.datadefinition.CurrentLength != $scope.datadefinition.DataList.length) {
                     $scope.actionForm('Load');
@@ -201,7 +191,7 @@
                             $scope.filteredValue = $scope.UpperCase(value);
                             break;
                         case 'DateTime':
-                            $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss");
+                            $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss a");
                             break;
                         case 'Date':
                             $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy");
@@ -586,6 +576,13 @@
                 if ($scope.actioncreate == true) {
                     $scope.actioncreate = false;
                     $scope.actionForm('Create');
+                }
+                var width = window.innerWidth;
+                if (width < 650) {
+                    $scope.menuPosition = "left";
+                }
+                else {
+                    $scope.menuPosition = "right";
                 }
             }, 100);
 

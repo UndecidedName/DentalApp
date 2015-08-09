@@ -34,6 +34,7 @@
                                             contextMenuLabel - Lable for each context menu item
                                             contextMenuLabelImage - Image for the menu
                                         */
+            filterdefinition: '=',
             submitbuttontext: '=',      //scope that holds the submit button label
             submitbuttonlistener: '=',  //scope that will serve as listener that will identify if the user submit an action  
             closecontainer: '&',        //function that will close the form container
@@ -70,11 +71,13 @@
             showformerror: '&',         //function that will trigger when an error occured
         },
         templateUrl: '/Directive/DataGrid1',
-        controller: function ($scope, $http, $interval, $filter, $parse, $compile, LxProgressService) {
+        controller: function ($scope, $http, $interval, $filter, $parse, $compile, LxProgressService, LxDialogService) {
             var stop;
             $scope.criteria = $scope.datadefinition.Keys[0];
             $scope.selectedIndex = null;
             $scope.filteredValue = "";
+            $scope.filterStatus = false;
+            $scope.defaultGetUrl = $scope.datadefinition.APIUrl[0];
 
             if ($scope.datadefinition.Type[0] == 'DateTime' || $scope.datadefinition.Type[0] == 'Date' || $scope.datadefinition.Type[0] == 'Time' || $scope.datadefinition.Type[0] == 'Formatted-Time') {
                 $scope.sortByDesc = false;
@@ -84,22 +87,107 @@
                 $scope.sortByDesc = true;
                 $scope.sortByAsc = false;
             }
+
+            $scope.setFilterVariables = function () {
+                $scope.filterParameters = { "Property": null, "Value": null, "Value2": null};
+                $scope.filteredData = { "Definition": $scope.filterdefinition.Source[0] };
+                $scope.filteredStatus = { "Definition": undefined };
+                $scope.searchValue = "";
+                $scope.showFilterDate = false; 
+                $scope.showFilterDropDown = false;
+                $scope.showFilterText = true;
+                $scope.filterDate = {
+                                        "FromDate": $filter('date')(new Date() - 1, "MM/dd/yyyy"),
+                                        "FromDateHolder": $filter('date')(new Date() - 1, "MM/dd/yyyy"),
+                                        "ToDate": $filter('date')(new Date() - 1, "MM/dd/yyyy"),
+                                        "ToDateHolder": $filter('date')(new Date() - 1, "MM/dd/yyyy")
+                                    }
+            };
+
+            //Set the filter variables default value
+            $scope.setFilterVariables();
+
+            //Get data using the filtered criteria
+            $scope.submitFilteredData = function () {
+                var flag = false;
+                $scope.filterParameters.Value = null;
+                $scope.filterParameters.Value2 = null;
+                $scope.filterParameters.Property = $scope.filteredData.Definition.Property;
+                switch ($scope.filteredData.Definition.Type) {
+                    case "Date":
+                        if ($scope.filterDate.FromDate <= $scope.filterDate.ToDate) {
+                            $scope.filterParameters.Value = $scope.filterDate.FromDate;
+                            $scope.filterParameters.Value2 = $scope.filterDate.ToDate;
+                            flag = true;
+                        }
+                        else
+                            $scope.showformerror({ error: "End Date must be beyond the Start Date." });
+                        break;
+                    case "DropDown":
+                        if (angular.isDefined($scope.filteredStatus.Definition))
+                        {
+                            $scope.filterParameters.Value = $scope.filteredStatus.Definition.Value;
+                            flag = true;
+                        }
+                        else
+                            $scope.showformerror({ error: ($scope.filteredData.Definition.Label + " is required.") });
+                        break;
+                    default:
+                        if ($scope.searchValue != "")
+                        {
+                            $scope.filterParameters.Value = $scope.searchValue;
+                            flag = true;
+                        }
+                        else
+                            $scope.showformerror({ error: ($scope.filteredData.Definition.Label + " is required.") });
+                        break;
+                }
+                if (flag == true)
+                {
+                    $scope.datadefinition.DataList = [];
+                    $scope.datadefinition.APIUrl[0] = $scope.filterdefinition.Url +
+                                                      "&property=" + $scope.filterParameters.Property +
+                                                      "&value=" + $scope.filterParameters.Value +
+                                                      "&value2=" + $scope.filterParameters.Value2;
+                    $scope.actionForm('Load');
+                }
+            };
+
+            //Show filter Date Modal
+            $scope.showDialog = function (dialogId) {
+                LxDialogService.open(dialogId);
+            };
+
+            //Close filter From Date modal
+            $scope.closeFilteredFromDate = function (dialogId) {
+                var promise = $interval(function () {
+                    $scope.filterDate.FromDate = "";
+                    $scope.filterDate.FromDateHolder = $filter('date')($scope.filterDate.FromDateHolder, "MM/dd/yyyy");
+                    $scope.filterDate.FromDate = $scope.filterDate.FromDateHolder;
+                    $interval.cancel(promise);
+                    promise = undefined;
+                    LxDialogService.close(dialogId);
+                }, 100);
+            };
+
+            //Close filter To Date modal
+            $scope.closeFilteredToDate = function (dialogId) {
+                var promise = $interval(function () {
+                    $scope.filterDate.ToDate = "";
+                    $scope.filterDate.ToDateHolder = $filter('date')($scope.filterDate.ToDateHolder, "MM/dd/yyyy");
+                    $scope.filterDate.ToDate = $scope.filterDate.ToDateHolder;
+                    $interval.cancel(promise);
+                    promise = undefined;
+                    LxDialogService.close(dialogId);
+                }, 100);
+            };
+
             //Set the focus on top of the page during load
             $scope.focusOnTop = function () {
                 $(document).ready(function () {
                     $(this).scrollTop(0);
                 });
             };
-
-            $interval(function () {
-                var width = window.innerWidth;
-                if (width < 650) {
-                    $scope.menuPosition = "left";
-                }
-                else {
-                    $scope.menuPosition = "right";
-                }
-            }, 100);
 
             $scope.getData = function () {
                 if ($scope.datadefinition.CurrentLength != $scope.datadefinition.DataList.length) {
@@ -200,7 +288,7 @@
                             $scope.filteredValue = $scope.UpperCase(value);
                             break;
                         case 'DateTime':
-                            $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss");
+                            $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss a");
                             break;
                         case 'Date':
                             $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy");
@@ -228,8 +316,10 @@
                                 $scope.filteredValue = "For Approval";
                             else if (value == 1)
                                 $scope.filteredValue = "Approved";
-                            else
+                            else if (value == 2)
                                 $scope.filteredValue = "Disapproved";
+                            else
+                                $scope.filteredValue = "Cancelled";
                             break;
                         case 'Status-Default':
                             if (value == 0)
@@ -369,6 +459,11 @@
                     }, 100);
                 }
                 if (action == 'Refresh') {
+                    //Initialize the API Url base on the filtered data if filter is enable
+                    if ($scope.filterStatus == true)
+                        $scope.datadefinition.APIUrl[0] = $scope.filterdefinition.Url +
+                                                          "&property=" + $scope.filterParameters.Property +
+                                                          "&value=" + $scope.filterParameters.Value;
                     $scope.datadefinition.DataList = [];
                     if ($scope.otheractions({ action: 'PreLoadAction' }))
                         $scope.loadData(0);
@@ -578,6 +673,8 @@
 
             //Listener that will check if user Submit an action
             $interval(function () {
+                if ($scope.filterStatus == false)
+                    $scope.datadefinition.APIUrl[0] = $scope.defaultGetUrl;
                 if ($scope.submitbuttonlistener == true) {
                     //reset listener to false
                     $scope.submitbuttonlistener = false;
@@ -586,6 +683,45 @@
                 if ($scope.actioncreate == true) {
                     $scope.actioncreate = false;
                     $scope.actionForm('Create');
+                }
+                var width = window.innerWidth;
+                if (width < 1030) {
+                    $scope.menuPosition = "left";
+                    $scope.criteriaStyle = "";
+                    $scope.searchValueStyle = "";
+                    $scope.searchDateTimeStyle = "";
+                    $scope.searchStyle = "";
+                    $scope.filterContainerStyle = "";
+                    $scope.checkBoxStyle = "";
+                }
+                else {
+                    $scope.menuPosition = "right";
+                    $scope.criteriaStyle = "width: 250px;";
+                    $scope.searchValueStyle = "width: 450px; padding-left:10px;";
+                    $scope.searchDateTimeStyle = "width: 225px; padding-left:50px;";
+                    $scope.searchStyle = "width:100px;padding-left:10px; padding-top:35px;";
+                    $scope.filterContainerStyle = "padding-left:10px;";
+                    $scope.checkBoxStyle = "padding-left:0px;";
+                }
+                if (angular.isDefined($scope.filteredData.Definition))
+                {
+                    if ($scope.filteredData.Definition.Type == 'Date') {
+                        $scope.showFilterDate = true;
+                        $scope.showFilterText = false;
+                        $scope.showFilterDropDown = false
+                        $scope.filteredStatus = { "Definition": undefined };
+                    }
+                    else if ($scope.filteredData.Definition.Type == 'DropDown') {
+                        $scope.showFilterDropDown = true
+                        $scope.showFilterDate = false;
+                        $scope.showFilterText = false;
+                    }
+                    else {
+                        $scope.showFilterText = true;
+                        $scope.showFilterDropDown = false;
+                        $scope.showFilterDate = false;
+                        $scope.filteredStatus = { "Definition": undefined };
+                    }
                 }
             }, 100);
 

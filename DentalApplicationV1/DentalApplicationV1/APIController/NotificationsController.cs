@@ -35,7 +35,6 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
                 return db.Notifications
                     .Where(n => n.UserId == userId)
                     .OrderByDescending(n => n.Status)

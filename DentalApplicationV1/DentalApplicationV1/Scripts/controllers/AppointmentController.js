@@ -110,6 +110,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
+                         'filterdefinition="filterDefinition"' +
                          'submitbuttontext="submitButtonText"' +
                          'submitbuttonlistener="submitButtonListenerMaster"' +
                          'closecontainer="closeForm()"' +
@@ -131,7 +132,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
             "Header": ['Date', 'Time', 'Status', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
             "Keys": ['ScheduleDate', 'ScheduleTime', 'Status', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['ScheduleDate-Date', 'ScheduleTime-Time', 'DentistName-Dentist Name'],
-            "Type": ['Date', 'Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'Date'],
+            "Type": ['Date', 'Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'DateTime'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &userId=' + $rootScope.user.Id,//get
@@ -143,6 +144,19 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
             "contextMenu": ['Create', 'Edit', 'Delete', 'View'],
             "contextMenuLabel": ['Create', 'Edit', 'Cancel', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
+        };
+        $scope.filterDefinition = {
+            "Url": '/api/Appointments?length= &userId=' + $rootScope.user.Id,//get
+            "Source": [
+                        { "Label": "Date", "Property": "ScheduledDate", "Values": [], "Type": "Date" },
+                        { "Label": "Remarks Date", "Property": "TransactionDate", "Values": [], "Type": "Date" },
+                        { "Label": "Status", "Property": "Status", "Values": [
+                                                                                { "Label": "For Approval",  "Value": "0" },
+                                                                                { "Label": "Approved",      "Value": "1" },
+                                                                                { "Label": "Disapproved",   "Value": "2" }
+                                                                            ], "Type": "DropDown"
+                        }
+                      ]
         };
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
@@ -285,7 +299,10 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 case 1:
                     $scope.dataDefinitionMaster.DataItem.StatusHolder = "Approved";
                     break;
-                default: $scope.dataDefinitionMaster.DataItem.StatusHolder = "Disapproved";
+                case 2:
+                    $scope.dataDefinitionMaster.DataItem.StatusHolder = "Disapproved";
+                    break;
+                default: $scope.dataDefinitionMaster.DataItem.StatusHolder = "Cancelled";
                     break;
             }
         };

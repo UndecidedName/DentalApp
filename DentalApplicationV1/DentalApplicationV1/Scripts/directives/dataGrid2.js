@@ -130,7 +130,7 @@
                             $scope.filteredValue = $scope.UpperCase(value);
                             break;
                         case 'DateTime':
-                            $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss");
+                            $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss a");
                             break;
                         case 'Date':
                             $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy");

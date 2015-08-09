@@ -25,7 +25,7 @@ namespace DentalApplicationV1.APIController
         }
 
         // GET: api/UserMenus?length=0&userTypeId=1
-        public IQueryable<UserMenu> GetUserMenus(int length, int userTypeId)
+        public IHttpActionResult GetUserMenus(int length, int userTypeId)
         {
             int fetch;
             var records = db.UserMenus.Where(um => um.UserTypeId == userTypeId)
@@ -36,22 +36,26 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.UserMenus
+                var getUserMenus = db.UserMenus
                     .Include(um => um.DentalMenu)
                     .Where(um => um.UserTypeId == userTypeId)
                     .Where(um => um.UserTypeId != 0)
-                    .OrderBy(um => um.Id).Skip((length)).Take(fetch);
+                    .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getUserMenus.Length; i++)
+                {
+                    getUserMenus[i].UserType = null;
+                    getUserMenus[i].DentalMenu.UserMenus = null;
+                }
+                return Ok(getUserMenus);
             }
             else
             {
-                IQueryable<UserMenu> um = new List<UserMenu>().AsQueryable();
-                return um;
+                return Ok();
             }
         }
 
         // GET: api/UserMenus?length=0&userTypeId=1&status=0
-        public IQueryable<UserMenu> GetUserMenus(int length, int userTypeId, int status)
+        public IHttpActionResult GetUserMenus(int length, int userTypeId, int status)
         {
             int fetch;
             var records = db.UserMenus.Where(um => um.UserTypeId == userTypeId)
@@ -62,17 +66,21 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.UserMenus
+                var getUserMenus = db.UserMenus
                     .Include(um => um.DentalMenu)
                     .Where(um => um.UserTypeId == userTypeId)
                     .Where(um => um.Status == status)
-                    .OrderBy(um => um.Id).Skip((length)).Take(fetch);
+                    .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getUserMenus.Length; i++)
+                {
+                    getUserMenus[i].UserType = null;
+                    getUserMenus[i].DentalMenu.UserMenus = null;
+                }
+                return Ok(getUserMenus);
             }
             else
             {
-                IQueryable<UserMenu> um = new List<UserMenu>().AsQueryable();
-                return um;
+                return Ok();
             }
         }
 

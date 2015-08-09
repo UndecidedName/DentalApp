@@ -27,7 +27,7 @@ namespace DentalApplicationV1.APIController
         }
 
         // GET: api/ScheduleMasters?length=1
-        public IQueryable<ScheduleMaster> GetScheduleMasters(int length)
+        public IHttpActionResult GetScheduleMasters(int length)
         {   
             int fetch;
             var records = db.ScheduleMasters.Where(sm => sm.Status != 2).Count();
@@ -37,19 +37,27 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.ScheduleMasters.Where(sm => sm.Status != 2)
+                var getScheduleMasters = db.ScheduleMasters.Where(sm => sm.Status != 2)
                     .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
-                    .OrderBy(sm => sm.Date).Skip((length)).Take(fetch);
+                    .OrderBy(sm => sm.Date).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getScheduleMasters.Length; i++)
+                {
+                    getScheduleMasters[i].Appointments = null;
+                    getScheduleMasters[i].ScheduleDetails = null;
+                    getScheduleMasters[i].UserInformation.PatientMouths = null;
+                    getScheduleMasters[i].UserInformation.User = null;
+                    getScheduleMasters[i].UserInformation.ScheduleMasters = null;
+                }
+                return Ok(getScheduleMasters);
             }
-            else{
-                IQueryable<ScheduleMaster> sm = new List<ScheduleMaster>().AsQueryable();
-                return sm;
+            else
+            {
+                return Ok();
             }
         }
 
         // GET: api/ScheduleMasters?length=1&status=0
-        public IQueryable<ScheduleMaster> GetScheduleMasters(int length, int status)
+        public IHttpActionResult GetScheduleMasters(int length, int status)
         {
             int fetch;
             var records = db.ScheduleMasters.Where(sm => sm.Status == status).Count();
@@ -59,15 +67,22 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-
-                return db.ScheduleMasters.Where(sm => sm.Status == status)
+                var getScheduleMasters =  db.ScheduleMasters.Where(sm => sm.Status == status)
                     .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
-                    .OrderBy(sm => sm.Date).Skip((length)).Take(fetch);
+                    .OrderBy(sm => sm.Date).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getScheduleMasters.Length; i++)
+                {
+                    getScheduleMasters[i].Appointments = null;
+                    getScheduleMasters[i].ScheduleDetails = null;
+                    getScheduleMasters[i].UserInformation.PatientMouths = null;
+                    getScheduleMasters[i].UserInformation.User = null;
+                    getScheduleMasters[i].UserInformation.ScheduleMasters = null;
+                }
+                return Ok(getScheduleMasters);
             }
             else
             {
-                IQueryable<ScheduleMaster> sm = new List<ScheduleMaster>().AsQueryable();
-                return sm;
+                return Ok();
             }
         }
 
