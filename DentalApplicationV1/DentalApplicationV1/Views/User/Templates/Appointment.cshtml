@@ -42,7 +42,7 @@
                 <input type="text"
                        name="Message"
                        ng-model="dataDefinitionMaster.DataItem.Message"
-                       ng-disabled="dataDefinitionMaster.ViewOnly" />
+                       ng-disabled="dataDefinitionMaster.ViewOnly || dataDefinitionMaster.DataItem.Status == 2" />
             </lx-text-field>
         </div>
     </div>

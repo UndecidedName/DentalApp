@@ -163,22 +163,6 @@ IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
 
 
 GO
-PRINT N'Creating [dbo].[DentalMenu]...';
-
-
-GO
-CREATE TABLE [dbo].[DentalMenu] (
-    [Id]          INT           IDENTITY (1, 1) NOT NULL,
-    [ParentId]    INT           NULL,
-    [Name]        VARCHAR (100) NOT NULL,
-    [Description] VARCHAR (200) NULL,
-    [Url]         VARCHAR (50)  NULL,
-    [Status]      INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[ScheduleDetail]...';
 
 
@@ -551,12 +535,19 @@ CREATE TABLE [dbo].[Appointment] (
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[DentalMenu]....';
+PRINT N'Creating [dbo].[DentalMenu]...';
 
 
 GO
-ALTER TABLE [dbo].[DentalMenu]
-    ADD DEFAULT 1 FOR [Status];
+CREATE TABLE [dbo].[DentalMenu] (
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
+    [ParentId]    INT           NULL,
+    [Name]        VARCHAR (100) NOT NULL,
+    [Description] VARCHAR (200) NULL,
+    [Url]         VARCHAR (50)  NULL,
+    [Status]      INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
 
 
 GO
@@ -718,6 +709,15 @@ PRINT N'Creating Default Constraint on [dbo].[UserMenu]....';
 
 GO
 ALTER TABLE [dbo].[UserMenu]
+    ADD DEFAULT 1 FOR [Status];
+
+
+GO
+PRINT N'Creating Default Constraint on [dbo].[DentalMenu]....';
+
+
+GO
+ALTER TABLE [dbo].[DentalMenu]
     ADD DEFAULT 1 FOR [Status];
 
 
@@ -962,6 +962,15 @@ PRINT N'Creating FK_Appointment_ScheduleDetailId...';
 GO
 ALTER TABLE [dbo].[Appointment]
     ADD CONSTRAINT [FK_Appointment_ScheduleDetailId] FOREIGN KEY ([ScheduleDetailId]) REFERENCES [dbo].[ScheduleDetail] ([Id]);
+
+
+GO
+PRINT N'Creating FK_DentalMenu_ParentId...';
+
+
+GO
+ALTER TABLE [dbo].[DentalMenu]
+    ADD CONSTRAINT [FK_DentalMenu_ParentId] FOREIGN KEY ([ParentId]) REFERENCES [dbo].[DentalMenu] ([Id]);
 
 
 GO

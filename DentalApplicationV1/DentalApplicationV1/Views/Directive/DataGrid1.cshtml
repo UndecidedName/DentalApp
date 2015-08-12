@@ -39,7 +39,7 @@
         @*From Date*@
         <div ng-show="showFilterDate" flex-container="row" style="{{searchDateTimeStyle}}">
             <div flex-item>
-                <lx-text-field label="Start Date">
+                <lx-text-field label="From">
                     <input type="text"
                            name="FilteredFromDate"
                            ng-model="filterDate.FromDate"
@@ -50,11 +50,33 @@
         @*To Date*@
         <div ng-show="showFilterDate" flex-container="row" style="{{searchDateTimeStyle}}">
             <div flex-item>
-                <lx-text-field label="End Date">
+                <lx-text-field label="To">
                     <input type="text"
                            name="FilteredToDate"
                            ng-model="filterDate.ToDate"
                            ng-click="showDialog('FilteredToDate')">
+                </lx-text-field>
+            </div>
+        </div>
+        @*From Time*@
+        <div ng-show="showFilterTime" flex-container="row" style="{{searchDateTimeStyle}}">
+            <div flex-item>
+                <lx-text-field label="From">
+                    <input type="text"
+                           name="FilteredFromTime"
+                           ng-model="filterTime.FromTime"
+                           ng-click="showDialog('FilteredFromTime')">
+                </lx-text-field>
+            </div>
+        </div>
+        @*To Time*@
+        <div ng-show="showFilterTime" flex-container="row" style="{{searchDateTimeStyle}}">
+            <div flex-item>
+                <lx-text-field label="To">
+                    <input type="text"
+                           name="FilteredToTime"
+                           ng-model="filterTime.ToTime"
+                           ng-click="showDialog('FilteredToTime')">
                 </lx-text-field>
             </div>
         </div>
@@ -79,7 +101,7 @@
             </div>
         </div>
     </div>
-    @*Modal for from date filtering*@
+    @*Modal for From Date filtering*@
     <lx-dialog class="dialog dialog--l" id="FilteredFromDate" auto-close="true">
         <div class="dialog__header">
         </div>
@@ -95,7 +117,7 @@
         <div class="dialog__actions">
         </div>
     </lx-dialog>
-    @*Modal for to date filtering*@
+    @*Modal for To Date filtering*@
     <lx-dialog class="dialog dialog--l" id="FilteredToDate" auto-close="true">
         <div class="dialog__header">
         </div>
@@ -106,6 +128,34 @@
                                   orientation="false"
                                   on-save="saveFn(filterDate.ToDateHolder); closeFilteredToDate('FilteredToDate')">
                 </time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+    @*Modal for From Time filtering*@
+    <lx-dialog class="dialog dialog--l" id="FilteredFromTime" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="filterTime.FromTimeHolder"
+                                  display-mode="time" orientation="false"
+                                  on-save="saveFn(filterTime.FromTimeHolder); closeFilteredTime('FilteredFromTime')"></time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+    @*Modal for To Time filtering*@
+    <lx-dialog class="dialog dialog--l" id="FilteredToTime" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="filterTime.ToTimeHolder"
+                                  display-mode="time" orientation="false"
+                                  on-save="saveFn(filterTime.ToTimeHolder); closeFilteredTime('FilteredToTime')"></time-date-picker>
             </div>
         </div>
         <div class="dialog__actions">

@@ -10,6 +10,7 @@
      5. Overriding and Overloading by using otherActions scope predefined actions
      6. Formatting of Date,Time,DateTime, String, String-Upper, Boolean and Number
      7. Validate required fields
+     8. Filtering
     ---------------------------------------------------------------------------------*/
     return {
         restrict: 'E',
@@ -101,7 +102,15 @@
                                         "FromDateHolder": $filter('date')(new Date() - 1, "MM/dd/yyyy"),
                                         "ToDate": $filter('date')(new Date() - 1, "MM/dd/yyyy"),
                                         "ToDateHolder": $filter('date')(new Date() - 1, "MM/dd/yyyy")
-                                    }
+                }
+                $scope.filterTime = {
+                    "FromTime": $filter('date')((new Date() - 1), "hh:mm a"),
+                    "FromTimeHolder": undefined,
+                    "ToTime": $filter('date')((new Date() - 1), "hh:mm a"),
+                    "ToTimeHolder": undefined,
+                    "FromSeconds": new Date((new Date() - 1)).getTime(),
+                    "ToSeconds": new Date((new Date() - 1)).getTime()
+                }
             };
 
             //Set the filter variables default value
@@ -110,8 +119,8 @@
             //Get data using the filtered criteria
             $scope.submitFilteredData = function () {
                 var flag = false;
-                $scope.filterParameters.Value = null;
-                $scope.filterParameters.Value2 = null;
+                $scope.filterParameters.Value = "";
+                $scope.filterParameters.Value2 = "";
                 $scope.filterParameters.Property = $scope.filteredData.Definition.Property;
                 switch ($scope.filteredData.Definition.Type) {
                     case "Date":
@@ -132,10 +141,26 @@
                         else
                             $scope.showformerror({ error: ($scope.filteredData.Definition.Label + " is required.") });
                         break;
+                    case "Time":
+                        if ($scope.filterTime.FromSeconds < $scope.filterTime.ToSeconds) {
+                            $scope.filterParameters.Value = $filter('date')(new Date($scope.filterTime.FromSeconds), "HH:mm")
+                            $scope.filterParameters.Value2 = $filter('date')(new Date($scope.filterTime.ToSeconds), "HH:mm")
+                            flag = true;
+                        } else
+                            $scope.showformerror({ error: "From time must be less than To time." });
+                        break;
+                    //Default Type
                     default:
                         if ($scope.searchValue != "")
                         {
-                            $scope.filterParameters.Value = $scope.searchValue;
+                            $scope.filterParameters.Value = "";
+                            for (var i = 0; i < $scope.searchValue.length; i++)
+                            {
+                                if ($scope.searchValue.charAt(i) == ' ')
+                                    $scope.filterParameters.Value += '%20';
+                                else
+                                    $scope.filterParameters.Value += $scope.searchValue.charAt(i);
+                            }
                             flag = true;
                         }
                         else
@@ -145,6 +170,7 @@
                 if (flag == true)
                 {
                     $scope.datadefinition.DataList = [];
+                    $scope.datadefinition.CurrentLength = $scope.datadefinition.DataList.length;
                     $scope.datadefinition.APIUrl[0] = $scope.filterdefinition.Url +
                                                       "&property=" + $scope.filterParameters.Property +
                                                       "&value=" + $scope.filterParameters.Value +
@@ -153,8 +179,14 @@
                 }
             };
 
-            //Show filter Date Modal
+            //Show filter Date/Time Modal
             $scope.showDialog = function (dialogId) {
+                if (dialogId == "FilteredFromTime") {
+                    $scope.filterTime.FromTime = $scope.filterTime.FromTimeHolder;
+                }
+                else if (dialogId == "FilteredToTime") {
+                    $scope.filterTime.ToTime = $scope.filterTime.ToTimeHolder;
+                }
                 LxDialogService.open(dialogId);
             };
 
@@ -168,6 +200,32 @@
                     promise = undefined;
                     LxDialogService.close(dialogId);
                 }, 100);
+            };
+
+            //Close filter time
+            $scope.closeFilteredTime = function (dialogId) {
+                if (dialogId == 'FilteredFromTime') {
+                    var promise = $interval(function () {
+                        //convert the selected time to seconds
+                        $scope.filterTime.FromSeconds = new Date($scope.filterTime.FromTimeHolder).getTime();
+                        //format the converted time for display
+                        $scope.filterTime.FromTime = $filter('date')(new Date($scope.filterTime.FromSeconds), "hh:mm a");
+                        $interval.cancel(promise);
+                        promise = undefined;
+                        LxDialogService.close(dialogId);
+                    }, 100);
+                }
+                else {
+                    var promise = $interval(function () {
+                        //convert the selected time to seconds
+                        $scope.filterTime.ToSeconds = new Date($scope.filterTime.ToTimeHolder).getTime();
+                        //format the converted time for display
+                        $scope.filterTime.ToTime = $filter('date')(new Date($scope.filterTime.ToSeconds), "hh:mm a");
+                        $interval.cancel(promise);
+                        promise = undefined;
+                        LxDialogService.close(dialogId);
+                    }, 100);
+                }
             };
 
             //Close filter To Date modal
@@ -462,8 +520,9 @@
                     //Initialize the API Url base on the filtered data if filter is enable
                     if ($scope.filterStatus == true)
                         $scope.datadefinition.APIUrl[0] = $scope.filterdefinition.Url +
-                                                          "&property=" + $scope.filterParameters.Property +
-                                                          "&value=" + $scope.filterParameters.Value;
+                                                      "&property=" + $scope.filterParameters.Property +
+                                                      "&value=" + $scope.filterParameters.Value +
+                                                      "&value2=" + $scope.filterParameters.Value2;
                     $scope.datadefinition.DataList = [];
                     if ($scope.otheractions({ action: 'PreLoadAction' }))
                         $scope.loadData(0);
@@ -698,7 +757,7 @@
                     $scope.menuPosition = "right";
                     $scope.criteriaStyle = "width: 250px;";
                     $scope.searchValueStyle = "width: 450px; padding-left:10px;";
-                    $scope.searchDateTimeStyle = "width: 225px; padding-left:50px;";
+                    $scope.searchDateTimeStyle = "width: 225px; padding-left:10px;";
                     $scope.searchStyle = "width:100px;padding-left:10px; padding-top:35px;";
                     $scope.filterContainerStyle = "padding-left:10px;";
                     $scope.checkBoxStyle = "padding-left:0px;";
@@ -709,17 +768,26 @@
                         $scope.showFilterDate = true;
                         $scope.showFilterText = false;
                         $scope.showFilterDropDown = false
+                        $scope.showFilterTime = false;
                         $scope.filteredStatus = { "Definition": undefined };
+                    }
+                    else if ($scope.filteredData.Definition.Type == 'Time') {
+                        $scope.showFilterTime = true;
+                        $scope.showFilterDate = false;
+                        $scope.showFilterText = false;
+                        $scope.showFilterDropDown = false;
                     }
                     else if ($scope.filteredData.Definition.Type == 'DropDown') {
                         $scope.showFilterDropDown = true
                         $scope.showFilterDate = false;
                         $scope.showFilterText = false;
+                        $scope.showFilterTime = false;
                     }
                     else {
                         $scope.showFilterText = true;
                         $scope.showFilterDropDown = false;
                         $scope.showFilterDate = false;
+                        $scope.showFilterTime = false;
                         $scope.filteredStatus = { "Definition": undefined };
                     }
                 }

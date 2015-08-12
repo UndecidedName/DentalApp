@@ -49,10 +49,10 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Edit";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Date', 'Time', 'Status', 'Patient Name', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
-            "Keys": ['ScheduleDate', 'ScheduleTime', 'Status', 'PatientName', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
+            "Header": ['Date', 'Start Time', 'End Time', 'Status', 'Patient Name', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
+            "Keys": ['ScheduleDate', 'StartTime', 'EndTime', 'Status', 'PatientName', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['Remarks-Remarks'],
-            "Type": ['Date', 'Time', 'Status-Approver', 'String', 'String', 'String-Default', 'String-Default', 'Date'],
+            "Type": ['Date', 'Time', 'Time', 'Status-Approver', 'String', 'String', 'String-Default', 'String-Default', 'Date'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &type=AllAppointments',//get
@@ -127,6 +127,8 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                         var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.ToTime;
                         startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                         endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
+                        $scope.dataDefinitionMaster.DataList[i].StartTime = startTime;
+                        $scope.dataDefinitionMaster.DataList[i].EndTime = endTime;
                         $scope.dataDefinitionMaster.DataList[i].ScheduleTime = startTime + " - " + endTime;
                     }
                     return true;

@@ -96,6 +96,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                 endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                 $scope.dataDefinitionMaster.DataItem.ScheduleTime = startTime + " - " + endTime;
+                $scope.dataDefinitionMaster.DataItem.StartTime = startTime;
+                $scope.dataDefinitionMaster.DataItem.EndTime = endTime;
                 $scope.dataDefinitionMaster.DataItem.DentistName = $scope.dataDefinitionScheduleDateList.DataItem.DentistName;
             }
         }
@@ -129,10 +131,10 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Create";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Date', 'Time', 'Status', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
-            "Keys": ['ScheduleDate', 'ScheduleTime', 'Status', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
-            "RequiredFields": ['ScheduleDate-Date', 'ScheduleTime-Time', 'DentistName-Dentist Name'],
-            "Type": ['Date', 'Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'DateTime'],
+            "Header": ['Date', 'Start Time', 'End Time', 'Status', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
+            "Keys": ['ScheduleDate', 'StartTime', 'EndTime', 'Status', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
+            "RequiredFields": ['ScheduleDate-Date', 'DentistName-Dentist Name'],
+            "Type": ['Date', 'Time', 'Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'DateTime'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &userId=' + $rootScope.user.Id,//get
@@ -149,13 +151,18 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
             "Url": '/api/Appointments?length= &userId=' + $rootScope.user.Id,//get
             "Source": [
                         { "Label": "Date", "Property": "ScheduledDate", "Values": [], "Type": "Date" },
-                        { "Label": "Remarks Date", "Property": "TransactionDate", "Values": [], "Type": "Date" },
+                        { "Label": "Start Time", "Property": "ScheduledFromTime", "Values": [], "Type": "Time" },
+                        { "Label": "End Time", "Property": "ScheduledToTime", "Values": [], "Type": "Time" },
+                        { "Label": "Dentist First Name", "Property": "DentistFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Middle Name", "Property": "DentistMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Last Name", "Property": "DentistLastName", "Values": [], "Type": "Default" },
                         { "Label": "Status", "Property": "Status", "Values": [
                                                                                 { "Label": "For Approval",  "Value": "0" },
                                                                                 { "Label": "Approved",      "Value": "1" },
                                                                                 { "Label": "Disapproved",   "Value": "2" }
                                                                             ], "Type": "DropDown"
-                        }
+                        },
+                        { "Label": "Remarks Date", "Property": "TransactionDate", "Values": [], "Type": "Date" }
                       ]
         };
         //Do Overriding or Overloading in this function
@@ -248,6 +255,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                         var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.ToTime;
                         startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                         endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
+                        $scope.dataDefinitionMaster.DataList[i].StartTime = startTime;
+                        $scope.dataDefinitionMaster.DataList[i].EndTime = endTime;
                         $scope.dataDefinitionMaster.DataList[i].ScheduleTime = startTime + " - " + endTime;
                     }
                     return true;
@@ -264,6 +273,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 ScheduleDetailId: null,
                 ScheduleDate: null,
                 ScheduleTime: null,
+                StartTime: null,
+                EndTime: null,
                 DentistName: null,
                 User: { UserTypeId: null },
                 Status: 0,

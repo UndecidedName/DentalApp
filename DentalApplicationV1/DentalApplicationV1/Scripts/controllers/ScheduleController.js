@@ -104,6 +104,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
+                         'filterdefinition="filterDefinition"' +
                          'submitbuttontext="submitButtonText"' +
                          'submitbuttonlistener="submitButtonListenerMaster"' +
                          'closecontainer="closeForm()"' +
@@ -138,6 +139,23 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             "contextMenuLabel": ['Create', 'Edit', 'Delete', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
         };
+
+        $scope.filterDefinition = {
+            "Url": '/api/ScheduleMasters?length= ',//get
+            "Source": [
+                        { "Label": "Date", "Property": "Date", "Values": [], "Type": "Date" },
+                        { "Label": "Dentist First Name", "Property": "DentistFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Middle Name", "Property": "DentistMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Last Name", "Property": "DentistLastName", "Values": [], "Type": "Default" },
+                        {
+                            "Label": "Status", "Property": "Status", "Values": [
+                                                                                  { "Label": "Open", "Value": "0" },
+                                                                                  { "Label": "Closed", "Value": "1" }
+                            ], "Type": "DropDown"
+                        }
+            ]
+        };
+
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {

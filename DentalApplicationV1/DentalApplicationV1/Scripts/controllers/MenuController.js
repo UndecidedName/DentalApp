@@ -73,6 +73,7 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
+                         'filterdefinition="filterDefinition"' +
                          'submitbuttontext="submitButtonText"' +
                          'submitbuttonlistener="submitButtonListenerMaster"' +
                          'closecontainer="closeForm()"' +
@@ -107,6 +108,27 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
             "contextMenuLabel": ['Create', 'Edit', 'Delete', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
         };
+
+        $scope.filterDefinition = {
+            "Url": '/api/DentalMenus?length= ',//get
+            "Source": [
+                        {
+                            "Label": "Parent Name", "Property": "ParentName", "Values": [
+                                                                                  { "Label": "Maintenance", "Value": "2" },
+                                                                                  { "Label": "Transaction", "Value": "1" }
+                            ], "Type": "DropDown"
+                        },
+                        { "Label": "Name", "Property": "Name", "Values": [], "Type": "Default" },
+                        { "Label": "Description", "Property": "Description", "Values": [], "Type": "Default" },
+                        { "Label": "Url", "Property": "Url", "Values": [], "Type": "Default" },
+                        {
+                            "Label": "Status", "Property": "Status", "Values": [
+                                                                                  { "Label": "Active", "Value": "1" },
+                                                                                  { "Label": "Inactive", "Value": "0" }
+                            ], "Type": "DropDown"
+                        }
+            ]
+        };
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {
@@ -130,14 +152,15 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                     $scope.closeForm();
                     return true;
                 case 'PostLoadAction':
+                    console.log($scope.dataDefinitionMaster.DataList.length);
                     //Initialize menu parent
                     for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
-                        for (var j = 0; j < $scope.dataDefinitionMaster.DataList.length; j++) {
-                            if ($scope.dataDefinitionMaster.DataList[i].ParentId == $scope.dataDefinitionMaster.DataList[j].Id) {
-                                $scope.dataDefinitionMaster.DataList[i].ParentName = $scope.dataDefinitionMaster.DataList[j].Name;
-                                j = $scope.dataDefinitionMaster.DataList.length;
-                            }
-                        }
+                        //for (var j = 0; j < $scope.dataDefinitionMaster.DataList.length; j++) {
+                            if ($scope.dataDefinitionMaster.DataList[i].ParentId == 1)
+                                $scope.dataDefinitionMaster.DataList[i].ParentName = "Transaction";
+                            else
+                                $scope.dataDefinitionMaster.DataList[i].ParentName = "Maintenance";
+                        //}
                     }
                     return true;
                 default:

@@ -77,6 +77,16 @@ namespace DentalApplicationV1.APIController
             }
         }
 
+        //Filtering
+        public IHttpActionResult GetCivilStatus(int length, string property, string value, string value2)
+        {
+            CivilStatu[] civilStatus = new CivilStatu[pageSize];
+            this.filterRecord(length, property, value, value2, ref civilStatus);
+            if (civilStatus != null)
+                return Ok(civilStatus);
+            else
+                return Ok();
+        }
         // GET: api/CivilStatus/5
         [ResponseType(typeof(CivilStatu))]
         public IHttpActionResult GetCivilStatu(int id)
@@ -183,6 +193,63 @@ namespace DentalApplicationV1.APIController
             base.Dispose(disposing);
         }
 
+        public void filterRecord(int length, string property, string value, string value2, ref CivilStatu[] civilStatus)
+        {
+            /* Fields that can be filter
+             * Name
+             * Desription
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            civilStatus = null;
+            if (property.Equals("Name"))
+            {
+                value = value.ToLower();
+                var records = db.CivilStatus.Where(cs => cs.Name.ToLower().Contains(value) || cs.Name.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getCivilStatus = db.CivilStatus.Where(cs => cs.Name.ToLower().Contains(value) || cs.Name.ToLower().ToLower().Equals(value))
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    civilStatus = getCivilStatus;
+                }
+            }
+            else if (property.Equals("Description"))
+            {
+                value = value.ToLower();
+                var records = db.CivilStatus.Where(cs => cs.Description.ToLower().Contains(value) || cs.Description.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getCivilStatus = db.CivilStatus.Where(cs => cs.Description.ToLower().Contains(value) || cs.Description.ToLower().ToLower().Equals(value))
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    civilStatus = getCivilStatus;
+                }
+            }
+            //status
+            else
+            {
+                StringManipulation strManipulate = new StringManipulation(value, value2, "Integer");
+                var records = db.CivilStatus.Where(cs => cs.Status == strManipulate.intValue).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getCivilStatus = db.CivilStatus.Where(cs => cs.Status == strManipulate.intValue)
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    civilStatus = getCivilStatus;
+                }
+            }
+        }
         private bool CivilStatuExists(int id)
         {
             return db.CivilStatus.Count(e => e.Id == id) > 0;

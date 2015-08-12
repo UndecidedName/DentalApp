@@ -21,6 +21,7 @@ namespace DentalApplicationV1.Models
         public DateTime dateValue { get; set; }
         public DateTime dateValue2 { get; set; }
         public TimeSpan timeValue { get; set; }
+        public TimeSpan timeValue2 { get; set; }
         public int intValue { get; set; }
         public decimal decimalValue { get; set; }
         public double doubleValue { get; set; }
@@ -47,9 +48,11 @@ namespace DentalApplicationV1.Models
             }
             else if (this.type.Equals("Time"))
             {
-                TimeSpan timeHolder;
+                TimeSpan timeHolder, timeHolder1;
                 TimeSpan.TryParse(this.value, out timeHolder);
+                TimeSpan.TryParse(this.value2, out timeHolder1);
                 this.timeValue = timeHolder;
+                this.timeValue2 = timeHolder1;
             }
             else if (this.type.Equals("Integer"))
             {
@@ -67,7 +70,7 @@ namespace DentalApplicationV1.Models
             }
             else
             {
-                this.stringValue = value.ToString();
+                this.stringValue = value;
             }
             
         }
