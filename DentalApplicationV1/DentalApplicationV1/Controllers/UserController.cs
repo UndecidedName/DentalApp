@@ -46,6 +46,8 @@ namespace DentalWebApp.Controllers
                     return PartialView("~/Views/User/Templates/Menu.cshtml");
                 case "civilstatus":
                     return PartialView("~/Views/User/Templates/CivilStatus.cshtml");
+                case "userinformation":
+                    return PartialView("~/Views/User/Templates/UserInformation.cshtml");
                 case "usermenu":
                     return PartialView("~/Views/User/Templates/UserMenu.cshtml");
                 case "usertype":

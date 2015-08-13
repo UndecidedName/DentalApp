@@ -80,6 +80,17 @@ namespace DentalApplicationV1.APIController
             return Ok(userType);
         }
 
+        //Filtering
+        public IHttpActionResult GetUserType(int length, string property, string value, string value2)
+        {
+            UserType[] userType = new UserType[pageSize];
+            this.filterRecord(length, property, value, value2, ref userType);
+            if (userType != null)
+                return Ok(userType);
+            else
+                return Ok();
+        }
+
         // PUT: api/UserTypes/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUserType(int id, UserType userType)
@@ -175,6 +186,64 @@ namespace DentalApplicationV1.APIController
         private bool UserTypeExists(int id)
         {
             return db.UserTypes.Count(e => e.Id == id) > 0;
+        }
+
+        public void filterRecord(int length, string property, string value, string value2, ref UserType[] userType)
+        {
+            /* Fields that can be filter
+             * Name
+             * Desription
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            userType = null;
+            if (property.Equals("Name"))
+            {
+                value = value.ToLower();
+                var records = db.UserTypes.Where(cs => cs.Name.ToLower().Contains(value) || cs.Name.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUserType = db.UserTypes.Where(cs => cs.Name.ToLower().Contains(value) || cs.Name.ToLower().ToLower().Equals(value))
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    userType = getUserType;
+                }
+            }
+            else if (property.Equals("Description"))
+            {
+                value = value.ToLower();
+                var records = db.UserTypes.Where(cs => cs.Description.ToLower().Contains(value) || cs.Description.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUserType = db.UserTypes.Where(cs => cs.Description.ToLower().Contains(value) || cs.Description.ToLower().ToLower().Equals(value))
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    userType = getUserType;
+                }
+            }
+            //status
+            else
+            {
+                StringManipulation strManipulate = new StringManipulation(value, value2, "Integer");
+                var records = db.UserTypes.Where(cs => cs.Status == strManipulate.intValue).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUserType = db.UserTypes.Where(cs => cs.Status == strManipulate.intValue)
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    userType = getUserType;
+                }
+            }
         }
     }
 }

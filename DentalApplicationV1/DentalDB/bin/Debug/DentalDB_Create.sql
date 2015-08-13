@@ -965,15 +965,6 @@ ALTER TABLE [dbo].[Appointment]
 
 
 GO
-PRINT N'Creating FK_DentalMenu_ParentId...';
-
-
-GO
-ALTER TABLE [dbo].[DentalMenu]
-    ADD CONSTRAINT [FK_DentalMenu_ParentId] FOREIGN KEY ([ParentId]) REFERENCES [dbo].[DentalMenu] ([Id]);
-
-
-GO
 PRINT N'Creating [dbo].[V_UserMenu]...';
 
 

@@ -31,6 +31,7 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
+                         'filterdefinition="filterDefinition"' +
                          'submitbuttontext="submitButtonText"' +
                          'submitbuttonlistener="submitButtonListenerMaster"' +
                          'closecontainer="closeForm()"' +
@@ -65,6 +66,30 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
             "contextMenuLabel": ['Decide','View'],
             "contextMenuLabelImage": ['mdi mdi-table-edit', 'mdi mdi-eye']
         };
+
+        $scope.filterDefinition = {
+            "Url": '/api/Appointments?length= &type=all',//get
+            "Source": [
+                        { "Label": "Date", "Property": "ScheduledDate", "Values": [], "Type": "Date" },
+                        { "Label": "Start Time", "Property": "ScheduledFromTime", "Values": [], "Type": "Time" },
+                        { "Label": "End Time", "Property": "ScheduledToTime", "Values": [], "Type": "Time" },
+                        { "Label": "Patient First Name", "Property": "PatientFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Patient Middle Name", "Property": "PatientMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Patient Last Name", "Property": "PatientLastName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist First Name", "Property": "DentistFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Middle Name", "Property": "DentistMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Last Name", "Property": "DentistLastName", "Values": [], "Type": "Default" },
+                        {
+                            "Label": "Status", "Property": "Status", "Values": [
+                                                                                  { "Label": "For Approval", "Value": "0" },
+                                                                                  { "Label": "Approved", "Value": "1" },
+                                                                                  { "Label": "Disapproved", "Value": "2" }
+                            ], "Type": "DropDown"
+                        },
+                        { "Label": "Remarks Date", "Property": "TransactionDate", "Values": [], "Type": "Date" }
+            ]
+        };
+
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {
@@ -76,7 +101,6 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                     $scope.dataDefinitionMaster.DataItem.TransactionDate = $filter('date')(new Date(), "MM/dd/yyyy hh:mm:ss");
                     return true;
                 case 'PostEditAction':
-                    //$scope.dataDefinitionMaster.ViewOnly = ($scope.dataDefinitionMaster.DataItem.Status == 0 ? false : true);
                     $scope.dataDefinitionMaster.DataItem.TransactionStatus = ($scope.dataDefinitionMaster.DataItem.Status == 1 ? true :
                                                                              ($scope.dataDefinitionMaster.DataItem.Status == 0 ? true : false));
                     $scope.dataDefinitionMaster.DataItem.Remarks = ($scope.dataDefinitionMaster.DataItem.Status == 0 ? "" : $scope.dataDefinitionMaster.DataItem.Remarks);
@@ -103,14 +127,14 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                         UserId: $scope.dataDefinitionMaster.DataItem.PatientId,
                         Status: 0
                     };
-                    $scope.data = angular.copy($scope.dataDefinitionMaster.ServerData[0].objParam1);
-                    var date = $filter('date')($scope.data[0].ScheduleMaster.Date, "MM/dd/yyyy");
-                    var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
-                    var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
-                    startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
-                    endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
+                    $scope.data     = angular.copy($scope.dataDefinitionMaster.ServerData[0].objParam1);
+                    var date        = $filter('date')($scope.data[0].ScheduleMaster.Date, "MM/dd/yyyy");
+                    var startTime   = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
+                    var endTime     = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
+                    startTime       = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
+                    endTime         = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                     $scope.notification.Description = "Your appointment on " + date + " at " + startTime + " - "
-                                       + endTime + " has been" + ($scope.data[0].Status == 1 ? ' approved,' : ' disapproved,') + " please see remarks.";
+                                                    + endTime + " has been" + ($scope.data[0].Status == 1 ? ' approved,' : ' disapproved,') + " please see remarks.";
                     $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
                     $scope.closeForm();
                     return true;

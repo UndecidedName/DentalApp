@@ -152,7 +152,6 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                     $scope.closeForm();
                     return true;
                 case 'PostLoadAction':
-                    console.log($scope.dataDefinitionMaster.DataList.length);
                     //Initialize menu parent
                     for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
                         //for (var j = 0; j < $scope.dataDefinitionMaster.DataList.length; j++) {

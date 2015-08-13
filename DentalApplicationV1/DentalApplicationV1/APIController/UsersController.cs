@@ -18,6 +18,7 @@ namespace DentalApplicationV1.APIController
     public class UsersController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
+        private int pageSize = 20;
         private Response response = new Response();
         private MyGenerator generator = new MyGenerator();
 
@@ -151,23 +152,44 @@ namespace DentalApplicationV1.APIController
                 return Ok(response);
             }
         }
-
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        // GET: api/Users?length=0
+        public IHttpActionResult GetUser(int length)
         {
-            response.status = "FAILURE";
-            User user = db.Users.Find(id);
-            if (user == null)
-                response.message = "User doesn't exist!";
+            int fetch;
+            var records = db.Users.Count();
+            if (records > length)
+            {
+                if ((records - length) > pageSize)
+                    fetch = pageSize;
+                else
+                    fetch = records - length;
+
+                var getUser = db.Users
+                                .Include(u => u.UserInformations)
+                                .Include(u => u.UserType)
+                                .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                for (int i = 0; i < getUser.Length; i++)
+                {
+                    getUser[0].UserType.UserMenus = null;
+                    getUser[0].UserType.Users = null;
+                }
+                return Ok(getUser);
+            }
             else
             {
-                response.status = "SUCCESS";
-                response.objParam1 = user;
+                return Ok();
             }
-            return Ok(response);
         }
-
+        //Filtering for a specif user's Appointments
+        public IHttpActionResult GetUser(int length, string property, string value, string value2)
+        {
+            User[] users = new User[pageSize];
+            this.filterRecord(length, property, value, value2, ref users);
+            if (users != null)
+                return Ok(users);
+            else
+                return Ok();
+        }
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
@@ -246,6 +268,162 @@ namespace DentalApplicationV1.APIController
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
+        }
+
+        public void filterRecord(int length, string property, string value, string value2, ref User[] users)
+        {
+            /* Fields that can be filter
+             * Name
+             * Desription
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            users = null;
+            if (property.Equals("UserName"))
+            {
+                value = value.ToLower();
+                var records = db.Users.Where(u => u.Username.ToLower().Contains(value) || u.Username.ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users.Include(u => u.UserInformations)
+                                           .Include(u => u.UserType)
+                                           .Where(u => u.Username.ToLower().Contains(value) || u.Username.ToLower().Equals(value))
+                                           .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            else if (property.Equals("FirstName"))
+            {
+                value = value.ToLower();
+                var records = db.Users.Where(u => u.UserInformations.Where( ui => ui.FirstName.ToLower().Contains(value)).Count() > 0
+                                               || u.UserInformations.Where( ui => ui.FirstName.ToLower().Equals(value)).Count() > 0).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users
+                                     .Include(u => u.UserInformations)
+                                     .Include(u => u.UserType)
+                                     .Where(u => u.UserInformations.Where(ui => ui.FirstName.ToLower().Contains(value)).Count() > 0
+                                            || u.UserInformations.Where(ui => ui.FirstName.ToLower().Equals(value)).Count() > 0)
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            else if (property.Equals("MiddleName"))
+            {
+                value = value.ToLower();
+                var records = db.Users.Where(u => u.UserInformations.Where(ui => ui.MiddleName.ToLower().Contains(value)).Count() > 0
+                                               || u.UserInformations.Where(ui => ui.MiddleName.ToLower().Equals(value)).Count() > 0).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users
+                                     .Include(u => u.UserInformations)
+                                     .Include(u => u.UserType)
+                                     .Where(u => u.UserInformations.Where(ui => ui.MiddleName.ToLower().Contains(value)).Count() > 0
+                                            || u.UserInformations.Where(ui => ui.MiddleName.ToLower().Equals(value)).Count() > 0)
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            else if (property.Equals("LastName"))
+            {
+                value = value.ToLower();
+                var records = db.Users.Where(u => u.UserInformations.Where(ui => ui.LastName.ToLower().Contains(value)).Count() > 0
+                                               || u.UserInformations.Where(ui => ui.LastName.ToLower().Equals(value)).Count() > 0).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users
+                                     .Include(u => u.UserInformations)
+                                     .Include(u => u.UserType)
+                                     .Where(u => u.UserInformations.Where(ui => ui.LastName.ToLower().Contains(value)).Count() > 0
+                                            || u.UserInformations.Where(ui => ui.LastName.ToLower().Equals(value)).Count() > 0)
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            else if (property.Equals("EmailAddress"))
+            {
+                value = value.ToLower();
+                var records = db.Users.Where(u => u.UserInformations.Where(ui => ui.EmailAddress.ToLower().Contains(value)).Count() > 0
+                                               || u.UserInformations.Where(ui => ui.EmailAddress.ToLower().Equals(value)).Count() > 0).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users
+                                     .Include(u => u.UserInformations)
+                                     .Include(u => u.UserType)
+                                     .Where(u => u.UserInformations.Where(ui => ui.EmailAddress.ToLower().Contains(value)).Count() > 0
+                                            || u.UserInformations.Where(ui => ui.EmailAddress.ToLower().Equals(value)).Count() > 0)
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            else if (property.Equals("Gender"))
+            {
+                value = value.ToLower();
+                var records = db.Users.Where(u => u.UserInformations.Where(ui => ui.Gender.ToLower().Contains(value)).Count() > 0
+                                               || u.UserInformations.Where(ui => ui.Gender.ToLower().Equals(value)).Count() > 0).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users
+                                     .Include(u => u.UserInformations)
+                                     .Include(u => u.UserType)
+                                     .Where(u => u.UserInformations.Where(ui => ui.Gender.ToLower().Contains(value)).Count() > 0
+                                            || u.UserInformations.Where(ui => ui.Gender.ToLower().Equals(value)).Count() > 0)
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            //status
+            else
+            {
+                StringManipulation strManipulate = new StringManipulation(value, value2, "Integer");
+                var records = db.Users.Where(u => u.Status == strManipulate.intValue).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUsers = db.Users
+                                     .Include(u => u.UserInformations)
+                                     .Include(u => u.UserType)
+                                     .Where(u => u.Status == strManipulate.intValue)
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                    users = getUsers;
+                }
+            }
+            if (users != null)
+            {
+                for (int i = 0; i < users.Length; i++)
+                {
+                    users[0].UserType.UserMenus = null;
+                    users[0].UserType.Users = null;
+                }
+            }
         }
     }
 }

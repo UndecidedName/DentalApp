@@ -102,6 +102,17 @@ namespace DentalApplicationV1.APIController
             return Ok(userMenu);
         }
 
+        //Filtering
+        public IHttpActionResult GetUserMenu(int length, string property, string value, string value2)
+        {
+            UserMenu[] userMenu = new UserMenu[pageSize];
+            this.filterRecord(length, property, value, value2, ref userMenu);
+            if (userMenu != null)
+                return Ok(userMenu);
+            else
+                return Ok();
+        }
+
         // PUT: api/UserMenus/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUserMenu(int id, UserMenu userMenu)
@@ -203,6 +214,7 @@ namespace DentalApplicationV1.APIController
         {
             return db.UserMenus.Count(e => e.Id == id) > 0;
         }
+
         private bool validateMenu(int userTypeId, int menuId) {
             var searchMenu = db.UserMenus
                             .Where(um => um.UserTypeId == userTypeId)
@@ -211,6 +223,64 @@ namespace DentalApplicationV1.APIController
                 return false;
             else
                 return true;
+        }
+
+        public void filterRecord(int length, string property, string value, string value2, ref UserMenu[] userMenu)
+        {
+            /* Fields that can be filter
+             * Name
+             * Desription
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            userMenu = null;
+            if (property.Equals("Name"))
+            {
+                value = value.ToLower();
+                var records = db.UserMenus.Where(um => um.DentalMenu.Name.ToLower().Contains(value) || um.DentalMenu.Name.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUserMenu = db.UserMenus.Where(um => um.DentalMenu.Name.ToLower().Contains(value) || um.DentalMenu.Name.ToLower().ToLower().Equals(value))
+                        .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
+                    userMenu = getUserMenu;
+                }
+            }
+            else if (property.Equals("Description"))
+            {
+                value = value.ToLower();
+                var records = db.UserMenus.Where(um => um.DentalMenu.Description.ToLower().Contains(value) || um.DentalMenu.Description.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUserMenu = db.UserMenus.Where(um => um.DentalMenu.Name.ToLower().Contains(value) || um.DentalMenu.Name.ToLower().ToLower().Equals(value))
+                        .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
+                    userMenu = getUserMenu;
+                }
+            }
+            //status
+            else
+            {
+                StringManipulation strManipulate = new StringManipulation(value, value2, "Integer");
+                var records = db.UserMenus.Where(cs => cs.Status == strManipulate.intValue).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getUserMenu = db.UserMenus.Where(um => um.Status == strManipulate.intValue)
+                        .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
+                    userMenu = getUserMenu;
+                }
+            }
         }
     }
 }

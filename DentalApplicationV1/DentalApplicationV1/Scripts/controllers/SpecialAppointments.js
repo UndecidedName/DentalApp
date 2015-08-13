@@ -153,6 +153,7 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
+                         'filterdefinition="filterDefinition"' +
                          'submitbuttontext="submitButtonText"' +
                          'submitbuttonlistener="submitButtonListenerMaster"' +
                          'closecontainer="closeForm()"' +
@@ -187,6 +188,30 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
             "contextMenuLabel": ['Create', 'Edit', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-eye']
         };
+
+        $scope.filterDefinition = {
+            "Url": '/api/Appointments?length= &type=special',//get
+            "Source": [
+                        { "Label": "Date", "Property": "ScheduledDate", "Values": [], "Type": "Date" },
+                        { "Label": "Start Time", "Property": "ScheduledFromTime", "Values": [], "Type": "Time" },
+                        { "Label": "End Time", "Property": "ScheduledToTime", "Values": [], "Type": "Time" },
+                        { "Label": "Patient First Name", "Property": "PatientFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Patient Middle Name", "Property": "PatientMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Patient Last Name", "Property": "PatientLastName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist First Name", "Property": "DentistFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Middle Name", "Property": "DentistMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Last Name", "Property": "DentistLastName", "Values": [], "Type": "Default" },
+                        {
+                            "Label": "Status", "Property": "Status", "Values": [
+                                                                                  { "Label": "For Approval", "Value": "0" },
+                                                                                  { "Label": "Approved", "Value": "1" },
+                                                                                  { "Label": "Disapproved", "Value": "2" }
+                            ], "Type": "DropDown"
+                        },
+                        { "Label": "Remarks Date", "Property": "TransactionDate", "Values": [], "Type": "Date" }
+                     ]
+        };
+
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {
@@ -237,8 +262,8 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
                             var user = "You ";
                         }
                         $scope.notification.Description = user + " has set an appointment on " + $scope.data.ScheduleDate + " at "
-                                                        + $scope.data.ScheduleTime + "."
-                                                        + "for " + $scope.data.PatientName + ".";
+                                                        + $scope.data.ScheduleTime
+                                                        + " for " + $scope.data.PatientName + ".";
                         $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
                     }
                     //Send notification to patient
@@ -285,8 +310,6 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
                         startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                         endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                         $scope.notification.Description = patient + " has cancelled " + gender + " appointment on " + date + " at " + startTime + " - " + endTime;
-                        //$scope.notification.Description =   patient +"'s appointment on " + date + " at " + startTime + " - "
-                        //                                    + endTime + " has been cancelled.";
                         $rootScope.sendNotification($scope.notification, $scope.notification.UserId.toString());
                     }
                     $scope.closeForm();

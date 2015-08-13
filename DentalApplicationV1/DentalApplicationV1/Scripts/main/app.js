@@ -140,6 +140,11 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "User/Templates/CivilStatus",
         controller: "CivilStatusController"
     })
+    .state('UserInformation', {
+        url: "/User/Index",
+        templateUrl: "User/Templates/UserInformation",
+        controller: "UserInformationController"
+    })
     .state('UserMenu', {
          url: "/User/Index",
          templateUrl: "User/Templates/UserMenu",

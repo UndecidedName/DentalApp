@@ -53,6 +53,7 @@ function UserMenuController(LxDialogService, LxNotificationService, LxDropdownSe
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
+                         'filterdefinition="filterDefinition"' +
                          'submitbuttontext="submitButtonText"' +
                          'submitbuttonlistener="submitButtonListenerMaster"' +
                          'closecontainer="closeForm()"' +
@@ -87,6 +88,21 @@ function UserMenuController(LxDialogService, LxNotificationService, LxDropdownSe
             "contextMenuLabel": ['Add Menu',],
             "contextMenuLabelImage": ['mdi mdi-plus']
         };
+
+        $scope.filterDefinition = {
+            "Url": '/api/CivilStatus?length= ',//get
+            "Source": [
+                        { "Label": "Name", "Property": "Name", "Values": [], "Type": "Default" },
+                        { "Label": "Description", "Property": "Description", "Values": [], "Type": "Default" },
+                        {
+                            "Label": "Status", "Property": "Status", "Values": [
+                                                                                  { "Label": "Active", "Value": "1" },
+                                                                                  { "Label": "Inactive", "Value": "0" }
+                            ], "Type": "DropDown"
+                        }
+            ]
+        };
+
         //Do Overriding or Overloading in this function
         $scope.otherActionsMaster = function (action) {
             switch (action) {

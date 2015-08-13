@@ -35,7 +35,10 @@
                                             contextMenuLabel - Lable for each context menu item
                                             contextMenuLabelImage - Image for the menu
                                         */
-            filterdefinition: '=',
+            filterdefinition: '=',      /*
+                                            Url     - Contains the API Url for Filter
+                                            Source  - Contains the data needed for filtering such as Label, Property, Values and Type
+                                        */
             submitbuttontext: '=',      //scope that holds the submit button label
             submitbuttonlistener: '=',  //scope that will serve as listener that will identify if the user submit an action  
             closecontainer: '&',        //function that will close the form container
@@ -147,7 +150,7 @@
                             $scope.filterParameters.Value2 = $filter('date')(new Date($scope.filterTime.ToSeconds), "HH:mm")
                             flag = true;
                         } else
-                            $scope.showformerror({ error: "From time must be less than To time." });
+                            $scope.showformerror({ error: "From time must be less than to To time." });
                         break;
                     //Default Type
                     default:

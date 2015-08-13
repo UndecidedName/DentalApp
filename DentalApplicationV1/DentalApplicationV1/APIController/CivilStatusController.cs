@@ -193,6 +193,11 @@ namespace DentalApplicationV1.APIController
             base.Dispose(disposing);
         }
 
+        private bool CivilStatuExists(int id)
+        {
+            return db.CivilStatus.Count(e => e.Id == id) > 0;
+        }
+
         public void filterRecord(int length, string property, string value, string value2, ref CivilStatu[] civilStatus)
         {
             /* Fields that can be filter
@@ -249,10 +254,6 @@ namespace DentalApplicationV1.APIController
                     civilStatus = getCivilStatus;
                 }
             }
-        }
-        private bool CivilStatuExists(int id)
-        {
-            return db.CivilStatus.Count(e => e.Id == id) > 0;
         }
     }
 }
