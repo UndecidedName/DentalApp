@@ -10,103 +10,172 @@
     <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
         <div id="progress"></div>
         <div flex-item>
-            <lx-text-field label="Username" error="validateInput(dataDefinitionMaster.DataItem.ScheduleDate)">
+            <lx-text-field label="Username" error="validateInput(dataDefinitionMaster.DataItem.Username)">
                 <input type="text"
-                       name="Date"
-                       ng-model="dataDefinitionMaster.DataItem.ScheduleDate"
+                       name="Username"
+                       ng-model="dataDefinitionMaster.DataItem.Username"
                        pattern=".{4,50}"
-                       ng-disabled="dataDefinitionMaster.ViewOnly; (dataDefinitionMaster.DataItem.Id != null ? true: false)"
-                       ng-click="showDialog('ScheduleDate')">
-            </lx-text-field>
-        </div>
-        <div flex-item>
-            <lx-text-field label="Time" error="validateInput(dataDefinitionMaster.DataItem.ScheduleTime)">
-                <input type="text"
-                       name="Time"
-                       ng-model="dataDefinitionMaster.DataItem.ScheduleTime"
                        ng-disabled="true">
             </lx-text-field>
         </div>
         <div flex-item>
-            <lx-text-field label="Dentist" error="validateInput(dataDefinitionMaster.DataItem.DentistName)">
-                <input type="text"
-                       name="Dentist"
-                       ng-model="dataDefinitionMaster.DataItem.DentistName"
-                       ng-disabled="true" />
-            </lx-text-field>
-        </div>
-    </div>
-    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
-        <div flex-item>
-            <lx-text-field label="Message">
-                <input type="text"
-                       name="Message"
-                       ng-model="dataDefinitionMaster.DataItem.Message"
-                       ng-disabled="dataDefinitionMaster.ViewOnly || dataDefinitionMaster.DataItem.Status == 2" />
-            </lx-text-field>
-        </div>
-    </div>
-    <br />
-    <div class="divider divider--dark"></div>
-    <div flex-container="row" flex-gutter="24" style=" padding-top: 20px; padding-left:20px; padding-right:20px;">
-        <div flex-item>
-            For Clinic Only
-        </div>
-    </div>
-    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
-        <div flex-item>
-            <lx-text-field label="Remarks">
-                <input type="text"
-                       name="Remarks"
-                       ng-model="dataDefinitionMaster.DataItem.Remarks"
-                       ng-disabled="true" />
-            </lx-text-field>
-        </div>
-    </div>
-    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
-        <div flex-item>
-            <lx-text-field label="Remarks Date">
-                <input type="text"
-                       name="Remarks Date"
-                       ng-model="dataDefinitionMaster.DataItem.TransactionDate"
-                       ng-disabled="true" />
+            <lx-text-field label="Password" error="validateInput(dataDefinitionMaster.DataItem.Password)">
+                <input type="password"
+                       name="Password"
+                       ng-model="dataDefinitionMaster.DataItem.Password"
+                       ng-disabled="false">
             </lx-text-field>
         </div>
         <div flex-item>
-            <lx-text-field label="Status">
-                <input type="text"
-                       name="Status"
-                       ng-model="dataDefinitionMaster.DataItem.StatusHolder"
-                       ng-disabled="true" />
-            </lx-text-field>
-        </div>
-    </div>
-    <br />
-    <lx-dialog class="dialog dialog--l" id="ScheduleDate" auto-close="true">
-        <div class="dialog__header">
-            <div class="toolbar bgc-light-blue-500 pl++">
-                <span class="toolbar__label tc-white fs-title">
-                    Available Schedules
-                </span>
-            </div>
-        </div>
-        <div class="dialog__content">
-            <dir-data-modal1 datadefinition="dataDefinitionScheduleDateList" otheractions="otherActionScheduleDate(action)" closecontainer="closeScheduleDate(dialog)"></dir-data-modal1>
-        </div>
-        <div class="dialog__actions">
-        </div>
-    </lx-dialog>
+            <lx-select ng-model="dataDefinitionMaster.DataItem.UserType" placeholder="Type" choices="userTypeList" floating-label>
+                <lx-select-selected>
+                    {{ $selected.Name }}
+                </lx-select-selected>
 
-    <lx-dialog class="dialog dialog--l" id="ScheduleTime" auto-close="true">
-        <div class="dialog__header">
-            <div class="toolbar bgc-light-blue-500 pl++">
-                <span class="toolbar__label tc-white fs-title">
-                    Available Schedules for {{dataDefinitionScheduleDateList.DataItem.Date}}
-                </span>
+                <lx-select-choices>
+                    {{ $choice.Name }}
+                </lx-select-choices>
+            </lx-select>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item>
+            <lx-text-field label="First Name" error="validateInput(dataDefinitionMaster.DataItem.FirstName)">
+                <input type="text"
+                       name="FirstName"
+                       ng-model="dataDefinitionMaster.DataItem.FirstName"
+                       pattern=".{4,50}"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Middle Name" error="validateInput(dataDefinitionMaster.DataItem.MiddleName)">
+                <input type="text"
+                       name="MiddleName"
+                       ng-model="dataDefinitionMaster.DataItem.MiddleName"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Last Name" error="validateInput(dataDefinitionMaster.DataItem.LastName)">
+                <input type="text"
+                       name="LastName"
+                       ng-model="dataDefinitionMaster.DataItem.LastName"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item>
+            <lx-text-field label="Height">
+                <input type="number"
+                       name="Height"
+                       ng-model="dataDefinitionMaster.DataItem.Height"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Weight">
+                <input type="number"
+                       name="Weight"
+                       ng-model="dataDefinitionMaster.DataItem.Weight"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-select ng-model="dataDefinitionMaster.DataItem.GenderDesc" placeholder="Gender" choices="genderList" floating-label>
+                <lx-select-selected>
+                    {{ $selected.Name }}
+                </lx-select-selected>
+
+                <lx-select-choices>
+                    {{ $choice.Name }}
+                </lx-select-choices>
+            </lx-select>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item>
+            <lx-text-field label="Birthdate">
+                <input type="text"
+                       name="Date"
+                       ng-model="dataDefinitionMaster.DataItem.BirthDate"
+                       ng-click="showDialog('BirthDate')"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+        <div flex-item>
+            <lx-select ng-model="dataDefinitionMaster.DataItem.CivilStatusHolder" placeholder="Civil Status" choices="civilStatusList" floating-label>
+                <lx-select-selected>
+                    {{ $selected.Name }}
+                </lx-select-selected>
+
+                <lx-select-choices>
+                    {{ $choice.Name }}
+                </lx-select-choices>
+            </lx-select>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Occupation">
+                <input type="text"
+                       name="Occupation"
+                       ng-model="dataDefinitionMaster.DataItem.Occupation"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div flex-item>
+            <lx-text-field label="Address">
+                <input type="text"
+                       name="Address"
+                       ng-model="dataDefinitionMaster.DataItem.Address"
+                       ng-disabled="false" />
+            </lx-text-field>
+        </div>
+    </div>
+    <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+        <div id="progress"></div>
+        <div flex-item>
+            <lx-text-field label="Email" error="!emailValidation(dataDefinitionMaster.DataItem.EmailAddress)">
+                <input type="email" ng-model="dataDefinitionMaster.DataItem.EmailAddress">
+            </lx-text-field>
+
+            <span class="text-field-error" ng-if="!emailValidation(dataDefinitionMaster.DataItem.EmailAddress)">Email Address is invalid</span>
+        </div>
+        <div flex-item>
+            <lx-text-field label="Contact Number">
+                <input type="text"
+                       name="ContactNo"
+                       ng-model="dataDefinitionMaster.DataItem.ContactNo"
+                       ng-disabled="false">
+            </lx-text-field>
+        </div>
+        <div flex-item style="{{checkBoxStyle}}">
+            <div class="checkbox">
+                <input type="checkbox"
+                       id="Status"
+                       class="checkbox__input"
+                       ng-model="dataDefinitionMaster.DataItem.StatusHolder"
+                       ng-disabled="false">
+                <label for="Status" class="checkbox__label">{{statusLabel}}</label>
             </div>
         </div>
+    </div>
+    <lx-dialog class="dialog dialog--l" id="BirthDate" auto-close="true">
+        <div class="dialog__header">
+        </div>
         <div class="dialog__content">
-            <dir-data-modal1 datadefinition="dataDefinitionScheduleTimeList" otheractions="otherActionScheduleTime(action)" closecontainer="closeScheduleTime(dialog)"></dir-data-modal1>
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="dataDefinitionMaster.DataItem.BirthDateHolder"
+                                  display-mode="date"
+                                  orientation="false"
+                                  on-save="saveFn(dataDefinitionMaster.DataItem.BirthDateHolder); closeDate('BirthDate')">
+                </time-date-picker>
+            </div>
         </div>
         <div class="dialog__actions">
         </div>

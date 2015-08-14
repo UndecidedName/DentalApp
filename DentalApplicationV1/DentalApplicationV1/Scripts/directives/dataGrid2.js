@@ -177,6 +177,10 @@
                             var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
                             $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
+                        case 'Password':
+                            for (var i = 0; i < value.length; i++)
+                                $scope.filteredValue += '*';
+                            break;
                         default:
                             $scope.filteredValue = value;
                     }

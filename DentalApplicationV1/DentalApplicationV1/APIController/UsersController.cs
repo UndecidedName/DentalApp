@@ -194,35 +194,39 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
-            if (!ModelState.IsValid)
+            Response response = new Response();
+            response.status = "FAILURE";
+            if (!ModelState.IsValid || id != user.Id)
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != user.Id)
-            {
-                return BadRequest();
+                response.message = "Bad request.";
+                return Ok(response);
             }
 
             db.Entry(user).State = EntityState.Modified;
 
             try
             {
+                var searchUserInformation = db.UserInformations.Where(ui => ui.UserId == id).ToArray();
+                var userInformation = db.UserInformations.Find(searchUserInformation[searchUserInformation.Length - 1].Id);
+                db.Entry(userInformation).CurrentValues.SetValues(user.UserInformations);
+                db.Entry(userInformation).State = EntityState.Modified;
                 db.SaveChanges();
+                response.objParam1 = user;
+                response.status = "SUCCESS";
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!UserExists(id))
                 {
-                    return NotFound();
+                    response.message = "User doesn't exist.";
                 }
                 else
                 {
-                    throw;
+                    response.message = e.InnerException.InnerException.Message.ToString();
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
 
         // POST: api/Users
