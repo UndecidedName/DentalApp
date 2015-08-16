@@ -8,9 +8,9 @@
                 <table class="myTableContent dir-export" id="export">
                     <tbody>
                         <tr class="myTableRow"
-                            ng-repeat="notifications in notificationList | orderBy:['status','-Date']">
-                            <td class="myTableCell cell-10">{{notifications.Description}}</td>
-                            <td class="myTableCell cell-fixed-10 padding-right-20">{{filterValue(notifications.Date, $index, 'Date')}}</td>
+                            ng-repeat="notifications in notificationList | orderBy:['Status','-Date']">
+                            <td id="{{formatId(notifications.Id, 'desc')}}" class="myTableCell cell-10" style="{{setStyle(notifications.Status)}}" ng-click="updateStatus(notifications.Id, $index, notifications)">{{notifications.Description}}</td>
+                            <td id="{{formatId(notifications.Id, 'date')}}" class="myTableCell cell-fixed-10 padding-right-20" style="{{setStyle(notifications.Status)}}" ng-click="updateStatus(notifications.Id, $index, notifications)">{{filterValue(notifications.Date, $index, 'Date')}}</td>
                         </tr>
                     </tbody>
                 </table>

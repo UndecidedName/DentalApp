@@ -1,17 +1,183 @@
-﻿
+﻿<div flex-container="row" flex-gutter="24" style="{{filterContainerStyle}}">
+    <div flex-container="row" style="{{checkBoxStyle}}">
+        <div flex-item>
+            <div class="checkbox">
+                <input type="checkbox"
+                       id="filterStatusModal"
+                       class="checkbox__input"
+                       ng-model="filterStatus">
+                <label for="filterStatusModal" class="checkbox__label"></label>
+            </div>
+        </div>
+    </div>
+    <br />
+    @*Filter Container*@
+    <div ng-show="filterStatus" flex-container="row" flex-gutter="24" style="{{filterContainerStyle}}">
+        @*Criteria*@
+        <div flex-container=" row" style="{{criteriaStyle}}">
+            <div flex-item>
+                <lx-select ng-model="filteredData.Definition" placeholder="Criteria" choices="filterdefinition.Source" floating-label>
+                    <lx-select-selected>
+                        {{ $selected.Label }}
+                    </lx-select-selected>
+
+                    <lx-select-choices>
+                        {{ $choice.Label }}
+                    </lx-select-choices>
+                </lx-select>
+            </div>
+        </div>
+        @*Text field*@
+        <div ng-show="showFilterText" flex-container="row" style="{{searchValueStyle}}">
+            <div flex-item>
+                <lx-text-field>
+                    <input ng-model="searchValue" type="text" ng-disabled="" />
+                </lx-text-field>
+            </div>
+        </div>
+        @*From Date*@
+        <div ng-show="showFilterDate" flex-container="row" style="{{searchDateTimeStyle}}">
+            <div flex-item>
+                <lx-text-field label="From">
+                    <input type="text"
+                           name="FilteredFromDate"
+                           ng-model="filterDate.FromDate"
+                           ng-click="showDialog('FilteredFromDate')">
+                </lx-text-field>
+            </div>
+        </div>
+        @*To Date*@
+        <div ng-show="showFilterDate" flex-container="row" style="{{searchDateTimeStyle}}">
+            <div flex-item>
+                <lx-text-field label="To">
+                    <input type="text"
+                           name="FilteredToDate"
+                           ng-model="filterDate.ToDate"
+                           ng-click="showDialog('FilteredToDate')">
+                </lx-text-field>
+            </div>
+        </div>
+        @*From Time*@
+        <div ng-show="showFilterTime" flex-container="row" style="{{searchDateTimeStyle}}">
+            <div flex-item>
+                <lx-text-field label="From">
+                    <input type="text"
+                           name="FilteredFromTime"
+                           ng-model="filterTime.FromTime"
+                           ng-click="showDialog('FilteredFromTime')">
+                </lx-text-field>
+            </div>
+        </div>
+        @*To Time*@
+        <div ng-show="showFilterTime" flex-container="row" style="{{searchDateTimeStyle}}">
+            <div flex-item>
+                <lx-text-field label="To">
+                    <input type="text"
+                           name="FilteredToTime"
+                           ng-model="filterTime.ToTime"
+                           ng-click="showDialog('FilteredToTime')">
+                </lx-text-field>
+            </div>
+        </div>
+        @*DropDown Select*@
+        <div ng-show="showFilterDropDown" flex-container="row" style="{{searchValueStyle}}">
+            <div flex-item>
+                <lx-select ng-model="filteredStatus.Definition" placeholder="{{filteredData.Definition.Label}}" choices="filteredData.Definition.Values" floating-label>
+                    <lx-select-selected>
+                        {{ $selected.Label }}
+                    </lx-select-selected>
+
+                    <lx-select-choices>
+                        {{ $choice.Label }}
+                    </lx-select-choices>
+                </lx-select>
+            </div>
+        </div>
+        @*Search Button*@
+        <div flex-container="row" style="{{searchStyle}}">
+            <div flex-item>
+                <button class="btn btn--s btn--blue btn--raised" ng-click="submitFilteredData()" lx-ripple>Search</button>
+            </div>
+        </div>
+    </div>
+    @*Modal for From Date filtering*@
+    <lx-dialog class="dialog dialog--l" id="FilteredFromDate" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="filterDate.FromDateHolder"
+                                  display-mode="date"
+                                  orientation="false"
+                                  on-save="saveFn(filterDate.FromDateHolder); closeFilteredFromDate('FilteredFromDate')">
+                </time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+    @*Modal for To Date filtering*@
+    <lx-dialog class="dialog dialog--l" id="FilteredToDate" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="filterDate.ToDateHolder"
+                                  display-mode="date"
+                                  orientation="false"
+                                  on-save="saveFn(filterDate.ToDateHolder); closeFilteredToDate('FilteredToDate')">
+                </time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+    @*Modal for From Time filtering*@
+    <lx-dialog class="dialog dialog--l" id="FilteredFromTime" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="filterTime.FromTimeHolder"
+                                  display-mode="time" orientation="false"
+                                  on-save="saveFn(filterTime.FromTimeHolder); closeFilteredTime('FilteredFromTime')"></time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+    @*Modal for To Time filtering*@
+    <lx-dialog class="dialog dialog--l" id="FilteredToTime" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="filterTime.ToTimeHolder"
+                                  display-mode="time" orientation="false"
+                                  on-save="saveFn(filterTime.ToTimeHolder); closeFilteredTime('FilteredToTime')"></time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+</div>
+<br>
 <div class="myTableContainter" scrollable-container="getData()">
     <!--For IE-->
     <div id="progress"></div>
     <iframe id="exportTemplate" style="display:none"></iframe>
     <!--End of for IE-->
-    <div class="toolbar__left">
+    @*<div class="toolbar__left">
         <i class="mdi mdi-magnify" style="font-size:150%; padding-top:5px; padding-left:10px;"></i>
         <input type="text" ng-model="search" placeholder="Search..." class="filter-input" ng-change="change()" style="padding-left:5px;" />
         <i class="mdi mdi-close-circle" style="font-size:100%; padding-top:12px; cursor:pointer;" ng-show="showClose" ng-click="showClose = false; search=''"></i>
-    </div>
+    </div>*@
     <table class="myTableContent dir-export" id="export">
         <thead>
             <tr class="myTableRow-header" style="text-align:left">
+                <th class="myTableCell cell-seqno fs-subhead display-block tc-white" ng-click="actionForm('Refresh')">
+                    <i class="icon icon--s icon--white icon--flat mdi mdi-reload" lx-tooltip="Refresh" tooltip-position="bottom"></i>
+                </th>
                 <th class="myTableCell cell-seqno fs-subhead display-block tc-white">
                     <strong>{{datadefinition.Header[datadefinition.Header.length - 1]}}</strong>
                 </th>
@@ -32,6 +198,7 @@
             <tr class="myTableRow"
                 ng-repeat="data in datadefinition.DataList | filter:{$:search}| orderBy: criteria"
                 ng-click="getRecord(data); closecontainer({ dialog: datadefinition.Dialog });">
+                <td></td>
                 <td class="myTableCell cell-seqno fs-subhead display-block">
                     {{$index + 1}}
                 </td>

@@ -7,6 +7,7 @@
         $rootScope.appName = "Smile Fairies Dental Suites";
         $rootScope.notificationList = [];
         $rootScope.usersForNotification = [];
+        $rootScope.notifCount = 0;
     }
     $rootScope.reset();
     $rootScope.notification = null;
@@ -28,6 +29,15 @@
             $.connection.hub.start().done(function () {
                 $rootScope.addClient($rootScope.user.Id.toString(), $.connection.hub.id);
             });
+
+            //Get unread notification count
+            $http.get("api/Notifications?status=0&userId=" + $rootScope.user.Id + "&dummy=''")
+            .success(function (data, status) {
+                if (data.status == "SUCCESS") {
+                    $rootScope.notifCount = data.intParam1;
+                }
+            });
+
             $location.path("User/Index");
         }
         else
@@ -40,6 +50,7 @@
         $rootScope.notificationList.push(notification);
         var snd = undefined;
         var snd = new Audio("/audio/notification.mp3"); // buffers automatically when created
+        $rootScope.notifCount += 1;
         snd.play();
     };
 
@@ -60,6 +71,20 @@
             })
         }
     });
+
+    //Manipulate DOM for removing an element
+    $rootScope.manipulateDOM = function () {
+        Element.prototype.remove = function () {
+            this.parentElement.removeChild(this);
+        }
+        NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
+            for (var i = this.length - 1; i >= 0; i--) {
+                if (this[i] && this[i].parentElement) {
+                    this[i].parentElement.removeChild(this[i]);
+                }
+            }
+        }
+    };
 });
 
 dentalApp.config(function ($stateProvider, $urlRouterProvider) {

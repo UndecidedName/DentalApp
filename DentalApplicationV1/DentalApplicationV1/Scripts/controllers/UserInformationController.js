@@ -58,7 +58,7 @@ function UserInformationController($scope, LxNotificationService, LxDialogServic
         $scope.initMasterDataGridParameters();
     };
     $scope.loadMasterDataGrid = function () {
-        html = '<dir-data-grid1 actioncreate="actionMaster"' +
+        html = '<dir-data-grid3 actioncreate="actionMaster"' +
                          'actionmode="actionModeMaster"' +
                          'contextmenuitem="contextMenuItemMaster"' +
                          'datadefinition="dataDefinitionMaster"' +
@@ -70,7 +70,7 @@ function UserInformationController($scope, LxNotificationService, LxDialogServic
                          'otheractions="otherActionsMaster(action)"' +
                          'resetdata="resetMasterItem()"' +
                          'showformerror="showFormErrorMaster(error)">' +
-                '</dir-data-grid1>';
+                '</dir-data-grid3>';
         $content = angular.element(document.querySelector('#masterList')).html(html);
         $compile($content)($scope);
     };

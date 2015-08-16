@@ -19,7 +19,7 @@
             <li>
                 <a ui-sref="Notification" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-earth"
-                       lx-tooltip="Notifications" tooltip-position="bottom"></i>@*<span class="fs-subhead tc-red-900">6</span>*@
+                       lx-tooltip="Notifications" tooltip-position="bottom"></i><span ng-show="notifCount != 0 ? true : false" class="fs-subhead tc-red-900">{{notifCount}}</span>
                 </a>
             </li>
             <li>
@@ -46,7 +46,7 @@
 
             <lx-dropdown-menu>
                 <ul>
-                    <li><a ui-sref="Notification" class="dropdown-link" lx-ripple="white">Notification</a></li>
+                    <li><a ui-sref="Notification" class="dropdown-link" lx-ripple="white">Notification<span ng-show="notifCount != 0 ? true : false" class="fs-subhead tc-red-900">{{notifCount}}</span></a></li>
                     <li><a ui-sref="Setting" class="dropdown-link" lx-ripple="white">Setting</a></li>
                     <li><a href="" class="dropdown-link" lx-ripple="white" ng-click="logout()">Logout</a></li>
                 </ul>

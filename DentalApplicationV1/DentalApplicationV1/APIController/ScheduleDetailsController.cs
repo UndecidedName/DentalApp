@@ -74,6 +74,63 @@ namespace DentalApplicationV1.APIController
             }
         }
 
+        public IHttpActionResult GetScheduleDetails(int length, int masterId, int status, string property, string value, string value2)
+        {
+            ScheduleDetail[] scheduleDetail = new ScheduleDetail[pageSize];
+            this.filterRecord(length, masterId, status, property, value, value2, ref scheduleDetail);
+            if (scheduleDetail != null)
+                return Ok(scheduleDetail);
+            else
+                return Ok();
+
+        }
+
+        public void filterRecord(int length, int masterId, int status, string property, string value, string value2, ref ScheduleDetail [] scheduleDetail)
+        {
+            int fetch;
+            scheduleDetail = null;
+            if (property.Equals("FromTime"))
+                {
+                    StringManipulation strManipulate = new StringManipulation(value, value2, "Time");
+                    var records = db.ScheduleDetails.Where(a => a.FromTime >= strManipulate.timeValue && a.FromTime <= strManipulate.timeValue2)
+                                                    .Where(a => a.ScheduleMasterId == masterId)
+                                                    .Where(a => a.Status == status).Count();
+                    if (records > length)
+                    {
+                        if ((records - length) > pageSize)
+                            fetch = pageSize;
+                        else
+                            fetch = records - length;
+                        var getScheduleDetail = db.ScheduleDetails
+                            .Where(a => a.FromTime >= strManipulate.timeValue && a.FromTime <= strManipulate.timeValue2)
+                            .Where(a => a.ScheduleMasterId == masterId)
+                            .Where(a => a.Status == status)
+                            .OrderByDescending(a => a.FromTime).Skip((length)).Take(fetch).ToArray();
+                        scheduleDetail = getScheduleDetail;
+                    }
+                }
+            //ToTime
+            else
+                {
+                    StringManipulation strManipulate = new StringManipulation(value, value2, "Time");
+                    var records = db.ScheduleDetails.Where(a => a.ToTime >= strManipulate.timeValue && a.ToTime <= strManipulate.timeValue2)
+                                                    .Where(a => a.ScheduleMasterId == masterId)
+                                                    .Where(a => a.Status == status).Count();
+                    if (records > length)
+                    {
+                        if ((records - length) > pageSize)
+                            fetch = pageSize;
+                        else
+                            fetch = records - length;
+                        var getScheduleDetail = db.ScheduleDetails
+                            .Where(a => a.ToTime >= strManipulate.timeValue && a.ToTime <= strManipulate.timeValue2)
+                            .Where(a => a.ScheduleMasterId == masterId)
+                            .Where(a => a.Status == status)
+                            .OrderByDescending(a => a.FromTime).Skip((length)).Take(fetch).ToArray();
+                        scheduleDetail = getScheduleDetail;
+                    }
+                }
+        }
         // GET: api/ScheduleDetails/5
         [ResponseType(typeof(ScheduleDetail))]
         public IHttpActionResult GetScheduleDetail(int id)

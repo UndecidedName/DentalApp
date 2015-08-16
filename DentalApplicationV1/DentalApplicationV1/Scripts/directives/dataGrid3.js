@@ -1,6 +1,6 @@
 ﻿dentalApp.directive('dirDataGrid3', function () {
     /*---------------------------------------------------------------------------------//
-     Directive Name: dirDataGrid1
+     Directive Name: dirDataGrid3
      Description: Functionalities are the same to datagrid1 but no create button in listing
      Author: Kenneth Ybañez
      Note: If this is used more than once in a page, the other instance should be resetted.
@@ -392,8 +392,10 @@
                             $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
                         case 'Password':
+                            $scope.filteredValue = "";
                             for (var i = 0; i < value.length; i++)
                                 $scope.filteredValue += '*';
+                            break;
                             break;
                         default:
                             $scope.filteredValue = value;

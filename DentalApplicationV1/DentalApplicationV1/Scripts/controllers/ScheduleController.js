@@ -28,6 +28,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
             $scope.setStyle = "width:465px; max-width:100%";
         }
     }, 100);
+    
     $scope.showDialog = function (dialogId, type) {
         if(type == 'From')
             $scope.dataDefinitionDetail.DataItem.FromTime = $scope.FromTimeHolder;
@@ -53,6 +54,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                                                                 + $scope.dataDefinitionDentisList.DataItem.LastName;
         }
         LxDialogService.close(dialogId);
+        document.getElementsByClassName("dialog-filter dialog-filter--is-shown").remove();
     };
     $scope.closeTime = function (dialogId, col) {
         if (col === 'From') {
@@ -77,7 +79,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
         }
     };
     $scope.getDentistList = function () {
-        $http.get("/api/UserInformations?length=" + $scope.dentistInformation.length + "&userType=4")
+        $http.get("/api/UserInformations?length=" + $scope.dentistInformation.length + "&userType=4&status=1")
         .success(function (data, status) {
             for (var j = 0; j < data.length; j++)
                 $scope.dentistInformation.push(data[j]);
@@ -88,8 +90,29 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                 "DataList": $scope.dentistInformation,
                 "CurrentLength": $scope.dentistInformation.length,
                 "DataItem": {},
-                "APIUrl": ['/api/UserInformations?length= &userType=4'],
+                "APIUrl": ['/api/UserInformations?length= &userType=4&status=1'],
                 "Dialog": "dentistList"
+            };
+            $scope.filterDefinitionDentist = {
+                "Url": '/api/UserInformations?length= &userType=4&status=1',//get
+                "Source": [
+                            { "Label": "First Name", "Property": "FirstName", "Values": [], "Type": "Default" },
+                            { "Label": "Middle Name", "Property": "MiddleName", "Values": [], "Type": "Default" },
+                            { "Label": "Last Name", "Property": "LastName", "Values": [], "Type": "Default" },
+                            {
+                                "Label": "Gender", "Property": "Gender", "Values": [
+                                                                                      { "Label": "Female", "Value": "F" },
+                                                                                      { "Label": "Male", "Value": "M" }
+                                ], "Type": "DropDown"
+                            },
+                            { "Label": "Contact No", "Property": "ContactNo", "Values": [], "Type": "Default" },
+                ]
+            };
+
+            $scope.otherActionDentist= function (action) {
+                switch (action) {
+                    default: return true;
+                }
             };
         });
     };
@@ -374,6 +397,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
         };
     };
 
+    $rootScope.manipulateDOM();
     $scope.getDentistList();
     $scope.loadMaster();
 }

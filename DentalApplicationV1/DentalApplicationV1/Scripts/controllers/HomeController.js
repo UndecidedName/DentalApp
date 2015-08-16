@@ -82,6 +82,14 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
                 //Add user to Notification dictionary
                 $rootScope.addClient($rootScope.user.Id.toString(), $.connection.hub.id);
 
+                //Get unread notification count
+                $http.get("api/Notifications?status=0&userId=" + $rootScope.user.Id + "&dummy=''")
+                .success(function (data, status) {
+                    if (data.status == "SUCCESS") {
+                        $rootScope.notifCount = data.intParam1;
+                    }
+                });
+
                 LxProgressService.circular.hide();
                 LxDialogService.close(dialogId);
             }

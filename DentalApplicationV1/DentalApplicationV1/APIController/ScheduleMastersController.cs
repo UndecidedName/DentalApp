@@ -67,9 +67,10 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-                var getScheduleMasters =  db.ScheduleMasters.Where(sm => sm.Status == status)
+                    var getScheduleMasters =  db.ScheduleMasters.Where(sm => sm.Status == status)
                     .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
                     .OrderBy(sm => sm.Date).Skip((length)).Take(fetch).ToArray();
+
                 for (int i = 0; i < getScheduleMasters.Length; i++)
                 {
                     getScheduleMasters[i].Appointments = null;
@@ -99,7 +100,7 @@ namespace DentalApplicationV1.APIController
             return Ok(scheduleMaster);
         }
 
-        //Filtering
+        //Filtering for Schedule date, regardless of the status
         public IHttpActionResult GetScheduleMaster(int length, string property, string value, string value2)
         {
             ScheduleMaster[] scheduleMaster = new ScheduleMaster[pageSize];
@@ -110,6 +111,19 @@ namespace DentalApplicationV1.APIController
                 return Ok();
 
         }
+
+        //Filtering for Schedule date, base on the status
+        public IHttpActionResult GetScheduleMaster(int length, int status, string property, string value, string value2)
+        {
+            ScheduleMaster[] scheduleMaster = new ScheduleMaster[pageSize];
+            this.filterRecord(length, status, property, value, value2, ref scheduleMaster);
+            if (scheduleMaster != null)
+                return Ok(scheduleMaster);
+            else
+                return Ok();
+
+        }
+
         // PUT: api/ScheduleMasters/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutScheduleMaster(int id, ScheduleMaster scheduleMaster)
@@ -270,7 +284,6 @@ namespace DentalApplicationV1.APIController
             db.ScheduleMasters.Add(scheduleMaster);
             db.SaveChanges();
         }
-
         public void filterRecord(int length, string property, string value, string value2, ref ScheduleMaster[] scheduleMaster)
         {
             /* Fields that can be filter
@@ -293,7 +306,8 @@ namespace DentalApplicationV1.APIController
                     else
                         fetch = records - length;
                     var getScheduleMaster = db.ScheduleMasters.Where(sm => sm.Date >= strManipulate.dateValue && sm.Date <= strManipulate.dateValue2)
-                        .OrderByDescending(sm => sm.Date).Skip((length)).Take(fetch).ToArray();
+                                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                                              .OrderByDescending(sm => sm.Date).Skip((length)).Take(fetch).ToArray();
                     scheduleMaster = getScheduleMaster;
                 }
             }
@@ -308,7 +322,8 @@ namespace DentalApplicationV1.APIController
                     else
                         fetch = records - length;
                     var getScheduleMaster = db.ScheduleMasters.Where(sm => sm.UserInformation.FirstName.ToLower().Contains(value) || sm.UserInformation.FirstName.ToLower().ToLower().Equals(value))
-                        .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                                              .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
                     scheduleMaster = getScheduleMaster;
                 }
             }
@@ -323,7 +338,8 @@ namespace DentalApplicationV1.APIController
                     else
                         fetch = records - length;
                     var getScheduleMaster = db.ScheduleMasters.Where(sm => sm.UserInformation.MiddleName.ToLower().Contains(value) || sm.UserInformation.MiddleName.ToLower().ToLower().Equals(value))
-                        .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                                              .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
                     scheduleMaster = getScheduleMaster;
                 }
             }
@@ -338,7 +354,8 @@ namespace DentalApplicationV1.APIController
                     else
                         fetch = records - length;
                     var getScheduleMaster = db.ScheduleMasters.Where(sm => sm.UserInformation.LastName.ToLower().Contains(value) || sm.UserInformation.LastName.ToLower().ToLower().Equals(value))
-                        .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                                              .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
                     scheduleMaster = getScheduleMaster;
                 }
             }
@@ -354,8 +371,113 @@ namespace DentalApplicationV1.APIController
                     else
                         fetch = records - length;
                     var getScheduleMaster = db.ScheduleMasters.Where(sm => sm.Status == strManipulate.intValue)
-                        .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                                              .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
                     scheduleMaster = getScheduleMaster;
+                }
+            }
+            if (scheduleMaster != null)
+            {
+                for (int i = 0; i < scheduleMaster.Length; i++)
+                {
+                    scheduleMaster[i].Appointments = null;
+                    scheduleMaster[i].ScheduleDetails = null;
+                    scheduleMaster[i].UserInformation.PatientMouths = null;
+                    scheduleMaster[i].UserInformation.User = null;
+                    scheduleMaster[i].UserInformation.ScheduleMasters = null;
+                }
+            }
+        }
+        public void filterRecord(int length, int status, string property, string value, string value2, ref ScheduleMaster[] scheduleMaster)
+        {
+            /* Fields that can be filter
+             * Name
+             * Desription
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            scheduleMaster = null;
+            if (property.Equals("Date"))
+            {
+                StringManipulation strManipulate = new StringManipulation(value, value2, "Date");
+                strManipulate.dateValue2 = strManipulate.dateValue2.AddHours(11);
+                var records = db.ScheduleMasters.Where(sm => sm.Date >= strManipulate.dateValue && sm.Date <= strManipulate.dateValue2 && sm.Status == status).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getScheduleMaster = db.ScheduleMasters.Where(sm => sm.Date >= strManipulate.dateValue && sm.Date <= strManipulate.dateValue2 && sm.Status == status)
+                                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                                              .OrderByDescending(sm => sm.Date).Skip((length)).Take(fetch).ToArray();
+                    scheduleMaster = getScheduleMaster;
+                }
+            }
+            else if (property.Equals("DentistFirstName"))
+            {
+                value = value.ToLower();
+                var records = db.ScheduleMasters.Where(sm => (sm.UserInformation.FirstName.ToLower().Contains(value) || sm.UserInformation.FirstName.ToLower().ToLower().Equals(value))
+                                                             && sm.Status == status).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getScheduleMaster = db.ScheduleMasters
+                                            .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                            .Where(sm => (sm.UserInformation.FirstName.ToLower().Contains(value) || sm.UserInformation.FirstName.ToLower().ToLower().Equals(value))
+                                                                            && sm.Status == status).OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                    scheduleMaster = getScheduleMaster;
+                }
+            }
+            else if (property.Equals("DentistMiddleName"))
+            {
+                value = value.ToLower();
+                var records = db.ScheduleMasters.Where(sm => (sm.UserInformation.MiddleName.ToLower().Contains(value) || sm.UserInformation.MiddleName.ToLower().ToLower().Equals(value))
+                                                              && sm.Status == status).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getScheduleMaster = db.ScheduleMasters
+                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4)
+                                              .Where(sm => (sm.UserInformation.MiddleName.ToLower().Contains(value) || sm.UserInformation.MiddleName.ToLower().ToLower().Equals(value))
+                                                                            && sm.Status == status).OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                    scheduleMaster = getScheduleMaster;
+                }
+            }
+            //Dentist Last Name
+            else
+            {
+                value = value.ToLower();
+                var records = db.ScheduleMasters.Where(sm => sm.UserInformation.LastName.ToLower().Contains(value) || sm.UserInformation.LastName.ToLower().ToLower().Equals(value)).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getScheduleMaster = db.ScheduleMasters
+                                              .Include(sm => sm.UserInformation).Where(ui => ui.UserInformation.User.UserTypeId == 4) 
+                                              .Where(sm => sm.UserInformation.LastName.ToLower().Contains(value) || sm.UserInformation.LastName.ToLower().ToLower().Equals(value))
+                                              .OrderBy(sm => sm.Id).Skip((length)).Take(fetch).ToArray();
+                    scheduleMaster = getScheduleMaster;
+                }
+            }
+            if (scheduleMaster != null)
+            {
+                for (int i = 0; i < scheduleMaster.Length; i++)
+                {
+                    scheduleMaster[i].Appointments = null;
+                    scheduleMaster[i].ScheduleDetails = null;
+                    scheduleMaster[i].UserInformation.PatientMouths = null;
+                    scheduleMaster[i].UserInformation.User = null;
+                    scheduleMaster[i].UserInformation.ScheduleMasters = null;
                 }
             }
         }

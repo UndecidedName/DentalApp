@@ -37,9 +37,7 @@ namespace DentalApplicationV1.APIController
                     fetch = records - length;
                 return db.Notifications
                     .Where(n => n.UserId == userId)
-                    .OrderByDescending(n => n.Status)
-                    .OrderByDescending(n => n.Date)
-                    .OrderByDescending(n => n.Id)
+                    .OrderBy(n => n.Status)
                     .Skip((length)).Take(fetch);
             }
             else
@@ -47,6 +45,14 @@ namespace DentalApplicationV1.APIController
                 IQueryable<Notification> n = new List<Notification>().AsQueryable();
                 return n;
             }
+        }
+ 
+        // GET: api/Notifications?status=0&userId=1
+        //returns the number of unread notifications
+        public IHttpActionResult GetNotifications(int status, int userId, string dummy) {
+            response.status = "SUCCESS";
+            response.intParam1 = db.Notifications.Where(n => n.Status == status && n.UserId == userId).Count();
+            return Ok(response);
         }
 
         // GET: api/Notifications/5
@@ -66,14 +72,11 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutNotification(int id, Notification notification)
         {
-            if (!ModelState.IsValid)
+            response.status = "FAILURE";
+            if (!ModelState.IsValid || id != notification.Id)
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != notification.Id)
-            {
-                return BadRequest();
+                response.message = "Bad request.";
+                return Ok(response);
             }
 
             db.Entry(notification).State = EntityState.Modified;
@@ -81,20 +84,22 @@ namespace DentalApplicationV1.APIController
             try
             {
                 db.SaveChanges();
+                response.status = "SUCCESS";
+                response.objParam1 = notification;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!NotificationExists(id))
                 {
-                    return NotFound();
+                    response.message = "Notification doesn't exist.";
                 }
                 else
                 {
-                    throw;
+                    response.message = e.InnerException.InnerException.Message.ToString();
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
 
         // POST: api/Notifications

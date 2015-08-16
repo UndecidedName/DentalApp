@@ -40,6 +40,14 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
             "Dialog": "Menu"
         };
 
+        $scope.filterDefinitionMenu = {
+            "Url": '/api/DentalMenus?length= &status=1',//get
+            "Source": [
+                        { "Label": "Menu Name", "Property": "Name", "Values": [], "Type": "Default" },
+                        { "Label": "Description", "Property": "Description", "Values": [], "Type": "Default" }
+            ]
+        };
+
         $scope.otherActionMenu = function (action) {
             switch (action) {
                 case 'PostLoadAction':
@@ -140,6 +148,9 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                     return true;
                 case 'PreSave':
                     delete $scope.dataDefinitionMaster.DataItem.Id;
+                    if ($scope.dataDefinitionMaster.DataItem.ParentId == null || $scope.dataDefinitionMaster.DataItem.ParentId == "")
+                        $scope.dataDefinitionMaster.DataItem.ParentId = 0;
+                    console.log($scope.dataDefinitionMaster.DataItem.ParentId);
                     return true;
                 case 'PostSave':
                     $scope.closeForm();
@@ -154,12 +165,12 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                 case 'PostLoadAction':
                     //Initialize menu parent
                     for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
-                        //for (var j = 0; j < $scope.dataDefinitionMaster.DataList.length; j++) {
-                            if ($scope.dataDefinitionMaster.DataList[i].ParentId == 1)
-                                $scope.dataDefinitionMaster.DataList[i].ParentName = "Transaction";
-                            else
-                                $scope.dataDefinitionMaster.DataList[i].ParentName = "Maintenance";
-                        //}
+                        if ($scope.dataDefinitionMaster.DataList[i].ParentId == 1)
+                            $scope.dataDefinitionMaster.DataList[i].ParentName = "Transaction";
+                        else if ($scope.dataDefinitionMaster.DataList[i].ParentId == 2)
+                            $scope.dataDefinitionMaster.DataList[i].ParentName = "Maintenance";
+                        else
+                            $scope.dataDefinitionMaster.DataList[i].ParentName = "";
                     }
                     return true;
                 default:
@@ -170,7 +181,7 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
         $scope.resetMasterItem = function () {
             $scope.dataDefinitionMaster.DataItem = {
                 Id: null,
-                ParentId: null,
+                ParentId: 0,
                 Name: null,
                 Description: null,
                 Url: null,

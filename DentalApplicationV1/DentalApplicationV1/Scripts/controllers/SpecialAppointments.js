@@ -31,14 +31,25 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
             "APIUrl": ['/api/ScheduleMasters?length= &status=0'],
             "Dialog": "ScheduleDate"
         };
+
+        $scope.filterDefinitionScheduleDate = {
+            "Url": '/api/ScheduleMasters?length= &status=0',//get
+            "Source": [
+                        { "Label": "Date", "Property": "Date", "Values": [], "Type": "Date" },
+                        { "Label": "Dentist First Name", "Property": "DentistFirstName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Middle Name", "Property": "DentistMiddleName", "Values": [], "Type": "Default" },
+                        { "Label": "Dentist Last Name", "Property": "DentistLastName", "Values": [], "Type": "Default" }
+            ]
+        };
+
         $scope.otherActionScheduleDate = function (action) {
             switch (action) {
                 case 'PostLoadAction':
-                    for (var i = 0; i < $scope.scheduleMaster.length; i++) {
-                        $scope.scheduleMaster[i].Date = $filter('date')($scope.scheduleMaster[i].Date, "MM/dd/yyyy");
-                        $scope.scheduleMaster[i].DentistName = $scope.scheduleMaster[i].UserInformation.FirstName + " "
-                                                                + $scope.scheduleMaster[i].UserInformation.MiddleName + " "
-                                                                + $scope.scheduleMaster[i].UserInformation.LastName;
+                    for (var i = 0; i < $scope.dataDefinitionScheduleDateList.DataList.length; i++) {
+                        $scope.dataDefinitionScheduleDateList.DataList[i].Date = $filter('date')($scope.dataDefinitionScheduleDateList.DataList[i].Date, "MM/dd/yyyy");
+                        $scope.dataDefinitionScheduleDateList.DataList[i].DentistName = $scope.dataDefinitionScheduleDateList.DataList[i].UserInformation.FirstName + " "
+                                                                + $scope.dataDefinitionScheduleDateList.DataList[i].UserInformation.MiddleName + " "
+                                                                + $scope.dataDefinitionScheduleDateList.DataList[i].UserInformation.LastName;
                     }
                     return true;
                 default: return true;
@@ -47,6 +58,7 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
 
         $scope.closeScheduleDate = function (dialogId) {
             LxDialogService.close(dialogId);
+            document.getElementsByClassName("dialog-filter dialog-filter--is-shown").remove();
             if ($scope.dataDefinitionScheduleDateList.DataItem.Id != null) {
                 LxProgressService.circular.show('#5fa2db', '#progress');
                 var promise = $interval(function () {
@@ -76,6 +88,14 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
             "Dialog": "ScheduleTime"
         };
 
+        $scope.filterDefinitionScheduleTime = {
+            "Url": '/api/ScheduleDetails?length= &masterId=' + $scope.dataDefinitionScheduleDateList.DataItem.Id + '&status=0',//get
+            "Source": [
+                        { "Label": "Start Time", "Property": "FromTime", "Values": [], "Type": "Time" },
+                        { "Label": "End Time", "Property": "ToTime", "Values": [], "Type": "Time" }
+            ]
+        };
+
         $scope.otherActionScheduleTime = function (action) {
             switch (action) {
                 default: return true;
@@ -85,6 +105,7 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
         $scope.closeScheduleTime = function (dialogId) {
             LxDialogService.close(dialogId);
             $scope.dataDefinitionMaster.ViewOnly = false;
+            document.getElementsByClassName("dialog-filter dialog-filter--is-shown").remove();
             //Initialize $scope.dataDefinitionMaster.DataItem
             if ($scope.dataDefinitionScheduleTimeList.DataItem.Id != null) {
                 $scope.dataDefinitionMaster.DataItem.ScheduleMasterId = $scope.dataDefinitionScheduleDateList.DataItem.Id;
@@ -121,8 +142,24 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
             "DataList": $scope.patientList,
             "CurrentLength": $scope.patientList.length,
             "DataItem": {},
-            "APIUrl": ['/api/UserInformations?length= &userType=6'],
+            "APIUrl": ['/api/UserInformations?length= &userType=6&status=1'],
             "Dialog": "Patients"
+        };
+
+        $scope.filterDefinitionPatient = {
+            "Url": '/api/UserInformations?length= &userType=6&status=1',//get
+            "Source": [
+                            { "Label": "First Name", "Property": "FirstName", "Values": [], "Type": "Default" },
+                            { "Label": "Middle Name", "Property": "MiddleName", "Values": [], "Type": "Default" },
+                            { "Label": "Last Name", "Property": "LastName", "Values": [], "Type": "Default" },
+                            {
+                                "Label": "Gender", "Property": "Gender", "Values": [
+                                                                                      { "Label": "Female", "Value": "F" },
+                                                                                      { "Label": "Male", "Value": "M" }
+                                ], "Type": "DropDown"
+                            },
+                            { "Label": "Contact No", "Property": "ContactNo", "Values": [], "Type": "Default" },
+                      ]
         };
 
         $scope.otherActionPatient = function (action) {
@@ -134,6 +171,7 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
         $scope.closePatient = function (dialogId) {
             LxDialogService.close(dialogId);
             $scope.dataDefinitionMaster.ViewOnly = false;
+            document.getElementsByClassName("dialog-filter dialog-filter--is-shown").remove();
             //Initialize $scope.dataDefinitionMaster.DataItem
             if ($scope.dataDefinitionPatientList.DataItem.Id != null) {
                 $scope.dataDefinitionMaster.DataItem.PatientId = $scope.dataDefinitionPatientList.DataItem.UserId;
@@ -174,7 +212,7 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
         $scope.dataDefinitionMaster = {
             "Header": ['Date', 'Start Time', 'End Time', 'Status', 'Patient Name', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
             "Keys": ['ScheduleDate', 'StartTime', 'EndTime', 'Status', 'PatientName', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
-            "RequiredFields": ['Remarks-Remarks'],
+            "RequiredFields": ['ScheduleDate-Schedule Date', 'PatientName-Patient', 'DentistName-Dentist', 'Remarks-Remarks'],
             "Type": ['Date', 'Time', 'Time', 'Status-Approver', 'String', 'String', 'String-Default', 'String-Default', 'Date'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
@@ -388,6 +426,7 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
         };
     };
 
+    $rootScope.manipulateDOM();
     $scope.loadMaster();
     $scope.getScheduleDateList();
 };

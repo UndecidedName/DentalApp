@@ -178,8 +178,10 @@
                             $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
                         case 'Password':
+                            $scope.filteredValue = "";
                             for (var i = 0; i < value.length; i++)
                                 $scope.filteredValue += '*';
+                            break;
                             break;
                         default:
                             $scope.filteredValue = value;
