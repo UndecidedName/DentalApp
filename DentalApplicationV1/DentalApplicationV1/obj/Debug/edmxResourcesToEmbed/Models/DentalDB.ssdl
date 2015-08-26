@@ -239,7 +239,7 @@
     <Property Name="UserTypeId" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Url" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar" MaxLength="200" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserInformation">

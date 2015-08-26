@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DentalApplicationV1.Models;
-using YbanezNacua.Models;
 using System.Web;
 using System.Text.RegularExpressions;
 
@@ -27,18 +26,20 @@ namespace DentalApplicationV1.APIController
         {
             return db.Users;
         }
-
-        public HttpResponseMessage GetUsers(string url, string username)
+        // GET: api/Users?url=xxx&username=xxxx&app=dental
+        public HttpResponseMessage GetUser(string url, string username, string app)
         {
             try
             {
+                UserInformation ui = new UserInformation();
                 var Session = HttpContext.Current.Session;
                 var rootUrl = Url.Content("~/");
+                var generatedUrl = rootUrl + "api/Users?url=" + url + "&username=" + username + "&app=dental";
                 var redirect = Request.CreateResponse(HttpStatusCode.Moved);
 
                 //Search username and get url
                 var users = db.Users.Where(u => u.Username.Equals(username)).ToArray();
-                if (users.Length > 0 && users[0].Url.Equals(url))
+                if (users.Length > 0 && users[0].Url.Equals(generatedUrl))
                 {
                     var user = db.Users.Find(users[0].Id);
                     users[0].Status = 1;
@@ -274,6 +275,15 @@ namespace DentalApplicationV1.APIController
             return db.Users.Count(e => e.Id == id) > 0;
         }
 
+        public bool checkIfExist(string userName)
+        { 
+            var findUser = db.Users.Where(u => u.Username.Equals(userName)).Count();
+            if (findUser > 0)
+                return true;
+            else
+                return false;
+        }
+        
         public void filterRecord(int length, string property, string value, string value2, ref User[] users)
         {
             /* Fields that can be filter

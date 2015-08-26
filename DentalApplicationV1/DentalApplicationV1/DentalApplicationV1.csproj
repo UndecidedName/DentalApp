@@ -851,6 +851,7 @@
     <Content Include="Scripts\controllers\AppointmentController.js" />
     <Content Include="Scripts\controllers\CivilStatusController.js" />
     <Content Include="Scripts\controllers\HomeController.js" />
+    <Content Include="Scripts\controllers\IndexController.js" />
     <Content Include="Scripts\controllers\MenuController.js" />
     <Content Include="Scripts\controllers\NotificationController.js" />
     <Content Include="Scripts\controllers\ScheduleController.js" />

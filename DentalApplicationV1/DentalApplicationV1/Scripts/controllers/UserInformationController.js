@@ -183,14 +183,16 @@ function UserInformationController($scope, LxNotificationService, LxDialogServic
                     delete $scope.dataDefinitionMaster.DataItem.PatientMedicalHistories;
 
                     $scope.dataDefinitionMaster.DataItem.Gender = $scope.dataDefinitionMaster.DataItem.GenderDesc.Value;
-                    $scope.dataDefinitionMaster.DataItem.CivilStatusId = $scope.dataDefinitionMaster.DataItem.CivilStatusHolder.Id;
-                    $scope.dataDefinitionMaster.DataItem.CivilStatus = $scope.dataDefinitionMaster.DataItem.CivilStatusHolder.Name
+                    if ($scope.dataDefinitionMaster.DataItem.CivilStatusHolder != null) {
+                        $scope.dataDefinitionMaster.DataItem.CivilStatusId = $scope.dataDefinitionMaster.DataItem.CivilStatusHolder.Id;
+                        $scope.dataDefinitionMaster.DataItem.CivilStatus = $scope.dataDefinitionMaster.DataItem.CivilStatusHolder.Name
+                    }
                     $scope.dataDefinitionMaster.DataItem.UserTypeId = $scope.dataDefinitionMaster.DataItem.UserType.Id;
                     $scope.dataDefinitionMaster.DataItem.Type = $scope.dataDefinitionMaster.DataItem.UserType.Name;
 
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].FirstName = $scope.dataDefinitionMaster.DataItem.FirstName;
-                    $scope.dataDefinitionMaster.DataItem.UserInformations[0].MiddleName = $scope.dataDefinitionMaster.DataItem.FirstName;
-                    $scope.dataDefinitionMaster.DataItem.UserInformations[0].LastName = $scope.dataDefinitionMaster.DataItem.FirstName;
+                    $scope.dataDefinitionMaster.DataItem.UserInformations[0].MiddleName = $scope.dataDefinitionMaster.DataItem.MiddleName;
+                    $scope.dataDefinitionMaster.DataItem.UserInformations[0].LastName = $scope.dataDefinitionMaster.DataItem.LastName;
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].Height = $scope.dataDefinitionMaster.DataItem.Height;
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].Weight = $scope.dataDefinitionMaster.DataItem.Weight;
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].Gender = $scope.dataDefinitionMaster.DataItem.Gender;
@@ -200,8 +202,6 @@ function UserInformationController($scope, LxNotificationService, LxDialogServic
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].Address = $scope.dataDefinitionMaster.DataItem.Address;
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].EmailAddress = $scope.dataDefinitionMaster.DataItem.EmailAddress;
                     $scope.dataDefinitionMaster.DataItem.UserInformations[0].ContactNo = $scope.dataDefinitionMaster.DataItem.ContactNo;
-
-                    console.log($scope.dataDefinitionMaster.DataItem);
                     return true;
                 case 'PreSave':
                     delete $scope.dataDefinitionMaster.DataItem.Id;

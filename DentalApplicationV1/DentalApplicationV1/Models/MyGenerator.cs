@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace YbanezNacua.Models
+namespace DentalApplicationV1.Models
 {
     public class MyGenerator
     {

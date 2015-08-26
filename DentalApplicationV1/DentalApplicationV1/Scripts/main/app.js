@@ -95,7 +95,8 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
     .state('Home', {
         url: "/Home/Index",
-        templateUrl: "Home/Templates/Home"
+        templateUrl: "Home/Templates/Home",
+        controller: "IndexController"
     })
 
     //AboutUs Link

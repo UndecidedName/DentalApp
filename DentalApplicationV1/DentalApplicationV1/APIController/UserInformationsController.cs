@@ -15,6 +15,8 @@ namespace DentalApplicationV1.APIController
     public class UserInformationsController : ApiController
     {
         private DentalDBEntities db = new DentalDBEntities();
+        private MyGenerator generator = new MyGenerator();
+        private Response response = new Response();
         private int pageSize = 20;
         // GET: api/UserInformations
         public IQueryable<UserInformation> GetUserInformations()
@@ -78,19 +80,19 @@ namespace DentalApplicationV1.APIController
 
         // PUT: api/UserInformations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUserInformation(int id, UserInformation UserInformation)
+        public IHttpActionResult PutUserInformation(int id, UserInformation userInformation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != UserInformation.Id)
+            if (id != userInformation.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(UserInformation).State = EntityState.Modified;
+            db.Entry(userInformation).State = EntityState.Modified;
 
             try
             {
@@ -113,17 +115,54 @@ namespace DentalApplicationV1.APIController
 
         // POST: api/UserInformations
         [ResponseType(typeof(UserInformation))]
-        public IHttpActionResult PostUserInformation(UserInformation UserInformation)
+        public IHttpActionResult PostUserInformation(UserInformation userInformation)
         {
+            response.status = "FAILURE";
+            var searchEmail = db.UserInformations.Where(ui => ui.EmailAddress.Equals(userInformation.EmailAddress)).Count();
+
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                response.message = "Bad request.";
+                return Ok(response);
             }
+            else if (this.checkIfExist(userInformation.User.Username))
+            {
+                response.message = "Username is already used, please choose another one.";
+                return Ok(response);
+            }
+            else if (searchEmail > 0)
+            {
+                response.message = "Email address is already used, please choose another one.";
+                return Ok(response);
+            }
+            else
+            {
+                try
+                {
+                    User userDetails = new User();
+                    userDetails.Username = userInformation.User.Username;
+                    userDetails.Password = userInformation.User.Password;
+                    userDetails.Url = this.generateUrl(20, userDetails.Username);
+                    userDetails.UserTypeId = 6;
+                    userDetails.Status = 0;
 
-            db.UserInformations.Add(UserInformation);
-            db.SaveChanges();
+                    //email url
+                    this.emailUrl(userDetails.Url, userInformation.EmailAddress, userInformation.FirstName);
 
-            return CreatedAtRoute("DefaultApi", new { id = UserInformation.Id }, UserInformation);
+                    db.Users.Add(userDetails);
+                    userInformation.User = null;
+                    userInformation.UserId = userDetails.Id;
+                    db.UserInformations.Add(userInformation);
+                    db.SaveChanges();
+                    response.status = "SUCCESS";
+                    response.message = "Thank you for your patience. Please check your email for account activation.";
+                }
+                catch (Exception e)
+                {
+                    response.message = e.Message.ToString();
+                }
+            }
+            return Ok(response);
         }
 
         // DELETE: api/UserInformations/5
@@ -154,6 +193,40 @@ namespace DentalApplicationV1.APIController
         private bool UserInformationExists(int id)
         {
             return db.UserInformations.Count(e => e.Id == id) > 0;
+        }
+
+        public bool checkIfExist(string userName)
+        {
+            UsersController u = new UsersController();
+            if (u.checkIfExist(userName))
+                return true;
+            else
+                return false;
+        }
+        public string generateUrl(int size, string userName)
+        {
+            var rootUrl = Url.Content("~/");
+            var url = rootUrl + "api/Users?url=" + generator.generateCode(20) + "&username=" + userName + "&app=dental";
+            return url;
+        }
+
+        private void emailUrl(string url, string recipient, string firstName)
+        {
+            String header, body, footer;
+            //send email
+            GMailer.GmailUsername = "smilefairies2015@gmail.com";
+            GMailer.GmailPassword = "123smile";
+
+            GMailer mailer = new GMailer();
+
+            header = "Hi " + firstName + "<br><br>" + "Good Day! <br> <br>";
+            body = "For security purposes , please activate your account by clicking the link below. <br><br>Verification Link: " + url + ".<br><br>Thank you and God Bless! <br><br>";
+            footer = "Yours Truly, <br> Smile Fairies Dental Suites";
+            mailer.ToEmail = recipient;
+            mailer.Subject = "Account Activation";
+            mailer.Body = header + body + footer;
+            mailer.IsHtml = true;
+            mailer.Send();
         }
 
         public void filterRecord(int length, int userType, string property, string value, string value2, ref UserInformation[] userInformation)

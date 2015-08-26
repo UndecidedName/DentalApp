@@ -244,7 +244,7 @@
           <Property Name="UserTypeId" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="varchar" MaxLength="200" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserInformation">
@@ -1252,7 +1252,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointments" Relationship="DentalDBModel.FK_Appointment_PatientId" FromRole="User" ToRole="Appointment" />
           <NavigationProperty Name="Messages" Relationship="DentalDBModel.FK_User_ReceiverId" FromRole="User" ToRole="Message" />

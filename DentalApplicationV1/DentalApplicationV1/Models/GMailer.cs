@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
-namespace YbanezNacua.Models
+namespace DentalApplicationV1.Models
 {
     public class GMailer
     {

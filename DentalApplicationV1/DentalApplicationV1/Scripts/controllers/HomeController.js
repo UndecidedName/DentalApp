@@ -27,10 +27,11 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
     $scope.openLogin = function (dialogId) {
         LxProgressService.circular.hide();
         $scope.initUser();
-        if (angular.isDefined($cookies.get('DentalUsername')))
+        if (angular.isDefined($cookies.get('DentalCookie')))
         {
-            $scope.userInfo.username = $cookies.get('DentalUsername')
-            $scope.userInfo.password = $cookies.get('DentalPassword')
+            var cookieValues = $cookies.get('DentalCookie').split(",");
+            $scope.userInfo.username = cookieValues[0];
+            $scope.userInfo.password = cookieValues[1];
             $scope.userInfo.rememberMe = true;
         }
         LxDialogService.open(dialogId);
@@ -59,26 +60,12 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
             if (data.status == "SUCCESS") {
                 $rootScope.isLogged = true;
                 $rootScope.user = data.objParam1[0];
-                LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
-                $location.path("/User/Index");
 
                 //get all users which are userType 4 for Dentist and 5 for Secretary
                 $rootScope.usersForNotification = data.objParam2;
 
-                //Save user info in cookie
-                if ($scope.userInfo.rememberMe == true) {
-                    var expiryDate = new Date();
-                    expiryDate.setDate(expiryDate.getDate() + 30);
-                    $cookies.put('DentalUsername', $scope.userInfo.username, { 'expires': expiryDate });
-                    $cookies.put('DentalPassword', $scope.userInfo.password, { 'expires': expiryDate });
-                }
-                //remove user info cookie
-                else {
-                    if (angular.isDefined($cookies.get('DentalUsername'))) {
-                        $cookies.remove('DentalUsername')
-                        $cookies.remove('DentalPassword')
-                    }
-                }
+                $scope.saveToCookie();
+
                 //Add user to Notification dictionary
                 $rootScope.addClient($rootScope.user.Id.toString(), $.connection.hub.id);
 
@@ -92,6 +79,7 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
 
                 LxProgressService.circular.hide();
                 LxDialogService.close(dialogId);
+                $scope.redirectToProfile();
             }
             else {
                 LxProgressService.circular.hide();
@@ -99,5 +87,29 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
             }
         });
         
+    };
+
+    $scope.saveToCookie = function () {
+        //Save user info in cookie
+        if ($scope.userInfo.rememberMe == true) {
+            var expiryDate = new Date();
+            var dentalCookie = [];
+            dentalCookie.push($scope.userInfo.username);
+            dentalCookie.push($scope.userInfo.password);
+
+            expiryDate.setDate(expiryDate.getDate() + 30);
+            $cookies.put('DentalCookie', dentalCookie, { 'expires': expiryDate });
+        }
+            //remove user info cookie
+        else {
+            if (angular.isDefined($cookies.get('DentalCookie'))) {
+                $cookies.remove('DentalCookie')
+            }
+        }
+    };
+
+    $scope.redirectToProfile = function () {
+        $location.path("/User/Index");
+        LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
     };
 };

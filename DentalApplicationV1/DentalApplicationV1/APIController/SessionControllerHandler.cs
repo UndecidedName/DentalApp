@@ -6,7 +6,7 @@ using System.Web.Http.WebHost;
 using System.Web.Routing;
 using System.Web.SessionState;
 
-namespace YbanezNacua.APIController
+namespace DentalApplicationV1.APIController
 {
     public class SessionControllerHandler : HttpControllerHandler, IRequiresSessionState
     {
