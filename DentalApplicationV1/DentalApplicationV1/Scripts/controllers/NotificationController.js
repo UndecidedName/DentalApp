@@ -77,13 +77,13 @@ function NotificationController(LxDialogService, LxNotificationService, LxDropdo
                     $scope.filteredValue = $scope.UpperCase(value);
                     break;
                 case 'DateTime':
-                    $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy HH:mm:ss");
+                    $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy hh:mm:ss a");
                     break;
                 case 'Date':
                     $scope.filteredValue = $filter('date')(value, "MM/dd/yyyy");
                     break;
                 case 'Time':
-                    $scope.filteredValue = $filter('date')(value, "HH:mm:ss");
+                    $scope.filteredValue = $filter('date')(value, "HH:mm:ss a");
                     break;
                 case 'Number':
                     $scope.filteredValue = value;

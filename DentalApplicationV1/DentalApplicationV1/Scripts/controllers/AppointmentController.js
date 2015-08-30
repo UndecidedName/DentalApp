@@ -268,6 +268,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                     $scope.closeForm();
                     return true;
                 case 'PostLoadAction':
+                    console.log($scope.dataDefinitionMaster.DataList);
                     for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
                         $scope.dataDefinitionMaster.DataList[i].DentistName = $scope.dataDefinitionMaster.DataList[i].ScheduleMaster.UserInformation.FirstName + " " +
                                                                               $scope.dataDefinitionMaster.DataList[i].ScheduleMaster.UserInformation.MiddleName + " " +

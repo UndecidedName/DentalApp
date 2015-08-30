@@ -10,37 +10,37 @@
     <nav class="main-nav main-nav--lap-and-up">
         <ul>
             <li>
-                @*<a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">Our Services</a>*@
-                <a ui-sref="OurServices" class="main-nav__link" lx-ripple="white">
+                <a ui-sref="{{islogged == true ? '' : 'OurServices'}}" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-factory"
-                       lx-tooltip="Our Services" tooltip-position="bottom"></i>
+                       lx-tooltip="Our Services" tooltip-position="bottom"></i>Our Services
                 </a>
             </li>
             <li>
-                @*<a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">Contact Us</a>*@
-                <a ui-sref="ContactUs" class="main-nav__link" lx-ripple="white">
+                <a ui-sref="{{islogged == true ? '' : 'ContactUs'}}" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-phone-in-talk"
                        lx-tooltip="Contact Us" tooltip-position="bottom"></i>
+                    Contact Us
                 </a>
             </li>
             <li>
-                @*<a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">Testimonials</a>*@
-                <a ui-sref="Testimonials" class="main-nav__link" lx-ripple="white">
+                <a ui-sref="{{islogged == true ? '' : 'Testimonials'}}" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-pen"
                        lx-tooltip="Testimonials" tooltip-position="bottom"></i>
+                    Testimonials
                 </a>
             </li>
             <li>
-                @*<a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">About Us</a>*@
-                <a ui-sref="AboutUs" class="main-nav__link" lx-ripple="white">
+                <a ui-sref="{{islogged == true ? '' : 'AboutUs'}}" class="main-nav__link" lx-ripple="white">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-account-multiple"
                        lx-tooltip="About Us" tooltip-position="bottom"></i>
+                    About Us
                 </a>
             </li>
             <li>
-                <a href="" class="main-nav__link" lx-ripple="white" ng-click="openLogin('LoginModal')">
+                <a href="" class="main-nav__link" lx-ripple="white" ng-click="(isLogged == true ? '' : openLogin('LoginModal'))">
                     <i class="icon icon--s icon--white icon--flat mdi mdi-login"
                        lx-tooltip="Login" tooltip-position="bottom"></i>
+                    Login
                 </a>
             </li>
         </ul>
@@ -55,10 +55,10 @@
 
             <lx-dropdown-menu>
                 <ul>
-                    <li><a ui-sref="OurServices" class="dropdown-link" lx-ripple="white">Our Services</a></li>
-                    <li><a ui-sref="ContactUs" class="dropdown-link" lx-ripple="white">Contact Us</a></li>
-                    <li><a ui-sref="Testimonials" class="dropdown-link" lx-ripple="white">Testimonials</a></li>
-                    <li><a ui-sref="AboutUs" class="dropdown-link" lx-ripple="white">About Us</a></li>
+                    <li><a ui-sref="{{islogged == true ? '' : 'OurServices'}}" class="dropdown-link" lx-ripple="white">Our Services</a></li>
+                    <li><a ui-sref="{{islogged == true ? '' : 'ContactUs'}}" class="dropdown-link" lx-ripple="white">Contact Us</a></li>
+                    <li><a ui-sref="{{islogged == true ? '' : 'Testimonials'}}" class="dropdown-link" lx-ripple="white">Testimonials</a></li>
+                    <li><a ui-sref="{{islogged == true ? '' : 'AboutUs'}}" class="dropdown-link" lx-ripple="white">About Us</a></li>
                     <li><a class="dropdown-link" lx-ripple=" white" ng-click="openLogin('LoginModal')">Login</a></li>
                 </ul>
             </lx-dropdown-menu>

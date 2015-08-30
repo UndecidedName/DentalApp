@@ -428,6 +428,7 @@
     <Content Include="libs\highlightjs\styles\vs.css" />
     <Content Include="libs\highlightjs\styles\xcode.css" />
     <Content Include="libs\highlightjs\styles\zenburn.css" />
+    <Content Include="libs\images\signup.jpg" />
     <Content Include="libs\jquery\dist\jquery.js" />
     <Content Include="libs\jquery\dist\jquery.min.js" />
     <Content Include="libs\jquery\MIT-LICENSE.txt" />
@@ -1482,6 +1483,7 @@
     <Content Include="Views\User\Verification.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\User\Templates\UserInformation.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

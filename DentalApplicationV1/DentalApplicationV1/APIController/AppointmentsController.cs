@@ -40,7 +40,6 @@ namespace DentalApplicationV1.APIController
                     .Include(a => a.ScheduleDetail)
                     .Include(a => a.ScheduleMaster.UserInformation)
                     .Where(a => a.PatientId == userId && a.Status != 3).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
-                appointments[0].Message = null;
                 appointments[0].User = null;
                 appointments[0].PatientDiagnosisHistoryMasters = null;
                 appointments[0].ScheduleMaster.Appointments = null;

@@ -10,7 +10,7 @@
                         <tr class="myTableRow"
                             ng-repeat="notifications in notificationList | orderBy:['Status','-Date']">
                             <td id="{{formatId(notifications.Id, 'desc')}}" class="myTableCell cell-10" style="{{setStyle(notifications.Status)}}" ng-click="updateStatus(notifications.Id, $index, notifications)">{{notifications.Description}}</td>
-                            <td id="{{formatId(notifications.Id, 'date')}}" class="myTableCell cell-fixed-10 padding-right-20" style="{{setStyle(notifications.Status)}}" ng-click="updateStatus(notifications.Id, $index, notifications)">{{filterValue(notifications.Date, $index, 'Date')}}</td>
+                            <td id="{{formatId(notifications.Id, 'date')}}" class="myTableCell cell-fixed-10 padding-right-20" style="{{setStyle(notifications.Status)}}" ng-click="updateStatus(notifications.Id, $index, notifications)">{{filterValue(notifications.Date, $index, 'DateTime')}}</td>
                         </tr>
                     </tbody>
                 </table>

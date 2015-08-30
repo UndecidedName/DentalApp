@@ -4,7 +4,7 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
         var width = window.innerWidth;
         if (width < 650) {
             $rootScope.browserWidth = false;
-            $scope.loginModalStyle = "";
+            $scope.loginModalStyle = "padding: 0px 10px 0px 10px";
             $scope.loginModalHeader = "Smile";
         }
         else {
@@ -50,7 +50,7 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
         if (input == null || input == "")
             return true;
         return false;
-    }
+    };
 
     $scope.loginRequest = function (dialogId) {
         LxProgressService.circular.show('#5fa2db', '#progress');
@@ -112,4 +112,5 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
         $location.path("/User/Index");
         LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
     };
+
 };

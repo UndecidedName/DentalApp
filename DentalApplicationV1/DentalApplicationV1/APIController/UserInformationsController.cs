@@ -146,13 +146,14 @@ namespace DentalApplicationV1.APIController
                     userDetails.UserTypeId = 6;
                     userDetails.Status = 0;
 
-                    //email url
-                    this.emailUrl(userDetails.Url, userInformation.EmailAddress, userInformation.FirstName);
-
                     db.Users.Add(userDetails);
                     userInformation.User = null;
                     userInformation.UserId = userDetails.Id;
                     db.UserInformations.Add(userInformation);
+
+                    //email url
+                    this.emailUrl(userDetails.Url, userInformation.EmailAddress, userInformation.FirstName);
+
                     db.SaveChanges();
                     response.status = "SUCCESS";
                     response.message = "Thank you for your patience. Please check your email for account activation.";
@@ -220,7 +221,7 @@ namespace DentalApplicationV1.APIController
             GMailer mailer = new GMailer();
 
             header = "Hi " + firstName + "<br><br>" + "Good Day! <br> <br>";
-            body = "For security purposes , please activate your account by clicking the link below. <br><br>Verification Link: " + url + ".<br><br>Thank you and God Bless! <br><br>";
+            body = "For security purposes , please activate your account by clicking the link below. <br><br>Verification Link: <a href='" + url + "'>" + url + "</a>" + ".<br><br>Thank you and God Bless! <br><br>";
             footer = "Yours Truly, <br> Smile Fairies Dental Suites";
             mailer.ToEmail = recipient;
             mailer.Subject = "Account Activation";

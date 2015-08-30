@@ -1,5 +1,103 @@
-﻿<dir-body-container top="65">
-    <h2>Home</h2>
-    <div id="progress"></div>
-    <button ng-click="registrationRequest()">Register</button>
+﻿<dir-body-container top="60">
+    <div class="signup" ng-click="showDialog('RegistrationModal')" ng-disabled="isLogged">
+    </div>
+    <!--Registration Modal Form-->
+    <lx-dialog class="dialog dialog--s" id="RegistrationModal" auto-close="false">
+        <div id="progress"></div>
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title text-center">
+                    {{registrationHeader}}
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Username" error="validateInput(userInfo.User.Username)">
+                        <input type="text" name="Username" ng-model="userInfo.User.Username" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Password" error="validateInput(userInfo.User.Password)">
+                        <input type="password" name="Password" ng-model="userInfo.User.Password" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Verify Password" error="validateInput(userInfo.vpassword)">
+                        <input type="password" name="Password" ng-model="userInfo.vpassword" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="First Name" error="validateInput(userInfo.FirstName)">
+                        <input type="text" name="FirstName" ng-model="userInfo.FirstName" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Middle Name" error="validateInput(userInfo.MiddleName)">
+                        <input type="text" name="MiddleName" ng-model="userInfo.MiddleName" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Last Name" error="validateInput(userInfo.LastName)">
+                        <input type="text" name="LastName" ng-model="userInfo.LastName" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Birthdate" error="validateInput(userInfo.BirthDate)">
+                        <input type="text" name="Birthdate" ng-model="userInfo.BirthDate" ng-click="showDialog('BirthDate')">
+                    </lx-text-field>
+                </div>
+                <div flex-item>
+                    <lx-select ng-model="userInfo.GenderDesc" placeholder="Gender" choices="genderList" floating-label>
+                        <lx-select-selected>
+                            {{ $selected.Name }}
+                        </lx-select-selected>
+
+                        <lx-select-choices>
+                            {{ $choice.Name }}
+                        </lx-select-choices>
+                    </lx-select>
+                </div>
+            </div>
+            <div flex-container="row" flex-gutter="24" style="{{registrationModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Email Address" error="!emailValidation(userInfo.EmailAddress)">
+                        <input type="text" name="EmailAddress" ng-model="userInfo.EmailAddress" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+        </div>
+        <div class="dialog__actions">
+            <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeDialog('RegistrationModal')" ng-disabled="lock">Cancel</button>
+            <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="registrationRequest('RegistrationModal')" ng-disabled="lock">Register</button>
+        </div>
+    </lx-dialog>
+    <lx-dialog class="dialog dialog--l" id="BirthDate" auto-close="true">
+        <div class="dialog__header">
+        </div>
+        <div class="dialog__content">
+            <div style="overflow-x:auto;">
+                <time-date-picker ng-model="userInfo.BirthDateHolder"
+                                  display-mode="date"
+                                  orientation="false"
+                                  on-save="saveFn(userInfo.BirthDateHolder); closeDate('BirthDate')">
+                </time-date-picker>
+            </div>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
 </dir-body-container>
