@@ -428,6 +428,7 @@
     <Content Include="libs\highlightjs\styles\vs.css" />
     <Content Include="libs\highlightjs\styles\xcode.css" />
     <Content Include="libs\highlightjs\styles\zenburn.css" />
+    <Content Include="libs\images\signup-1.jpg" />
     <Content Include="libs\images\signup.jpg" />
     <Content Include="libs\jquery\dist\jquery.js" />
     <Content Include="libs\jquery\dist\jquery.min.js" />
@@ -859,6 +860,7 @@
     <Content Include="Scripts\controllers\SettingController.js" />
     <Content Include="Scripts\controllers\SpecialAppointments.js" />
     <Content Include="Scripts\controllers\TreatmentTypeController.js" />
+    <Content Include="Scripts\controllers\UserIndexController.js" />
     <Content Include="Scripts\controllers\UserMenuController.js" />
     <Content Include="Scripts\controllers\UserInformationController.js" />
     <Content Include="Scripts\controllers\UserTypeController.js" />
@@ -1483,7 +1485,6 @@
     <Content Include="Views\User\Verification.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\User\Templates\UserInformation.cshtml" />
-    <Content Include="Views\Home\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -43,6 +43,7 @@
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="200" />
           <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="SeqNo" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DiagnosisType">
@@ -244,6 +245,7 @@
           <Property Name="UserTypeId" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RegistrationDate" Type="date" Nullable="false" />
           <Property Name="Url" Type="varchar" MaxLength="200" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -298,6 +300,7 @@ warning 6002: The table/view 'DentalDB.dbo.V_UserMenu' does not have a primary k
           <Property Name="ParentId" Type="int" />
           <Property Name="Url" Type="varchar" MaxLength="50" />
           <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="SeqNo" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -312,6 +315,7 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="Gender" />
             <PropertyRef Name="LastName" />
+            <PropertyRef Name="RegistrationDate" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
@@ -330,6 +334,7 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
           <Property Name="MiddleName" Type="varchar" MaxLength="100" />
           <Property Name="Occupation" Type="varchar" MaxLength="100" />
           <Property Name="Weight" Type="float" />
+          <Property Name="RegistrationDate" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="FK_Appointment_PatientId">
           <End Role="User" Type="Self.User" Multiplicity="0..1">
@@ -703,7 +708,8 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
 [V_UserMenu].[Description] AS [Description], 
 [V_UserMenu].[ParentId] AS [ParentId], 
 [V_UserMenu].[Url] AS [Url], 
-[V_UserMenu].[UserTypeId] AS [UserTypeId]
+[V_UserMenu].[UserTypeId] AS [UserTypeId], 
+[V_UserMenu].[SeqNo] AS [SeqNo]
 FROM [dbo].[V_UserMenu] AS [V_UserMenu]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_UsersList" EntityType="Self.V_UsersList" store:Type="Views" store:Schema="dbo">
@@ -724,7 +730,8 @@ FROM [dbo].[V_UserMenu] AS [V_UserMenu]</DefiningQuery>
 [V_UsersList].[LastName] AS [LastName], 
 [V_UsersList].[MiddleName] AS [MiddleName], 
 [V_UsersList].[Occupation] AS [Occupation], 
-[V_UsersList].[Weight] AS [Weight]
+[V_UsersList].[Weight] AS [Weight], 
+[V_UsersList].[RegistrationDate] AS [RegistrationDate]
 FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Appointment_PatientId" Association="Self.FK_Appointment_PatientId">
@@ -1021,6 +1028,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserMenus" Relationship="DentalDBModel.Fk_UserMenu_MenuId" FromRole="DentalMenu" ToRole="UserMenu" />
+          <Property Name="SeqNo" Type="Int32" />
         </EntityType>
         <EntityType Name="DiagnosisType">
           <Key>
@@ -1263,6 +1271,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="PatientMedicalHistories" Relationship="DentalDBModel.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
           <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
           <NavigationProperty Name="UserInformations" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="User" ToRole="UserInformation" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="UserInformation">
           <Key>
@@ -1321,6 +1330,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="ParentId" Type="Int32" />
           <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SeqNo" Type="Int32" />
         </EntityType>
         <EntityType Name="V_UsersList">
           <Key>
@@ -1333,6 +1343,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="Gender" />
             <PropertyRef Name="LastName" />
+            <PropertyRef Name="RegistrationDate" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -1351,6 +1362,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Weight" Type="Double" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="FK_Appointment_PatientId">
           <End Type="DentalDBModel.User" Role="User" Multiplicity="0..1">
@@ -1733,6 +1745,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="DentalMenus">
             <EntityTypeMapping TypeName="DentalDBModel.DentalMenu">
               <MappingFragment StoreEntitySet="DentalMenu">
+                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1952,6 +1965,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DentalDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -2004,6 +2018,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="V_UserMenu">
             <EntityTypeMapping TypeName="DentalDBModel.V_UserMenu">
               <MappingFragment StoreEntitySet="V_UserMenu">
+                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
@@ -2016,6 +2031,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="V_UsersList">
             <EntityTypeMapping TypeName="DentalDBModel.V_UsersList">
               <MappingFragment StoreEntitySet="V_UsersList">
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="Occupation" ColumnName="Occupation" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />

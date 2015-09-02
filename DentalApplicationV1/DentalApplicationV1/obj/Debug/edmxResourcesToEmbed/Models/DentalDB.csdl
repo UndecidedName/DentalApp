@@ -181,6 +181,7 @@
     <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="UserMenus" Relationship="DentalDBModel.Fk_UserMenu_MenuId" FromRole="DentalMenu" ToRole="UserMenu" />
+    <Property Name="SeqNo" Type="Int32" />
   </EntityType>
   <EntityType Name="DiagnosisType">
     <Key>
@@ -423,6 +424,7 @@
     <NavigationProperty Name="PatientMedicalHistories" Relationship="DentalDBModel.FK_PatientMedicalHistory_PatientId" FromRole="User" ToRole="PatientMedicalHistory" />
     <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
     <NavigationProperty Name="UserInformations" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="User" ToRole="UserInformation" />
+    <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
   <EntityType Name="UserInformation">
     <Key>
@@ -481,6 +483,7 @@
     <Property Name="ParentId" Type="Int32" />
     <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="SeqNo" Type="Int32" />
   </EntityType>
   <EntityType Name="V_UsersList">
     <Key>
@@ -493,6 +496,7 @@
       <PropertyRef Name="FirstName" />
       <PropertyRef Name="Gender" />
       <PropertyRef Name="LastName" />
+      <PropertyRef Name="RegistrationDate" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -511,6 +515,7 @@
     <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Weight" Type="Double" />
+    <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
   <Association Name="FK_Appointment_PatientId">
     <End Type="DentalDBModel.User" Role="User" Multiplicity="0..1">

@@ -82,35 +82,46 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUserInformation(int id, UserInformation userInformation)
         {
-            if (!ModelState.IsValid)
+            response.status = "FAILURE";
+            if (!ModelState.IsValid || id != userInformation.Id)
             {
-                return BadRequest(ModelState);
+                response.message = "Bad request";
+                return Ok(response);
             }
-
-            if (id != userInformation.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(userInformation).State = EntityState.Modified;
 
             try
             {
+                var searchEmail = db.UserInformations.Where(ui => ui.EmailAddress.Equals(userInformation.EmailAddress) && ui.User.Id != userInformation.Id).Count();
+                if (searchEmail > 0)
+                {
+                    response.message = "Email Address is already used.";
+                    return Ok(response);
+                }
+                var getId = db.UserInformations.Where(ui => ui.UserId == id).ToArray();
+                userInformation.UserId = id;
+                id = getId[0].Id;
+                var getInformation = db.UserInformations.Find(id);
+                userInformation.Id = id;
+                //userInformation.RegistrationDate = DateTime.Now;
+                db.Entry(getInformation).CurrentValues.SetValues(userInformation);
+                db.Entry(getInformation).State = EntityState.Modified;
                 db.SaveChanges();
+                response.status = "SUCCESS";
+                response.objParam1 = userInformation;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!UserInformationExists(id))
                 {
-                    return NotFound();
+                    response.message = "User doesn't exist";
                 }
                 else
                 {
-                    throw;
+                    response.message = e.InnerException.InnerException.Message.ToString();
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(response);
         }
 
         // POST: api/UserInformations

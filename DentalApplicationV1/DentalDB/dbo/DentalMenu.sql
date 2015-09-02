@@ -5,5 +5,6 @@
     [Name] VARCHAR(100) NOT NULL, 
     [Description] VARCHAR(200) NULL, 
 	[Url] VARCHAR(50) NULL, 
-    [Status] INT NOT NULL DEFAULT 1
+    [SeqNo] INT NOT NULL,
+    [Status] INT NOT NULL DEFAULT 1, 
 )

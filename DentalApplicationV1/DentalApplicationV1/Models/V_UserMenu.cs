@@ -20,5 +20,6 @@ namespace DentalApplicationV1.Models
         public Nullable<int> ParentId { get; set; }
         public string Url { get; set; }
         public int UserTypeId { get; set; }
+        public Nullable<int> SeqNo { get; set; }
     }
 }

@@ -1,7 +1,140 @@
 ﻿<div class="main-section">
-    <h3 class="main-section__title">This is the Index</h3>
+    <h3 class="main-section__title">My Information</h3>
 
     <div class="main-section__content">
-        
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            <div flex-item>
+                <lx-text-field label="First Name" error="validateInput(userInfo.FirstName)">
+                    <input type="text"
+                           name="FirstName"
+                           ng-model="userInfo.FirstName"
+                           pattern=".{4,50}"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+            <div flex-item>
+                <lx-text-field label="Middle Name" error="validateInput(userInfo.MiddleName)">
+                    <input type="text"
+                           name="MiddleName"
+                           ng-model="userInfo.MiddleName"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+            <div flex-item>
+                <lx-text-field label="Last Name" error="validateInput(userInfo.LastName)">
+                    <input type="text"
+                           name="LastName"
+                           ng-model="userInfo.LastName"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+        </div>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            <div flex-item>
+                <lx-text-field label="Height">
+                    <input type="number"
+                           name="Height"
+                           ng-model="userInfo.Height"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+            <div flex-item>
+                <lx-text-field label="Weight">
+                    <input type="number"
+                           name="Weight"
+                           ng-model="userInfo.Weight"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+            <div flex-item>
+                <lx-select ng-model="userInfo.GenderDesc" placeholder="Gender" choices="genderList" floating-label>
+                    <lx-select-selected>
+                        {{ $selected.Name }}
+                    </lx-select-selected>
+
+                    <lx-select-choices>
+                        {{ $choice.Name }}
+                    </lx-select-choices>
+                </lx-select>
+            </div>
+        </div>
+        <div id="progress"></div>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            <div flex-item>
+                <lx-text-field label="Birthdate">
+                    <input type="text"
+                           name="Date"
+                           ng-model="userInfo.BirthDate"
+                           ng-click="showDialog('BirthDate')"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+            <div flex-item>
+                <lx-select ng-model="userInfo.CivilStatusHolder" placeholder="Civil Status" choices="civilStatusList" floating-label>
+                    <lx-select-selected>
+                        {{ $selected.Name }}
+                    </lx-select-selected>
+
+                    <lx-select-choices>
+                        {{ $choice.Name }}
+                    </lx-select-choices>
+                </lx-select>
+            </div>
+            <div flex-item>
+                <lx-text-field label="Occupation">
+                    <input type="text"
+                           name="Occupation"
+                           ng-model="userInfo.Occupation"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+        </div>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            <div flex-item>
+                <lx-text-field label="Address">
+                    <input type="text"
+                           name="Address"
+                           ng-model="userInfo.Address"
+                           ng-disabled="viewOnly" />
+                </lx-text-field>
+            </div>
+        </div>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            <div flex-item>
+                <lx-text-field label="Email" error="!emailValidation(userInfo.EmailAddress)">
+                    <input type="email" ng-model="userInfo.EmailAddress" ng-disabled="viewOnly">
+                </lx-text-field>
+
+                <span class="text-field-error" ng-if="!emailValidation(userInfo.EmailAddress)">Email Address is invalid</span>
+            </div>
+            <div flex-item>
+                <lx-text-field label="Contact Number">
+                    <input type="text"
+                           name="ContactNo"
+                           ng-model="userInfo.ContactNo"
+                           ng-disabled="viewOnly">
+                </lx-text-field>
+            </div>
+        </div><br/>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            <div flex-item>
+                <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="submit()">{{submitButtonText}}</button>
+            </div>
+        </div>
+        <lx-dialog class="dialog dialog--l" id="BirthDate" auto-close="true">
+            <div class="dialog__header">
+            </div>
+            <div class="dialog__content">
+                <div style="overflow-x:auto;">
+                    <time-date-picker ng-model="userInfo.BirthDateHolder"
+                                      display-mode="date"
+                                      orientation="false"
+                                      on-save="saveFn(userInfo.BirthDateHolder); closeDate('BirthDate')">
+                    </time-date-picker>
+                </div>
+            </div>
+            <div class="dialog__actions">
+            </div>
+        </lx-dialog>
     </div>
 </div>

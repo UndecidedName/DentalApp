@@ -207,7 +207,16 @@ namespace DentalApplicationV1.APIController
 
             try
             {
+                //searhc user information
                 var searchUserInformation = db.UserInformations.Where(ui => ui.UserId == id).ToArray();
+                string emailAddress = searchUserInformation[0].EmailAddress;
+
+                var searchEmail = db.UserInformations.Where(ui => ui.EmailAddress.Equals(emailAddress) && ui.UserId != id).Count();
+                if (searchEmail > 0)
+                {
+                    response.message = "Email address is already used, please choose another one.";
+                    return Ok(response);
+                }
                 var userInformation = db.UserInformations.Find(searchUserInformation[searchUserInformation.Length - 1].Id);
                 db.Entry(userInformation).CurrentValues.SetValues(user.UserInformations);
                 db.Entry(userInformation).State = EntityState.Modified;

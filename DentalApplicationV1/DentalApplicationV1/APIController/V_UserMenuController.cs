@@ -24,7 +24,7 @@ namespace DentalApplicationV1.APIController
 
         public IQueryable<V_UserMenu> GetV_UserMenu(int userTypeId)
         {
-            return db.V_UserMenu.Where(vum => vum.UserTypeId == userTypeId).OrderBy(vum => vum.Name);
+            return db.V_UserMenu.Where(vum => vum.UserTypeId == userTypeId).OrderBy(vum => vum.SeqNo);
         }
 
         // GET: api/V_UserMenu/5

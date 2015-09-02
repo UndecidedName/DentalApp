@@ -8,7 +8,8 @@ function dirBodyContainer() {
         {
             element.css({
                 position: 'absolute',
-                top: scope.top + 'px'
+                top: scope.top + 'px',
+                width: '100%'
             })
         }
     }

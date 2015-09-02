@@ -34,7 +34,7 @@ namespace DentalApplicationV1.APIController
                 else
                     fetch = records - length;
                 var getDentalMenus = db.DentalMenus
-                    .OrderBy(m => m.Name).Skip((length)).Take(fetch).ToArray();
+                    .OrderBy(m => m.SeqNo).Skip((length)).Take(fetch).ToArray();
                 for(int i = 0; i < getDentalMenus.Length; i++)
                 {
                     getDentalMenus[i].UserMenus = null;
@@ -47,7 +47,7 @@ namespace DentalApplicationV1.APIController
             }
         }
 
-        public IHttpActionResult GetDentalMenus(int length, int status)
+        public IHttpActionResult GetDentalMenus(int length, int status, string type)
         {
             int fetch;
             var records = db.DentalMenus.Where(dm => dm.Status == status).Count();
@@ -57,10 +57,22 @@ namespace DentalApplicationV1.APIController
                     fetch = pageSize;
                 else
                     fetch = records - length;
-                var getDentalMenus = db.DentalMenus
-                    .Where(dm => dm.Status == status)
-                    .OrderBy(m => m.Name).Skip((length)).Take(fetch).ToArray();
-                return Ok(getDentalMenus);
+                if (type.Equals("parent"))
+                {
+                    var getDentalMenus = db.DentalMenus
+                        .Where(dm => dm.Status == status && dm.ParentId == 0)
+                        .OrderBy(m => m.SeqNo).Skip((length)).Take(fetch).ToArray();
+
+                    return Ok(getDentalMenus);
+                }
+                else
+                {
+                    var getDentalMenus = db.DentalMenus
+                        .Where(dm => dm.Status == status)
+                        .OrderBy(m => m.SeqNo).Skip((length)).Take(fetch).ToArray();
+
+                    return Ok(getDentalMenus);
+                }
             }
             else
             {

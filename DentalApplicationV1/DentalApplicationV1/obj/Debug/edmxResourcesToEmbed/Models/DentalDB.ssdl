@@ -38,6 +38,7 @@
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="200" />
     <Property Name="Url" Type="varchar" MaxLength="50" />
+    <Property Name="SeqNo" Type="int" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DiagnosisType">
@@ -239,6 +240,7 @@
     <Property Name="UserTypeId" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
     <Property Name="Url" Type="varchar" MaxLength="200" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
@@ -293,6 +295,7 @@ warning 6002: The table/view 'DentalDB.dbo.V_UserMenu' does not have a primary k
     <Property Name="ParentId" Type="int" />
     <Property Name="Url" Type="varchar" MaxLength="50" />
     <Property Name="UserTypeId" Type="int" Nullable="false" />
+    <Property Name="SeqNo" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -307,6 +310,7 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       <PropertyRef Name="FirstName" />
       <PropertyRef Name="Gender" />
       <PropertyRef Name="LastName" />
+      <PropertyRef Name="RegistrationDate" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="200" Nullable="false" />
@@ -325,6 +329,7 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     <Property Name="MiddleName" Type="varchar" MaxLength="100" />
     <Property Name="Occupation" Type="varchar" MaxLength="100" />
     <Property Name="Weight" Type="float" />
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
   </EntityType>
   <Association Name="FK_Appointment_PatientId">
     <End Role="User" Type="Self.User" Multiplicity="0..1">
@@ -698,7 +703,8 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
 [V_UserMenu].[Description] AS [Description], 
 [V_UserMenu].[ParentId] AS [ParentId], 
 [V_UserMenu].[Url] AS [Url], 
-[V_UserMenu].[UserTypeId] AS [UserTypeId]
+[V_UserMenu].[UserTypeId] AS [UserTypeId], 
+[V_UserMenu].[SeqNo] AS [SeqNo]
 FROM [dbo].[V_UserMenu] AS [V_UserMenu]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="V_UsersList" EntityType="Self.V_UsersList" store:Type="Views" store:Schema="dbo">
@@ -719,7 +725,8 @@ FROM [dbo].[V_UserMenu] AS [V_UserMenu]</DefiningQuery>
 [V_UsersList].[LastName] AS [LastName], 
 [V_UsersList].[MiddleName] AS [MiddleName], 
 [V_UsersList].[Occupation] AS [Occupation], 
-[V_UsersList].[Weight] AS [Weight]
+[V_UsersList].[Weight] AS [Weight], 
+[V_UsersList].[RegistrationDate] AS [RegistrationDate]
 FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_Appointment_PatientId" Association="Self.FK_Appointment_PatientId">

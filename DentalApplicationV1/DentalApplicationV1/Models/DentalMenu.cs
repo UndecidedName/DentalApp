@@ -25,6 +25,7 @@ namespace DentalApplicationV1.Models
         public string Description { get; set; }
         public string Url { get; set; }
         public int Status { get; set; }
+        public Nullable<int> SeqNo { get; set; }
     
         public virtual ICollection<UserMenu> UserMenus { get; set; }
     }

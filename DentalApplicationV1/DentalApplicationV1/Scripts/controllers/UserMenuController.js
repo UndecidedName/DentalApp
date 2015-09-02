@@ -20,18 +20,18 @@ function UserMenuController(LxDialogService, LxNotificationService, LxDropdownSe
     $scope.getMenuList = function () {
         $scope.menuList = [];
         $scope.dataDefinitionMenuList = {
-            "Header": ['Menu Name', 'Description', 'No'],
-            "Keys": ['Name', 'Description'],
-            "Type": ['String', 'String-Default'],
+            "Header": ['Menu Name', 'Description', 'Sequence', 'No'],
+            "Keys": ['Name', 'Description', 'SeqNo'],
+            "Type": ['String', 'String-Default', 'Number'],
             "DataList": $scope.menuList,
             "CurrentLength": $scope.menuList.length,
             "DataItem": {},
-            "APIUrl": ['/api/DentalMenus?length= &status=1'],
+            "APIUrl": ['/api/DentalMenus?length= &status=1&type=all'],
             "Dialog": "Menu"
         };
 
         $scope.filterDefinitionMenu = {
-            "Url": '/api/DentalMenus?length= &status=1',//get
+            "Url": '/api/DentalMenus?length= &status=1&type=all',//get
             "Source": [
                         { "Label": "Menu Name", "Property": "Name", "Values": [], "Type": "Default" },
                         { "Label": "Description", "Property": "Description", "Values": [], "Type": "Default" }

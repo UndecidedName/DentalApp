@@ -36,6 +36,7 @@
     <EntitySetMapping Name="DentalMenus">
       <EntityTypeMapping TypeName="DentalDBModel.DentalMenu">
         <MappingFragment StoreEntitySet="DentalMenu">
+          <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Description" ColumnName="Description" />
@@ -255,6 +256,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="DentalDBModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -307,6 +309,7 @@
     <EntitySetMapping Name="V_UserMenu">
       <EntityTypeMapping TypeName="DentalDBModel.V_UserMenu">
         <MappingFragment StoreEntitySet="V_UserMenu">
+          <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
           <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
           <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
@@ -319,6 +322,7 @@
     <EntitySetMapping Name="V_UsersList">
       <EntityTypeMapping TypeName="DentalDBModel.V_UsersList">
         <MappingFragment StoreEntitySet="V_UsersList">
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="Occupation" ColumnName="Occupation" />
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />

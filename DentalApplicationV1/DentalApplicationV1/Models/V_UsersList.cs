@@ -31,5 +31,6 @@ namespace DentalApplicationV1.Models
         public string MiddleName { get; set; }
         public string Occupation { get; set; }
         public Nullable<double> Weight { get; set; }
+        public System.DateTime RegistrationDate { get; set; }
     }
 }

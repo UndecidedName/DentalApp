@@ -32,6 +32,7 @@ namespace DentalApplicationV1.Models
         public string Password { get; set; }
         public string Url { get; set; }
         public int Status { get; set; }
+        public System.DateTime RegistrationDate { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

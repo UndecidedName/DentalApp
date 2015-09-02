@@ -30,18 +30,18 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
     $scope.getMenuList = function () {
         $scope.menuList = [];
         $scope.dataDefinitionMenuList = {
-            "Header": ['Parent Menu', 'Name', 'Description', 'Url', 'No'],
-            "Keys": ['ParentName', 'Name', 'Description', 'Url'],
-            "Type": ['String-Default', 'String-Default', 'String-Default', 'String-Default-Default'],
+            "Header": ['Parent Menu', 'Name', 'Description', 'Url', 'Sequence', 'No'],
+            "Keys": ['ParentName', 'Name', 'Description', 'Url', 'SeqNo'],
+            "Type": ['String-Default', 'String-Default', 'String-Default', 'String-Default-Default', 'Number'],
             "DataList": $scope.menuList,
             "CurrentLength": $scope.menuList.length,
             "DataItem": {},
-            "APIUrl": ['/api/DentalMenus?length= &status=1'],
+            "APIUrl": ['/api/DentalMenus?length= &status=1&type=parent'],
             "Dialog": "Menu"
         };
 
         $scope.filterDefinitionMenu = {
-            "Url": '/api/DentalMenus?length= &status=1',//get
+            "Url": '/api/DentalMenus?length= &status=1&type=parent',//get
             "Source": [
                         { "Label": "Menu Name", "Property": "Name", "Values": [], "Type": "Default" },
                         { "Label": "Description", "Property": "Description", "Values": [], "Type": "Default" }
@@ -100,10 +100,10 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
         $scope.actionCreateMaster = false;
         $scope.actionModeMaster = "Create";//default to Create
         $scope.dataDefinitionMaster = {
-            "Header": ['Parent Name', 'Name', 'Description', 'Url', 'Status', 'No'],
-            "Keys": ['ParentName', 'Name', 'Description', 'Url','Status'],
-            "Type": ['String-Default', 'String-Default', 'String-Default', 'String-Default', 'Status-Maintenance'],
-            "RequiredFields": ['Name-Name', 'Url-Url'],
+            "Header": ['Parent Name', 'Name', 'Description', 'Url', 'Sequence', 'Status', 'No'],
+            "Keys": ['ParentName', 'Name', 'Description', 'Url', 'SeqNo','Status'],
+            "Type": ['String-Default', 'String-Default', 'String-Default', 'String-Default', 'Number', 'Status-Maintenance'],
+            "RequiredFields": ['Name-Name', 'Url-Url', 'SeqNo-Sequence'],
             "DataList": $scope.menu,
             "CurrentLength": $scope.menu.length,
             "APIUrl": ['/api/DentalMenus?length=',//get
@@ -185,6 +185,7 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                 Name: null,
                 Description: null,
                 Url: null,
+                SeqNo: null,
                 Status: 1,
                 ParentName: null,
                 StatusHolder: 1

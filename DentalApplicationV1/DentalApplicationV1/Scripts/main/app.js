@@ -125,7 +125,8 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
 
     .state('Profile', {
         url: "/User/Index",
-        templateUrl: "User/Index"
+        templateUrl: "User/Index",
+        controller: "UserIndexController"
     })
 
     .state('Notification', {

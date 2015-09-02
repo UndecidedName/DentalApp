@@ -3,6 +3,7 @@
 				u.Username,
 				u.Password,
 				u.UserTypeId,
+				u.RegistrationDate,
 				u.Status,
 				p.Address,
 				p.BirthDate,

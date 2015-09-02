@@ -163,22 +163,6 @@ IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
 
 
 GO
-PRINT N'Creating [dbo].[DentalMenu]...';
-
-
-GO
-CREATE TABLE [dbo].[DentalMenu] (
-    [Id]          INT           IDENTITY (1, 1) NOT NULL,
-    [ParentId]    INT           NULL,
-    [Name]        VARCHAR (100) NOT NULL,
-    [Description] VARCHAR (200) NULL,
-    [Url]         VARCHAR (50)  NULL,
-    [Status]      INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[ScheduleDetail]...';
 
 
@@ -497,22 +481,6 @@ CREATE TABLE [dbo].[CivilStatus] (
 
 
 GO
-PRINT N'Creating [dbo].[User]...';
-
-
-GO
-CREATE TABLE [dbo].[User] (
-    [Id]         INT           IDENTITY (1, 1) NOT NULL,
-    [UserTypeId] INT           NOT NULL,
-    [Username]   VARCHAR (200) NOT NULL,
-    [Password]   VARCHAR (200) NOT NULL,
-    [Url]        VARCHAR (200) NULL,
-    [Status]     INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[UserInformation]...';
 
 
@@ -551,12 +519,37 @@ CREATE TABLE [dbo].[UserMenu] (
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[DentalMenu]....';
+PRINT N'Creating [dbo].[User]...';
 
 
 GO
-ALTER TABLE [dbo].[DentalMenu]
-    ADD DEFAULT 1 FOR [Status];
+CREATE TABLE [dbo].[User] (
+    [Id]               INT           IDENTITY (1, 1) NOT NULL,
+    [UserTypeId]       INT           NOT NULL,
+    [Username]         VARCHAR (200) NOT NULL,
+    [Password]         VARCHAR (200) NOT NULL,
+    [Url]              VARCHAR (200) NULL,
+    [RegistrationDate] DATE          NOT NULL,
+    [Status]           INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[DentalMenu]...';
+
+
+GO
+CREATE TABLE [dbo].[DentalMenu] (
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
+    [ParentId]    INT           NULL,
+    [Name]        VARCHAR (100) NOT NULL,
+    [Description] VARCHAR (200) NULL,
+    [Url]         VARCHAR (50)  NULL,
+    [SeqNo]       INT           NOT NULL,
+    [Status]      INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
 
 
 GO
@@ -704,6 +697,15 @@ ALTER TABLE [dbo].[CivilStatus]
 
 
 GO
+PRINT N'Creating Default Constraint on [dbo].[UserMenu]....';
+
+
+GO
+ALTER TABLE [dbo].[UserMenu]
+    ADD DEFAULT 1 FOR [Status];
+
+
+GO
 PRINT N'Creating Default Constraint on [dbo].[User]....';
 
 
@@ -713,11 +715,11 @@ ALTER TABLE [dbo].[User]
 
 
 GO
-PRINT N'Creating Default Constraint on [dbo].[UserMenu]....';
+PRINT N'Creating Default Constraint on [dbo].[DentalMenu]....';
 
 
 GO
-ALTER TABLE [dbo].[UserMenu]
+ALTER TABLE [dbo].[DentalMenu]
     ADD DEFAULT 1 FOR [Status];
 
 
@@ -920,15 +922,6 @@ ALTER TABLE [dbo].[PatientMedicalHistory]
 
 
 GO
-PRINT N'Creating FK_User_UserTypeId...';
-
-
-GO
-ALTER TABLE [dbo].[User]
-    ADD CONSTRAINT [FK_User_UserTypeId] FOREIGN KEY ([UserTypeId]) REFERENCES [dbo].[UserType] ([Id]) ON DELETE CASCADE;
-
-
-GO
 PRINT N'Creating FK_UserInformation_PatientId...';
 
 
@@ -965,18 +958,14 @@ ALTER TABLE [dbo].[UserMenu]
 
 
 GO
-PRINT N'Creating [dbo].[V_UserMenu]...';
+PRINT N'Creating FK_User_UserTypeId...';
 
 
 GO
-CREATE VIEW [dbo].[V_UserMenu]
-	AS SELECT	dm.Id,
-				dm.Name,
-				dm.Description,
-				dm.ParentId,
-				dm.Url,
-				um.UserTypeId
-	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1
+ALTER TABLE [dbo].[User]
+    ADD CONSTRAINT [FK_User_UserTypeId] FOREIGN KEY ([UserTypeId]) REFERENCES [dbo].[UserType] ([Id]) ON DELETE CASCADE;
+
+
 GO
 PRINT N'Creating [dbo].[V_UsersList]...';
 
@@ -987,6 +976,7 @@ CREATE VIEW [dbo].[V_UsersList]
 				u.Username,
 				u.Password,
 				u.UserTypeId,
+				u.RegistrationDate,
 				u.Status,
 				p.Address,
 				p.BirthDate,
@@ -1001,6 +991,20 @@ CREATE VIEW [dbo].[V_UsersList]
 				p.Occupation,
 				p.Weight
 	FROM [User] as u INNER JOIN [UserInformation] as p ON u.Id = p.UserId WHERE u.Status = 1
+GO
+PRINT N'Creating [dbo].[V_UserMenu]...';
+
+
+GO
+CREATE VIEW [dbo].[V_UserMenu]
+	AS SELECT	TOP (100) PERCENT dm.Id,
+				dm.Name,
+				dm.Description,
+				dm.ParentId,
+				dm.Url,
+				dm.SeqNo,
+				um.UserTypeId
+	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 ORDER BY dm.SeqNo
 GO
 -- Refactoring step to update target server with deployed transaction logs
 

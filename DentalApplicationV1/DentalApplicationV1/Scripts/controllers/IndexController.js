@@ -14,11 +14,12 @@ function IndexController($scope, LxNotificationService, LxDialogService, LxProgr
         }
     }, 100);
     $scope.lock = false;
+    $scope.showDiv = true;
     $scope.initUser = function () {
         $scope.userInfo = {
             "User": {"Username": null,
                 "Password": null},
-            "vpassword": null,
+             "vpassword": null,
             "BirthDate": null,
             "GenderDesc":null,
             "BirthDateHolder": null,
@@ -94,8 +95,9 @@ function IndexController($scope, LxNotificationService, LxDialogService, LxProgr
             $http.post("/api/UserInformations", $scope.userInfo)
             .success(function (data, status) {
                 if (data.status == "SUCCESS") {
-                    $scope.closeDialog('RegistrationModal');
-                    LxNotificationService.alert('System Message', data.message, 'Ok', function (answer) { });
+                    LxNotificationService.alert('System Message', data.message, 'Ok', function (answer) {
+                        $scope.hideDiv();
+                    });
                 }
                 else
                     LxNotificationService.error(data.message);
@@ -110,6 +112,22 @@ function IndexController($scope, LxNotificationService, LxDialogService, LxProgr
         }
     };
 
+    $scope.toggle = function () {
+        $("#target").slideToggle(function () {
+            $scope.initUser();
+            $scope.showDiv = false;
+        });
+    };
+
+    $scope.hideDiv = function () {
+        $("#target").slideToggle(function () {
+            $scope.initUser();
+            $scope.showDiv = true;
+        });
+    };
+
     $rootScope.manipulateDOM();
     $scope.initGenderList();
+    $scope.initUser();
+    $("#target").slideToggle();
 };
