@@ -6,11 +6,13 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
             $rootScope.browserWidth = false;
             $scope.loginModalStyle = "padding: 0px 10px 0px 10px";
             $scope.loginModalHeader = "Smile";
+            $scope.forgotPasswordModalHeader = "Smile";
         }
         else {
             $rootScope.browserWidth = true;
             $scope.loginModalStyle = "padding:0px 60px 0px 60px";
             $scope.loginModalHeader = $rootScope.appName + " Login Form";
+            $scope.forgotPasswordModalHeader = $rootScope.appName + " Forgot Password Form";
         }
         if ($rootScope.isLogged)
             $location.path("/User/Index");
@@ -20,7 +22,8 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
         $scope.userInfo = {
             username: null,
             password: null,
-            rememberMe: null
+            rememberMe: null,
+            EmailAddress: null
         };
     };
 
@@ -35,6 +38,10 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
             $scope.userInfo.rememberMe = true;
         }
         LxDialogService.open(dialogId);
+    };
+
+    $scope.emailValidation = function (email) {
+        return /^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$/.test(email);
     };
 
     $scope.closeLogin = function (dialogId) {
@@ -113,4 +120,36 @@ function HomeController(LxProgressService, LxDialogService, LxNotificationServic
         LxNotificationService.info('Hello ' + $rootScope.user.FirstName + '!');
     };
 
+    $scope.forgotPassword = function () {
+        LxDialogService.close('LoginModal');
+        var promise = $interval(function () {
+            $interval.cancel(promise);
+            promise = undefined;
+            LxDialogService.open('ForgotPasswordModal');
+        }, 600);
+    };
+
+    $scope.closeForgotPassword = function () {
+        LxDialogService.close('ForgotPasswordModal');
+    };
+
+    $scope.forgotPasswordRequest = function (dialogId) {
+        LxProgressService.circular.show('#5fa2db', '#fprogress');
+        $http.get("/api/Users?emailAddress=" + $scope.userInfo.EmailAddress)
+        .success(function (response, status) {
+            if (response.status == "SUCCESS") {
+                LxProgressService.circular.hide();
+                LxNotificationService.alert('System Message', response.message, 'Ok', function (answer) { });
+                LxDialogService.close(dialogId);
+            }
+            else {
+                LxProgressService.circular.hide();
+                LxNotificationService.error(response.message);
+            }
+        })
+        .error(function (error, status) {
+            LxProgressService.circular.hide();
+            LxNotificationService.error(status);
+        })
+    }
 };

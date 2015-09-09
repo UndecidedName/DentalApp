@@ -106,6 +106,7 @@ function UserIndexController($scope, LxNotificationService, LxDialogService, LxP
             else if (!(/^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$/.test($scope.userInfo.EmailAddress)))
                 LxNotificationService.error('Invalid Email Address.');
             else {
+                LxProgressService.circular.show('#5fa2db', '#progress');
                 $scope.userInfo.CivilStatusId = $scope.userInfo.CivilStatusHolder.Id;
                 console.log($scope.userInfo.CivilStatusId);
                 $scope.userInfo.Gender = $scope.userInfo.GenderDesc.Value;
@@ -115,11 +116,15 @@ function UserIndexController($scope, LxNotificationService, LxDialogService, LxP
                         $scope.submitButtonText = "Edit";
                         $scope.viewOnly = true;
                         $rootScope.user = angular.copy($scope.userInfo);
+                        LxProgressService.circular.hide();
                     }
-                    else
+                    else {
+                        LxProgressService.circular.hide();
                         LxNotificationService.error(response.message);
+                    }
                 })
                 .error(function (error, status) {
+                    LxProgressService.circular.hide();
                     LxNotificationService.error(status);
                 })
             }

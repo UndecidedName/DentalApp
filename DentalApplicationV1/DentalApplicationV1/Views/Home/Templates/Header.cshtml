@@ -96,10 +96,38 @@
                     <label for="rememberMe" class="checkbox__label">Remember me</label>
                 </div>
             </div>
+            <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
+                Forgot Password?Click<a class="forgotPass" ng-click="forgotPassword()">here.</a>
+            </div>
         </div>
         <div class="dialog__actions">
             <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeLogin('LoginModal')">Cancel</button>
             <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="loginRequest('LoginModal')">Login</button>
+        </div>
+    </lx-dialog>
+
+    <!--Forgot Password Modal Form-->
+    <lx-dialog class="dialog dialog--s" id="ForgotPasswordModal" auto-close="true" onscrollend="scrollEndDialog()">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title text-center">
+                    {{forgotPasswordModalHeader}}
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <div id="fprogress"></div>
+            <div flex-container="row" flex-gutter="24" style="{{loginModalStyle}}">
+                <div flex-item>
+                    <lx-text-field label="Email Address" error="!emailValidation(userInfo.EmailAddress)">
+                        <input type="text" name="EmailAddress" ng-model="userInfo.EmailAddress" pattern=".{4,50}">
+                    </lx-text-field>
+                </div>
+            </div>
+        </div>
+        <div class="dialog__actions">
+            <button class="btn btn--m btn--black btn--flat" lx-ripple ng-click="closeForgotPassword()">Cancel</button>
+            <button class="btn btn--m btn--blue btn--raised" lx-ripple ng-click="forgotPasswordRequest('ForgotPasswordModal')">Submit</button>
         </div>
     </lx-dialog>
 </header>

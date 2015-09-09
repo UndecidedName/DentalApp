@@ -191,6 +191,45 @@ namespace DentalApplicationV1.APIController
             else
                 return Ok();
         }
+        // GET: api/Users?emailAddress=xxx@xxxxx.xxx
+        public IHttpActionResult GetUser(string emailAddress) {
+            response.status = "FAILURE";
+            try
+            {
+                var searchUser = db.UserInformations.Where(u => u.EmailAddress.ToLower().Equals(emailAddress.ToLower()))
+                    .Include(ui => ui.User)
+                    .ToArray();
+                if (searchUser.Length > 0)
+                {
+                    String header, body, footer;
+                    //send email
+                    GMailer.GmailUsername = "smilefairies2015@gmail.com";
+                    GMailer.GmailPassword = "123smile";
+
+                    GMailer mailer = new GMailer();
+                    header = "Hi " + searchUser[0].FirstName + "<br><br>" + "Good Day! <br> <br>";
+                    body = "Account Information <br>";
+                    body += "Username: " + searchUser[0].User.Username + "<br>";
+                    body += "Password: " + searchUser[0].User.Password + "<br> <br>";
+                    footer = "Yours Truly, <br> Smile Fairies Dental Suites";
+                    mailer.ToEmail = searchUser[0].EmailAddress;
+                    mailer.Subject = "Account Information";
+                    mailer.Body = header + body + footer;
+                    mailer.IsHtml = true;
+                    mailer.Send();
+
+                    response.status = "SUCCESS";
+                    response.message = "An email has been sent to your email address.";
+                }
+                else
+                    response.message = "User doesn't exist.";
+            }
+            catch (Exception e)
+            {
+                response.message = e.Message.ToString();
+            }
+            return Ok(response);
+        }
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
