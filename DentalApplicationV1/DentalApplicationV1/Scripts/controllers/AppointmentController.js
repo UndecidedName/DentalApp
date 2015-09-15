@@ -113,8 +113,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                 $scope.dataDefinitionMaster.DataItem.ScheduleMasterId = $scope.dataDefinitionScheduleDateList.DataItem.Id;
                 $scope.dataDefinitionMaster.DataItem.ScheduleDetailId = $scope.dataDefinitionScheduleTimeList.DataItem.Id;
                 $scope.dataDefinitionMaster.DataItem.ScheduleDate = $scope.dataDefinitionScheduleDateList.DataItem.Date;
-                var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionScheduleTimeList.DataItem.FromTime;
-                var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionScheduleTimeList.DataItem.ToTime;
+                var startTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionScheduleTimeList.DataItem.FromTime;
+                var endTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionScheduleTimeList.DataItem.ToTime;
                 startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                 endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                 $scope.dataDefinitionMaster.DataItem.ScheduleTime = startTime + " - " + endTime;
@@ -156,7 +156,7 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
             "Header": ['Date', 'Start Time', 'End Time', 'Status', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
             "Keys": ['ScheduleDate', 'StartTime', 'EndTime', 'Status', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['ScheduleDate-Date', 'DentistName-Dentist Name'],
-            "Type": ['Date', 'Time', 'Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'DateTime'],
+            "Type": ['Date', 'Formatted-Time', 'Formatted-Time', 'Status-Approver', 'String', 'String-Default', 'String-Default', 'DateTime'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &userId=' + $rootScope.user.Id,//get
@@ -258,8 +258,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                                         $scope.data[0].User.UserInformations[0].LastName;
                         var gender = ($scope.data[0].User.UserInformations[0].Gender == 'M' ? 'his' : 'her');
                         var date = $filter('date')($scope.data[0].ScheduleMaster.Date, "MM/dd/yyyy");
-                        var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
-                        var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
+                        var startTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
+                        var endTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
                         startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                         endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                         $scope.notification.Description = patient + " has cancelled " + gender + " appointment on " + date + " at " + startTime + " - " + endTime + ".";
@@ -274,8 +274,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
                                                                               $scope.dataDefinitionMaster.DataList[i].ScheduleMaster.UserInformation.MiddleName + " " +
                                                                               $scope.dataDefinitionMaster.DataList[i].ScheduleMaster.UserInformation.LastName;
                         $scope.dataDefinitionMaster.DataList[i].ScheduleDate = $filter('date')($scope.dataDefinitionMaster.DataList[i].ScheduleMaster.Date, "MM/dd/yyyy");
-                        var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " +  $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.FromTime;
-                        var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.ToTime;
+                        var startTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.FromTime;
+                        var endTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.ToTime;
                         startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                         endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                         $scope.dataDefinitionMaster.DataList[i].StartTime = startTime;
@@ -355,6 +355,8 @@ function AppointmentController($scope, LxNotificationService, LxDialogService, L
         //Check if input doesn't contain special character
         $("#message ").keypress(function (key) {
             if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else if (key.charCode == 46 || key.charCode == 0)
                 return true;
             else {
                 if (!(key.charCode < 48 || key.charCode > 57))

@@ -388,7 +388,7 @@
                                 $scope.filteredValue = "Active";
                             break;
                         case 'Formatted-Time':
-                            var day = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + value;
+                            var day = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + value;
                             $scope.filteredValue = $filter('date')(new Date(day).getTime(), "hh:mm a");
                             break;
                         case 'Password':

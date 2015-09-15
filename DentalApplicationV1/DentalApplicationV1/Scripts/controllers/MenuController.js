@@ -259,6 +259,8 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
         $("#url").keypress(function (key) {
             if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
                 return true;
+            else if (key.charCode == 46 || key.charCode == 0)
+                return true;
             else {
                 if (!(key.charCode < 48 || key.charCode > 57))
                     return true;

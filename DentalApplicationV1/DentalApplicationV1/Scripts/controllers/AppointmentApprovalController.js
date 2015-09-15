@@ -53,7 +53,7 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
             "Header": ['Date', 'Start Time', 'End Time', 'Status', 'Patient Name', 'Dentist Name', 'Message', 'Remarks', 'Remarks Date', 'No'],
             "Keys": ['ScheduleDate', 'StartTime', 'EndTime', 'Status', 'PatientName', 'DentistName', 'Message', 'Remarks', 'TransactionDate'],
             "RequiredFields": ['Remarks-Remarks'],
-            "Type": ['Date', 'Time', 'Time', 'Status-Approver', 'String', 'String', 'String-Default', 'String-Default', 'Date'],
+            "Type": ['Date', 'Formatted-Time', 'Formatted-Time', 'Status-Approver', 'String', 'String', 'String-Default', 'String-Default', 'Date'],
             "DataList": $scope.appointment,
             "CurrentLength": $scope.appointment.length,
             "APIUrl": ['/api/Appointments?length= &type=AllAppointments',//get
@@ -129,8 +129,8 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                     };
                     $scope.data     = angular.copy($scope.dataDefinitionMaster.ServerData[0].objParam1);
                     var date        = $filter('date')($scope.data[0].ScheduleMaster.Date, "MM/dd/yyyy");
-                    var startTime   = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
-                    var endTime     = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
+                    var startTime   = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.FromTime;
+                    var endTime     = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.data[0].ScheduleDetail.ToTime;
                     startTime       = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                     endTime         = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                     $scope.notification.Description = "Your appointment on " + date + " at " + startTime + " - "
@@ -147,8 +147,8 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                                                                               $scope.dataDefinitionMaster.DataList[i].User.UserInformations[0].MiddleName + " " +
                                                                               $scope.dataDefinitionMaster.DataList[i].User.UserInformations[0].LastName;
                         $scope.dataDefinitionMaster.DataList[i].ScheduleDate = $filter('date')($scope.dataDefinitionMaster.DataList[i].ScheduleMaster.Date, "MM/dd/yyyy");
-                        var startTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.FromTime;
-                        var endTime = new Date().getDate() + " " + new Date().getMonth() + " " + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.ToTime;
+                        var startTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.FromTime;
+                        var endTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() +" " +  $scope.dataDefinitionMaster.DataList[i].ScheduleDetail.ToTime;
                         startTime = $filter('date')(new Date(startTime).getTime(), "hh:mm a");
                         endTime = $filter('date')(new Date(endTime).getTime(), "hh:mm a");
                         $scope.dataDefinitionMaster.DataList[i].StartTime = startTime;
@@ -222,6 +222,30 @@ function NotificationController($scope, LxNotificationService, LxDialogService, 
                 }
             }
         };
+    };
+
+    //Find specific character
+    $scope.findCharacter = function (v, c) {
+        for (var i = 0; i < v.length; i++) {
+            if (v.charAt(i) == c)
+                return true;
+        }
+        return false;
+    };
+
+    $scope.filterCharacters = function () {
+        //Check if input doesn't contain special character
+        $("#remarks ").keypress(function (key) {
+            if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else if (key.charCode == 46 || key.charCode == 0)
+                return true;
+            else {
+                if (!(key.charCode < 48 || key.charCode > 57))
+                    return true;
+            }
+            return false;
+        });
     };
 
     $scope.loadMaster();
