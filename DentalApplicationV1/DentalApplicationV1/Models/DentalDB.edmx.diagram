@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="DentalDBModel.Appointment" Width="1.5" PointX="8.25" PointY="14" />
         <EntityTypeShape EntityType="DentalDBModel.CivilStatu" Width="1.5" PointX="6" PointY="21.625" />
         <EntityTypeShape EntityType="DentalDBModel.DentalMenu" Width="1.5" PointX="0.75" PointY="12.5" />
-        <EntityTypeShape EntityType="DentalDBModel.DiagnosisType" Width="1.5" PointX="10.5" PointY="10.625" />
         <EntityTypeShape EntityType="DentalDBModel.ImageUrl" Width="1.5" PointX="9" PointY="26.5" />
         <EntityTypeShape EntityType="DentalDBModel.Log" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DentalDBModel.Message" Width="1.5" PointX="5.25" PointY="17.5" />
@@ -37,7 +36,6 @@
         <AssociationConnector Association="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" />
         <AssociationConnector Association="DentalDBModel.FK_UserInformation_CivilStatusId" />
         <AssociationConnector Association="DentalDBModel.Fk_UserMenu_MenuId" />
-        <AssociationConnector Association="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" />
         <AssociationConnector Association="DentalDBModel.FK_MouthType_ImageUrlId" />
         <AssociationConnector Association="DentalDBModel.FK_PatientTooth_ImageUrlId" />
         <AssociationConnector Association="DentalDBModel.FK_Tooth_ImageUrlId" />

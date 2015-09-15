@@ -5,45 +5,55 @@
         <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
             <div flex-item>
                 <lx-text-field label="First Name" error="validateInput(userInfo.FirstName)">
-                    <input type="text"
+                    <input id="firstname"
+                           type="text"
                            name="FirstName"
                            ng-model="userInfo.FirstName"
                            pattern=".{4,50}"
-                           ng-disabled="viewOnly">
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Middle Name" error="validateInput(userInfo.MiddleName)">
-                    <input type="text"
+                    <input id="middlename"
+                           type="text"
                            name="MiddleName"
                            ng-model="userInfo.MiddleName"
-                           ng-disabled="viewOnly">
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Last Name" error="validateInput(userInfo.LastName)">
-                    <input type="text"
+                    <input id="lastname"
+                           type="text"
                            name="LastName"
                            ng-model="userInfo.LastName"
-                           ng-disabled="viewOnly">
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()">
                 </lx-text-field>
             </div>
         </div>
         <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
             <div flex-item>
                 <lx-text-field label="Height">
-                    <input type="number"
+                    <input id="height"
+                           type="text"
                            name="Height"
                            ng-model="userInfo.Height"
-                           ng-disabled="viewOnly">
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Weight">
-                    <input type="number"
+                    <input id="weight"
+                           type="text"
                            name="Weight"
                            ng-model="userInfo.Weight"
-                           ng-disabled="viewOnly">
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
@@ -82,20 +92,24 @@
             </div>
             <div flex-item>
                 <lx-text-field label="Occupation">
-                    <input type="text"
+                    <input id="occupation"
+                           type="text"
                            name="Occupation"
                            ng-model="userInfo.Occupation"
-                           ng-disabled="viewOnly">
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()">
                 </lx-text-field>
             </div>
         </div>
         <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
             <div flex-item>
                 <lx-text-field label="Address">
-                    <input type="text"
+                    <input id="address"
+                           type="text"
                            name="Address"
                            ng-model="userInfo.Address"
-                           ng-disabled="viewOnly" />
+                           ng-disabled="viewOnly"
+                           ng-click="filterCharacters()" />
                 </lx-text-field>
             </div>
         </div>
@@ -109,7 +123,8 @@
             </div>
             <div flex-item>
                 <lx-text-field label="Contact Number">
-                    <input type="text"
+                    <input id="contactno"
+                           type="text"
                            name="ContactNo"
                            ng-model="userInfo.ContactNo"
                            ng-disabled="viewOnly">

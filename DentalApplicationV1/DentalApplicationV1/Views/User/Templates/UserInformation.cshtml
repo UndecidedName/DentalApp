@@ -11,7 +11,8 @@
         <div id="progress"></div>
         <div flex-item>
             <lx-text-field label="Username" error="validateInput(dataDefinitionMaster.DataItem.Username)">
-                <input type="text"
+                <input id="username"
+                       type="text"
                        name="Username"
                        ng-model="dataDefinitionMaster.DataItem.Username"
                        pattern=".{4,50}"
@@ -20,7 +21,8 @@
         </div>
         <div flex-item>
             <lx-text-field label="Password" error="validateInput(dataDefinitionMaster.DataItem.Password)">
-                <input type="password"
+                <input id="password"
+                       type="password"
                        name="Password"
                        ng-model="dataDefinitionMaster.DataItem.Password"
                        ng-disabled="false">
@@ -42,27 +44,33 @@
         <div id="progress"></div>
         <div flex-item>
             <lx-text-field label="First Name" error="validateInput(dataDefinitionMaster.DataItem.FirstName)">
-                <input type="text"
+                <input id="firstname"
+                       type="text"
                        name="FirstName"
                        ng-model="dataDefinitionMaster.DataItem.FirstName"
                        pattern=".{4,50}"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
         <div flex-item>
             <lx-text-field label="Middle Name" error="validateInput(dataDefinitionMaster.DataItem.MiddleName)">
-                <input type="text"
+                <input id="middlename"
+                       type="text"
                        name="MiddleName"
                        ng-model="dataDefinitionMaster.DataItem.MiddleName"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
         <div flex-item>
             <lx-text-field label="Last Name" error="validateInput(dataDefinitionMaster.DataItem.LastName)">
-                <input type="text"
+                <input id="lastname"
+                       type="text"
                        name="LastName"
                        ng-model="dataDefinitionMaster.DataItem.LastName"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
     </div>
@@ -70,18 +78,22 @@
         <div id="progress"></div>
         <div flex-item>
             <lx-text-field label="Height">
-                <input type="number"
+                <input id="height"
+                       type="text"
                        name="Height"
                        ng-model="dataDefinitionMaster.DataItem.Height"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
         <div flex-item>
             <lx-text-field label="Weight">
-                <input type="number"
+                <input id="weight"
+                       type="text"
                        name="Weight"
                        ng-model="dataDefinitionMaster.DataItem.Weight"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
         <div flex-item>
@@ -120,17 +132,20 @@
         </div>
         <div flex-item>
             <lx-text-field label="Occupation">
-                <input type="text"
+                <input id="occupation"
+                       type="text"
                        name="Occupation"
                        ng-model="dataDefinitionMaster.DataItem.Occupation"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
     </div>
     <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
         <div flex-item>
             <lx-text-field label="Address">
-                <input type="text"
+                <input id="address" 
+                       type="text"
                        name="Address"
                        ng-model="dataDefinitionMaster.DataItem.Address"
                        ng-disabled="false" />
@@ -148,10 +163,12 @@
         </div>
         <div flex-item>
             <lx-text-field label="Contact Number">
-                <input type="text"
+                <input id="contactno"
+                       type="text"
                        name="ContactNo"
                        ng-model="dataDefinitionMaster.DataItem.ContactNo"
-                       ng-disabled="false">
+                       ng-disabled="false"
+                       ng-change="filterCharacters()">
             </lx-text-field>
         </div>
         <div flex-item style="{{checkBoxStyle}}">

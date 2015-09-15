@@ -30,7 +30,6 @@ namespace DentalApplicationV1.Models
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<CivilStatu> CivilStatus { get; set; }
         public DbSet<DentalMenu> DentalMenus { get; set; }
-        public DbSet<DiagnosisType> DiagnosisTypes { get; set; }
         public DbSet<ImageUrl> ImageUrls { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<Message> Messages { get; set; }

@@ -426,6 +426,19 @@ function SpecialAppointmentsController($scope, LxNotificationService, LxDialogSe
         };
     };
 
+    $scope.filterCharacters = function () {
+        //Check if input doesn't contain special character
+        $("#remarks ").keypress(function (key) {
+            if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else {
+                if (!(key.charCode < 48 || key.charCode > 57))
+                    return true;
+            }
+            return false;
+        });
+    };
+
     $rootScope.manipulateDOM();
     $scope.loadMaster();
     $scope.getScheduleDateList();

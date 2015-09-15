@@ -235,6 +235,38 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
         };
     };
 
+    //Find specific character
+    $scope.findCharacter = function (v, c) {
+        for (var i = 0; i < v.length; i++) {
+            if (v.charAt(i) == c)
+                return true;
+        }
+        return false;
+    };
+
+    $scope.filterCharacters = function () {
+        //Check if input contains letter only
+        $("#name,#description").keypress(function (key) {
+            if ((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)) return false;
+        });
+
+        //Check if input is whole number
+        $('#sequence').keypress(function (key) {
+            if (key.charCode < 48 || key.charCode > 57) return false;
+        });
+
+        //Check if input doesn't contain special character
+        $("#url").keypress(function (key) {
+            if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else {
+                if (!(key.charCode < 48 || key.charCode > 57))
+                    return true;
+            }
+            return false;
+        });
+    };
+
     $scope.loadMaster();
     $scope.getMenuList();
 };

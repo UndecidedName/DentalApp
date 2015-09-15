@@ -41,15 +41,6 @@
     <Property Name="SeqNo" Type="int" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="DiagnosisType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="200" />
-    <Property Name="Status" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="ImageUrl">
     <Key>
       <PropertyRef Name="Id" />
@@ -125,7 +116,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PDHMasterId" Type="int" Nullable="false" />
-    <Property Name="DiagnosisTypeId" Type="int" />
+    <Property Name="Diagnosis" Type="varchar" MaxLength="500" />
     <Property Name="TreatmentTypeId" Type="int" />
     <Property Name="DiagnosedTeeth" Type="varchar" MaxLength="200" />
   </EntityType>
@@ -139,6 +130,7 @@
     <Property Name="Fee" Type="money" Nullable="false" />
     <Property Name="Paid" Type="money" />
     <Property Name="Balance" Type="money" />
+    <Property Name="Notes" Type="text" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatientMedicalHistory">
@@ -407,18 +399,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-    <End Role="DiagnosisType" Type="Self.DiagnosisType" Multiplicity="0..1" />
-    <End Role="PatientDiagnosisHistoryDetail" Type="Self.PatientDiagnosisHistoryDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DiagnosisType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PatientDiagnosisHistoryDetail">
-        <PropertyRef Name="DiagnosisTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PatientDiagnosisHistoryDetail_PDHMasterId">
     <End Role="PatientDiagnosisHistoryMaster" Type="Self.PatientDiagnosisHistoryMaster" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -676,7 +656,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CivilStatus" EntityType="Self.CivilStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DentalMenu" EntityType="Self.DentalMenu" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DiagnosisType" EntityType="Self.DiagnosisType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageUrl" EntityType="Self.ImageUrl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
@@ -752,10 +731,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     <AssociationSet Name="FK_PatientDentalHistory_PatientId" Association="Self.FK_PatientDentalHistory_PatientId">
       <End Role="User" EntitySet="User" />
       <End Role="PatientDentalHistory" EntitySet="PatientDentalHistory" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" Association="Self.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-      <End Role="DiagnosisType" EntitySet="DiagnosisType" />
-      <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_PDHMasterId" Association="Self.FK_PatientDiagnosisHistoryDetail_PDHMasterId">
       <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMaster" />

@@ -13,6 +13,7 @@ function IndexController($scope, LxNotificationService, LxDialogService, LxProgr
             $scope.registrationHeader = $rootScope.appName + " Registration Form";
         }
     }, 100);
+
     $scope.lock = false;
     $scope.showDiv = true;
     $scope.initUser = function () {
@@ -127,7 +128,37 @@ function IndexController($scope, LxNotificationService, LxDialogService, LxProgr
     };
 
     $rootScope.manipulateDOM();
+
     $scope.initGenderList();
+
     $scope.initUser();
+
+    //Find specific character
+    $scope.findCharacter = function (v, c) {
+        for (var i = 0; i < v.length; i++) {
+            if (v.charAt(i) == c)
+                return true;
+        }
+        return false;
+    };
+
+    $scope.filterCharacters = function () {
+        //Check if input contains letter only
+        $("#firstname,#lastname,#middlename").keypress(function (key) {
+            if ((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)) return false;
+        });
+
+        //Check if input doesn't contain special character
+        $("#password,#vpassword,#username").keypress(function (key) {
+            if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else {
+                if (!(key.charCode < 48 || key.charCode > 57))
+                    return true;
+            }
+            return false;
+        });
+    };
+
     $("#target").slideToggle();
 };

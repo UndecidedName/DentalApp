@@ -46,15 +46,6 @@
           <Property Name="SeqNo" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="DiagnosisType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="200" />
-          <Property Name="Status" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="ImageUrl">
           <Key>
             <PropertyRef Name="Id" />
@@ -130,7 +121,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PDHMasterId" Type="int" Nullable="false" />
-          <Property Name="DiagnosisTypeId" Type="int" />
+          <Property Name="Diagnosis" Type="varchar" MaxLength="500" />
           <Property Name="TreatmentTypeId" Type="int" />
           <Property Name="DiagnosedTeeth" Type="varchar" MaxLength="200" />
         </EntityType>
@@ -144,6 +135,7 @@
           <Property Name="Fee" Type="money" Nullable="false" />
           <Property Name="Paid" Type="money" />
           <Property Name="Balance" Type="money" />
+          <Property Name="Notes" Type="text" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientMedicalHistory">
@@ -412,18 +404,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-          <End Role="DiagnosisType" Type="Self.DiagnosisType" Multiplicity="0..1" />
-          <End Role="PatientDiagnosisHistoryDetail" Type="Self.PatientDiagnosisHistoryDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DiagnosisType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientDiagnosisHistoryDetail">
-              <PropertyRef Name="DiagnosisTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PatientDiagnosisHistoryDetail_PDHMasterId">
           <End Role="PatientDiagnosisHistoryMaster" Type="Self.PatientDiagnosisHistoryMaster" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -681,7 +661,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CivilStatus" EntityType="Self.CivilStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DentalMenu" EntityType="Self.DentalMenu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DiagnosisType" EntityType="Self.DiagnosisType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageUrl" EntityType="Self.ImageUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
@@ -757,10 +736,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <AssociationSet Name="FK_PatientDentalHistory_PatientId" Association="Self.FK_PatientDentalHistory_PatientId">
             <End Role="User" EntitySet="User" />
             <End Role="PatientDentalHistory" EntitySet="PatientDentalHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" Association="Self.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-            <End Role="DiagnosisType" EntitySet="DiagnosisType" />
-            <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_PDHMasterId" Association="Self.FK_PatientDiagnosisHistoryDetail_PDHMasterId">
             <End Role="PatientDiagnosisHistoryMaster" EntitySet="PatientDiagnosisHistoryMaster" />
@@ -852,7 +827,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySet Name="Appointments" EntityType="DentalDBModel.Appointment" />
           <EntitySet Name="CivilStatus" EntityType="DentalDBModel.CivilStatu" />
           <EntitySet Name="DentalMenus" EntityType="DentalDBModel.DentalMenu" />
-          <EntitySet Name="DiagnosisTypes" EntityType="DentalDBModel.DiagnosisType" />
           <EntitySet Name="ImageUrls" EntityType="DentalDBModel.ImageUrl" />
           <EntitySet Name="Logs" EntityType="DentalDBModel.Log" />
           <EntitySet Name="Messages" EntityType="DentalDBModel.Message" />
@@ -897,10 +871,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <AssociationSet Name="Fk_UserMenu_MenuId" Association="DentalDBModel.Fk_UserMenu_MenuId">
             <End Role="DentalMenu" EntitySet="DentalMenus" />
             <End Role="UserMenu" EntitySet="UserMenus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" Association="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-            <End Role="DiagnosisType" EntitySet="DiagnosisTypes" />
-            <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_MouthType_ImageUrlId" Association="DentalDBModel.FK_MouthType_ImageUrlId">
             <End Role="ImageUrl" EntitySet="ImageUrls" />
@@ -1030,16 +1000,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="UserMenus" Relationship="DentalDBModel.Fk_UserMenu_MenuId" FromRole="DentalMenu" ToRole="UserMenu" />
           <Property Name="SeqNo" Type="Int32" />
         </EntityType>
-        <EntityType Name="DiagnosisType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" FromRole="DiagnosisType" ToRole="PatientDiagnosisHistoryDetail" />
-        </EntityType>
         <EntityType Name="ImageUrl">
           <Key>
             <PropertyRef Name="Id" />
@@ -1125,12 +1085,11 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PDHMasterId" Type="Int32" Nullable="false" />
-          <Property Name="DiagnosisTypeId" Type="Int32" />
           <Property Name="TreatmentTypeId" Type="Int32" />
           <Property Name="DiagnosedTeeth" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DiagnosisType" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="DiagnosisType" />
           <NavigationProperty Name="PatientDiagnosisHistoryMaster" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryDetail" ToRole="PatientDiagnosisHistoryMaster" />
           <NavigationProperty Name="TreatmentType" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_TreatmentTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="TreatmentType" />
+          <Property Name="Diagnosis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PatientDiagnosisHistoryMaster">
           <Key>
@@ -1146,6 +1105,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="Appointment" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="PatientDiagnosisHistoryMaster" ToRole="Appointment" />
           <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryMaster" ToRole="PatientDiagnosisHistoryDetail" />
           <NavigationProperty Name="User" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_PatientId" FromRole="PatientDiagnosisHistoryMaster" ToRole="User" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PatientMedicalHistory">
           <Key>
@@ -1435,18 +1395,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Principal>
             <Dependent Role="UserMenu">
               <PropertyRef Name="MenuId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-          <End Type="DentalDBModel.DiagnosisType" Role="DiagnosisType" Multiplicity="0..1" />
-          <End Type="DentalDBModel.PatientDiagnosisHistoryDetail" Role="PatientDiagnosisHistoryDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DiagnosisType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientDiagnosisHistoryDetail">
-              <PropertyRef Name="DiagnosisTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1755,16 +1703,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DiagnosisTypes">
-            <EntityTypeMapping TypeName="DentalDBModel.DiagnosisType">
-              <MappingFragment StoreEntitySet="DiagnosisType">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ImageUrls">
             <EntityTypeMapping TypeName="DentalDBModel.ImageUrl">
               <MappingFragment StoreEntitySet="ImageUrl">
@@ -1843,9 +1781,9 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="PatientDiagnosisHistoryDetails">
             <EntityTypeMapping TypeName="DentalDBModel.PatientDiagnosisHistoryDetail">
               <MappingFragment StoreEntitySet="PatientDiagnosisHistoryDetail">
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
                 <ScalarProperty Name="DiagnosedTeeth" ColumnName="DiagnosedTeeth" />
                 <ScalarProperty Name="TreatmentTypeId" ColumnName="TreatmentTypeId" />
-                <ScalarProperty Name="DiagnosisTypeId" ColumnName="DiagnosisTypeId" />
                 <ScalarProperty Name="PDHMasterId" ColumnName="PDHMasterId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1854,6 +1792,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <EntitySetMapping Name="PatientDiagnosisHistoryMasters">
             <EntityTypeMapping TypeName="DentalDBModel.PatientDiagnosisHistoryMaster">
               <MappingFragment StoreEntitySet="PatientDiagnosisHistoryMaster">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
                 <ScalarProperty Name="Paid" ColumnName="Paid" />

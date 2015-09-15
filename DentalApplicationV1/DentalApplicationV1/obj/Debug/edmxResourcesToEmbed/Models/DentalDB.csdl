@@ -5,7 +5,6 @@
     <EntitySet Name="Appointments" EntityType="DentalDBModel.Appointment" />
     <EntitySet Name="CivilStatus" EntityType="DentalDBModel.CivilStatu" />
     <EntitySet Name="DentalMenus" EntityType="DentalDBModel.DentalMenu" />
-    <EntitySet Name="DiagnosisTypes" EntityType="DentalDBModel.DiagnosisType" />
     <EntitySet Name="ImageUrls" EntityType="DentalDBModel.ImageUrl" />
     <EntitySet Name="Logs" EntityType="DentalDBModel.Log" />
     <EntitySet Name="Messages" EntityType="DentalDBModel.Message" />
@@ -50,10 +49,6 @@
     <AssociationSet Name="Fk_UserMenu_MenuId" Association="DentalDBModel.Fk_UserMenu_MenuId">
       <End Role="DentalMenu" EntitySet="DentalMenus" />
       <End Role="UserMenu" EntitySet="UserMenus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" Association="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-      <End Role="DiagnosisType" EntitySet="DiagnosisTypes" />
-      <End Role="PatientDiagnosisHistoryDetail" EntitySet="PatientDiagnosisHistoryDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_MouthType_ImageUrlId" Association="DentalDBModel.FK_MouthType_ImageUrlId">
       <End Role="ImageUrl" EntitySet="ImageUrls" />
@@ -183,16 +178,6 @@
     <NavigationProperty Name="UserMenus" Relationship="DentalDBModel.Fk_UserMenu_MenuId" FromRole="DentalMenu" ToRole="UserMenu" />
     <Property Name="SeqNo" Type="Int32" />
   </EntityType>
-  <EntityType Name="DiagnosisType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" FromRole="DiagnosisType" ToRole="PatientDiagnosisHistoryDetail" />
-  </EntityType>
   <EntityType Name="ImageUrl">
     <Key>
       <PropertyRef Name="Id" />
@@ -278,12 +263,11 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PDHMasterId" Type="Int32" Nullable="false" />
-    <Property Name="DiagnosisTypeId" Type="Int32" />
     <Property Name="TreatmentTypeId" Type="Int32" />
     <Property Name="DiagnosedTeeth" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="DiagnosisType" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="DiagnosisType" />
     <NavigationProperty Name="PatientDiagnosisHistoryMaster" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryDetail" ToRole="PatientDiagnosisHistoryMaster" />
     <NavigationProperty Name="TreatmentType" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_TreatmentTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="TreatmentType" />
+    <Property Name="Diagnosis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PatientDiagnosisHistoryMaster">
     <Key>
@@ -299,6 +283,7 @@
     <NavigationProperty Name="Appointment" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_AppointmentId" FromRole="PatientDiagnosisHistoryMaster" ToRole="Appointment" />
     <NavigationProperty Name="PatientDiagnosisHistoryDetails" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryMaster" ToRole="PatientDiagnosisHistoryDetail" />
     <NavigationProperty Name="User" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryMaster_PatientId" FromRole="PatientDiagnosisHistoryMaster" ToRole="User" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PatientMedicalHistory">
     <Key>
@@ -588,18 +573,6 @@
       </Principal>
       <Dependent Role="UserMenu">
         <PropertyRef Name="MenuId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId">
-    <End Type="DentalDBModel.DiagnosisType" Role="DiagnosisType" Multiplicity="0..1" />
-    <End Type="DentalDBModel.PatientDiagnosisHistoryDetail" Role="PatientDiagnosisHistoryDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DiagnosisType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PatientDiagnosisHistoryDetail">
-        <PropertyRef Name="DiagnosisTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

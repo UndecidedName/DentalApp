@@ -4,34 +4,34 @@
         <div flex-container="row" flex-gutter="24">
             <div flex-item>
                 <lx-text-field label="Username" error="validateInput(userInfo.User.Username)">
-                    <input type="text" name="Username" ng-model="userInfo.User.Username" pattern=".{4,50}">
+                    <input id="username" type="text" name="Username" ng-model="userInfo.User.Username" pattern=".{4,50}" ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Password" error="validateInput(userInfo.User.Password)">
-                    <input type="password" name="Password" ng-model="userInfo.User.Password" pattern=".{4,50}">
+                    <input id="password" type="password" name="Password" ng-model="userInfo.User.Password" pattern=".{4,50}" ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Verify Password" error="validateInput(userInfo.vpassword)">
-                    <input type="password" name="Password" ng-model="userInfo.vpassword" pattern=".{4,50}">
+                    <input id="vpassword" type="password" name="Password" ng-model="userInfo.vpassword" pattern=".{4,50}" ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
         </div>
         <div flex-container="row" flex-gutter="24">
             <div flex-item>
                 <lx-text-field label="First Name" error="validateInput(userInfo.FirstName)">
-                    <input type="text" name="FirstName" ng-model="userInfo.FirstName" pattern=".{4,50}">
+                    <input id="firstname" type="text" name="FirstName" ng-model="userInfo.FirstName" pattern=".{4,50}" ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Middle Name" error="validateInput(userInfo.MiddleName)">
-                    <input type="text" name="MiddleName" ng-model="userInfo.MiddleName" pattern=".{4,50}">
+                    <input id="middlename" type="text" name="MiddleName" ng-model="userInfo.MiddleName" pattern=".{4,50}" ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
             <div flex-item>
                 <lx-text-field label="Last Name" error="validateInput(userInfo.LastName)">
-                    <input type="text" name="LastName" ng-model="userInfo.LastName" pattern=".{4,50}">
+                    <input id="lastname" type="text" name="LastName" ng-model="userInfo.LastName" pattern=".{4,50}" ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
         </div>

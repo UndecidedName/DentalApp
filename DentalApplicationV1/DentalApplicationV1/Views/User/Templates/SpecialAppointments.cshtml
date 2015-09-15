@@ -69,10 +69,12 @@
     <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
         <div flex-item>
             <lx-text-field label="Remarks">
-                <input type="text"
+                <input id="remarks"
+                       type="text"
                        name="Remarks"
                        ng-model="dataDefinitionMaster.DataItem.Remarks"
-                       ng-disabled="dataDefinitionMaster.ViewOnly" />
+                       ng-disabled="dataDefinitionMaster.ViewOnly"
+                       ng-click="filterCharacters()" />
             </lx-text-field>
         </div>
     </div>

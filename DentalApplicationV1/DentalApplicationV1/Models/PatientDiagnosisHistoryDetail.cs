@@ -16,11 +16,10 @@ namespace DentalApplicationV1.Models
     {
         public int Id { get; set; }
         public int PDHMasterId { get; set; }
-        public Nullable<int> DiagnosisTypeId { get; set; }
         public Nullable<int> TreatmentTypeId { get; set; }
         public string DiagnosedTeeth { get; set; }
+        public string Diagnosis { get; set; }
     
-        public virtual DiagnosisType DiagnosisType { get; set; }
         public virtual PatientDiagnosisHistoryMaster PatientDiagnosisHistoryMaster { get; set; }
         public virtual TreatmentType TreatmentType { get; set; }
     }

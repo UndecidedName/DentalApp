@@ -149,6 +149,13 @@ function UserTypeController($scope, LxNotificationService, LxDialogService, LxPr
         };
     };
 
+    $scope.filterCharacters = function () {
+        //Check if input contains letter only
+        $("#name,#description").keypress(function (key) {
+            if ((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)) return false;
+        });
+    };
+
     $scope.loadMaster();
 
     $interval(function () {

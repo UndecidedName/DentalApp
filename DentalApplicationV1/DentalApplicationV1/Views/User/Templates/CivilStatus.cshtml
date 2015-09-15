@@ -11,15 +11,18 @@
         <div id="progress"></div>
         <div flex-item style="{{textBoxStyle}}">
             <lx-text-field label="Name" error="validateInput(dataDefinitionMaster.DataItem.Name)">
-                <input type="text"
+                <input id="name"
+                       type="text"
                        name="Name"
                        ng-model="dataDefinitionMaster.DataItem.Name"
-                       ng-disabled="dataDefinitionMaster.ViewOnly"/>
+                       ng-disabled="dataDefinitionMaster.ViewOnly"
+                       ng-change="filterCharacters()" />
             </lx-text-field>
         </div>
         <div flex-item>
             <lx-text-field label="Description">
-                <input type="text"
+                <input id="description"
+                       type="text"
                        name="Description"
                        ng-model="dataDefinitionMaster.DataItem.Description"
                        ng-disabled="dataDefinitionMaster.ViewOnly" />
@@ -37,7 +40,5 @@
                 <label for="Status" class="checkbox__label">{{statusLabel}}</label>
             </div>
         </div>
-    </div>
-    <br />
+    </div><br />
 }
-

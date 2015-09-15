@@ -932,9 +932,6 @@
     <Compile Include="Models\DentalMenu.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DiagnosisType.cs">
-      <DependentUpon>DentalDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GMailer.cs" />
     <Compile Include="Models\ImageUrl.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
@@ -1260,7 +1257,6 @@
     <Content Include="libs\velocity\bower.json" />
     <Content Include="Views\Directive\UserMenu.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Templates\AboutUs.cshtml" />
     <Content Include="Views\Home\Templates\ContactUs.cshtml" />
     <Content Include="Views\Home\Templates\Header.cshtml" />
     <Content Include="Views\Home\Templates\Home.cshtml" />
@@ -1485,6 +1481,7 @@
     <Content Include="Views\User\Verification.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\User\Templates\UserInformation.cshtml" />
+    <Content Include="Views\Home\Templates\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

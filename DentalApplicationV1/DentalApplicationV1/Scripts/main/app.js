@@ -89,7 +89,7 @@
 
 dentalApp.config(function ($stateProvider, $urlRouterProvider) {
     //default view in ui-view
-    $urlRouterProvider.otherwise("/Home/Index");
+    $urlRouterProvider.otherwise("/");
 
     //Home Link
     $stateProvider

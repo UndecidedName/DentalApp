@@ -76,6 +76,52 @@ function UserIndexController($scope, LxNotificationService, LxDialogService, LxP
 
     $scope.userInfo.BirthDate = $filter('date')($scope.userInfo.BirthDate, 'MM-dd-yyyy');
 
+    //Find specific character
+    $scope.findCharacter = function (v, c) {
+        for (var i = 0; i < v.length; i++) {
+            if (v.charAt(i) == c)
+                return true;
+        }
+        return false;
+    };
+
+    $scope.filterCharacters = function () {
+        //Check if input contains letter only
+        $("#firstname,#lastname,#middlename").keypress(function (key) {
+            if ((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)) return false;
+        });
+
+        //Check if input is decimal number only
+        $('#height,#weight').keypress(function (key) {
+            if (key.charCode == 46) {
+                if ($scope.findCharacter(this.value, '.'))
+                    return false;
+                else
+                    return true;
+            }
+            else if (key.charCode < 48 || key.charCode > 57)
+                return false;
+            else
+                return true;
+        });
+
+        //Check if input is whole number
+        $('#contactno').keypress(function (key) {
+            if (key.charCode < 48 || key.charCode > 57) return false;
+        });
+
+        //Check if input doesn't contain special character
+        $("#address,#occupation").keypress(function (key) {
+            if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else {
+                if (!(key.charCode < 48 || key.charCode > 57))
+                    return true;
+            }
+            return false;
+        });
+    };
+
     $scope.submit = function ()
     {
         if ($scope.submitButtonText == "Edit") {

@@ -70,7 +70,6 @@
     <Build Include="dbo\Appointment.sql" />
     <Build Include="dbo\PatientDiagnosisHistoryDetail.sql" />
     <Build Include="dbo\UserType.sql" />
-    <Build Include="dbo\DiagnosisType.sql" />
     <Build Include="dbo\TreatmentType.sql" />
     <Build Include="dbo\MouthType.sql" />
     <Build Include="dbo\Tooth.sql" />

@@ -46,16 +46,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DiagnosisTypes">
-      <EntityTypeMapping TypeName="DentalDBModel.DiagnosisType">
-        <MappingFragment StoreEntitySet="DiagnosisType">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ImageUrls">
       <EntityTypeMapping TypeName="DentalDBModel.ImageUrl">
         <MappingFragment StoreEntitySet="ImageUrl">
@@ -134,9 +124,9 @@
     <EntitySetMapping Name="PatientDiagnosisHistoryDetails">
       <EntityTypeMapping TypeName="DentalDBModel.PatientDiagnosisHistoryDetail">
         <MappingFragment StoreEntitySet="PatientDiagnosisHistoryDetail">
+          <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
           <ScalarProperty Name="DiagnosedTeeth" ColumnName="DiagnosedTeeth" />
           <ScalarProperty Name="TreatmentTypeId" ColumnName="TreatmentTypeId" />
-          <ScalarProperty Name="DiagnosisTypeId" ColumnName="DiagnosisTypeId" />
           <ScalarProperty Name="PDHMasterId" ColumnName="PDHMasterId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -145,6 +135,7 @@
     <EntitySetMapping Name="PatientDiagnosisHistoryMasters">
       <EntityTypeMapping TypeName="DentalDBModel.PatientDiagnosisHistoryMaster">
         <MappingFragment StoreEntitySet="PatientDiagnosisHistoryMaster">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Balance" ColumnName="Balance" />
           <ScalarProperty Name="Paid" ColumnName="Paid" />
