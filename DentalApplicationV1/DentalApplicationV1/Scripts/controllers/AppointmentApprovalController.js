@@ -1,5 +1,5 @@
-﻿dentalApp.controller('AppointmentApprovalController', NotificationController);
-function NotificationController($scope, LxNotificationService, LxDialogService, LxProgressService, $interval, $filter, $http, $rootScope, $compile) {
+﻿dentalApp.controller('AppointmentApprovalController', AppointmentApprovalController);
+function AppointmentApprovalController($scope, LxNotificationService, LxDialogService, LxProgressService, $interval, $filter, $http, $rootScope, $compile) {
     $scope.modelName = "Appointment Approval";
     $scope.showForm = false;
     $scope.appointment = [];

@@ -856,6 +856,7 @@
     <Content Include="Scripts\controllers\IndexController.js" />
     <Content Include="Scripts\controllers\MenuController.js" />
     <Content Include="Scripts\controllers\NotificationController.js" />
+    <Content Include="Scripts\controllers\PDHController.js" />
     <Content Include="Scripts\controllers\ScheduleController.js" />
     <Content Include="Scripts\controllers\SettingController.js" />
     <Content Include="Scripts\controllers\SpecialAppointments.js" />
@@ -886,6 +887,7 @@
     <Compile Include="APIController\CivilStatusController.cs" />
     <Compile Include="APIController\DentalMenusController.cs" />
     <Compile Include="APIController\NotificationsController.cs" />
+    <Compile Include="APIController\PatientDiagnosisHistoryMastersController.cs" />
     <Compile Include="APIController\TreatmentTypesController.cs" />
     <Compile Include="APIController\UserInformationsController.cs" />
     <Compile Include="APIController\ScheduleDetailsController.cs" />
@@ -1482,6 +1484,7 @@
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\User\Templates\UserInformation.cshtml" />
     <Content Include="Views\Home\Templates\AboutUs.cshtml" />
+    <Content Include="Views\User\Templates\PDH.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

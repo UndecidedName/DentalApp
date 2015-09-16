@@ -192,4 +192,9 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "User/Templates/SpecialAppointments",
         controller: "SpecialAppointmentsController"
     })
+    .state('PDH', {
+        url: "/User/Index",
+        templateUrl: "User/Templates/PDH",
+        controller: "PDHController"
+    })
 });

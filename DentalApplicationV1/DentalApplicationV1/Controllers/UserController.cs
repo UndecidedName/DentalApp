@@ -55,6 +55,8 @@ namespace DentalWebApp.Controllers
                     return PartialView("~/Views/User/Templates/TreatmentType.cshtml");
                 case "specialappointments":
                     return PartialView("~/Views/User/Templates/SpecialAppointments.cshtml");
+                case "pdh":
+                    return PartialView("~/Views/User/Templates/PDH.cshtml");
                 default: throw new Exception("template not known");
                     
             }

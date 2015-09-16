@@ -240,6 +240,9 @@ function dirDataModal1() {
                         case 'Number':
                             $scope.filteredValue = value;
                             break;
+                        case 'Decimal':
+                            $scope.filteredValue = $filter('number')(value, 4);
+                            break;
                         case 'Boolean':
                             if (value)
                                 $scope.filteredValue = "Yes";

@@ -6,6 +6,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     $scope.selectedTab = 0;
     
     $scope.dentistInformation = [];
+
     $scope.setSelectedTab = function (index) {
         $scope.selectedTab = index;
     };
