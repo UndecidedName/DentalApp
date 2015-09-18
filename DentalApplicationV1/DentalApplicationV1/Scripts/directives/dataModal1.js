@@ -340,6 +340,7 @@ function dirDataModal1() {
                     $scope.showClose = false;
                 }
             };
+
             //Manage user actions
             $scope.actionForm = function (action) {
                 //It should be outside of the PreAction statement

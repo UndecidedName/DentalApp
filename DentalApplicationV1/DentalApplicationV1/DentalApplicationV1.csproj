@@ -869,6 +869,7 @@
     <Content Include="Scripts\directives\dataGrid1.js" />
     <Content Include="Scripts\directives\dataGrid2.js" />
     <Content Include="Scripts\directives\dataGrid3.js" />
+    <Content Include="Scripts\directives\dataGrid4.js" />
     <Content Include="Scripts\directives\dataModal1.js" />
     <Content Include="Scripts\directives\dentalDirective.js" />
     <Content Include="Scripts\directives\scrollableContainer.js" />
@@ -887,6 +888,7 @@
     <Compile Include="APIController\CivilStatusController.cs" />
     <Compile Include="APIController\DentalMenusController.cs" />
     <Compile Include="APIController\NotificationsController.cs" />
+    <Compile Include="APIController\PatientDiagnosisHistoryDetailsController.cs" />
     <Compile Include="APIController\PatientDiagnosisHistoryMastersController.cs" />
     <Compile Include="APIController\TreatmentTypesController.cs" />
     <Compile Include="APIController\UserInformationsController.cs" />
@@ -1485,6 +1487,7 @@
     <Content Include="Views\User\Templates\UserInformation.cshtml" />
     <Content Include="Views\Home\Templates\AboutUs.cshtml" />
     <Content Include="Views\User\Templates\PDH.cshtml" />
+    <Content Include="Views\Directive\DataGrid4.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

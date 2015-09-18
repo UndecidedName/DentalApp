@@ -3,7 +3,10 @@
 //\*------------------------------------*/
 
 // Checkbox base styles
-.checkbox {}
+.checkbox {
+    min-width: $size-xs;
+    min-height: $size-xs;
+}
 
     // Checkbox input
     .checkbox__input {
@@ -54,6 +57,10 @@
         line-height: $size-xs;
         cursor: pointer;
         @include user-select(none);
+
+        .checkbox--standalone & {
+            padding-left: 0;
+        }
 
         &:before,
         &:after {

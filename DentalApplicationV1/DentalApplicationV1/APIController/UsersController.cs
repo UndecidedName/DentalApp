@@ -60,6 +60,7 @@ namespace DentalApplicationV1.APIController
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(string userinfo, string request)
         {
+            HttpContext.Current.Session.Timeout = 1440;
             var Session = HttpContext.Current.Session;
             string username = "", password = "";
             response.status = "FAILURE";

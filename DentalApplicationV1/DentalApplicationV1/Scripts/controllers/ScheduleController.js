@@ -7,8 +7,29 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     
     $scope.dentistInformation = [];
 
+    $scope.setSelectedTabStyle = function () {
+        var promise = $interval(function () {
+            var element = document.getElementById($scope.tabPages[0]);
+            if (element != null) {
+                element.style.color = "#4FC1E9";
+                $interval.cancel(promise);
+                promise = undefined;
+            }
+        }, 100);
+    };
+
     $scope.setSelectedTab = function (index) {
         $scope.selectedTab = index;
+        for (var i = 0; i < $scope.tabPages.length; i++) {
+            if (i == $scope.selectedTab) {
+                var element = document.getElementById($scope.tabPages[i]);
+                element.style.color = "#4FC1E9";
+            }
+            else {
+                var element = document.getElementById($scope.tabPages[i]);
+                element.style.color = "";
+            }
+        }
     };
 
     $scope.validateInput = function (input) {
@@ -401,4 +422,5 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
     $rootScope.manipulateDOM();
     $scope.getDentistList();
     $scope.loadMaster();
+    $scope.setSelectedTabStyle();
 }

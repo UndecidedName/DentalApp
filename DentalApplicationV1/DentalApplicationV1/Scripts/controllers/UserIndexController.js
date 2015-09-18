@@ -156,7 +156,6 @@ function UserIndexController($scope, LxNotificationService, LxDialogService, LxP
             else {
                 LxProgressService.circular.show('#5fa2db', '#progress');
                 $scope.userInfo.CivilStatusId = $scope.userInfo.CivilStatusHolder.Id;
-                console.log($scope.userInfo.CivilStatusId);
                 $scope.userInfo.Gender = $scope.userInfo.GenderDesc.Value;
                 $http.put("/api/UserInformations/" + $scope.userInfo.Id, $scope.userInfo)
                 .success(function (response, status) {

@@ -1,25 +1,50 @@
 ﻿dentalApp.controller('PDHController', PDHController);
 function PDHController($scope, LxNotificationService, LxDialogService, LxProgressService, $interval, $filter, $http, $rootScope, $compile) {
-    $scope.modelName = "Patient Diagnosis History";
+    $scope.modelName = "Patient Diagnosis";
     $scope.showForm = false;
     $scope.tabPages = ['Information'];
     $scope.selectedTab = 0;
-
+    $scope.addComma = false;
+    $scope.submitButtonTextDetail = "Add";
     //Listen the changes of the scope
     $interval(function () {
         var width = window.innerWidth;
         if (width < 650) {
             $rootScope.browserWidth = false;
             $scope.setStyle = "";
+            $scope.setStyle1 = "";
         }
         else {
             $rootScope.browserWidth = true;
             $scope.setStyle = "width:200px; max-width:100%; padding-left:10px;";
+            $scope.setStyle1 = "width:100px; max-width:100%;";
         }
     }, 100);
 
+    $scope.setSelectedTabStyle = function () {
+        var promise = $interval(function () {
+            var element = document.getElementById($scope.tabPages[0]);
+            if (element != null) {
+                element.style.color = "#4FC1E9";
+                $interval.cancel(promise);
+                promise = undefined;
+            }
+        }, 100);
+    };
+
     $scope.setSelectedTab = function (index) {
         $scope.selectedTab = index;
+        for (var i = 0; i < $scope.tabPages.length; i++)
+        {
+            if (i == $scope.selectedTab) {
+                var element = document.getElementById($scope.tabPages[i]);
+                element.style.color = "#4FC1E9";
+            }
+            else {
+                var element = document.getElementById($scope.tabPages[i]);
+                element.style.color = "";
+            }
+        }
     };
 
     $scope.validateInput = function (input) {
@@ -96,9 +121,9 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
     $scope.getAppointmentList = function () {
         $scope.AppointmentList = [];
         $scope.dataDefinitionAppointmentList = {
-            "Header": ['Date', 'Start Time', 'End Time', 'Dentist Name','No'],
-            "Keys": ['Date', 'FromTime', 'ToTime', 'DentistName'],
-            "Type": ['Date', 'Formatted-Time', 'Formatted-Time', 'String'],
+            "Header": ['Date', 'Time', 'Dentist Name','No'],
+            "Keys": ['AppointmentDate', 'AppointmentTime', 'DentistName'],
+            "Type": ['Date', 'Default', 'String'],
             "DataList": $scope.AppointmentList,
             "CurrentLength": $scope.AppointmentList.length,
             "DataItem": {},
@@ -149,10 +174,50 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
             if ($scope.dataDefinitionAppointmentList.DataItem.Id != null) {
                 $scope.dataDefinitionMaster.DataItem.AppointmentId = $scope.dataDefinitionAppointmentList.DataItem.Id;
                 $scope.dataDefinitionMaster.DataItem.AppointmentDate = $scope.dataDefinitionAppointmentList.DataItem.AppointmentDate;
-                $scope.dataDefinitionMaster.DataItem.AppointmentTime = n$scope.dataDefinitionAppointmentList.DataItem.AppointmentTime;
+                $scope.dataDefinitionMaster.DataItem.AppointmentTime = $scope.dataDefinitionAppointmentList.DataItem.AppointmentTime;
                 $scope.dataDefinitionMaster.DataItem.DentistName = $scope.dataDefinitionAppointmentList.DataItem.DentistName;
             }
         }
+    };
+
+    //Retrieve treatment type list
+    $scope.getTreatmentTypeList = function () {
+        $scope.treatmentTypeList = [];
+        $scope.dataDefinitionTreatmentTypeList = {
+            "Header": ['Name', 'Description','No'],
+            "Keys": ['Name', 'Description'],
+            "Type": ['String', 'Default'],
+            "DataList": $scope.treatmentTypeList,
+            "CurrentLength": $scope.treatmentTypeList.length,
+            "DataItem": {},
+            "APIUrl": ['/api/TreatmentTypes?length= &status=1'],
+            "Dialog": "TreatmentType"
+        };
+
+        $scope.filterDefinitionTreatmentType = {
+            "Url": '/api/TreatmentTypes?length= &status=1',//get
+            "Source": [
+                            { "Label": "Name", "Property": "Name", "Values": [], "Type": "Default" },
+                            { "Label": "Description", "Property": "Description", "Values": [], "Type": "Default" }
+            ]
+        };
+
+        $scope.otherActionTreatmentTypeList = function (action) {
+            switch (action) {
+                default: return true;
+            }
+        };
+
+        $scope.closeTreatmentTypeList = function (dialogId) {
+            LxDialogService.close(dialogId);
+            $scope.dataDefinitionMaster.ViewOnly = false;
+            $scope.dataDefinitionDetail.DataItem.TreatmentTypeId = $scope.dataDefinitionTreatmentTypeList.DataItem.Id;
+            $scope.dataDefinitionDetail.DataItem.TreatmentTypeName = $scope.dataDefinitionTreatmentTypeList.DataItem.Name;
+        }
+    };
+
+    $scope.initializeBalance = function () {
+        $scope.dataDefinitionMaster.DataItem.Balance = $filter('number')($scope.dataDefinitionMaster.DataItem.Fee - $scope.dataDefinitionMaster.DataItem.Paid, 4);
     };
 
     $scope.loadMaster = function () {
@@ -186,7 +251,7 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
         $scope.dataDefinitionMaster = {
             "Header": ['Patient', 'Appointment Date',  'Appointment Time', 'Dentist', 'Fee', 'Paid', 'Balance', 'Notes', 'No'],
             "Keys": ['PatientName', 'AppointmentDate', 'AppointmentTime', 'DentistName', 'Fee', 'Paid', 'Balance', 'Notes'],
-            "RequiredFields": ['PatientName-Patient', 'AppointmentDate-Appointment', '', 'Fee-Fee'],
+            "RequiredFields": ['PatientName-Patient', 'AppointmentDate-Appointment', 'Fee-Fee'],
             "Type": ['String', 'Date', 'Default', 'String', 'Decimal', 'Decimal', 'Decimal', 'Default'],
             "DataList": $scope.pdhMaster,
             "CurrentLength": $scope.pdhMaster.length,
@@ -196,7 +261,7 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
             "DataItem": {},
             "ServerData": [],
             "ViewOnly": false,
-            "contextMenu": ['Create', 'Edit', 'Cancel', 'View'],
+            "contextMenu": ['Create', 'Edit', 'Delete', 'View'],
             "contextMenuLabel": ['Create', 'Edit', 'Cancel', 'View'],
             "contextMenuLabelImage": ['mdi mdi-plus', 'mdi mdi-table-edit', 'mdi mdi-delete', 'mdi mdi-eye']
         };
@@ -230,12 +295,12 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
                 case 'PostViewAction':
                     $scope.tabPages = ['Information', 'Detail'];
                     $scope.loadDetail();
-                    $scope.dataDefinitionDetail.ViewOnly = true;
+                    //$scope.dataDefinitionDetail.ViewOnly = true;
                     return true;
                 case 'PostDeleteAction':
                     $scope.tabPages = ['Information', 'Detail'];
                     $scope.loadDetail();
-                    $scope.dataDefinitionDetail.ViewOnly = true;
+                    //$scope.dataDefinitionDetail.ViewOnly = true;
                     return true;
                 case 'PreSave':
                     delete $scope.dataDefinitionMaster.DataItem.Id;
@@ -246,6 +311,9 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
                     $scope.selectedTab = 1;
                     return true;
                 case 'PreUpdate':
+                    delete $scope.dataDefinitionMaster.DataItem.Appointment;
+                    delete $scope.dataDefinitionMaster.DataItem.PatientDiaganosisHistoryDetail;
+                    delete $scope.dataDefinitionMaster.DataItem.User;
                     return true;
                 case 'PostUpdate':
                     $scope.closeForm();
@@ -258,9 +326,9 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
                         $scope.dataDefinitionMaster.DataList[i].PatientName = $scope.dataDefinitionMaster.DataList[i].User.UserInformations[0].FirstName + " " +
                                                                               $scope.dataDefinitionMaster.DataList[i].User.UserInformations[0].MiddleName + " " +
                                                                               $scope.dataDefinitionMaster.DataList[i].User.UserInformations[0].LastName;
-                        $scope.dataDefinitionMaster.DataList[i].DentistName = $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster[0].UserInformation.FirstName + " " +
-                                                                              $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster[0].UserInformation.MiddleName + " " +
-                                                                              $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster[0].UserInformation.LastName;
+                        $scope.dataDefinitionMaster.DataList[i].DentistName = $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster.UserInformation.FirstName + " " +
+                                                                              $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster.UserInformation.MiddleName + " " +
+                                                                              $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster.UserInformation.LastName;
                         $scope.dataDefinitionMaster.DataList[i].AppointmentDate = $filter('date')($scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleMaster.Date, "MM/dd/yyyy");
                         var startTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleDetail.FromTime;
                         var endTime = new Date().getMonth() + "/" + new Date().getDate() + "/" + new Date().getFullYear() + " " + $scope.dataDefinitionMaster.DataList[i].Appointment.ScheduleDetail.ToTime;
@@ -285,7 +353,8 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
                 Fee: 0,
                 Paid: 0,
                 Balance: 0,
-                Notes: null
+                Notes: null,
+                Status: 1
             }
         };
         $scope.showFormErrorMaster = function (message) {
@@ -316,14 +385,145 @@ function PDHController($scope, LxNotificationService, LxDialogService, LxProgres
 
     };
 
+    $scope.loadDetail = function () {
+        $scope.pdhDetail = [];
+        $scope.loadDetailDataGrid();
+        $scope.initDetailDataGridParameters();
+    };
+    $scope.loadDetailDataGrid = function () {
+        html = '<dir-data-grid4 id="grid2" actioncreate="actionCreateDetail"' +
+                         'datadefinition="dataDefinitionDetail"' +
+                         'otheractions="otherActionsDetail(action)"' +
+                         'submitbuttonlistener="submitButtonListenerDetail"' +
+                         'showformerror="showFormErrorDetail(error)">' +
+                         '</dir-data-grid4>';
+        $content = angular.element(document.querySelector('#detailList')).html(html);
+        $compile($content)($scope);
+    };
+    $scope.initDetailDataGridParameters = function () {
+        $scope.actionCreateDetail = false;
+        $scope.dataDefinitionDetail = {
+            "Header": ['Treatment', 'Diagnosis', 'Diagnosed Teeth', 'No'],
+            "Keys": ['TreatmentTypeName', 'Diagnosis', 'DiagnosedTeeth'],
+            "Type": ['String', 'Default', 'String'],
+            "RequiredFields": ['TreatmentTypeName-Treatment Type', 'Diagnosis-Diagnosis', 'DiagnosedTeeth-DiagnosedTeeth'],
+            "DataList": $scope.pdhDetail,
+            "DataItem": {},
+            "ViewOnly": false,
+            "CurrentLength": $scope.pdhDetail.length,
+            "APIUrl": ['/api/PatientDiagnosisHistoryDetails?length= &masterId=' + $scope.dataDefinitionMaster.DataItem.Id,//get
+                       '/api/PatientDiagnosisHistoryDetails' //post, put, delete
+            ],
+            "ServerData": []
+        };
+        //Do Overriding or Overloading in this function
+        $scope.otherActionsDetail = function (action) {
+            switch (action) {
+                case 'PreAction':
+                    if ($scope.dataDefinitionMaster.ViewOnly == true)
+                        return false;
+                    else
+                        return true;
+                case 'PreLoadAction':
+                    if (angular.isDefined($scope.dataDefinitionMaster.DataItem.Id))
+                        return true;
+                    else
+                        return false;
+                case 'PostLoadAction':
+                    for (var i = 0; i < $scope.dataDefinitionDetail.DataList.length; i++) {
+                        $scope.dataDefinitionDetail.DataList[i].TreatmentTypeName = $scope.dataDefinitionDetail.DataList[i].TreatmentType.Name;
+                    }
+                    return true;
+                case 'PostEditAction':
+                    $scope.submitButtonTextDetail = "Edit";
+                    return true;
+                case 'PreSave':
+                    delete $scope.dataDefinitionDetail.DataItem.Id;
+                    $scope.dataDefinitionDetail.DataItem.PDHMasterId = $scope.dataDefinitionMaster.DataItem.Id;
+                    return true;
+                case 'PostSave':
+                    $scope.resetDetailItem();
+                    return true;
+                case 'PostUpdate':
+                    $scope.resetDetailItem();
+                    $scope.submitButtonTextDetail = "Add";
+                    return true;
+                case 'PostSubmit':
+                    return true;
+                default: return true;
+            }
+        };
+
+        $scope.resetDetailItem = function () {
+            $scope.dataDefinitionDetail.DataItem = {
+                Id: null,
+                PDHMasterId: null,
+                TreatmentTypeId: null,
+                TreatmentTypeName: null,
+                DiagnosedTeeth: null
+            }
+        };
+        $scope.showFormErrorDetail = function (message) {
+            $scope.resetDetailItem();
+            LxNotificationService.error(message);
+        };
+        $scope.submitDetail = function () {
+            $scope.submitButtonListenerDetail = true;
+        };
+    };
+
+    //Find specific character
+    $scope.findCharacter = function (v, c) {
+        for (var i = 0; i < v.length; i++) {
+            if (v.charAt(i) == c)
+                return true;
+        }
+        return false;
+    };
+
     $scope.filterCharacters = function () {
-        //Check if input doesn't contain special characters
-        $("#PatientName").keypress(function (key) {
+        $scope.addComma = false;
+        $("#PatientName,#Treatment").keypress(function (key) {
             return false;
+        });
+
+        //Check if input doesn't contain special characters
+        $("#Notes, #Diagnosis").keypress(function (key) {
+            if (!((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45) && (key.charCode != 32)))
+                return true;
+            else if (key.charCode == 46 || key.charCode == 0)
+                return true;
+            else {
+                if (!(key.charCode < 48 || key.charCode > 57))
+                    return true;
+            }
+            return false;
+        });
+
+        //Check if input is decimal number only
+        $('#Fee,#Paid').keypress(function (key) {
+            if (key.charCode == 46) {
+                if ($scope.findCharacter(this.value, '.'))
+                    return false;
+                else
+                    return true;
+            }
+            else if (key.charCode < 48 || key.charCode > 57)
+                return false;
+            else
+                return true;
+        });
+
+        //Check if input is whole number  or comma
+        $('#DiagnosedTeeth').keypress(function (key) {
+            if ((key.charCode < 48 || key.charCode > 57) && key.charCode != 44)
+                return false;
         });
     };
 
     $rootScope.manipulateDOM();
     $scope.getPatientList();
+    $scope.getTreatmentTypeList();
     $scope.loadMaster();
+    $scope.setSelectedTabStyle();
 }

@@ -39,7 +39,7 @@ namespace DentalApplicationV1.APIController
                     .Include(p => p.Appointment.ScheduleMaster)
                     .Include(p => p.Appointment.ScheduleMaster.UserInformation)
                     .Include(p => p.Appointment.ScheduleDetail)
-                    .Where(p =>  p.Status != 3).OrderByDescending(p => p.Appointment.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
+                    .Where(p =>  p.Status != 0).OrderByDescending(p => p.Appointment.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
                 for (int i = 0; i < pdh.Length; i++)
                 {
                     pdh[i].User.Appointments = null;
@@ -151,6 +151,7 @@ namespace DentalApplicationV1.APIController
         {
             response.status = "FAILURE";
             PatientDiagnosisHistoryMaster patientDiagnosisHistoryMaster = db.PatientDiagnosisHistoryMasters.Find(id);
+
             if (patientDiagnosisHistoryMaster == null)
             {
                 response.message = "Diagnosis History doesn't exist.";
@@ -158,7 +159,10 @@ namespace DentalApplicationV1.APIController
             }
             try 
             {
-                db.PatientDiagnosisHistoryMasters.Remove(patientDiagnosisHistoryMaster);
+                PatientDiagnosisHistoryMaster patientDiagnosisHistoryMasterEdited = db.PatientDiagnosisHistoryMasters.Find(id);
+                patientDiagnosisHistoryMasterEdited.Status = 0;
+                db.Entry(patientDiagnosisHistoryMaster).CurrentValues.SetValues(patientDiagnosisHistoryMasterEdited);
+                db.Entry(patientDiagnosisHistoryMaster).State = EntityState.Modified;
                 db.SaveChanges();
                 response.status = "SUCCESS";
             }

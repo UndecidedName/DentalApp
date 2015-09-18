@@ -12,9 +12,8 @@
             <lx-tabs indicator="blue-200" layout="inline">
                 <ul class="tabs__links bgc-white">
                     <li ng-repeat="tab in tabPages">
-                        <a lx-tab-link
+                        <a id="{{tab}}"
                            class="tabs-link"
-                           ng-class="{'tabs-link--is-active' : $index === selectedTab}"
                            ng-click="setSelectedTab($index)"
                            lx-ripple="green-200">{{tab}}</a>
                     </li>

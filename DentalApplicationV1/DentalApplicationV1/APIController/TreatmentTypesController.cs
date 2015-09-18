@@ -22,7 +22,7 @@ namespace DentalApplicationV1.APIController
         {
             return db.TreatmentTypes;
         }
-
+        // GET: api/TreatmentTypes?length=0
         public IQueryable<TreatmentType> GetTreatmentTypes(int length)
         {
             int fetch;
@@ -43,7 +43,7 @@ namespace DentalApplicationV1.APIController
                 return tt;
             }
         }
-
+        // GET: api/TreatmentTypes?length=0&status=1
         public IQueryable<TreatmentType> GetTreatmentTypes(int length, int status)
         {
             int fetch;
@@ -83,6 +83,17 @@ namespace DentalApplicationV1.APIController
         {
             TreatmentType[] treatmentType = new TreatmentType[pageSize];
             this.filterRecord(length, property, value, value2, ref treatmentType);
+            if (treatmentType != null)
+                return Ok(treatmentType);
+            else
+                return Ok();
+        }
+
+        //Filtering
+        public IHttpActionResult GetTreatmentType(int length, int status, string property, string value, string value2)
+        {
+            TreatmentType[] treatmentType = new TreatmentType[pageSize];
+            this.filterRecord(length, status, property, value, value2, ref treatmentType);
             if (treatmentType != null)
                 return Ok(treatmentType);
             else
@@ -238,6 +249,69 @@ namespace DentalApplicationV1.APIController
                     else
                         fetch = records - length;
                     var getTreatmentType = db.TreatmentTypes.Where(cs => cs.Status == strManipulate.intValue)
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    treatmentType = getTreatmentType;
+                }
+            }
+        }
+
+        public void filterRecord(int length, int status, string property, string value, string value2, ref TreatmentType[] treatmentType)
+        {
+            /* Fields that can be filter
+             * Name
+             * Desription
+             * Status
+             */
+            //Filter for a specific patient
+            int fetch;
+            treatmentType = null;
+            if (property.Equals("Name"))
+            {
+                value = value.ToLower();
+                var records = db.TreatmentTypes.Where(cs => cs.Name.ToLower().Contains(value) || cs.Name.ToLower().ToLower().Equals(value))
+                                               .Where(cs => cs.Status == 1).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getTreatmentType = db.TreatmentTypes.Where(cs => cs.Name.ToLower().Contains(value) || cs.Name.ToLower().ToLower().Equals(value))
+                        .Where(cs => cs.Status == 1)
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    treatmentType = getTreatmentType;
+                }
+            }
+            else if (property.Equals("Description"))
+            {
+                value = value.ToLower();
+                var records = db.TreatmentTypes.Where(cs => cs.Description.ToLower().Contains(value) || cs.Description.ToLower().ToLower().Equals(value))
+                                               .Where(cs => cs.Status == 1).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getTreatmentType = db.TreatmentTypes.Where(cs => cs.Description.ToLower().Contains(value) || cs.Description.ToLower().ToLower().Equals(value))
+                        .Where(cs => cs.Status == 1)
+                        .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
+                    treatmentType = getTreatmentType;
+                }
+            }
+            //status
+            else
+            {
+                StringManipulation strManipulate = new StringManipulation(value, value2, "Integer");
+                var records = db.TreatmentTypes.Where(cs => cs.Status == strManipulate.intValue).Where(cs => cs.Status == 1).Count();
+                if (records > length)
+                {
+                    if ((records - length) > pageSize)
+                        fetch = pageSize;
+                    else
+                        fetch = records - length;
+                    var getTreatmentType = db.TreatmentTypes.Where(cs => cs.Status == strManipulate.intValue)
+                        .Where(cs => cs.Status == 1)
                         .OrderBy(cs => cs.Id).Skip((length)).Take(fetch).ToArray();
                     treatmentType = getTreatmentType;
                 }

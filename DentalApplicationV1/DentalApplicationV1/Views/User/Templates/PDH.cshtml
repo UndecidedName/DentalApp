@@ -8,18 +8,20 @@
 
 @section Tab1Content{
     <div ng-show="selectedTab === 0">
-        <div flex-container="row" flex-gutter="24" ng-show="selectedTab === 0" style="padding-left:20px; padding-right:20px;">
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            @*Patient Name*@
             <div flex-item>
                 <lx-text-field label="Patient Name" error="validateInput(dataDefinitionMaster.DataItem.PatientName)">
                     <input id="PatientName"
                            type="text"
                            name="PatientName"
                            ng-model="dataDefinitionMaster.DataItem.PatientName"
-                           ng-disabled="dataDefinitionMaster.ViewOnly; (dataDefinitionMaster.DataItem.Id != null ? true: false)"
+                           ng-disabled="dataDefinitionMaster.ViewOnly"
                            ng-click="getPatientList();showDialog('Patients');"
                            ng-change="filterCharacters()" />
                 </lx-text-field>
             </div>
+            @*Appointment Date*@
             <div flex-container="row" flex-gutter="24" style="{{setStyle}}">
                 <div flex-item>
                     <lx-text-field label="Appointment Date" error="validateInput(dataDefinitionMaster.DataItem.AppointmentDate)">
@@ -30,6 +32,7 @@
                     </lx-text-field>
                 </div>
             </div>
+            @*Appointment Time*@
             <div flex-container="row" flex-gutter="24" style="{{setStyle}}">
                 <div flex-item>
                     <lx-text-field label="Appointment Time" error="validateInput(dataDefinitionMaster.DataItem.AppointmentTime)" style="{{setStyle}}">
@@ -40,6 +43,7 @@
                     </lx-text-field>
                 </div>
             </div>
+            @*Dentist Name*@
             <div flex-item>
                 <lx-text-field label="Dentist" error="validateInput(dataDefinitionMaster.DataItem.DentistName)">
                     <input type="text"
@@ -49,8 +53,52 @@
                 </lx-text-field>
             </div>
         </div>
-        <div flex-container="row" flex-gutter="24" ng-show="selectedTab === 0" style="padding-left:20px; padding-right:20px;">
-
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            @*Fee*@
+            <div flex-item>
+                <lx-text-field label="Fee" error="validateInput(dataDefinitionMaster.DataItem.Fee)">
+                    <input id="Fee"
+                           type="text"
+                           name="Fee"
+                           ng-model="dataDefinitionMaster.DataItem.Fee"
+                           ng-disabled="dataDefinitionMaster.ViewOnly"
+                           ng-change="filterCharacters(); initializeBalance()" />
+                </lx-text-field>
+            </div>
+            @*Paid*@
+            <div flex-item>
+                <lx-text-field label="Paid">
+                    <input id="Paid"
+                           type="text"
+                           name="Paid"
+                           ng-model="dataDefinitionMaster.DataItem.Paid"
+                           ng-disabled="dataDefinitionMaster.ViewOnly"
+                           ng-change="filterCharacters(); initializeBalance()" />
+                </lx-text-field>
+            </div>
+            @*Balance*@
+            <div flex-item>
+                <lx-text-field label="Balance">
+                    <input id="Balance"
+                           type="text"
+                           name="Balance"
+                           ng-model="dataDefinitionMaster.DataItem.Balance"
+                           ng-disabled="true" />
+                </lx-text-field>
+            </div>
+        </div>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            @*Notes*@
+            <div flex-item>
+                <lx-text-field label="Notes">
+                    <input id="Notes"
+                           type="text"
+                           name="PatientName"
+                           ng-model="dataDefinitionMaster.DataItem.Notes"
+                           ng-disabled="dataDefinitionMaster.ViewOnly"
+                           ng-change="filterCharacters()" />
+                </lx-text-field>
+            </div>
         </div>
         <br />
         @*Patient List Modal*@
@@ -89,56 +137,64 @@
 @section Tab2Content{
     <div ng-show="selectedTab === 1">
         <div id="progress"></div>
-        <div flex-container="row" flex-gutter="24" ng-show="selectedTab === 1" style="padding-left:20px; padding-right:20px;">
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            @*Treatment Type*@
             <div flex-item>
-                <lx-text-field label="From" error="validateInput(dataDefinitionDetail.DataItem.FromTime)">
-                    <input type="text"
-                           name="From"
-                           ng-model="dataDefinitionDetail.DataItem.FromTime"
-                           pattern=".{4,50}"
+                <lx-text-field label="Treatment" error="validateInput(dataDefinitionDetail.DataItem.TreatmentTypeName)">
+                    <input id="Treatment"
+                           type="text"
+                           name="Treatment"
+                           ng-model="dataDefinitionDetail.DataItem.TreatmentTypeName"
                            ng-disabled="dataDefinitionDetail.ViewOnly"
-                           ng-click="showDialog('FromTime', 'From')">
+                           ng-click="showDialog('TreatmentType')"
+                           ng-change="filterCharacters()">
                 </lx-text-field>
             </div>
+            @*Diagnosed Teeth*@
             <div flex-item>
-                <lx-text-field label="To" error="validateInput(dataDefinitionDetail.DataItem.ToTime)">
-                    <input type="text"
-                           name="To"
-                           ng-model="dataDefinitionDetail.DataItem.ToTime"
-                           pattern=".{4,50}"
+                <lx-text-field label="Diagnosed Teeth(Separated by comma)" error="validateInput(dataDefinitionDetail.DataItem.DiagnosedTeeth)">
+                    <input id="DiagnosedTeeth"
+                           type="text"
+                           name="DiagnosedTeeth"
+                           ng-model="dataDefinitionDetail.DataItem.DiagnosedTeeth"
                            ng-disabled="dataDefinitionDetail.ViewOnly"
-                           ng-click="showDialog('ToTime', 'To')">
+                           ng-change="filterCharacters(dataDefinitionDetail.DataItem.DiagnosedTeeth)">
                 </lx-text-field>
             </div>
-            <div flex-item style="padding-top:28px">
-                <button class="btn btn--m btn--blue btn--raised" ng-click="submitDetail()" ng-disabled="dataDefinitionDetail.ViewOnly">Add</button>
+        </div>
+        <div flex-container="row" flex-gutter="24" style="padding-left:20px; padding-right:20px;">
+            @*Diagnosis*@
+            <div flex-item>
+                <lx-text-field label="Diagnosis" error="validateInput(dataDefinitionDetail.DataItem.Diagnosis)">
+                    <input id="Diagnosis"
+                           type="text"
+                           name="Diagnosis"
+                           ng-model="dataDefinitionDetail.DataItem.Diagnosis"
+                           ng-disabled="dataDefinitionDetail.ViewOnly"
+                           ng-change="filterCharacters()">
+                </lx-text-field>
+            </div>
+            @*Add Button*@
+            <div flex-container="row" flex-gutter="24" style="{{setStyle1}}">
+                <div flex-item style="padding-top:28px">
+                    <button class="btn btn--m btn--blue btn--raised" ng-click="submitDetail()" ng-disabled="dataDefinitionDetail.ViewOnly">{{submitButtonTextDetail}}</button>
+                </div>
             </div>
         </div>
         <br />
         <div id="detailList" style="padding-left:20px; padding-right:20px;"></div>
         <br />
-        <lx-dialog class="dialog dialog--l" id="FromTime" auto-close="true">
+        @*Treatment Type Modal*@
+        <lx-dialog class="dialog dialog--l" id="TreatmentType" auto-close="true">
             <div class="dialog__header">
-            </div>
-            <div class="dialog__content">
-                <div style="overflow-x:auto;">
-                    <time-date-picker ng-model="dataDefinitionDetail.DataItem.FromTime"
-                                      display-mode="time" orientation="false"
-                                      on-save="saveFn(dataDefinitionDetail.DataItem.FromTime); closeTime('FromTime', 'From')"></time-date-picker>
+                <div class="toolbar bgc-light-blue-500 pl++">
+                    <span class="toolbar__label tc-white fs-title">
+                        Treatment Type List
+                    </span>
                 </div>
             </div>
-            <div class="dialog__actions">
-            </div>
-        </lx-dialog>
-        <lx-dialog class="dialog dialog--l" id="ToTime" auto-close="false">
-            <div class="dialog__header">
-            </div>
             <div class="dialog__content">
-                <div style="overflow-x:auto;">
-                    <time-date-picker ng-model="dataDefinitionDetail.DataItem.ToTime"
-                                      display-mode="time" orientation="false"
-                                      on-save="saveFn(dataDefinitionDetail.DataItem.ToTime); closeTime('ToTime', 'To')"></time-date-picker>
-                </div>
+                <dir-data-modal1 datadefinition="dataDefinitionTreatmentTypeList" filterdefinition="filterDefinitionTreatmentType" otheractions="otherActionTreatmentTypeList(action)" closecontainer="closeTreatmentTypeList(dialog)" showformerror="showFormErrorMaster(error)"></dir-data-modal1>
             </div>
             <div class="dialog__actions">
             </div>

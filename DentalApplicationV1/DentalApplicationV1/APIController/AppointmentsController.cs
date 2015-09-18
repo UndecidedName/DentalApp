@@ -37,6 +37,7 @@ namespace DentalApplicationV1.APIController
                 else
                     fetch = records - length;
                 var appointments = db.Appointments
+                    .Include(a => a.User.UserInformations)
                     .Include(a => a.ScheduleMaster)
                     .Include(a => a.ScheduleDetail)
                     .Include(a => a.ScheduleMaster.UserInformation)
@@ -45,15 +46,28 @@ namespace DentalApplicationV1.APIController
                 {
                     for (int i = 0; i < appointments.Length; i++)
                     {
-                        appointments[0].User = null;
-                        appointments[0].PatientDiagnosisHistoryMasters = null;
-                        appointments[0].ScheduleMaster.Appointments = null;
-                        appointments[0].ScheduleMaster.ScheduleDetails = null;
-                        appointments[0].ScheduleDetail.Appointments = null;
-                        appointments[0].ScheduleDetail.ScheduleMaster = null;
-                        appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
-                        appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
-                        appointments[0].ScheduleMaster.UserInformation.User = null;
+                        appointments[i].User.Appointments = null;
+                        appointments[i].User.Messages = null;
+                        appointments[i].User.Messages1 = null;
+                        appointments[i].User.Notifications = null;
+                        appointments[i].User.PatientDentalHistories = null;
+                        appointments[i].User.PatientDiagnosisHistoryMasters = null;
+                        appointments[i].User.PatientMedicalHistories = null;
+                        appointments[i].User.UserType = null;
+                        appointments[i].PatientDiagnosisHistoryMasters = null;
+                        appointments[i].ScheduleMaster.Appointments = null;
+                        appointments[i].ScheduleMaster.ScheduleDetails = null;
+                        appointments[i].ScheduleDetail.Appointments = null;
+                        appointments[i].ScheduleDetail.ScheduleMaster = null;
+                        appointments[i].ScheduleMaster.UserInformation.PatientMouths = null;
+                        appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                        appointments[i].ScheduleMaster.UserInformation.User = null;
+                        foreach (var ui in appointments[i].User.UserInformations)
+                        {
+                            ui.CivilStatu = null;
+                            ui.PatientMouths = null;
+                            ui.ScheduleMasters = null;
+                        }
                     }
                 }
                 return Ok(appointments);
@@ -65,10 +79,12 @@ namespace DentalApplicationV1.APIController
         }
 
         // GET: api/Appointments?length=0&userId=1&status=1
+        //Api that will get list of appointments that are not found in diagnosis master
         public IHttpActionResult GetAppointment(int length, int userId, int status)
         {
             int fetch;
-            var records = db.Appointments.Where(a => a.PatientId == userId && a.Status == status).Count();
+            var records = db.Appointments.Where(a => a.PatientId == userId && a.Status == status)
+                                         .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
             if (records > length)
             {
                 if ((records - length) > pageSize)
@@ -76,23 +92,39 @@ namespace DentalApplicationV1.APIController
                 else
                     fetch = records - length;
                 var appointments = db.Appointments
+                    .Include(a => a.User.UserInformations)
                     .Include(a => a.ScheduleMaster)
                     .Include(a => a.ScheduleDetail)
                     .Include(a => a.ScheduleMaster.UserInformation)
-                    .Where(a => a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
+                    .Where(a => a.PatientId == userId && a.Status == status)
+                    .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
+                    .OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
                 if (appointments != null)
                 {
                     for (int i = 0; i < appointments.Length; i++)
                     {
-                        appointments[0].User = null;
-                        appointments[0].PatientDiagnosisHistoryMasters = null;
-                        appointments[0].ScheduleMaster.Appointments = null;
-                        appointments[0].ScheduleMaster.ScheduleDetails = null;
-                        appointments[0].ScheduleDetail.Appointments = null;
-                        appointments[0].ScheduleDetail.ScheduleMaster = null;
-                        appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
-                        appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
-                        appointments[0].ScheduleMaster.UserInformation.User = null;
+                        appointments[i].User.Appointments = null;
+                        appointments[i].User.Messages = null;
+                        appointments[i].User.Messages1 = null;
+                        appointments[i].User.Notifications = null;
+                        appointments[i].User.PatientDentalHistories = null;
+                        appointments[i].User.PatientDiagnosisHistoryMasters = null;
+                        appointments[i].User.PatientMedicalHistories = null;
+                        appointments[i].User.UserType = null;
+                        appointments[i].PatientDiagnosisHistoryMasters = null;
+                        appointments[i].ScheduleMaster.Appointments = null;
+                        appointments[i].ScheduleMaster.ScheduleDetails = null;
+                        appointments[i].ScheduleDetail.Appointments = null;
+                        appointments[i].ScheduleDetail.ScheduleMaster = null;
+                        appointments[i].ScheduleMaster.UserInformation.PatientMouths = null;
+                        appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                        appointments[i].ScheduleMaster.UserInformation.User = null;
+                        foreach (var ui in appointments[i].User.UserInformations)
+                        {
+                            ui.CivilStatu = null;
+                            ui.PatientMouths = null;
+                            ui.ScheduleMasters = null;
+                        }
                     }
                 }
                 return Ok(appointments);
@@ -126,23 +158,29 @@ namespace DentalApplicationV1.APIController
                     {
                         for (int i = 0; i < appointments.Length; i++)
                         {
-                            appointments[0].User.Appointments = null;
-                            appointments[0].User.Messages = null;
-                            appointments[0].User.Messages1 = null;
-                            appointments[0].User.Notifications = null;
-                            appointments[0].User.PatientDentalHistories = null;
-                            appointments[0].User.PatientDiagnosisHistoryMasters = null;
-                            appointments[0].User.PatientMedicalHistories = null;
-                            appointments[0].User.UserType = null;
-                            appointments[0].PatientDiagnosisHistoryMasters = null;
-                            appointments[0].ScheduleMaster.Appointments = null;
-                            appointments[0].ScheduleMaster.ScheduleDetails = null;
-                            appointments[0].ScheduleDetail.Appointments = null;
-                            appointments[0].ScheduleDetail.ScheduleMaster = null;
-                            appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
-                            appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
-                            appointments[0].ScheduleMaster.UserInformation.CivilStatu = null;
-                            appointments[0].ScheduleMaster.UserInformation.User = null;
+                            appointments[i].User.Appointments = null;
+                            appointments[i].User.Messages = null;
+                            appointments[i].User.Messages1 = null;
+                            appointments[i].User.Notifications = null;
+                            appointments[i].User.PatientDentalHistories = null;
+                            appointments[i].User.PatientDiagnosisHistoryMasters = null;
+                            appointments[i].User.PatientMedicalHistories = null;
+                            appointments[i].User.UserType = null;
+                            appointments[i].PatientDiagnosisHistoryMasters = null;
+                            appointments[i].ScheduleMaster.Appointments = null;
+                            appointments[i].ScheduleMaster.ScheduleDetails = null;
+                            appointments[i].ScheduleDetail.Appointments = null;
+                            appointments[i].ScheduleDetail.ScheduleMaster = null;
+                            appointments[i].ScheduleMaster.UserInformation.PatientMouths = null;
+                            appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                            appointments[i].ScheduleMaster.UserInformation.CivilStatu = null;
+                            appointments[i].ScheduleMaster.UserInformation.User = null;
+                            foreach (var ui in appointments[i].User.UserInformations)
+                            {
+                                ui.CivilStatu = null;
+                                ui.PatientMouths = null;
+                                ui.ScheduleMasters = null;
+                            }
                         }
                     }
                     return Ok(appointments);
@@ -172,23 +210,29 @@ namespace DentalApplicationV1.APIController
                     {
                         for (int i = 0; i < appointments.Length; i++)
                         {
-                            appointments[0].User.Appointments = null;
-                            appointments[0].User.Messages = null;
-                            appointments[0].User.Messages1 = null;
-                            appointments[0].User.Notifications = null;
-                            appointments[0].User.PatientDentalHistories = null;
-                            appointments[0].User.PatientDiagnosisHistoryMasters = null;
-                            appointments[0].User.PatientMedicalHistories = null;
-                            appointments[0].User.UserType = null;
-                            appointments[0].PatientDiagnosisHistoryMasters = null;
-                            appointments[0].ScheduleMaster.Appointments = null;
-                            appointments[0].ScheduleMaster.ScheduleDetails = null;
-                            appointments[0].ScheduleDetail.Appointments = null;
-                            appointments[0].ScheduleDetail.ScheduleMaster = null;
-                            appointments[0].ScheduleMaster.UserInformation.PatientMouths = null;
-                            appointments[0].ScheduleMaster.UserInformation.ScheduleMasters = null;
-                            appointments[0].ScheduleMaster.UserInformation.CivilStatu = null;
-                            appointments[0].ScheduleMaster.UserInformation.User = null;
+                            appointments[i].User.Appointments = null;
+                            appointments[i].User.Messages = null;
+                            appointments[i].User.Messages1 = null;
+                            appointments[i].User.Notifications = null;
+                            appointments[i].User.PatientDentalHistories = null;
+                            appointments[i].User.PatientDiagnosisHistoryMasters = null;
+                            appointments[i].User.PatientMedicalHistories = null;
+                            appointments[i].User.UserType = null;
+                            appointments[i].PatientDiagnosisHistoryMasters = null;
+                            appointments[i].ScheduleMaster.Appointments = null;
+                            appointments[i].ScheduleMaster.ScheduleDetails = null;
+                            appointments[i].ScheduleDetail.Appointments = null;
+                            appointments[i].ScheduleDetail.ScheduleMaster = null;
+                            appointments[i].ScheduleMaster.UserInformation.PatientMouths = null;
+                            appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                            appointments[i].ScheduleMaster.UserInformation.CivilStatu = null;
+                            appointments[i].ScheduleMaster.UserInformation.User = null;
+                            foreach (var ui in appointments[i].User.UserInformations)
+                            {
+                                ui.CivilStatu = null;
+                                ui.PatientMouths = null;
+                                ui.ScheduleMasters = null;
+                            }
                         }
                     }
                     return Ok(appointments);
@@ -436,7 +480,7 @@ namespace DentalApplicationV1.APIController
             db.SaveChanges();
         }
 
-        //Filtering base on status
+        //Filtering appointments that are not found in diagnosis master
         public void filterRecord(int length, int userId, int status, string property, string value, string value2, ref Appointment[] appointments)
         {
             /* Fields that can be filter
@@ -460,7 +504,8 @@ namespace DentalApplicationV1.APIController
                 StringManipulation strManipulate = new StringManipulation(value, value2, "Date");
                 strManipulate.dateValue2 = strManipulate.dateValue2.AddHours(11);
                 var records = db.Appointments.Where(a => (a.TransactionDate >= strManipulate.dateValue && a.TransactionDate <= strManipulate.dateValue2)
-                                                            && a.PatientId == userId && a.Status == status).Count();
+                                                            && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -471,6 +516,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.TransactionDate >= strManipulate.dateValue && a.TransactionDate <= strManipulate.dateValue2)
                                                             && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.TransactionDate).Skip((length)).Take(fetch).ToArray();
                     appointments = getAppointments;
@@ -480,7 +526,8 @@ namespace DentalApplicationV1.APIController
             {
                 StringManipulation strManipulate = new StringManipulation(value, value2, "Date");
                 var records = db.Appointments.Where(a => (a.ScheduleMaster.Date >= strManipulate.dateValue && a.ScheduleMaster.Date <= strManipulate.dateValue2)
-                                                            && a.PatientId == userId && a.Status == status).Count();
+                                                            && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -491,6 +538,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.ScheduleMaster.Date >= strManipulate.dateValue && a.ScheduleMaster.Date <= strManipulate.dateValue2)
                                                             && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleMaster.Date).Skip((length)).Take(fetch).ToArray();
                     appointments = getAppointments;
@@ -500,7 +548,8 @@ namespace DentalApplicationV1.APIController
             {
                 StringManipulation strManipulate = new StringManipulation(value, value2, "Time");
                 var records = db.Appointments.Where(a => (a.ScheduleDetail.FromTime >= strManipulate.timeValue && a.ScheduleDetail.FromTime <= strManipulate.timeValue2)
-                                                            && a.PatientId == userId && a.Status == status).Count();
+                                                            && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -511,6 +560,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.ScheduleDetail.FromTime >= strManipulate.timeValue && a.ScheduleDetail.FromTime <= strManipulate.timeValue2)
                                     && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
                     appointments = getAppointments;
@@ -520,7 +570,8 @@ namespace DentalApplicationV1.APIController
             {
                 StringManipulation strManipulate = new StringManipulation(value, value2, "Time");
                 var records = db.Appointments.Where(a => (a.ScheduleDetail.ToTime >= strManipulate.timeValue && a.ScheduleDetail.ToTime <= strManipulate.timeValue2)
-                                                          && a.PatientId == userId && a.Status == status).Count();
+                                                          && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -531,6 +582,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.ScheduleDetail.ToTime >= strManipulate.timeValue && a.ScheduleDetail.ToTime <= strManipulate.timeValue2)
                                     && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
                     appointments = getAppointments;
@@ -541,7 +593,8 @@ namespace DentalApplicationV1.APIController
                 value = value.ToLower();
                 var records = db.Appointments.Where(a => (a.ScheduleMaster.UserInformation.FirstName.ToLower().Contains(value)
                                                           || a.ScheduleMaster.UserInformation.FirstName.ToLower().Equals(value))
-                                                          && a.PatientId == userId && a.Status == status).Count();
+                                                          && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -552,6 +605,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.ScheduleMaster.UserInformation.FirstName.ToLower().Contains(value)
                                     || a.ScheduleMaster.UserInformation.FirstName.ToLower().Equals(value))
                                     && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
@@ -563,7 +617,8 @@ namespace DentalApplicationV1.APIController
                 value = value.ToLower();
                 var records = db.Appointments.Where(a => (a.ScheduleMaster.UserInformation.LastName.ToLower().Contains(value)
                                                           || a.ScheduleMaster.UserInformation.LastName.ToLower().Equals(value))
-                                                          && a.PatientId == userId && a.Status == status).Count();
+                                                          && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -574,6 +629,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.ScheduleMaster.UserInformation.LastName.ToLower().Contains(value)
                                     || a.ScheduleMaster.UserInformation.LastName.ToLower().Equals(value))
                                     && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
@@ -585,7 +641,8 @@ namespace DentalApplicationV1.APIController
                 value = value.ToLower();
                 var records = db.Appointments.Where(a => (a.ScheduleMaster.UserInformation.MiddleName.ToLower().Contains(value)
                                                           || a.ScheduleMaster.UserInformation.MiddleName.ToLower().Equals(value))
-                                                          && a.PatientId == userId && a.Status == status).Count();
+                                                          && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -596,6 +653,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => (a.ScheduleMaster.UserInformation.MiddleName.ToLower().Contains(value)
                                     || a.ScheduleMaster.UserInformation.MiddleName.ToLower().Equals(value))
                                     && a.PatientId == userId && a.Status == status).OrderByDescending(a => a.ScheduleDetail.FromTime).Skip((length)).Take(fetch).ToArray();
@@ -606,7 +664,8 @@ namespace DentalApplicationV1.APIController
             else
             {
                 StringManipulation strManipulate = new StringManipulation(value, value2, "Integer");
-                var records = db.Appointments.Where(a => a.Status == strManipulate.intValue && a.PatientId == userId && a.Status == status).Count();
+                var records = db.Appointments.Where(a => a.Status == strManipulate.intValue && a.PatientId == userId && a.Status == status)
+                                             .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0).Count();
                 if (records > length)
                 {
                     if ((records - length) > pageSize)
@@ -617,6 +676,7 @@ namespace DentalApplicationV1.APIController
                         .Include(a => a.ScheduleMaster)
                         .Include(a => a.ScheduleDetail)
                         .Include(a => a.ScheduleMaster.UserInformation)
+                        .Where(a => (db.PatientDiagnosisHistoryMasters.Where(pdh => pdh.AppointmentId == a.Id && pdh.Status == 1).Count()) == 0)
                         .Where(a => a.Status == strManipulate.intValue && a.PatientId == userId && a.Status == status).OrderBy(a => a.Status).Skip((length)).Take(fetch).ToArray();
                     appointments = getAppointments;
                 }
@@ -1376,6 +1436,12 @@ namespace DentalApplicationV1.APIController
                     appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
                     appointments[i].ScheduleMaster.UserInformation.CivilStatu = null;
                     appointments[i].ScheduleMaster.UserInformation.User = null;
+                    foreach (var ui in appointments[i].User.UserInformations)
+                    {
+                        ui.CivilStatu = null;
+                        ui.PatientMouths = null;
+                        ui.ScheduleMasters = null;
+                    }
                 }
             }
         }
