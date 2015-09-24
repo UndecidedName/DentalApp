@@ -351,6 +351,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\delete.png" />
     <Content Include="libs\angular-route\angular-route.js" />
     <Content Include="libs\angular-route\angular-route.min.js" />
     <Content Include="libs\angular-route\index.js" />
@@ -836,6 +837,13 @@
     <Content Include="libs\moment\templates\globals.js" />
     <Content Include="libs\moment\templates\locale-header.js" />
     <Content Include="libs\moment\templates\test-header.js" />
+    <Content Include="libs\uigrid\css\ui-grid.css" />
+    <Content Include="libs\uigrid\css\ui-grid.svg" />
+    <Content Include="libs\uigrid\js\csv.js" />
+    <Content Include="libs\uigrid\js\pdfmake.js" />
+    <Content Include="libs\uigrid\js\ui-grid-stable.js" />
+    <Content Include="libs\uigrid\js\ui-grid.js" />
+    <Content Include="libs\uigrid\js\vfs_fonts.js" />
     <Content Include="libs\velocity\test\bluebird.js" />
     <Content Include="libs\velocity\test\index.html" />
     <Content Include="libs\velocity\test\jquery-1.11.1.js" />
@@ -851,6 +859,7 @@
     <Content Include="libs\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\controllers\AppointmentApprovalController.js" />
     <Content Include="Scripts\controllers\AppointmentController.js" />
+    <Content Include="Scripts\controllers\AppointmentReport1Controller.js" />
     <Content Include="Scripts\controllers\CivilStatusController.js" />
     <Content Include="Scripts\controllers\HomeController.js" />
     <Content Include="Scripts\controllers\IndexController.js" />
@@ -866,16 +875,19 @@
     <Content Include="Scripts\controllers\UserInformationController.js" />
     <Content Include="Scripts\controllers\UserTypeController.js" />
     <Content Include="Scripts\directives\dataExport.js" />
+    <Content Include="Scripts\directives\dataGridReport.js" />
     <Content Include="Scripts\directives\dataGrid1.js" />
     <Content Include="Scripts\directives\dataGrid2.js" />
     <Content Include="Scripts\directives\dataGrid3.js" />
     <Content Include="Scripts\directives\dataGrid4.js" />
     <Content Include="Scripts\directives\dataModal1.js" />
     <Content Include="Scripts\directives\dentalDirective.js" />
+    <Content Include="Scripts\directives\filtering.js" />
     <Content Include="Scripts\directives\scrollableContainer.js" />
     <Content Include="Scripts\extras\angular-cookies.js" />
     <Content Include="Scripts\extras\angular-ui-router.min.js" />
     <Content Include="Scripts\extras\bootstrap.min.js" />
+    <Content Include="Scripts\filters\filter.js" />
     <Content Include="Scripts\jquery.signalR-2.0.2.js" />
     <Content Include="Scripts\jquery.signalR-2.0.2.min.js" />
     <Content Include="Scripts\main\app.js" />
@@ -913,9 +925,6 @@
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CivilStatu.cs">
-      <DependentUpon>DentalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__RefactorLog.cs">
       <DependentUpon>DentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DentalDB.Context.cs">
@@ -1488,6 +1497,12 @@
     <Content Include="Views\Home\Templates\AboutUs.cshtml" />
     <Content Include="Views\User\Templates\PDH.cshtml" />
     <Content Include="Views\Directive\DataGrid4.cshtml" />
+    <Content Include="Views\Directive\Filtering.cshtml" />
+    <Content Include="Views\User\Templates\AppointmentReport1.cshtml" />
+    <Content Include="libs\uigrid\css\ui-grid.eot" />
+    <Content Include="libs\uigrid\css\ui-grid.ttf" />
+    <Content Include="libs\uigrid\css\ui-grid.woff" />
+    <Content Include="Views\Directive\DataGridReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1497,7 +1512,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\filters\" />
+    <Folder Include="libs\uigrid\extras\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

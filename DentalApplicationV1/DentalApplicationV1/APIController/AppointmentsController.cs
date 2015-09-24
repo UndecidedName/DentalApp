@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DentalApplicationV1.Models;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace DentalApplicationV1.APIController
 {
@@ -279,6 +281,7 @@ namespace DentalApplicationV1.APIController
             else
                 return Ok();
         }
+
         // GET: api/Appointments/5
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult GetAppointment(int id)
@@ -292,6 +295,18 @@ namespace DentalApplicationV1.APIController
             return Ok(appointment);
         }
 
+        //Filtering for reports
+        public IHttpActionResult PutAppointment(int length, Appointment[] appointment)
+        {
+            Appointment[] appointments = new Appointment[pageSize];
+            this.filterRecord(length, appointment[0], appointment[1], ref appointments);
+
+            if (appointments != null)
+                return Ok(appointments);
+            else
+                return Ok();
+        }
+        
         // PUT: api/Appointments/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAppointment(int id, Appointment appointment)
@@ -372,6 +387,18 @@ namespace DentalApplicationV1.APIController
             }
             try
             {
+                var getScheduleMaster = db.ScheduleMasters.Find(appointment.ScheduleMasterId);
+                var checkIfExistBaseOnDate = db.Appointments.Where(a => a.ScheduleMaster.Date == getScheduleMaster.Date)
+                                                            .Where(a => a.PatientId == appointment.PatientId)
+                                                            .Where(a => a.Status == 0 || a.Status == 1).ToArray();
+                if (checkIfExistBaseOnDate.Length > 0)
+                {
+                    if (appointment.User.UserTypeId == 4 || appointment.User.UserTypeId == 5)
+                        response.message = "Patient has already an appointment on that same day.";
+                    else
+                        response.message = "You already have an appoinment on that same day.";
+                    return Ok(response);
+                }
                 //Appointment that are made by the secretary or dentist will be approved directly
                 if (appointment.User.UserTypeId == 4 || appointment.User.UserTypeId == 5)
                     appointment.Status = 1;
@@ -1444,6 +1471,104 @@ namespace DentalApplicationV1.APIController
                     }
                 }
             }
+        }
+
+        //Filtering for reports
+        public void filterRecord(int length, Appointment appointment, Appointment appointment1, ref Appointment[] appointments)
+        {
+            appointments = null;
+            //Set default values
+            DateTime appointmentFromDate = new DateTime(2015, 01, 01);
+            DateTime appointmentToDate = new DateTime(2100, 01, 01);
+            //Nullable Date
+            DateTime transactionFromDate = new DateTime(2015, 01, 01);
+            DateTime transactionToDate = new DateTime(2100, 01, 01);
+            int patientIdFrom = 0, patientIdTo = 2147483647, dentistIdFrom = 0, dentistIdTo = 2147483647, statusIdFrom = 0, statusIdTo = 2147483647;
+            
+
+
+            //Manipulate SQL
+            //Appointment Date
+            if (appointment.ScheduleMaster.Date.ToString() != "1/1/0001 12:00:00 AM")
+            {
+                appointmentFromDate = appointment.ScheduleMaster.Date;
+                appointmentToDate   = appointment1.ScheduleMaster.Date;
+            }
+
+            //Transaction Date
+            if (appointment.TransactionDate != null)
+            {
+                transactionFromDate = (DateTime)appointment.TransactionDate;
+                transactionToDate   = (DateTime)appointment1.TransactionDate;
+            }
+
+            //Patient
+            if (appointment.PatientId != null)
+            {
+                patientIdFrom   = (int)appointment.PatientId;
+                patientIdTo     = (int)appointment.PatientId;
+            }
+
+            //Dentist
+            if (appointment.ScheduleMaster.DentistId != 2147483647)
+            {
+                dentistIdFrom   = appointment.ScheduleMaster.DentistId;
+                dentistIdTo     = appointment.ScheduleMaster.DentistId;
+            }
+
+            //Status
+            if (appointment.Status != 2147483647)
+            {
+                statusIdFrom    = appointment.Status;
+                statusIdTo      = appointment.Status;
+            }
+
+            var appointmentList = db.Appointments
+                                    .Include(a => a.User.UserInformations)
+                                    .Include(a => a.ScheduleMaster)
+                                    .Include(a => a.ScheduleDetail)
+                                    .Include(a => a.ScheduleMaster.UserInformation)
+                                    //Put Or if column is nullable
+                                    .Where(a => a.TransactionDate >= transactionFromDate && a.TransactionDate <= transactionToDate || (appointment.TransactionDate == null ? a.TransactionDate == null : a.TransactionDate == transactionFromDate))
+                                    .Where(a => a.PatientId >= patientIdFrom && a.PatientId <= patientIdTo)
+                                    .Where(a => a.Status >= statusIdFrom && a.Status <= statusIdTo)
+                                    .Where(a => a.ScheduleMaster.DentistId >= dentistIdFrom && a.ScheduleMaster.DentistId <= dentistIdTo)
+                                    .Where(a => a.ScheduleMaster.Date >= appointmentFromDate && a.ScheduleMaster.Date <= appointmentToDate)
+                                    .OrderByDescending(a => a.ScheduleMaster.Date)
+                                    .Skip(length).Take(pageSize).ToArray();
+
+            //Set navigation properties to null for better perfomance
+            if (appointments != null)
+            {
+                for (int i = 0; i < appointments.Length; i++)
+                {
+                    appointments[i].User.Appointments = null;
+                    appointments[i].User.Messages = null;
+                    appointments[i].User.Messages1 = null;
+                    appointments[i].User.Notifications = null;
+                    appointments[i].User.PatientDentalHistories = null;
+                    appointments[i].User.PatientDiagnosisHistoryMasters = null;
+                    appointments[i].User.PatientMedicalHistories = null;
+                    appointments[i].User.UserType = null;
+                    appointments[i].PatientDiagnosisHistoryMasters = null;
+                    appointments[i].ScheduleMaster.Appointments = null;
+                    appointments[i].ScheduleMaster.ScheduleDetails = null;
+                    appointments[i].ScheduleDetail.Appointments = null;
+                    appointments[i].ScheduleDetail.ScheduleMaster = null;
+                    appointments[i].ScheduleMaster.UserInformation.PatientMouths = null;
+                    appointments[i].ScheduleMaster.UserInformation.ScheduleMasters = null;
+                    appointments[i].ScheduleMaster.UserInformation.CivilStatu = null;
+                    appointments[i].ScheduleMaster.UserInformation.User = null;
+                    foreach (var ui in appointments[i].User.UserInformations)
+                    {
+                        ui.CivilStatu = null;
+                        ui.PatientMouths = null;
+                        ui.ScheduleMasters = null;
+                    }
+                }
+            }
+
+            appointments = appointmentList;
         }
     }
 }

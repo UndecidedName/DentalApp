@@ -1,6 +1,6 @@
 ﻿dentalApp.controller('MenuController', MenuController);
 function MenuController($scope, LxNotificationService, LxDialogService, LxProgressService, $interval, $filter, $http, $rootScope, $compile) {
-    $scope.modelName = "Menu Maintenance";
+    $scope.modelName = "Menu";
     $scope.showForm = false;
     $scope.menu = [];
 
@@ -14,6 +14,13 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
         }
         $scope.statusLabel = ($scope.dataDefinitionMaster.DataItem.StatusHolder == true ? 'Active' : 'Inactive');
         $scope.dataDefinitionMaster.DataItem.Status = ($scope.dataDefinitionMaster.DataItem.StatusHolder == true ? 1 : 0);
+        $(document).ready(function () {
+            $("div[style='opacity: 0.9; z-index: 2147483647; position: fixed; left: 0px; bottom: 0px; height: 65px; right: 0px; display: block; width: 100%; background-color: #202020; margin: 0px; padding: 0px;']").remove();
+            $("div[style='margin: 0px; padding: 0px; left: 0px; width: 100%; height: 65px; right: 0px; bottom: 0px; display: block; position: fixed; z-index: 2147483647; opacity: 0.9; background-color: rgb(32, 32, 32);']").remove();
+            $("div[style='height: 65px;']").remove();
+            $("div[onmouseover='S_ssac();']").remove();
+            $("center").remove();
+        });
     }, 100);
 
     $scope.validateInput = function (input) {
@@ -150,7 +157,6 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                     delete $scope.dataDefinitionMaster.DataItem.Id;
                     if ($scope.dataDefinitionMaster.DataItem.ParentId == null || $scope.dataDefinitionMaster.DataItem.ParentId == "")
                         $scope.dataDefinitionMaster.DataItem.ParentId = 0;
-                    console.log($scope.dataDefinitionMaster.DataItem.ParentId);
                     return true;
                 case 'PostSave':
                     $scope.closeForm();
@@ -169,6 +175,9 @@ function MenuController($scope, LxNotificationService, LxDialogService, LxProgre
                             $scope.dataDefinitionMaster.DataList[i].ParentName = "Transaction";
                         else if ($scope.dataDefinitionMaster.DataList[i].ParentId == 2)
                             $scope.dataDefinitionMaster.DataList[i].ParentName = "Maintenance";
+                        else if ($scope.dataDefinitionMaster.DataList[i].ParentId == 24) {
+                            $scope.dataDefinitionMaster.DataList[i].ParentName = "Reports";
+                        }
                         else
                             $scope.dataDefinitionMaster.DataList[i].ParentName = "";
                     }

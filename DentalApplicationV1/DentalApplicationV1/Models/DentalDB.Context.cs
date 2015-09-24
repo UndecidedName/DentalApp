@@ -26,7 +26,6 @@ namespace DentalApplicationV1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<CivilStatu> CivilStatus { get; set; }
         public DbSet<DentalMenu> DentalMenus { get; set; }

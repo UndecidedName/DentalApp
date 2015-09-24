@@ -331,20 +331,6 @@ CREATE TABLE [dbo].[TreatmentType] (
 
 
 GO
-PRINT N'Creating [dbo].[DiagnosisType]...';
-
-
-GO
-CREATE TABLE [dbo].[DiagnosisType] (
-    [Id]          INT           IDENTITY (1, 1) NOT NULL,
-    [Name]        VARCHAR (100) NOT NULL,
-    [Description] VARCHAR (200) NULL,
-    [Status]      INT           NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
 PRINT N'Creating [dbo].[UserType]...';
 
 
@@ -354,21 +340,6 @@ CREATE TABLE [dbo].[UserType] (
     [Name]        VARCHAR (20)  NOT NULL,
     [Description] VARCHAR (100) NOT NULL,
     [Status]      INT           NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-PRINT N'Creating [dbo].[PatientDiagnosisHistoryDetail]...';
-
-
-GO
-CREATE TABLE [dbo].[PatientDiagnosisHistoryDetail] (
-    [Id]              INT           IDENTITY (1, 1) NOT NULL,
-    [PDHMasterId]     INT           NOT NULL,
-    [DiagnosisTypeId] INT           NULL,
-    [TreatmentTypeId] INT           NULL,
-    [DiagnosedTeeth]  VARCHAR (200) NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -553,6 +524,21 @@ CREATE TABLE [dbo].[DentalMenu] (
 
 
 GO
+PRINT N'Creating [dbo].[PatientDiagnosisHistoryDetail]...';
+
+
+GO
+CREATE TABLE [dbo].[PatientDiagnosisHistoryDetail] (
+    [Id]              INT           IDENTITY (1, 1) NOT NULL,
+    [PDHMasterId]     INT           NOT NULL,
+    [Diagnosis]       TEXT          NULL,
+    [TreatmentTypeId] INT           NULL,
+    [DiagnosedTeeth]  VARCHAR (200) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
 PRINT N'Creating Default Constraint on [dbo].[ScheduleDetail]....';
 
 
@@ -621,15 +607,6 @@ PRINT N'Creating Default Constraint on [dbo].[TreatmentType]....';
 
 GO
 ALTER TABLE [dbo].[TreatmentType]
-    ADD DEFAULT 1 FOR [Status];
-
-
-GO
-PRINT N'Creating Default Constraint on [dbo].[DiagnosisType]....';
-
-
-GO
-ALTER TABLE [dbo].[DiagnosisType]
     ADD DEFAULT 1 FOR [Status];
 
 
@@ -832,33 +809,6 @@ ALTER TABLE [dbo].[MouthType]
 
 
 GO
-PRINT N'Creating FK_PatientDiagnosisHistoryDetail_PDHMasterId...';
-
-
-GO
-ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
-    ADD CONSTRAINT [FK_PatientDiagnosisHistoryDetail_PDHMasterId] FOREIGN KEY ([PDHMasterId]) REFERENCES [dbo].[PatientDiagnosisHistoryMaster] ([Id]) ON DELETE CASCADE;
-
-
-GO
-PRINT N'Creating FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId...';
-
-
-GO
-ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
-    ADD CONSTRAINT [FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId] FOREIGN KEY ([DiagnosisTypeId]) REFERENCES [dbo].[DiagnosisType] ([Id]) ON DELETE SET NULL;
-
-
-GO
-PRINT N'Creating FK_PatientDiagnosisHistoryDetail_TreatmentTypeId...';
-
-
-GO
-ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
-    ADD CONSTRAINT [FK_PatientDiagnosisHistoryDetail_TreatmentTypeId] FOREIGN KEY ([TreatmentTypeId]) REFERENCES [dbo].[TreatmentType] ([Id]) ON DELETE SET NULL;
-
-
-GO
 PRINT N'Creating FK_Appointment_PatientId...';
 
 
@@ -967,6 +917,24 @@ ALTER TABLE [dbo].[User]
 
 
 GO
+PRINT N'Creating FK_PatientDiagnosisHistoryDetail_PDHMasterId...';
+
+
+GO
+ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
+    ADD CONSTRAINT [FK_PatientDiagnosisHistoryDetail_PDHMasterId] FOREIGN KEY ([PDHMasterId]) REFERENCES [dbo].[PatientDiagnosisHistoryMaster] ([Id]) ON DELETE CASCADE;
+
+
+GO
+PRINT N'Creating FK_PatientDiagnosisHistoryDetail_TreatmentTypeId...';
+
+
+GO
+ALTER TABLE [dbo].[PatientDiagnosisHistoryDetail]
+    ADD CONSTRAINT [FK_PatientDiagnosisHistoryDetail_TreatmentTypeId] FOREIGN KEY ([TreatmentTypeId]) REFERENCES [dbo].[TreatmentType] ([Id]) ON DELETE SET NULL;
+
+
+GO
 PRINT N'Creating [dbo].[V_UsersList]...';
 
 
@@ -1004,7 +972,7 @@ CREATE VIEW [dbo].[V_UserMenu]
 				dm.Url,
 				dm.SeqNo,
 				um.UserTypeId
-	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 ORDER BY dm.SeqNo
+	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 AND dm.SeqNo = 1 ORDER BY dm.SeqNo
 GO
 -- Refactoring step to update target server with deployed transaction logs
 
@@ -1108,6 +1076,8 @@ IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('8c5057e6-6667-45eb-ab0d-b9fc9f552ef8')
 IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = 'dac869cd-ec15-4324-8b41-f4460e752510')
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('dac869cd-ec15-4324-8b41-f4460e752510')
+IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey = '61161a1d-95ef-4628-8a8f-0b4647c17207')
+INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('61161a1d-95ef-4628-8a8f-0b4647c17207')
 
 GO
 

@@ -5,12 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DentalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="Id" />
@@ -121,7 +115,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PDHMasterId" Type="int" Nullable="false" />
-          <Property Name="Diagnosis" Type="varchar" MaxLength="500" />
+          <Property Name="Diagnosis" Type="varchar(max)" Nullable="false" />
           <Property Name="TreatmentTypeId" Type="int" />
           <Property Name="DiagnosedTeeth" Type="varchar" MaxLength="200" />
         </EntityType>
@@ -135,7 +129,7 @@
           <Property Name="Fee" Type="money" Nullable="false" />
           <Property Name="Paid" Type="money" />
           <Property Name="Balance" Type="money" />
-          <Property Name="Notes" Type="text" />
+          <Property Name="Notes" Type="varchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientMedicalHistory">
@@ -657,7 +651,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DentalDBModelStoreContainer">
-          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CivilStatus" EntityType="Self.CivilStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DentalMenu" EntityType="Self.DentalMenu" Schema="dbo" store:Type="Tables" />
@@ -823,7 +816,6 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
     <edmx:ConceptualModels>
       <Schema Namespace="DentalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DentalDBEntities" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="C__RefactorLog" EntityType="DentalDBModel.C__RefactorLog" />
           <EntitySet Name="Appointments" EntityType="DentalDBModel.Appointment" />
           <EntitySet Name="CivilStatus" EntityType="DentalDBModel.CivilStatu" />
           <EntitySet Name="DentalMenus" EntityType="DentalDBModel.DentalMenu" />
@@ -952,13 +944,11 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="UserMenu" EntitySet="UserMenus" />
           </AssociationSet>
+          <AssociationSet Name="FK_ScheduleMaster_DentistId1" Association="DentalDBModel.FK_ScheduleMaster_DentistId1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ScheduleMaster" EntitySet="ScheduleMasters" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="C__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="Guid" Nullable="false" />
-        </EntityType>
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="Id" />
@@ -1089,7 +1079,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <Property Name="DiagnosedTeeth" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PatientDiagnosisHistoryMaster" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_PDHMasterId" FromRole="PatientDiagnosisHistoryDetail" ToRole="PatientDiagnosisHistoryMaster" />
           <NavigationProperty Name="TreatmentType" Relationship="DentalDBModel.FK_PatientDiagnosisHistoryDetail_TreatmentTypeId" FromRole="PatientDiagnosisHistoryDetail" ToRole="TreatmentType" />
-          <Property Name="Diagnosis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientDiagnosisHistoryMaster">
           <Key>
@@ -1184,6 +1174,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="Appointments" Relationship="DentalDBModel.FK_Appointment_ScheduleMasterId" FromRole="ScheduleMaster" ToRole="Appointment" />
           <NavigationProperty Name="ScheduleDetails" Relationship="DentalDBModel.FK_ScheduleDetail_ScheduLeMasterId" FromRole="ScheduleMaster" ToRole="ScheduleDetail" />
           <NavigationProperty Name="UserInformation" Relationship="DentalDBModel.FK_ScheduleMaster_DentistId" FromRole="ScheduleMaster" ToRole="UserInformation" />
+          <NavigationProperty Name="User" Relationship="DentalDBModel.FK_ScheduleMaster_DentistId1" FromRole="ScheduleMaster" ToRole="User" />
         </EntityType>
         <EntityType Name="Tooth">
           <Key>
@@ -1232,6 +1223,7 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
           <NavigationProperty Name="UserType" Relationship="DentalDBModel.FK_User_UserTypeId" FromRole="User" ToRole="UserType" />
           <NavigationProperty Name="UserInformations" Relationship="DentalDBModel.FK_UserInformation_PatientId" FromRole="User" ToRole="UserInformation" />
           <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ScheduleMasters" Relationship="DentalDBModel.FK_ScheduleMaster_DentistId1" FromRole="User" ToRole="ScheduleMaster" />
         </EntityType>
         <EntityType Name="UserInformation">
           <Key>
@@ -1652,19 +1644,24 @@ FROM [dbo].[V_UsersList] AS [V_UsersList]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ScheduleMaster_DentistId1">
+          <End Type="DentalDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="DentalDBModel.ScheduleMaster" Role="ScheduleMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduleMaster">
+              <PropertyRef Name="DentistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DentalDBModelStoreContainer" CdmEntityContainer="DentalDBEntities">
-          <EntitySetMapping Name="C__RefactorLog">
-            <EntityTypeMapping TypeName="DentalDBModel.C__RefactorLog">
-              <MappingFragment StoreEntitySet="__RefactorLog">
-                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="DentalDBModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="~/libs/lumx/dist/roboto.css" />
     <link rel='stylesheet' href='/libs/md-date-time/dist/md-date-time.css'>
     <link rel="stylesheet" href="~/Content/customize-table.css" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/libs/uigrid/css/ui-grid.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
 </head>
 <body>
     <div ng-show="!isLogged" ng-include="'/Home/Templates/Header'"></div>
@@ -20,6 +21,8 @@
 </body>
 </html>
 <script src="~/libs/jquery/dist/jquery.js"></script>
+<script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
+<script src="signalr/hubs"></script>
 <script src="~/libs/velocity/velocity.js"></script>
 <script src="~/libs/moment/min/moment-with-locales.js"></script>
 <script src="~/libs/angular/angular.js"></script>
@@ -28,21 +31,26 @@
 <script src="~/libs/angular/angular-ui-router.min.js"></script>
 <script src="~/libs/angular/angular-cookies.js"></script>
 <script src="~/libs/angular/angular-local-storage.js"></script>
+<script src="~/libs/uigrid/js/csv.js"></script>
+<script src="~/libs/uigrid/js/pdfmake.js"></script>
+<script src="~/libs/uigrid/js/vfs_fonts.js"></script>
+<script src="~/libs/uigrid/js/ui-grid.js"></script>
 <script src="~/Scripts/main/app.js"></script>
-<script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
-<script src="signalr/hubs"></script>
 <script src="~/Scripts/services/dentalService.js"></script>
 <script src="~/Scripts/directives/dentalDirective.js"></script>
+<script src="~/Scripts/controllers/IndexController.js"></script>
+<script src="~/Scripts/controllers/HomeController.js"></script>
+<script src="~/Scripts/controllers/UserIndexController.js"></script>
 <script src="~/Scripts/directives/dataExport.js"></script>
+<script src="~/Scripts/filters/filter.js"></script>
+<script src="~/Scripts/directives/dataGridReport.js"></script>
 <script src="~/Scripts/directives/dataGrid1.js"></script>
 <script src="~/Scripts/directives/dataGrid2.js"></script>
 <script src="~/Scripts/directives/dataGrid3.js"></script>
 <script src="~/Scripts/directives/dataGrid4.js"></script>
 <script src="~/Scripts/directives/dataModal1.js"></script>
+<script src="~/Scripts/directives/filtering.js"></script>
 <script src="~/Scripts/directives/scrollableContainer.js"></script>
-<script src="~/Scripts/controllers/IndexController.js"></script>
-<script src="~/Scripts/controllers/HomeController.js"></script>
-<script src="~/Scripts/controllers/UserIndexController.js"></script>
 <script src="~/Scripts/controllers/UserController.js"></script>
 <script src="~/Scripts/controllers/UserInformationController.js"></script>
 <script src="~/Scripts/controllers/ScheduleController.js"></script>
@@ -57,3 +65,4 @@
 <script src="~/Scripts/controllers/TreatmentTypeController.js"></script>
 <script src="~/Scripts/controllers/SpecialAppointments.js"></script>
 <script src="~/Scripts/controllers/PDHController.js"></script>
+<script src="~/Scripts/controllers/AppointmentReport1Controller.js"></script>

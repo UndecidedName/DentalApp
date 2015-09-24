@@ -28,5 +28,6 @@ namespace DentalApplicationV1.Models
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<ScheduleDetail> ScheduleDetails { get; set; }
         public virtual UserInformation UserInformation { get; set; }
+        public virtual User User { get; set; }
     }
 }

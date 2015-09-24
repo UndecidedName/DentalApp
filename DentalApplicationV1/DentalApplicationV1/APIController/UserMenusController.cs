@@ -197,7 +197,7 @@ namespace DentalApplicationV1.APIController
                 response.message = e.InnerException.InnerException.Message.ToString();
             }
 
-            return Ok(userMenu);
+            return Ok(response);
         }
 
         protected override void Dispose(bool disposing)

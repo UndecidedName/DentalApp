@@ -15,6 +15,11 @@ namespace DentalWebApp.Controllers
         {
             return View();
         }
+        public ActionResult DataGridReport()
+        {
+            return View();
+        }
+
         public ActionResult DataGrid1()
         {
             return View();
@@ -36,6 +41,11 @@ namespace DentalWebApp.Controllers
         }
 
         public ActionResult DataModal1()
+        {
+            return View();
+        }
+
+        public ActionResult Filtering()
         {
             return View();
         }

@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_DataTableLayout1.cshtml";
+}
+
+@section TableContent{
+    <div id="filterContainter"></div><br />
+    <div id="masterList"></div>
+
+    <lx-dialog class="dialog dialog--l" id="Patients" auto-close="true">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title">
+                    Patient List
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <dir-data-modal1 datadefinition="dataDefinitionPatientList" filterdefinition="filterDefinitionPatient" otheractions="otherActionPatient(action)" closecontainer="closePatient(dialog)" showformerror="showFormErrorMaster(error)"></dir-data-modal1>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+
+    <lx-dialog class="dialog dialog--l" id="Dentists" auto-close="true">
+        <div class="dialog__header">
+            <div class="toolbar bgc-light-blue-500 pl++">
+                <span class="toolbar__label tc-white fs-title">
+                    Dentist List
+                </span>
+            </div>
+        </div>
+        <div class="dialog__content">
+            <dir-data-modal1 datadefinition="dataDefinitionDentistList" filterdefinition="filterDefinitionDentist" otheractions="otherActionDentist(action)" closecontainer="closeDentist(dialog)" showformerror="showFormErrorMaster(error)"></dir-data-modal1>
+        </div>
+        <div class="dialog__actions">
+        </div>
+    </lx-dialog>
+}

@@ -6,4 +6,4 @@
 				dm.Url,
 				dm.SeqNo,
 				um.UserTypeId
-	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 ORDER BY dm.SeqNo
+	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 AND dm.SeqNo = 1 ORDER BY dm.SeqNo

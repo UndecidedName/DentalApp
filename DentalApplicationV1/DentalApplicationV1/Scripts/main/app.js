@@ -1,4 +1,4 @@
-﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router', 'ngCookies', 'mdDateTime'])
+﻿var dentalApp = angular.module('DentalApp', ['lumx', 'ui.router', 'ngCookies', 'mdDateTime', 'ui.grid', 'ui.grid.autoResize', 'ui.grid.moveColumns', 'ui.grid.resizeColumns', 'ui.grid.selection', 'ui.grid.exporter'])
 .run(function ($rootScope, $http, $location, LxNotificationService, $interval) {
     $rootScope.reset = function () {
         $rootScope.browserWidth = true;
@@ -197,4 +197,10 @@ dentalApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "User/Templates/PDH",
         controller: "PDHController"
     })
+    .state('AppointmentReport1', {
+        url: "/User/Index",
+        templateUrl: "User/Templates/AppointmentReport1",
+        controller: "AppointmentReport1Controller"
+    })
+    
 });

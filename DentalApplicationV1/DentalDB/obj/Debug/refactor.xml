@@ -329,4 +329,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Type" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="61161a1d-95ef-4628-8a8f-0b4647c17207" ChangeDateTime="09/15/2015 00:00:44" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[PatientDiagnosisHistoryDetail].[DiagnosisTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PatientDiagnosisHistoryDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Diagnosis" />
+  </Operation>
 </Operations>

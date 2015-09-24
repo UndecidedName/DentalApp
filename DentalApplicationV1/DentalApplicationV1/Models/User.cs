@@ -24,6 +24,7 @@ namespace DentalApplicationV1.Models
             this.PatientDiagnosisHistoryMasters = new HashSet<PatientDiagnosisHistoryMaster>();
             this.PatientMedicalHistories = new HashSet<PatientMedicalHistory>();
             this.UserInformations = new HashSet<UserInformation>();
+            this.ScheduleMasters = new HashSet<ScheduleMaster>();
         }
     
         public int Id { get; set; }
@@ -43,5 +44,6 @@ namespace DentalApplicationV1.Models
         public virtual ICollection<PatientMedicalHistory> PatientMedicalHistories { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual ICollection<UserInformation> UserInformations { get; set; }
+        public virtual ICollection<ScheduleMaster> ScheduleMasters { get; set; }
     }
 }

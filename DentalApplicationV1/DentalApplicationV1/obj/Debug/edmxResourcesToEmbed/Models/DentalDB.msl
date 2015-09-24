@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DentalDBModelStoreContainer" CdmEntityContainer="DentalDBEntities">
-    <EntitySetMapping Name="C__RefactorLog">
-      <EntityTypeMapping TypeName="DentalDBModel.C__RefactorLog">
-        <MappingFragment StoreEntitySet="__RefactorLog">
-          <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Appointments">
       <EntityTypeMapping TypeName="DentalDBModel.Appointment">
         <MappingFragment StoreEntitySet="Appointment">

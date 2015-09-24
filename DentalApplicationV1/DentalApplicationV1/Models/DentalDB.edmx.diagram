@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="eeaf5bc8d3a4435295ed3c4d03a156b8" Name="Diagram1">
-        <EntityTypeShape EntityType="DentalDBModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DentalDBModel.Appointment" Width="1.5" PointX="8.25" PointY="14" />
         <EntityTypeShape EntityType="DentalDBModel.CivilStatu" Width="1.5" PointX="6" PointY="21.625" />
         <EntityTypeShape EntityType="DentalDBModel.DentalMenu" Width="1.5" PointX="0.75" PointY="12.5" />
@@ -56,6 +55,7 @@
         <AssociationConnector Association="DentalDBModel.FK_User_UserTypeId" />
         <AssociationConnector Association="DentalDBModel.FK_UserInformation_PatientId" />
         <AssociationConnector Association="DentalDBModel.Fk_UserMenu_UserTypeId" />
+        <AssociationConnector Association="DentalDBModel.FK_ScheduleMaster_DentistId1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

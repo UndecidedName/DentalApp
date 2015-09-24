@@ -175,22 +175,6 @@
 			</Property>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[DiagnosisType]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[DiagnosisType].[Status]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
-		</Element>
-		<Element Type="SqlDefaultConstraint">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[1]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
 					<References Name="[dbo].[UserType]" />
 				</Entry>
 			</Relationship>
@@ -199,7 +183,7 @@
 					<References Name="[dbo].[UserType].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -215,7 +199,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryMaster].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -231,7 +215,7 @@
 					<References Name="[dbo].[PatientDentalHistory].[Question4]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="13" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -247,7 +231,7 @@
 					<References Name="[dbo].[PatientMedicalHistory].[Question8]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="14" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -263,7 +247,7 @@
 					<References Name="[dbo].[PatientMedicalHistory].[Question18]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="15" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -279,7 +263,7 @@
 					<References Name="[dbo].[PatientMedicalHistory].[Question19]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="16" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -295,7 +279,7 @@
 					<References Name="[dbo].[CivilStatus].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="17" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -311,7 +295,7 @@
 					<References Name="[dbo].[UserMenu].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -327,7 +311,7 @@
 					<References Name="[dbo].[User].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
 		</Element>
 		<Element Type="SqlDefaultConstraint">
 			<Property Name="DefaultExpressionScript">
@@ -343,7 +327,7 @@
 					<References Name="[dbo].[DentalMenu].[Status]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -362,7 +346,7 @@
 					<References Name="[dbo].[ScheduleDetail]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -381,7 +365,7 @@
 					<References Name="[dbo].[ScheduleMaster]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="22" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -400,7 +384,7 @@
 					<References Name="[dbo].[Logs]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="23" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -419,7 +403,7 @@
 					<References Name="[dbo].[Message]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -438,7 +422,7 @@
 					<References Name="[dbo].[Notification]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -457,7 +441,7 @@
 					<References Name="[dbo].[PatientTooth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -476,7 +460,7 @@
 					<References Name="[dbo].[PatientMouth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -495,7 +479,7 @@
 					<References Name="[dbo].[ImageUrl]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -514,7 +498,7 @@
 					<References Name="[dbo].[Tooth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -533,7 +517,7 @@
 					<References Name="[dbo].[MouthType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -552,26 +536,7 @@
 					<References Name="[dbo].[TreatmentType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[DiagnosisType].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[DiagnosisType]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -590,26 +555,7 @@
 					<References Name="[dbo].[UserType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
-		</Element>
-		<Element Type="SqlPrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="SqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[PatientDiagnosisHistoryDetail].[Id]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[PatientDiagnosisHistoryDetail]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="35" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -628,7 +574,7 @@
 					<References Name="[dbo].[Appointment]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="36" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -647,7 +593,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryMaster]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -666,7 +612,7 @@
 					<References Name="[dbo].[PatientDentalHistory]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="35" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -685,7 +631,7 @@
 					<References Name="[dbo].[PatientMedicalHistory]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="36" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -704,7 +650,7 @@
 					<References Name="[dbo].[CivilStatus]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="40" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -723,7 +669,7 @@
 					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="41" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -742,7 +688,7 @@
 					<References Name="[dbo].[UserMenu]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="42" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -761,7 +707,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="43" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="40" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -780,7 +726,26 @@
 					<References Name="[dbo].[DentalMenu]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="44" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="41" />
+		</Element>
+		<Element Type="SqlPrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[PatientDiagnosisHistoryDetail].[Id]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[PatientDiagnosisHistoryDetail]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="42" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Appointment]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -800,7 +765,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="36" />
+						<AttachedAnnotation Disambiguator="33" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -935,9 +900,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="43" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="44" />
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="45" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="46" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="47" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[CivilStatus]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -957,7 +922,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="40" />
+						<AttachedAnnotation Disambiguator="37" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -1007,7 +972,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="18" />
+						<AttachedAnnotation Disambiguator="17" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -1035,7 +1000,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="44" />
+						<AttachedAnnotation Disambiguator="41" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -1132,85 +1097,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="21" />
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="Schema">
-				<Entry>
-					<References ExternalSource="BuiltIns" Name="[dbo]" />
-				</Entry>
-			</Relationship>
-		</Element>
-		<Element Type="SqlTable" Name="[dbo].[DiagnosisType]">
-			<Property Name="IsAnsiNullsOn" Value="True" />
-			<Relationship Name="Columns">
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DiagnosisType].[Id]">
-						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="33" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DiagnosisType].[Name]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="100" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DiagnosisType].[Description]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="Length" Value="200" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[DiagnosisType].[Status]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="11" />
+						<AttachedAnnotation Disambiguator="20" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -1242,7 +1129,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="45" />
+			<AttachedAnnotation Disambiguator="43" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Appointment_ScheduleDetailId]">
 			<Relationship Name="Columns">
@@ -1265,7 +1152,7 @@
 					<References Name="[dbo].[ScheduleDetail]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="47" />
+			<AttachedAnnotation Disambiguator="45" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Appointment_ScheduleMasterId]">
 			<Relationship Name="Columns">
@@ -1288,7 +1175,7 @@
 					<References Name="[dbo].[ScheduleMaster]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="46" />
+			<AttachedAnnotation Disambiguator="44" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_MouthType_ImageUrlId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1312,7 +1199,7 @@
 					<References Name="[dbo].[ImageUrl]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="48" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="46" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[Fk_Notification_UserId]">
 			<Relationship Name="Columns">
@@ -1335,7 +1222,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="49" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="47" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDentalHistory_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1359,31 +1246,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="50" />
-		</Element>
-		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryDetail_DiagnosisTypeId]">
-			<Property Name="OnDeleteAction" Value="2" />
-			<Relationship Name="Columns">
-				<Entry>
-					<References Name="[dbo].[PatientDiagnosisHistoryDetail].[DiagnosisTypeId]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[PatientDiagnosisHistoryDetail]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignColumns">
-				<Entry>
-					<References Name="[dbo].[DiagnosisType].[Id]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForeignTable">
-				<Entry>
-					<References Name="[dbo].[DiagnosisType]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="51" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="48" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryDetail_PDHMasterId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1407,7 +1270,7 @@
 					<References Name="[dbo].[PatientDiagnosisHistoryMaster]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="52" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="49" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryDetail_TreatmentTypeId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1431,7 +1294,7 @@
 					<References Name="[dbo].[TreatmentType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="53" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="50" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryMaster_AppointmentId]">
 			<Relationship Name="Columns">
@@ -1454,7 +1317,7 @@
 					<References Name="[dbo].[Appointment]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="54" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="51" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientDiagnosisHistoryMaster_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1478,7 +1341,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="55" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="52" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientMedicalHistory_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1502,7 +1365,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="56" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="53" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientMouth_MouthTypeId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1526,7 +1389,7 @@
 					<References Name="[dbo].[MouthType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="57" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="54" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientMouth_PatientId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1550,7 +1413,7 @@
 					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="58" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="55" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientTooth_ImageUrlId]">
 			<Relationship Name="Columns">
@@ -1573,7 +1436,7 @@
 					<References Name="[dbo].[ImageUrl]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="59" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="56" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_PatientTooth_PatientMouthId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1597,7 +1460,7 @@
 					<References Name="[dbo].[PatientMouth]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="60" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="57" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_ScheduleDetail_ScheduLeMasterId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1621,7 +1484,7 @@
 					<References Name="[dbo].[ScheduleMaster]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="61" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="58" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_ScheduleMaster_DentistId]">
 			<Relationship Name="Columns">
@@ -1644,7 +1507,7 @@
 					<References Name="[dbo].[UserInformation]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="62" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="59" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Tooth_ImageUrlId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1668,7 +1531,7 @@
 					<References Name="[dbo].[ImageUrl]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="63" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="60" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Tooth_MouthTypeId]">
 			<Relationship Name="Columns">
@@ -1691,7 +1554,7 @@
 					<References Name="[dbo].[MouthType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="64" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="61" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_User_ReceiverId]">
 			<Relationship Name="Columns">
@@ -1714,7 +1577,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="65" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="62" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_User_SenderId]">
 			<Relationship Name="Columns">
@@ -1737,7 +1600,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="66" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="63" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_User_UserTypeId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1761,7 +1624,7 @@
 					<References Name="[dbo].[UserType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="67" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="64" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_UserInformation_CivilStatusId]">
 			<Property Name="OnDeleteAction" Value="2" />
@@ -1785,7 +1648,7 @@
 					<References Name="[dbo].[CivilStatus]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="68" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="65" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_UserInformation_PatientId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1809,7 +1672,7 @@
 					<References Name="[dbo].[User]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="69" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="66" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[Fk_UserMenu_MenuId]">
 			<Relationship Name="Columns">
@@ -1832,7 +1695,7 @@
 					<References Name="[dbo].[DentalMenu]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="70" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="67" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[Fk_UserMenu_UserTypeId]">
 			<Relationship Name="Columns">
@@ -1855,7 +1718,7 @@
 					<References Name="[dbo].[UserType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="71" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="68" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[ImageUrl]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1875,7 +1738,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="29" />
+						<AttachedAnnotation Disambiguator="28" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -1937,7 +1800,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="24" />
+						<AttachedAnnotation Disambiguator="23" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -1998,7 +1861,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="25" />
+						<AttachedAnnotation Disambiguator="24" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2102,8 +1965,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="66" />
-			<AttachedAnnotation Disambiguator="65" />
+			<AttachedAnnotation Disambiguator="63" />
+			<AttachedAnnotation Disambiguator="62" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[MouthType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2123,7 +1986,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="31" />
+						<AttachedAnnotation Disambiguator="30" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2198,7 +2061,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="48" />
+			<AttachedAnnotation Disambiguator="46" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Notification]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2218,7 +2081,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="26" />
+						<AttachedAnnotation Disambiguator="25" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2293,7 +2156,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="49" />
+			<AttachedAnnotation Disambiguator="47" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientDentalHistory]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2313,7 +2176,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="38" />
+						<AttachedAnnotation Disambiguator="35" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2392,7 +2255,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="14" />
+						<AttachedAnnotation Disambiguator="13" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2553,7 +2416,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="50" />
+			<AttachedAnnotation Disambiguator="48" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientDiagnosisHistoryDetail]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2573,7 +2436,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="35" />
+						<AttachedAnnotation Disambiguator="42" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2593,13 +2456,13 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientDiagnosisHistoryDetail].[DiagnosisTypeId]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[PatientDiagnosisHistoryDetail].[Diagnosis]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
 									<Relationship Name="Type">
 										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
+											<References ExternalSource="BuiltIns" Name="[text]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -2644,9 +2507,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="52" />
-			<AttachedAnnotation Disambiguator="51" />
-			<AttachedAnnotation Disambiguator="53" />
+			<AttachedAnnotation Disambiguator="49" />
+			<AttachedAnnotation Disambiguator="50" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientDiagnosisHistoryMaster]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2666,7 +2528,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="37" />
+						<AttachedAnnotation Disambiguator="34" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2761,7 +2623,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="13" />
+						<AttachedAnnotation Disambiguator="12" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -2770,8 +2632,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="55" />
-			<AttachedAnnotation Disambiguator="54" />
+			<AttachedAnnotation Disambiguator="52" />
+			<AttachedAnnotation Disambiguator="51" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientMedicalHistory]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2791,7 +2653,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="39" />
+						<AttachedAnnotation Disambiguator="36" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -2934,7 +2796,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="15" />
+						<AttachedAnnotation Disambiguator="14" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3094,7 +2956,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="16" />
+						<AttachedAnnotation Disambiguator="15" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3110,7 +2972,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="17" />
+						<AttachedAnnotation Disambiguator="16" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3119,7 +2981,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="56" />
+			<AttachedAnnotation Disambiguator="53" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientMouth]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3139,7 +3001,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="28" />
+						<AttachedAnnotation Disambiguator="27" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3178,8 +3040,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="57" />
-			<AttachedAnnotation Disambiguator="58" />
+			<AttachedAnnotation Disambiguator="54" />
+			<AttachedAnnotation Disambiguator="55" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PatientTooth]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3199,7 +3061,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="27" />
+						<AttachedAnnotation Disambiguator="26" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3328,8 +3190,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="60" />
-			<AttachedAnnotation Disambiguator="59" />
+			<AttachedAnnotation Disambiguator="57" />
+			<AttachedAnnotation Disambiguator="56" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[ScheduleDetail]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3349,7 +3211,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="22" />
+						<AttachedAnnotation Disambiguator="21" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3416,7 +3278,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="61" />
+						<AttachedAnnotation Disambiguator="58" />
 						<AttachedAnnotation Disambiguator="3" />
 					</Element>
 				</Entry>
@@ -3445,7 +3307,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="23" />
+						<AttachedAnnotation Disambiguator="22" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3502,7 +3364,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="62" />
+			<AttachedAnnotation Disambiguator="59" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Tooth]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3522,7 +3384,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="30" />
+						<AttachedAnnotation Disambiguator="29" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3667,8 +3529,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="64" />
-			<AttachedAnnotation Disambiguator="63" />
+			<AttachedAnnotation Disambiguator="61" />
+			<AttachedAnnotation Disambiguator="60" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[TreatmentType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3688,7 +3550,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="32" />
+						<AttachedAnnotation Disambiguator="31" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3766,7 +3628,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="43" />
+						<AttachedAnnotation Disambiguator="40" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -3865,7 +3727,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="20" />
+						<AttachedAnnotation Disambiguator="19" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -3874,7 +3736,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="67" />
+			<AttachedAnnotation Disambiguator="64" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[UserInformation]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3894,7 +3756,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="41" />
+						<AttachedAnnotation Disambiguator="38" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -4113,8 +3975,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="69" />
-			<AttachedAnnotation Disambiguator="68" />
+			<AttachedAnnotation Disambiguator="66" />
+			<AttachedAnnotation Disambiguator="65" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[UserMenu]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -4134,7 +3996,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="42" />
+						<AttachedAnnotation Disambiguator="39" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -4183,7 +4045,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="19" />
+						<AttachedAnnotation Disambiguator="18" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -4192,8 +4054,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="71" />
-			<AttachedAnnotation Disambiguator="70" />
+			<AttachedAnnotation Disambiguator="68" />
+			<AttachedAnnotation Disambiguator="67" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[UserType]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -4213,7 +4075,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="34" />
+						<AttachedAnnotation Disambiguator="32" />
 					</Element>
 				</Entry>
 				<Entry>
@@ -4263,7 +4125,7 @@
 								</Element>
 							</Entry>
 						</Relationship>
-						<AttachedAnnotation Disambiguator="12" />
+						<AttachedAnnotation Disambiguator="11" />
 					</Element>
 				</Entry>
 			</Relationship>
@@ -4282,7 +4144,7 @@
 				dm.Url,
 				dm.SeqNo,
 				um.UserTypeId
-	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 ORDER BY dm.SeqNo]]></Value>
+	FROM [UserMenu] um INNER JOIN [DentalMenu] dm ON um.MenuId = dm.Id WHERE um.Status = 1 AND dm.SeqNo = 1 ORDER BY dm.SeqNo]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
@@ -4391,7 +4253,7 @@
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="274" />
+				<Property Name="Length" Value="291" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE VIEW [dbo].[V_UserMenu]&#xD;&#xA;&#x9;AS" />

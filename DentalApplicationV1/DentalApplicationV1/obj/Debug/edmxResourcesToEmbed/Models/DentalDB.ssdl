@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DentalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="__RefactorLog">
-    <Key>
-      <PropertyRef Name="OperationKey" />
-    </Key>
-    <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
   <EntityType Name="Appointment">
     <Key>
       <PropertyRef Name="Id" />
@@ -116,7 +110,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PDHMasterId" Type="int" Nullable="false" />
-    <Property Name="Diagnosis" Type="varchar" MaxLength="500" />
+    <Property Name="Diagnosis" Type="varchar(max)" Nullable="false" />
     <Property Name="TreatmentTypeId" Type="int" />
     <Property Name="DiagnosedTeeth" Type="varchar" MaxLength="200" />
   </EntityType>
@@ -130,7 +124,7 @@
     <Property Name="Fee" Type="money" Nullable="false" />
     <Property Name="Paid" Type="money" />
     <Property Name="Balance" Type="money" />
-    <Property Name="Notes" Type="text" />
+    <Property Name="Notes" Type="varchar(max)" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatientMedicalHistory">
@@ -652,7 +646,6 @@ warning 6002: The table/view 'DentalDB.dbo.V_UsersList' does not have a primary 
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DentalDBModelStoreContainer">
-    <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CivilStatus" EntityType="Self.CivilStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DentalMenu" EntityType="Self.DentalMenu" Schema="dbo" store:Type="Tables" />
