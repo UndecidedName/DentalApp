@@ -155,6 +155,7 @@ namespace DentalApplicationV1.APIController
                     userDetails.Password = userInformation.User.Password;
                     userDetails.Url = this.generateUrl(20, userDetails.Username);
                     userDetails.UserTypeId = 6;
+                    userDetails.RegistrationDate = DateTime.Now;
                     userDetails.Status = 0;
 
                     db.Users.Add(userDetails);

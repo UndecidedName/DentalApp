@@ -173,11 +173,7 @@ function AppointmentReport1Controller($scope, LxNotificationService, LxDialogSer
                                 $scope.filterDefinition.DataItem1.PatientId = $scope.source[i].From;
                                 break;
                             case 'Dentist':
-                                if ($scope.filterDefinition.DataItem1.ScheduleMaster.DentistId == null)
-                                    //Set status to 2147483647 as null because status will not accept null values in back-end as comparison
-                                    $scope.filterDefinition.DataItem1.ScheduleMaster.DentistId = 2147483647;
-                                else
-                                    $scope.filterDefinition.DataItem1.ScheduleMaster.DentistId = $scope.source[i].From;
+                                $scope.filterDefinition.DataItem1.ScheduleMaster.DentistId = $scope.source[i].From;
                                 break;
                             case 'Status':
                                 if ($scope.source[i].From == null)
@@ -192,6 +188,9 @@ function AppointmentReport1Controller($scope, LxNotificationService, LxDialogSer
                                 break;
                         }
                     }
+                    return true;
+                case 'PostFilterData':
+                    console.log($scope.filterDefinition.DataList);
                     return true;
                 case 'LoadData':
                     return true;

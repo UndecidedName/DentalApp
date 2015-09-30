@@ -87,6 +87,7 @@
                 };
             };
 
+            //Function that binds ui-grid template during scroll
             $scope.onScroll = function () {
                 if ($scope.datadefinition.EnableScroll == true)
                     $scope.scrolled = true;

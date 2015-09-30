@@ -39,12 +39,7 @@ namespace DentalApplicationV1.APIController
                     .Include(um => um.DentalMenu)
                     .Where(um => um.UserTypeId == userTypeId)
                     .Where(um => um.UserTypeId != 0)
-                    .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
-                for (int i = 0; i < getUserMenus.Length; i++)
-                {
-                    getUserMenus[i].UserType = null;
-                    getUserMenus[i].DentalMenu.UserMenus = null;
-                }
+                    .OrderBy(um => um.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                 return Ok(getUserMenus);
             }
             else
@@ -69,12 +64,7 @@ namespace DentalApplicationV1.APIController
                     .Include(um => um.DentalMenu)
                     .Where(um => um.UserTypeId == userTypeId)
                     .Where(um => um.Status == status)
-                    .OrderBy(um => um.Id).Skip((length)).Take(fetch).ToArray();
-                for (int i = 0; i < getUserMenus.Length; i++)
-                {
-                    getUserMenus[i].UserType = null;
-                    getUserMenus[i].DentalMenu.UserMenus = null;
-                }
+                    .OrderBy(um => um.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                 return Ok(getUserMenus);
             }
             else

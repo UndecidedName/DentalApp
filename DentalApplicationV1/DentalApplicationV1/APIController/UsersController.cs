@@ -356,7 +356,7 @@ namespace DentalApplicationV1.APIController
                     var getUsers = db.Users.Include(u => u.UserInformations)
                                            .Include(u => u.UserType)
                                            .Where(u => u.Username.ToLower().Contains(value) || u.Username.ToLower().Equals(value))
-                                           .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                           .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
                 }
             }
@@ -376,7 +376,7 @@ namespace DentalApplicationV1.APIController
                                      .Include(u => u.UserType)
                                      .Where(u => u.UserInformations.Where(ui => ui.FirstName.ToLower().Contains(value)).Count() > 0
                                             || u.UserInformations.Where(ui => ui.FirstName.ToLower().Equals(value)).Count() > 0)
-                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
                 }
             }
@@ -396,7 +396,7 @@ namespace DentalApplicationV1.APIController
                                      .Include(u => u.UserType)
                                      .Where(u => u.UserInformations.Where(ui => ui.MiddleName.ToLower().Contains(value)).Count() > 0
                                             || u.UserInformations.Where(ui => ui.MiddleName.ToLower().Equals(value)).Count() > 0)
-                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
                 }
             }
@@ -416,7 +416,7 @@ namespace DentalApplicationV1.APIController
                                      .Include(u => u.UserType)
                                      .Where(u => u.UserInformations.Where(ui => ui.LastName.ToLower().Contains(value)).Count() > 0
                                             || u.UserInformations.Where(ui => ui.LastName.ToLower().Equals(value)).Count() > 0)
-                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
                 }
             }
@@ -436,7 +436,7 @@ namespace DentalApplicationV1.APIController
                                      .Include(u => u.UserType)
                                      .Where(u => u.UserInformations.Where(ui => ui.EmailAddress.ToLower().Contains(value)).Count() > 0
                                             || u.UserInformations.Where(ui => ui.EmailAddress.ToLower().Equals(value)).Count() > 0)
-                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
                 }
             }
@@ -456,7 +456,7 @@ namespace DentalApplicationV1.APIController
                                      .Include(u => u.UserType)
                                      .Where(u => u.UserInformations.Where(ui => ui.Gender.ToLower().Contains(value)).Count() > 0
                                             || u.UserInformations.Where(ui => ui.Gender.ToLower().Equals(value)).Count() > 0)
-                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
                 }
             }
@@ -475,16 +475,8 @@ namespace DentalApplicationV1.APIController
                                      .Include(u => u.UserInformations)
                                      .Include(u => u.UserType)
                                      .Where(u => u.Status == strManipulate.intValue)
-                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).ToArray();
+                                     .OrderBy(u => u.Id).Skip((length)).Take(fetch).AsNoTracking().ToArray();
                     users = getUsers;
-                }
-            }
-            if (users != null)
-            {
-                for (int i = 0; i < users.Length; i++)
-                {
-                    users[0].UserType.UserMenus = null;
-                    users[0].UserType.Users = null;
                 }
             }
         }
