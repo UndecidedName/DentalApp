@@ -129,7 +129,6 @@ namespace DentalApplicationV1.APIController
         public IHttpActionResult PostUserInformation(UserInformation userInformation)
         {
             response.status = "FAILURE";
-            var searchEmail = db.UserInformations.Where(ui => ui.EmailAddress.Equals(userInformation.EmailAddress)).Count();
 
             if (!ModelState.IsValid)
             {
@@ -141,7 +140,7 @@ namespace DentalApplicationV1.APIController
                 response.message = "Username is already used, please choose another one.";
                 return Ok(response);
             }
-            else if (searchEmail > 0)
+            else if (searchEmail(userInformation.EmailAddress))
             {
                 response.message = "Email address is already used, please choose another one.";
                 return Ok(response);
@@ -216,6 +215,16 @@ namespace DentalApplicationV1.APIController
             else
                 return false;
         }
+
+        public bool searchEmail(string email)
+        {
+            var searchEmail = db.UserInformations.Where(ui => ui.EmailAddress.Equals(email)).Count();
+            if (searchEmail > 0)
+                return true;
+            else
+                return false;
+        }
+
         public string generateUrl(int size, string userName)
         {
             var rootUrl = Url.Content("~/");

@@ -244,6 +244,13 @@ namespace DentalApplicationV1.APIController
 
             try
             {
+                //Check if appointment is already used as a reference in diagnosis
+                var searchInDiagnosis = db.PatientDiagnosisHistoryMasters.Where(pdhm => pdhm.AppointmentId == appointment.Id).AsNoTracking().ToArray();
+                if (searchInDiagnosis.Length > 0) {
+                    response.message = "Appointment is already used in a patient's diagnosis.";
+                    return Ok(response);
+                }
+
                 switch (appointment.Status) { 
                     case 2:
                         //open schedule detail and schedule master status if appointment is disapproved

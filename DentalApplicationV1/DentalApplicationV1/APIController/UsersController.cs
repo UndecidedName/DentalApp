@@ -209,7 +209,7 @@ namespace DentalApplicationV1.APIController
 
                     GMailer mailer = new GMailer();
                     header = "Hi " + searchUser[0].FirstName + "<br><br>" + "Good Day! <br> <br>";
-                    body = "Account Information <br>";
+                    body = "Account Information: <br>";
                     body += "Username: " + searchUser[0].User.Username + "<br>";
                     body += "Password: " + searchUser[0].User.Password + "<br> <br>";
                     footer = "Yours Truly, <br> Smile Fairies Dental Suites";

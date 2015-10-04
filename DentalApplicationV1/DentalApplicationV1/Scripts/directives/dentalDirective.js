@@ -26,10 +26,11 @@ function dirGenerateMenu() {
             LxProgressService.circular.show('#5fa2db', '#progressMenu');
             $scope.setSelected = function (selector, subMenuSelector, id) {
                 var element = document.getElementById(subMenuSelector);
+                $scope.parentId = id;
                 if (element == null)
                 {
                     var html = '<ul id="' + subMenuSelector + '">' +
-                                    '<li ng-repeat="submenu in data | filter: { ParentId :' + id + '}" style="padding-left:20px;">' +
+                                    '<li ng-repeat="submenu in data" style="padding-left:20px;" ng-show="submenu.ParentId == parentId ? true : false">' +
                                         '<a ui-sref="{{submenu.Url}}" class="sidebar-menu__link" ng-click="innerToggle()">{{submenu.Name}}</a>' +
                                     '</li>' +
                                 '</ul>';
