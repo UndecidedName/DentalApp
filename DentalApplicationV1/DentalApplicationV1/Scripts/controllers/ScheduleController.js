@@ -249,6 +249,7 @@ function ScheduleController($scope, LxNotificationService, LxDialogService, $int
                     return true;
                 case 'PreUpdate':
                     delete $scope.dataDefinitionMaster.DataItem.DentistInformation;
+                    delete $scope.dataDefinitionMaster.DataItem.UserInformation;
                     return true;
                 case 'PostUpdate':
                     $scope.closeForm();

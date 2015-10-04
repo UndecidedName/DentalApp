@@ -127,6 +127,22 @@ namespace DentalApplicationV1.APIController
 
             try
             {
+                var getScheduleDetail = db.ScheduleDetails.Where(sd => sd.ScheduleMasterId == scheduleMaster.Id).AsNoTracking().ToArray();
+                bool valid = true;
+                //Check if details are not yet used or still open
+                foreach (ScheduleDetail sd in getScheduleDetail)
+                {
+                    if (sd.Status == 1)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+                if (!valid || scheduleMaster.Status == 1)
+                {
+                    response.message = "Schedule is already used so changing the dentist is not allowed.";
+                    return Ok(response);
+                }
                 db.SaveChanges();
                 response.status = "SUCCESS";
                 response.objParam1 = scheduleMaster;
