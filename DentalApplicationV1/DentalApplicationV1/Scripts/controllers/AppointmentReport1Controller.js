@@ -150,7 +150,8 @@ function AppointmentReport1Controller($scope, LxNotificationService, LxDialogSer
                                 "Index": 3, "Label": "Status", "Property": "Status", "Values": [
                                                                                       { "Label": "For Approval", "Value": "0" },
                                                                                       { "Label": "Approved", "Value": "1" },
-                                                                                      { "Label": "Disapproved", "Value": "2" }
+                                                                                      { "Label": "Disapproved", "Value": "2" },
+                                                                                      { "Label": "Cancelled", "Value": "3" }
                                 ], "From": null, "To": null, "Type": "DropDown"
                             },
                             { "Index": 4, "Label": "Remarks Date", "Property": "TransactionDate", "Values": [], "From": null, "To": null, "Type": "Date" },
@@ -190,7 +191,6 @@ function AppointmentReport1Controller($scope, LxNotificationService, LxDialogSer
                     }
                     return true;
                 case 'PostFilterData':
-                    console.log($scope.filterDefinition.DataList);
                     return true;
                 case 'LoadData':
                     return true;

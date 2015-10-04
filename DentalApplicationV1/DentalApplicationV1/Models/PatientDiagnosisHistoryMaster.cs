@@ -25,8 +25,8 @@ namespace DentalApplicationV1.Models
         public decimal Fee { get; set; }
         public Nullable<decimal> Paid { get; set; }
         public Nullable<decimal> Balance { get; set; }
-        public int Status { get; set; }
         public string Notes { get; set; }
+        public int Status { get; set; }
     
         public virtual Appointment Appointment { get; set; }
         public virtual ICollection<PatientDiagnosisHistoryDetail> PatientDiagnosisHistoryDetails { get; set; }

@@ -352,6 +352,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\delete.png" />
+    <Content Include="images\icon.png" />
     <Content Include="libs\angular-route\angular-route.js" />
     <Content Include="libs\angular-route\angular-route.min.js" />
     <Content Include="libs\angular-route\index.js" />
@@ -1019,23 +1020,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <EntityDeploy Include="Models\DentalDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DentalDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DentalDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DentalDB.edmx</DependentUpon>
-      <LastGenOutput>DentalDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DentalDB.edmx.diagram">
-      <DependentUpon>DentalDB.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DentalDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DentalDB.edmx</DependentUpon>
-      <LastGenOutput>DentalDB.cs</LastGenOutput>
-    </Content>
     <Content Include="libs\angular-route\.bower.json" />
     <Content Include="libs\angular-route\angular-route.min.js.map" />
     <Content Include="libs\angular-route\bower.json" />
@@ -1503,6 +1487,23 @@
     <Content Include="libs\uigrid\css\ui-grid.ttf" />
     <Content Include="libs\uigrid\css\ui-grid.woff" />
     <Content Include="Views\Directive\DataGridReport.cshtml" />
+    <EntityDeploy Include="Models\DentalDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DentalDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DentalDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+      <LastGenOutput>DentalDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DentalDB.edmx.diagram">
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DentalDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DentalDB.edmx</DependentUpon>
+      <LastGenOutput>DentalDB.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

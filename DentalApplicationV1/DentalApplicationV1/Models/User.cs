@@ -24,16 +24,15 @@ namespace DentalApplicationV1.Models
             this.PatientDiagnosisHistoryMasters = new HashSet<PatientDiagnosisHistoryMaster>();
             this.PatientMedicalHistories = new HashSet<PatientMedicalHistory>();
             this.UserInformations = new HashSet<UserInformation>();
-            this.ScheduleMasters = new HashSet<ScheduleMaster>();
         }
     
         public int Id { get; set; }
         public int UserTypeId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public System.DateTime RegistrationDate { get; set; }
         public string Url { get; set; }
         public int Status { get; set; }
-        public System.DateTime RegistrationDate { get; set; }
     
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
@@ -44,6 +43,5 @@ namespace DentalApplicationV1.Models
         public virtual ICollection<PatientMedicalHistory> PatientMedicalHistories { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual ICollection<UserInformation> UserInformations { get; set; }
-        public virtual ICollection<ScheduleMaster> ScheduleMasters { get; set; }
     }
 }
