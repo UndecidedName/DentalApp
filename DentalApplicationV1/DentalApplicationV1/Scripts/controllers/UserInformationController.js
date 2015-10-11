@@ -123,6 +123,15 @@ function UserInformationController($scope, LxNotificationService, LxDialogServic
         $scope.otherActionsMaster = function (action) {
             switch (action) {
                 case 'PostLoadAction':
+                    //Remove SuperAdmin User if Logged user is not the super admin
+                    if ($rootScope.user.UserTypeId != 1) {
+                        for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
+                            if ($scope.dataDefinitionMaster.DataList[i].UserTypeId == 1) {
+                                $scope.dataDefinitionMaster.DataList.splice(i, 1);
+                                i = $scope.dataDefinitionMaster.DataList.length;
+                            }
+                        }
+                    }
                     $scope.userInformation = $scope.dataDefinitionMaster.DataList;
                     for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++)
                     {

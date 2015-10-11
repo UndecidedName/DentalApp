@@ -87,7 +87,7 @@
                 }
             }
 
-            //Function that format a string value to properCase(Ex. Fast Cargo)
+            //Function that format a string value to properCase
             $scope.properCase = function (input) {
                 var words = input.split(' ');
                 for (var i = 0; i < words.length; i++) {
@@ -97,7 +97,7 @@
                 return words.join(' ');
             };
 
-            //Function that format a string value to UpperCase(Ex. FASTCARGO)
+            //Function that format a string value to UpperCase
             $scope.UpperCase = function (input) {
                 var value = input.toUpperCase();
                 return value;

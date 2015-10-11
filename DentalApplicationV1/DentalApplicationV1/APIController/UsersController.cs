@@ -67,16 +67,19 @@ namespace DentalApplicationV1.APIController
 
             //get all users which are userType 4 for Dentist and 5 for Secretary
             var getUsersForNotification = db.Users.Where(u => u.UserTypeId == 4 || u.UserTypeId == 5).ToArray();
-            getUsersForNotification[0].Appointments = null;
-            getUsersForNotification[0].Messages = null;
-            getUsersForNotification[0].Messages1 = null;
-            getUsersForNotification[0].Notifications = null;
-            getUsersForNotification[0].PatientDentalHistories = null;
-            getUsersForNotification[0].PatientDiagnosisHistoryMasters = null;
-            getUsersForNotification[0].PatientMedicalHistories = null;
-            getUsersForNotification[0].UserType = null;
-            getUsersForNotification[0].UserInformations = null;
-            response.objParam2 = getUsersForNotification;
+            if (getUsersForNotification.Length > 0)
+            {
+                getUsersForNotification[0].Appointments = null;
+                getUsersForNotification[0].Messages = null;
+                getUsersForNotification[0].Messages1 = null;
+                getUsersForNotification[0].Notifications = null;
+                getUsersForNotification[0].PatientDentalHistories = null;
+                getUsersForNotification[0].PatientDiagnosisHistoryMasters = null;
+                getUsersForNotification[0].PatientMedicalHistories = null;
+                getUsersForNotification[0].UserType = null;
+                getUsersForNotification[0].UserInformations = null;
+                response.objParam2 = getUsersForNotification;
+            }
 
             if (!(request.Equals("logout") || request.Equals("CheckIfLogged")))
             {

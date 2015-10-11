@@ -12,6 +12,20 @@
     $rootScope.reset();
     $rootScope.notification = null;
 
+    $rootScope.removeSuperAdmin = function (container) {
+        //Remove SuperAdmin User if Logged user is not the super admin
+        if ($rootScope.user.UserTypeId != 1) {
+            for (var i = 0; i < container.length; i++) {
+                if (container[i].Id == 1) {
+                    container.splice(i, 1);
+                    i = container.length;
+                }
+            }
+            return container;
+        }
+        return container;
+    };
+
     //NotificationHub Instance
     $rootScope.notification = $.connection.notificationHub;
 

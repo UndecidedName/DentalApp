@@ -122,6 +122,17 @@ function UserMenuController(LxDialogService, LxNotificationService, LxDropdownSe
                     $scope.loadDetail();
                     $scope.dataDefinitionDetail.ViewOnly = true;
                     return true;
+                case 'PostLoadAction':
+                    //Remove SuperAdmin User if Logged user is not the super admin
+                    if ($rootScope.user.UserTypeId != 1) {
+                        for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
+                            if ($scope.dataDefinitionMaster.DataList[i].Id == 1) {
+                                $scope.dataDefinitionMaster.DataList.splice(i, 1);
+                                i = $scope.dataDefinitionMaster.DataList.length;
+                            }
+                        }
+                    }
+                    return true;
                 default:
                     return true;
             }

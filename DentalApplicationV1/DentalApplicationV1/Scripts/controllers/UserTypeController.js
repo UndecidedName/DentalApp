@@ -87,6 +87,19 @@ function UserTypeController($scope, LxNotificationService, LxDialogService, LxPr
                 case 'PostDelete':
                     $scope.closeForm();
                     return true;
+                case 'PostLoadAction':
+                    //Remove SuperAdmin User if Logged user is not the super admin
+                    if ($rootScope.user.UserTypeId != 1)
+                    {
+                        for (var i = 0; i < $scope.dataDefinitionMaster.DataList.length; i++) {
+                            if($scope.dataDefinitionMaster.DataList[i].Id == 1)
+                            {
+                                $scope.dataDefinitionMaster.DataList.splice(i, 1);
+                                i = $scope.dataDefinitionMaster.DataList.length;
+                            }
+                        }
+                    }
+                    return true;
                 case 'PostUpdate':
                     $scope.initializeDataGridMasterStatus();
                     $scope.closeForm();

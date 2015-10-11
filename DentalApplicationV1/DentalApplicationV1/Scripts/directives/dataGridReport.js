@@ -68,7 +68,7 @@
                     exporterPdfDefaultStyle: { fontSize: 9 },
                     exporterPdfTableStyle: { margin: [0, 0, 0, 0] },
                     exporterPdfTableHeaderStyle: { fontSize: 12, bold: true, italics: true, color: 'black' },
-                    exporterPdfHeader: { text: "Fast Cargo", style: 'headerStyle' },
+                    exporterPdfHeader: { text: "Smile Fairies Dental Suites", style: 'headerStyle' },
                     exporterPdfFooter: function (currentPage, pageCount) {
                         return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
                     },
